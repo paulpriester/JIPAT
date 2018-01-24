@@ -28,7 +28,10 @@
   "dependencies": {
     "axios": "^0.16.2",
     "babel-preset-stage-1": "^6.1.18",
+    "email-verification": "^0.4.6",
     "lodash": "^3.10.1",
+    "nodemailer": "^4.4.1",
+    "prop-types": "^15.6.0",
     "react": "^0.14.9",
     "react-bootstrap": "^0.32.0",
     "react-dom": "^0.14.3",
