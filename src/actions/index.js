@@ -29,8 +29,8 @@ export function signInUser({email,password}){
 		
 			
 	};
-	
 }
+
 export function signUpUser({email,password}){
 	return function(dispatch){
 
@@ -46,6 +46,49 @@ export function signUpUser({email,password}){
 			
 			//-redirect to the route '/feature'	
 			browserHistory.push('/profile');	
+		})
+		//if request is bad
+		//-show an error to the user
+		.catch(errorobj=>{
+			// console.log(response);
+			dispatch(authError(errorobj.response.data.error))});	
+	};
+}
+
+export function signUpAdmin({email,password}){
+	return function(dispatch){
+
+		//submit email and password to the server
+		axios.post(`${ROOT_URL}/signup`,{email,password})
+		//if request succeed ..
+		.then(response=>{
+			//-update state to indicate user is authenticated and created
+			dispatch({type:AUTH_USER});
+			//-save JWT token
+			localStorage.setItem('token',response.data.token);
+			//localStorage is available on window scope hence no import
+			
+			//-redirect to the route '/feature'	
+			browserHistory.push('/feature');	
+		})
+		//if request is bad
+		//-show an error to the user
+		.catch(errorobj=>{
+			// console.log(response);
+			dispatch(authError(errorobj.response.data.error))});	
+	};
+}
+
+export function inviteUser({email,name, admin}){
+	return function(dispatch){
+
+		//submit email and name to the server
+		axios.post(`${ROOT_URL}/invite`,{email,name, admin})
+		//if request succeed ..
+		.then(response=>{
+			dispatch({type:AUTH_USER});
+			//-redirect to the route '/feature'	
+			browserHistory.push('/');	
 		})
 		//if request is bad
 		//-show an error to the user
