@@ -1,0 +1,79 @@
+body {
+  background-color: white;
+}
+
+h3 {
+  background-color: powderblue;
+  color: MediumSeaGreen;
+  text-align: center;
+  border:2px solid Tomato;
+  font-size: 40px;
+}
+
+h2 {
+  background-color: red;
+  text-align: center;
+  color: cyan;
+}
+
+ul {
+  display: flex;
+  font-size: 20px;
+  background-color: cyan;
+}
+
+.buttonMenu{
+  margin: auto;
+  width: 75%;
+  align: center;
+}
+
+button{
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 15px;
+  margin: 4px 20px;
+  cursor: pointer;
+}
+
+ul{
+  list-style-type: none;
+  margin: auto;
+  width: 75%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
+.inputForm{
+  display: flex;
+  vertical-align: center;
+  margin: 50px;
+  width: 75%;
+  border: 3px solid green;
+  padding: 10px;        
+}
+
+input{
+  vertical-align: center;
+  margin: 20px;
+  width: 50%;
+  padding: 10px; 
+}
+
+.inputSubmit{
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: center;
+  font-size: 15px;
+  margin: 4px 20px;
+  cursor: pointer;
+}

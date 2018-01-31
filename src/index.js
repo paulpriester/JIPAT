@@ -10,6 +10,7 @@ import App from './components/app';
 import SignIn from './components/auth/signin';
 import SignOut from './components/auth/signout';
 import SignUp from './components/auth/signup';
+import SignUpAd from './components/auth/signupad';
 import Feature from './components/feature';
 import Welcome from './components/welcome';
 import Detail from './components/JobDetail';
@@ -17,11 +18,10 @@ import Profile from './components/profile';
 import Job from './components/jobs';
 import Profile_2 from './components/profile_2';
 import Profile_3 from './components/profile_3';
-
+import Invite from './components/invite';
 import requireAuth from './components/auth/require_auth';
 import reducers from './reducers';
 import {AUTH_USER} from './actions/types';
-
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store=createStoreWithMiddleware(reducers);
@@ -41,7 +41,12 @@ ReactDOM.render(
   			<Route path="signin" component={SignIn}/>
   			<Route path="signout" component={SignOut}/>
   			<Route path="signup" component={SignUp}/>
+<<<<<<< HEAD
         <Route path="JobDetail" component={Detail}/>
+=======
+        <Route path="signupad" component={SignUpAd}/>
+        <Route path="invite" component={Invite}/>
+>>>>>>> 0e3b8d153e75d6f3f4cfb35e585511bbf1dc53ff
   			<Route path="feature" component={requireAuth(Feature)}/>
         <Route path="profile" component={requireAuth(Profile)}/>
         <Route path="profile_2" component={requireAuth(Profile_2)}/>
