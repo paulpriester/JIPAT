@@ -28,6 +28,8 @@ class Welcome extends Component {
 					am fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sap
 					ien nunc accuan eget.</p>
 				</div>
+				<Link className='button' to='/JobDetail'>Job Detail</Link>
+				<Link className='button' to='/jobs'>Jobs</Link>
 			  </div>
 		);
 	}

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import "./index.css";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
@@ -11,7 +12,9 @@ import SignOut from './components/auth/signout';
 import SignUp from './components/auth/signup';
 import Feature from './components/feature';
 import Welcome from './components/welcome';
+import Detail from './components/JobDetail';
 import Profile from './components/profile';
+import Job from './components/jobs';
 import Profile_2 from './components/profile_2';
 import Profile_3 from './components/profile_3';
 
@@ -38,10 +41,12 @@ ReactDOM.render(
   			<Route path="signin" component={SignIn}/>
   			<Route path="signout" component={SignOut}/>
   			<Route path="signup" component={SignUp}/>
+        <Route path="JobDetail" component={Detail}/>
   			<Route path="feature" component={requireAuth(Feature)}/>
         <Route path="profile" component={requireAuth(Profile)}/>
         <Route path="profile_2" component={requireAuth(Profile_2)}/>
         <Route path="profile_3" component={requireAuth(Profile_3)}/>
+        <Route path="jobs" component={Job}/>
   		</Route>
   	</Router>
   </Provider>

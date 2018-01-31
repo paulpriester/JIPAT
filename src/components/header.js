@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import {Navbar, Nav} from 'react-bootstrap';
 
 class Header extends Component{
 	renderLinks(){
@@ -8,6 +9,8 @@ class Header extends Component{
 			return(
 				<li className="nav-item">
 					<Link className="nav-link" to="/signout">Sign Out</Link>
+					<Link className="nav-link" to="/profile">Profile</Link>
+					<Link className="nav-link" to="/settings">Settings</Link>
 				</li>
 				);
 		}
@@ -26,7 +29,7 @@ class Header extends Component{
 	render(){
 		return (
 			<nav className="navbar navbar-light">
-				<Link to="/" className="navbar navbar-brand">Home</Link>
+				<Link to="/" className="navbar navbar-brand">The Knowledge House</Link>
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
 				</ul>
