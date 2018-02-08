@@ -1,21 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
+import SearchBar from './search_bar';
+import JobList from './jobs';
 
-class Feature extends Component{
-	
-	componentWillMount(){
-		this.props.fetchMessage();
-	}
-
+export default class Feature extends Component{
 	render(){
 		return(
-			<div>{this.props.user}</div>
+			<div>
+			<SearchBar />
+			<JobList />
+			</div>
 			);
 	}
 }
 
-function mapStateToProps(state){
-	return {message: state.auth.message};
-}
-export default connect(mapStateToProps,actions)(Feature);

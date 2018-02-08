@@ -1,6 +1,6 @@
-import axios from 'axios';
+ import axios from 'axios';
 import {browserHistory} from 'react-router';
-import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE} from './types';
+import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER} from './types';
 
 const ROOT_URL='http://localhost:3090';
 
@@ -31,7 +31,7 @@ export function signInUser({email,password}){
 	};
 }
 
-export function signUpUser({email,password}){
+export function signUpUser({email,password,firstName,lastName,about}){
 	return function(dispatch){
 
 		//submit email and password to the server
@@ -55,6 +55,26 @@ export function signUpUser({email,password}){
 	};
 }
 
+export function profile({firstName,lastName,about}){
+	return function(dispatch){
+
+		//submit email and name to the server
+		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about})
+		//if request succeed ..
+		.then(response=>{
+			dispatch({type:UPDATE_USER});
+			//-redirect to the route '/feature'	
+			browserHistory.push('/');	
+		})
+		//if request is bad
+		//-show an error to the user
+		.catch(errorobj=>{
+			// console.log(response);
+			dispatch(authError(errorobj.response.data.error))});	
+	};
+	
+}
+
 export function signUpAdmin({email,password}){
 	return function(dispatch){
 
@@ -69,7 +89,7 @@ export function signUpAdmin({email,password}){
 			//localStorage is available on window scope hence no import
 			
 			//-redirect to the route '/feature'	
-			browserHistory.push('/feature');	
+			browserHistory.push('/tmdashboard');	
 		})
 		//if request is bad
 		//-show an error to the user
@@ -96,8 +116,8 @@ export function inviteUser({email,name, admin}){
 			// console.log(response);
 			dispatch(authError(errorobj.response.data.error))});	
 	};
-	
 }
+
 
 export function signOutUser(){
 	localStorage.removeItem('token');

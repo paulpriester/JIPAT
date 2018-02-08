@@ -1,48 +1,82 @@
-import React, {Component} from 'react';
-import {Button, FormGroup, FormControl, Form, ControlLabel, Col, ButtonToolbar, ButtonGroup, HelpBlock} from 'react-bootstrap';
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 import {Link} from 'react-router';
 
-function FieldGroup({ id, label, help, ...props }) {
+
+const required = value => (value ? undefined : 'Required')
+const maxLength = max => value =>
+  value && value.length > max ? `Must be ${max} characters or less` : undefined
+const maxLength15 = maxLength(15)
+export const minLength = min => value =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined
+export const minLength2 = minLength(2)
+const aol = value =>
+  value && /.+@aol\.com/.test(value)
+    ? 'Really? You still use AOL for your email?'
+    : undefined
+const alphaNumeric = value =>
+  value && /[^a-zA-Z0-9 ]/i.test(value)
+    ? 'Only alphanumeric characters'
+    : undefined
+
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning }
+}) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input {...input} placeholder={label} type={type} />
+      {touched &&
+        ((error && <span>{error}</span>) ||
+          (warning && <span>{warning}</span>))}
+    </div>
+  </div>
+)
+
+const Profile3 = props => {
+  const { handleSubmit, pristine, reset, submitting } = props
   return (
-    <FormGroup controlId={id}>
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl {...props} />
-      {help && <HelpBlock>{help}</HelpBlock>}
-     </FormGroup>
-  );
+    <form onSubmit={handleSubmit(submit)}>
+      <Field
+        name="File"
+        type="file"
+        component={renderField}
+        label="Resume"
+        validate={required}
+      />
+      <Field
+        name="File"
+        type="file"
+        component={renderField}
+        label="Cover Letter"
+        validate={required}
+      />
+     
+      <div>
+      	<Link className='button' to='/profile_2'>
+        <button type="submit" disabled={submitting}>
+          Last Page
+        </button>
+        </Link>
+        <Link className='button' to='/jobs'>
+        <button type="submit" disabled={submitting}>
+          Submit
+        </button>
+        </Link>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>
+          Clear Values
+        </button>
+      </div>
+    </form>
+  )
 }
 
-class Profile_3 extends Component {
-
-	render() {
-		return (
-				<form>
-			      <FieldGroup
-				      id="formControlsFile"
-				      type="file"
-				      label="Resume:"
-				    />
-
-				   <FieldGroup
-				      id="formControlsFile"
-				      type="file"
-				      label="CoverLetter:"
-				    />
-				    	<br />
-				    	<br />
-				    	<br />
-
-			   	  	<ButtonToolbar>
-				    <ButtonGroup>
-				     <Link className='button' to='/profile_2'> <Button>Last Page</Button></Link>
-				     <Link className='button' to='/feature'><Button>Submit</Button></Link>
-					</ButtonGroup>
-				</ButtonToolbar>
-
-			  </form>
-		)
-	}
-}
-
-
-export default Profile_3;
+export default reduxForm({
+  form: 'fieldLevelValidation',// a unique identifier for this form
+  destroyOnUnmount: false, // <------ preserve form data
+  forceUnregisterOnUnmount: true // <------ unregister fields on unmount
+  
+})(Profile3)

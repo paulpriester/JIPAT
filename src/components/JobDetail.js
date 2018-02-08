@@ -1,31 +1,51 @@
 import React, {Component} from "react";
 import { Jumbotron, Button } from "react-bootstrap";
 import {Link} from "react-router";
+import JobList from './jobs'
+import { connect } from 'react-redux';
+
 // import '../style/jobdetail.css';
 
-class Detail extends Component {
+
+class JobDetail extends Component {
+
+	renderJob(jobData) {
+	 	const name = jobData.map(job => job.title)
+		const location = jobData.map(job => job.location)
+		const type = jobData.map(job => job.type)
+		const company = jobData.map(job => job.company)
+		const description = jobData.map(job => stripHTML(job.description))
+		const time = jobData.map(job => job.created_at)
+		const pic = jobData.map(job => (job.company_logo))
+		const apply = jobData.map(job => stripHTML(job.how_to_apply))
+
+	function stripHTML(text) {
+ return text.replace(/<.*?>/gm, '');
+}
+		return (
+			<ul key={name}>
+				<p><br />{pic}</p>
+				<p>Title <br />{name}</p>
+				<p>Post Date <br />{time}</p>
+			  	<p>Location <br />{location}</p>
+			  	<p>Type <br />{type}</p>
+			  	<p>Desciption <br />{description}</p>
+			  	<p>How to apply <br /><a href={apply}>apply</a></p>
+	      	  </ul>
+	       )
+	}
+	
 	render() {
-		return(
-			<div>
-			  <Jumbotron className="Jumbotron2">
-			    <h1>Job Title </h1>
-			    <h3>Job Company</h3>
-			    <hr></hr>
-			    <h6>Post Date: Jan 11,1111</h6>
-			    <br></br>
-			    <h3>Job Description</h3>
-			    <p>Some old Lorem Ipsum Description swaggyness...</p>
-			    <h3>Qualifications</h3>
-			    <p>Some old Lorem Ipsum Description swaggyness...</p>
-			    <h3>Requirements</h3>
-			    <p>Some old Lorem Ipsum Description swaggyness...</p>
-			    <hr></hr>
-			    <Button><Link className='button' to='/'>Apply</Link></Button>
-			    <Button><Link className='button' to='/'>Back</Link></Button>
-			  </Jumbotron>
+		return (
+			<div>	
+				{this.props.job.map(this.renderJob)}
 			</div>
 		)
 	}
 }
 
-export default Detail;
+function mapStateToProps({ job }) {
+	return { job };
+}
+
+export default connect (mapStateToProps)(JobDetail);

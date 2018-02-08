@@ -1,63 +1,84 @@
-import React, {Component} from 'react';
-import {Button, FormGroup, FormControl, Form, ControlLabel, Col, ButtonToolbar, ButtonGroup, HelpBlock} from 'react-bootstrap';
-import {Link} from 'react-router';
+import React, { Component } from "react";
+import { Field, reduxForm } from "redux-form";
+import { Link } from "react-router";
+import { connect } from "react-redux";
+import * as actions from '../actions';
 
-
-
-function FieldGroup({ id, label, help, ...props }) {
-  return (
-    <FormGroup controlId={id}>
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl {...props} />
-      {help && <HelpBlock>{help}</HelpBlock>}
-     </FormGroup>
-  );
-}
+import { profile } from "../actions/index";
 
 class Profile extends Component {
-	render() {
-		return (
-			<div className='login'>
-				<Form horizontal>
-			    <FormGroup>
-			      <Col componentClass={ControlLabel} sm={2}>
-			        First Name
-			      </Col>
-			      <Col sm={10}>
-			        <FormControl type="email" placeholder="Email" />
-			      </Col>
-			    </FormGroup>
+  renderField(field) {
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
-			    <FormGroup>
-			      <Col componentClass={ControlLabel} sm={2}>
-			        Last Name
-			      </Col>
-			      <Col sm={10}>
-			        <FormControl type="password" placeholder="Password" />
-			      </Col>
-			    </FormGroup>
+    return (
+      <div className={className}>
+        <label>{field.label}</label>
+        <input className="form-control" type="text" {...field.input} />
+        <div className="text-help">
+          {touched ? error : ""}
+        </div>
+      </div>
+    );
+  }
 
-			    
-			      <FieldGroup
-				      id="formControlsFile"
-				      type="file"
-				      label="File"
-				    />
+  handleFormSubmit(formProps) {
+        this.props.profile(formProps);
+  }
 
+  render() {
+    const { handleSubmit } = this.props;
 
-			    <FormGroup controlId="formControlsTextarea">
-			      <Col componentClass={ControlLabel} lg >
-			        About Me
-			      </Col>
-			      <Col lg={20} >
-			      <FormControl componentClass="textarea" placeholder="About" />
-			      </Col>
-			    </FormGroup>
-			   	<Link className='button' to='/profile_2'><button action="submit" className="btn btn-primary">Next Page</button></Link>
-			  </Form>
-  		</div>
-		)
-	}
+    return (
+      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <Field
+          label="First Name"
+          name="fistname"
+          component={this.renderField}
+        />
+        <Field
+          label="Last Name"
+          name="lastname"
+          component={this.renderField}
+        />
+        <Field
+          label="About"
+          name="about"
+          component={this.renderField}
+        />
+        <button type="submit" className="btn btn-primary">Submit</button>
+      </form>
+    );
+  }
 }
 
-export default Profile;
+function validate(values) {
+  // console.log(values) -> { title: 'asdf', categories: 'asdf', content: 'asdf' }
+  const errors = {};
+
+  // Validate the inputs from 'values'
+  if (!values.fistname) {
+    errors.title = "Enter a title";
+  }
+  if (!values.lastname) {
+    errors.categories = "Enter some categories";
+  }
+  if (!values.about) {
+    errors.content = "Enter some content please";
+  }
+
+  // If errors is empty, the form is fine to submit
+  // If errors has *any* properties, redux form assumes form is invalid
+  return errors;
+}
+
+function mapStateToProps(state){
+  return {errorMessage: state.auth.error};
+}
+
+export default reduxForm({
+  validate,
+  form: "Profile"
+})(
+  connect(mapStateToProps,actions)(Profile)
+);

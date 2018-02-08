@@ -1,80 +1,51 @@
 import React, {Component} from 'react';
 import api from './utils/api';
-import {Form, FormGroup, FormControl, FormLabel, Col} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import {table} from 'react-bootstrap';
+import {Link} from 'react-router';
 
-function JobList(props) {
-	return (
-		<ul className='job-list'>
-			{props.jobs.map(function(job) {
-				return (
-					<li key={job.data} className='job-item'>
-						<ul className="space-listings">
-							<li><a href={job.url}>{job.title}</a></li>
-						</ul>
-					</li>
-				)
-			})}
-		</ul>
-	)
-}
 
-class Job extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			input: '',
-			jobs: null
-		}
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+class JobList extends Component{
+	 renderJob(jobData) {
 
-	componentDidMount() {
-		api.fetchJobs("")
-		.then(function (jobList) {
-			this.setState({
-				jobs: jobList
-			})
-		}.bind(this))
-	}
+	 	const name = jobData.map(job => job.title)
 
-	handleChange(e) {
-		this.setState({
-			input: e.target.value
-		})
-	}
-
-	handleSubmit(e) {
-		e.preventDefault();
-
-		api.fetchJobs(this.state.input)
-		.then(function (jobList) {
-			this.setState({
-				input: "",
-				jobs: jobList
-			})
-		}.bind(this))
+		const location = jobData.map(job => job.location)
+		const type = jobData.map(job => job.type)
+		const company = jobData.map(job => job.company)
+		// <Link className='detail' to='/jobdetail'>
+		return (
+			<tr key={name}>
+			  	<td><Link className='detail' to='/jobdetail'>{name}</Link></td>
+			  	<td>{company}</td>
+			  	<td>{location}</td>
+			  	<td>{type}</td>
+	      	  </tr>
+		)
 	}
 
 	render() {
 		return (
-			<div>
-				<FormGroup>
-					<Col sm={2}>Job</Col>
-					<Col sm={8}>
-						<FormControl placeholder="Search" onChange={this.handleChange} value={this.state.input}/>
-					</Col>
-					<Col sm={2}><button onClick={this.handleSubmit}>Search</button></Col>
-				</FormGroup>
-
-				{
-					! this.state.jobs 
-					? <p>Loading</p>
-					: <JobList jobs={this.state.jobs} />
-				}
-			</div>
+				<table className ='table table-hover'>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Company</th>
+							<th>Location</th>
+							<th>Type Job</th>
+						</tr>
+					</thead>
+					<tbody>
+						{this.props.job.map(this.renderJob)}
+					</tbody>
+				</table>
 		)
 	}
 }
 
-export default Job;
+
+function mapStateToProps({ job }) {
+	return { job };
+}
+
+export default connect (mapStateToProps)(JobList);

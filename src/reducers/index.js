@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux';
 import {reducer as form} from 'redux-form';
 import authReducer from './auth_reducer';
+import JobReducer from './reducer_job';
 
 const rootReducer = combineReducers({
   form, //form: form
-  auth: authReducer
+  auth: authReducer,
+  job : JobReducer
+
 });
 
 export default rootReducer;

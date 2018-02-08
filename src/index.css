@@ -20,4 +20,15 @@
 
 .job-item {
 	list-style-type: none;
+	padding-top: 10px;
+	margin-top: 10px;
+}
+
+.job-list {
+	padding-top: 10px;
+	margin-top: 10px;
+}
+
+ .th {
+	color: red;
 }
