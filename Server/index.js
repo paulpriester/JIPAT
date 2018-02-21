@@ -10,7 +10,9 @@ const express = require('express'),
 
 
 // DB Setup
-mongoose.connect('mongodb://localhost/auth');
+// mongoose.connect('mongodb://localhost/auth');
+mongoose.connect(process.env.DB_URL);
+
 
 //App Setup
 app.use(morgan('combined'));
