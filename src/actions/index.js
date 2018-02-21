@@ -62,8 +62,10 @@ export function profile({firstName,lastName,about}){
 		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about})
 		//if request succeed ..
 		.then(response=>{
-			dispatch({type:UPDATE_USER});
-			//-redirect to the route '/feature'	
+			dispatch({type:AUTH_USER});
+			//-save JWT token
+			localStorage.setItem('token',response.data.token);
+				
 			browserHistory.push('/');	
 		})
 		//if request is bad

@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-import * as actions from '../actions';
+import * as actions from '../../actions';
 
-import { profile } from "../actions/index";
 
 class Profile extends Component {
   renderField(field) {
@@ -23,6 +22,7 @@ class Profile extends Component {
   }
 
   handleFormSubmit(formProps) {
+          console.log(formProps);
         this.props.profile(formProps);
   }
 
@@ -30,15 +30,15 @@ class Profile extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+      <form>
         <Field
           label="First Name"
-          name="fistname"
+          name="firstName"
           component={this.renderField}
         />
         <Field
           label="Last Name"
-          name="lastname"
+          name="lastName"
           component={this.renderField}
         />
         <Field
@@ -46,7 +46,7 @@ class Profile extends Component {
           name="about"
           component={this.renderField}
         />
-        <button type="submit" className="btn btn-primary">Submit</button>
+       <Link to='/profile_2'> <button type="submit" className="btn btn-primary">Submit</button></Link>
       </form>
     );
   }

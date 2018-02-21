@@ -39,7 +39,7 @@ const renderField = ({
 const Profile3 = props => {
   const { handleSubmit, pristine, reset, submitting } = props
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form >
       <Field
         name="File"
         type="file"
@@ -61,7 +61,7 @@ const Profile3 = props => {
           Last Page
         </button>
         </Link>
-        <Link className='button' to='/jobs'>
+        <Link className='button' to='/feature'>
         <button type="submit" disabled={submitting}>
           Submit
         </button>

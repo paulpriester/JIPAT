@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import "./index.css";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
@@ -19,7 +18,7 @@ import Feature from './components/feature';
 import TmDashboard from './components/tmdashboard'
 import Welcome from './components/welcome';
 import Detail from './components/JobDetail';
-import Profile from './components/profile';
+import Profile from './components/auth/profile';
 import Profile_2 from './components/profile_2';
 import Profile_3 from './components/profile_3';
 import Invite from './components/invite';
