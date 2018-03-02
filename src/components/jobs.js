@@ -9,11 +9,10 @@ class JobList extends Component{
 	 renderJob(jobData) {
 
 	 	const name = jobData.map(job => job.title)
-
 		const location = jobData.map(job => job.location)
 		const type = jobData.map(job => job.type)
 		const company = jobData.map(job => job.company)
-		// <Link className='detail' to='/jobdetail'>
+
 		return (
 			<tr key={name}>
 			  	<td><Link className='detail' to='/jobdetail'>{name}</Link></td>
@@ -26,7 +25,7 @@ class JobList extends Component{
 
 	render() {
 		return (
-				<table className ='table table-hover'>
+				<table className='table table-hover'>
 					<thead>
 						<tr>
 							<th>Name</th>
