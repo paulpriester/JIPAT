@@ -12,10 +12,7 @@ class Header extends Component	{
 				</li>
 				<li className="nav-item">
 					<Link className="nav-link" to="/profile">Profile</Link>
-				</li>
-				<li className="nav-item">
-					<Link className="nav-link" to="/settings">Settings</Link>
-				</li>		
+				</li>	
 				</div>		
 				
 			);

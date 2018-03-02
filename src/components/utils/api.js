@@ -1,19 +1,10 @@
 import axios from 'axios';
 
-// module.exports = {
-// 	fetchJobs: function (job) {
-// 		const encodedURI = window.encodeURI('https://jobs.github.com/positions.json?search=' + job);
-
-
-// 		return axios.get(encodedURI)
-// 		.then(function (response) {
-// 			return response.data;
-// 		});
-// 	}
-// }
-
 const ROOT_URL = `https://jobs.github.com/positions.json?search=`
+const SERVER_URL = `http://localhost:3090/jobs`
 export const FETCH_JOB = 'FETCH_JOB'
+export const SAVED_JOB = 'SAVED_JOB'
+
 
 export function fetchJob(job) {
 	const url = `${ROOT_URL}${job}`;
@@ -24,3 +15,14 @@ export function fetchJob(job) {
 		payload: request
 	}
 }
+
+export function savedJob() {
+	const url = `${SERVER_URL}`;
+	const request = axios.get(url);
+
+	return{
+		type: SAVED_JOB,
+		payload: request
+	}
+}
+

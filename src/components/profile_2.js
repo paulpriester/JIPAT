@@ -39,7 +39,7 @@ const renderField = ({
 const Profile2 = props => {
   const { handleSubmit, pristine, reset, submitting } = props
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form >
       <Field
         name="Portfolio"
         type="text"
