@@ -6,6 +6,13 @@ import {Link} from 'react-router';
 
 
 class JobList extends Component{
+
+	// componentDidMount(dispatch) {
+	// 	dispatch({
+	// 		type: 'SAVED_JOB',
+	// 		payload: response.data
+	// 	})
+	// }
 	
 	 renderJob(jobData,dispatch) {
 	 	var selectJob = function(job) {
@@ -15,18 +22,13 @@ class JobList extends Component{
 			})
 		}
 
-	 // 	const name = jobData.map(job => job.title)
-
-		// const location = jobData.map(job => job.location)
-		// const type = jobData.map(job => job.type)
-		// const company = jobData.map(job => job.company)
-		// <Link className='detail' to='/jobdetail'>
 		return (
 			<tr key={jobData.name}>
 			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
+			  	<td><button> save job</button></td>
 	      	  </tr>
 		)
 	}
@@ -41,6 +43,7 @@ class JobList extends Component{
 							<th>Company</th>
 							<th>Location</th>
 							<th>Type Job</th>
+							<th>Save Job</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,7 +56,6 @@ class JobList extends Component{
 
 
 function mapStateToProps({job} ) {
-	console.log(job)
 	return  job ;
 }
 

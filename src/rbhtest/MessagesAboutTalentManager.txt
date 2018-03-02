@@ -1,1 +1,0 @@
-The folder contains the web pages for the talent manager dashboard.

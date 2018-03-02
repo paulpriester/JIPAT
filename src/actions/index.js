@@ -1,6 +1,6 @@
- import axios from 'axios';
+import axios from 'axios';
 import {browserHistory} from 'react-router';
-import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER} from './types';
+import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVE_JOB} from './types';
 
 const ROOT_URL='http://localhost:3090';
 
@@ -26,7 +26,10 @@ export function signInUser({email,password}){
 			dispatch(authError('Bad Email or Password'));
 		});
 		
-		
+// export function jobs({title}) {
+// 	axios.get(`${ROOT_URL}/jobs`,{title})
+	
+// }
 			
 	};
 }
@@ -118,6 +121,15 @@ export function inviteUser({email,name, admin}){
 			// console.log(response);
 			dispatch(authError(errorobj.response.data.error))});	
 	};
+}
+
+export function findJob({title}) {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/jobs`, {title})
+		.then(response => {
+			dispatch({type: FETCH_JOB});
+		})
+	}
 }
 
 

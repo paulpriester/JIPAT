@@ -9,12 +9,12 @@ export default function (state = {selectedJob: '', allJobs:[]}, action) {
 			...state,
 			allJobs: action.payload.data.concat(state.allJobs)
 		}
-	case 'SELECT_JOB':		console.log(action)
-
+	case 'SELECT_JOB':	
 		return {
 			...state,
 			selectedJob: action.payload
 		}
 	}
+	
 	return state;
 }
