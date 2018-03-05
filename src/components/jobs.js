@@ -7,10 +7,6 @@ import {Link} from 'react-router';
 
 class JobList extends Component{
 
-	 	const name = jobData.map(job => job.title)
-		const location = jobData.map(job => job.location)
-		const type = jobData.map(job => job.type)
-		const company = jobData.map(job => job.company)
 	// componentDidMount(dispatch) {
 	// 	dispatch({
 	// 		type: 'SAVED_JOB',

@@ -9,7 +9,7 @@ export const SAVED_JOB = 'SAVED_JOB'
 export function fetchJob(job) {
 	const url = `${ROOT_URL}${job}`;
 	const request = axios.get(url);
-
+	
 	return{
 		type: FETCH_JOB,
 		payload: request
