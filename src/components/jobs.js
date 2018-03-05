@@ -3,16 +3,24 @@ import api from './utils/api';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
+import {savedJobs, removeJob, addJob} from '../actions'
 
 
 class JobList extends Component{
 
-	// componentDidMount(dispatch) {
-	// 	dispatch({
-	// 		type: 'SAVED_JOB',
-	// 		payload: response.data
-	// 	})
-	// }
+	componentDidMount() {
+		this.props.dispatch(savedJobs())
+	}
+
+	removeJob() {
+		console.log(removeJob())
+		this.props.dispatch(removeJob())
+	}
+
+	addJob() {
+		console.log(addJob())
+		this.props.dispatch(addJob())
+	}
 	
 	 renderJob(jobData,dispatch) {
 	 	var selectJob = function(job) {
@@ -28,7 +36,8 @@ class JobList extends Component{
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
-			  	<td><button> save job</button></td>
+			  	<td><button onClick={()=> this.addJob()}> save job</button></td>
+			  	<td><button onClick={()=> this.removeJob()}> remove job</button></td>
 	      	  </tr>
 		)
 	}
@@ -44,6 +53,7 @@ class JobList extends Component{
 							<th>Location</th>
 							<th>Type Job</th>
 							<th>Save Job</th>
+							<th>Remove Job</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -56,6 +66,7 @@ class JobList extends Component{
 
 
 function mapStateToProps({job} ) {
+	//console.log(job)
 	return  job ;
 }
 
