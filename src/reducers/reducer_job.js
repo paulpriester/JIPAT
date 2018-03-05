@@ -10,10 +10,15 @@ export default function (state = {selectedJob: '', allJobs:[]}, action) {
 			...state,
 			allJobs: action.payload.data
 		}
-	case 'SELECT_JOB':	
+	case 'SELECT_JOB':
 		return {
 			...state,
 			selectedJob: action.payload
+		}
+	case 'SAVE_JOB':
+		return {
+			...state,
+			allJobs: action.response.data.concat(state.allJobs)
 		}
 	}
 	

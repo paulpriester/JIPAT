@@ -1,6 +1,6 @@
-import axios from 'axios';
+ import axios from 'axios';
 import {browserHistory} from 'react-router';
-import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVE_JOB} from './types';
+import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB} from './types';
 
 const ROOT_URL='http://localhost:3090';
 
@@ -24,14 +24,36 @@ export function signInUser({email,password}){
 		.catch(()=>{
 			//-show an error to the user
 			dispatch(authError('Bad Email or Password'));
-		});
-		
-// export function jobs({title}) {
-// 	axios.get(`${ROOT_URL}/jobs`,{title})
-	
-// }
-			
+		});		
 	};
+}
+
+export function savedJobs() {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchjobs`)
+		.then(response => {
+			dispatch({type: "SAVE_JOB",response})
+		})
+	}
+}
+
+export function addJob() {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/jobs`)
+		.then(response => {
+			console.log('success')
+			dispatch({type: "SAVED_JOB",response})
+		})
+	}
+}
+
+export function removeJob({id}) {
+	return function(dispatch) {
+		axios.delete(`${ROOT_URL}/deletejob/${id}`)
+		.then(response => {
+			dispatch({type: 'SAVE_JOB', response})
+		})
+	}
 }
 
 export function signUpUser({email,password,firstName,lastName,about}){
@@ -125,7 +147,7 @@ export function inviteUser({email,name, admin}){
 
 export function findJob({title}) {
 	return function(dispatch) {
-		axios.post(`${ROOT_URL}/jobs`, {title})
+		axios.post(`${ROOT_URL}/savedjobs`, {title})
 		.then(response => {
 			dispatch({type: FETCH_JOB});
 		})
