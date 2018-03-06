@@ -1,4 +1,4 @@
-import { FETCH_JOB} from '../components/utils/api'
+import { FETCH_JOB } from '../components/utils/api'
 
 export default function (state = {selectedJob: '', allJobs:[]}, action) {
 	console.log(action);
