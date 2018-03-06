@@ -15,13 +15,13 @@ import SignOut from './components/auth/signout';
 import SignUp from './components/auth/signup';
 import SignUpAd from './components/auth/signupad';
 import Feature from './components/feature';
-import TmDashboard from './components/tmdashboard'
+import TmDashboard from './components/admin/tmdashboard'
 import Welcome from './components/welcome';
 import Detail from './components/JobDetail';
 import Profile from './components/auth/profile';
 import Profile_2 from './components/profile_2';
 import Profile_3 from './components/profile_3';
-import Invite from './components/invite';
+import Invite from './components/admin/invite';
 import JobDetail from './components/JobDetail';
 
 

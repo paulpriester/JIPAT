@@ -3,7 +3,7 @@ import api from './utils/api';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {savedJobs, removeJob, addJob} from '../actions'
+import {savedJobs, removeJob, addJob} from '../actions';
 
 
 class JobList extends Component{
