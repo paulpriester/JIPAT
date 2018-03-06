@@ -8,7 +8,7 @@ export default function (state = {selectedJob: '', allJobs:[]}, action) {
 		// better method of writing the above line
 		return {
 			...state,
-			allJobs: action.payload.data
+			allJobs: action.payload.data.concat(state.allJobs)
 		}
 	case 'SELECT_JOB':
 		return {
