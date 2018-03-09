@@ -28,7 +28,6 @@ class Welcome extends Component {
 					am fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sap
 					ien nunc accuan eget.</p>
 				</div>
-			
 			  </div>
 		);
 	}
