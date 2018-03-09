@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';                  
 import { fetchJob } from './utils/api';
@@ -37,6 +38,7 @@ class SearchBar extends Component {
 
 				<span className='input-group-btn'>
 					<button type="submit" className='btn btn-secondary'>Submit</button>
+					<Button className='btn btn-secondary'>Add Job</Button>
 				</span>
 			</form>
 		);
