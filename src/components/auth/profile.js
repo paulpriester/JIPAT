@@ -5,70 +5,76 @@ import { connect } from "react-redux";
 import * as actions from '../../actions';
 
 
-class Profile extends Component {
-  renderField(field) {
-    const { meta: { touched, error } } = field;
-    const className = `form-group ${touched && error ? "has-danger" : ""}`;
+const renderInput=field=>{
+  const {meta: {touched,error}}=field;
+  return(
+    <div>
+      <input {...field.input} type={field.type} className="form-control" />
+      <div className="error">{touched?error:''}</div>
+    </div>
+    );  
+  
+};
 
-    return (
-      <div className={className}>
-        <label>{field.label}</label>
-        <input className="form-control" type="text" {...field.input} />
-        <div className="text-help">
-          {touched ? error : ""}
+class Profile extends Component{
+
+  handleFormSubmit(formProps){
+    //call action creator to signup user
+    this.props.profile(formProps);
+  }
+  renderAlert(){
+    if(this.props.errorMessage){
+      return(
+        <div className="alert alert-danger">
+          <strong>Oops!</strong> {this.props.errorMessage}
         </div>
-      </div>
-    );
+        );
+    }
   }
+  render(){
+    const {handleSubmit}=this.props;
+          console.log({handleSubmit})
 
-  handleFormSubmit(formProps) {
-          console.log(formProps);
-        this.props.profile(formProps);
-  }
-
-  render() {
-    const { handleSubmit } = this.props;
-
-    return (
-      <form>
-        <Field
-          label="First Name"
-          name="firstName"
-          component={this.renderField}
-        />
-        <Field
-          label="Last Name"
-          name="lastName"
-          component={this.renderField}
-        />
-        <Field
-          label="About"
-          name="about"
-          component={this.renderField}
-        />
-       <Link to='/profile_2'> <button type="submit" className="btn btn-primary">Submit</button></Link>
-      </form>
+    return(
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <fieldset className="form-group">
+            <label>First Name:</label>
+            <Field
+              name="firstName"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <label>Last Name:</label>
+            <Field
+              name="lastName"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <label>About:</label>
+            <Field
+              name="about"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
+          {this.renderAlert()}
+          <button action="submit" className="btn btn-primary">Submit</button>
+        </form>
     );
   }
 }
-
-function validate(values) {
-  // console.log(values) -> { title: 'asdf', categories: 'asdf', content: 'asdf' }
-  const errors = {};
-
-  // Validate the inputs from 'values'
-  if (!values.fistname) {
-    errors.title = "Enter a title";
-  }
-  if (!values.lastname) {
-    errors.categories = "Enter some categories";
-  }
-  if (!values.about) {
-    errors.content = "Enter some content please";
-  }
-
-  // If errors is empty, the form is fine to submit
-  // If errors has *any* properties, redux form assumes form is invalid
+function validate(formProps){
+  const errors={};
+  if(!formProps.firstName)
+    errors.firstName="Please Enter firstName";
+  if(!formProps.lastName)
+    errors.lastName="Please Enter a Password";
+  if(!formProps.about)
+    errors.about="Please Enter a Confirm Password";
   return errors;
 }
 
@@ -78,7 +84,7 @@ function mapStateToProps(state){
 
 export default reduxForm({
   validate,
-  form: "Profile"
+  form: 'profile'
 })(
   connect(mapStateToProps,actions)(Profile)
 );

@@ -12,15 +12,15 @@ class JobList extends Component{
 		this.props.dispatch(savedJobs())
 	}
 
-	removeJob() {
-		console.log(removeJob())
-		this.props.dispatch(removeJob())
+	removeJob(id) {
+		console.log(id)
+		this.props.dispatch(removeJob(id))
 	}
 
-	addJob() {
-		console.log(addJob())
-		this.props.dispatch(addJob())
-	}
+	// addJob() {
+	// 	console.log(addJob())
+	// 	this.props.dispatch(addJob())
+	// }
 	
 	 renderJob(jobData,dispatch) {
 	 	var selectJob = function(job) {
@@ -37,13 +37,12 @@ class JobList extends Component{
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
 			  	<td><button onClick={()=> this.addJob()}> save job</button></td>
-			  	<td><button onClick={()=> this.removeJob()}> remove job</button></td>
+			  	<td><button onClick={()=> this.removeJob(jobData._id)}> remove job</button></td>
 	      	  </tr>
 		)
 	}
 
 	render() {
-		console.log(this.props)
 		return (
 				<table className ='table table-hover'>
 					<thead>

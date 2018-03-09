@@ -30,8 +30,7 @@ import {fetchStudents} from '../../actions'
 			<table className ='table table-hover'>
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Approve</th>
+							<th>Email</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,7 +42,7 @@ import {fetchStudents} from '../../actions'
 }
 
 function mapStateToProps({student} ) {
-	//console.log(job)
+	console.log(student)
 	return  student ;
 }
 

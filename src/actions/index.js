@@ -39,27 +39,38 @@ export function savedJobs() {
 
 export function fetchStudents () {
 	return function(dispatch) {
-		axios.get(`${ROOT_URL}//fetchUsers`)
+		axios.get(`${ROOT_URL}/fetchUsers`)
 		.then(response => {
 			dispatch({type: 'FETCH_STUDENT', response})
 		})
 	}
 }
 
-export function addJob() {
+export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at}) {
 	return function(dispatch) {
-		axios.post(`${ROOT_URL}/jobs`)
+		axios.post(`${ROOT_URL}/addjob`,{
+			title,
+			company,
+			location,
+			type,
+			jobid,
+			description,
+			how_to_apply,
+			created_at
+		})
 		.then(response => {
-			console.log('success')
-			dispatch({type: "SAVED_JOB",response})
+			console.log(response,"complete")
+			dispatch({type: "SAVE_JOB",response})
 		})
 	}
 }
 
-export function removeJob({id}) {
+export function removeJob(id) {
+	console.log(id)
 	return function(dispatch) {
 		axios.delete(`${ROOT_URL}/deletejob/${id}`)
 		.then(response => {
+			console.log(response)
 			dispatch({type: 'SAVE_JOB', response})
 		})
 	}
@@ -91,21 +102,11 @@ export function signUpUser({email,password,firstName,lastName,about}){
 
 export function profile({firstName,lastName,about}){
 	return function(dispatch){
-
-		//submit email and name to the server
 		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about})
-		//if request succeed ..
 		.then(response=>{
 			dispatch({type:AUTH_USER});
-			//-save JWT token
-			localStorage.setItem('token',response.data.token);
-				
-			browserHistory.push('/');	
 		})
-		//if request is bad
-		//-show an error to the user
 		.catch(errorobj=>{
-			// console.log(response);
 			dispatch(authError(errorobj.response.data.error))});	
 	};
 	

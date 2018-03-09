@@ -23,6 +23,8 @@ import Profile_2 from './components/profile_2';
 import Profile_3 from './components/profile_3';
 import Invite from './components/admin/invite';
 import JobDetail from './components/JobDetail';
+import Students from './components/admin/students';
+// import Test from './components/test';
 
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, reduxThunk)(createStore);
@@ -47,6 +49,7 @@ ReactDOM.render(
         <Route path="signupad" component={SignUpAd}/>
         <Route path="tmdashboard" component={TmDashboard}/>
         <Route path="invite" component={Invite}/>
+        <Route path="students" component={Students}/>
         <Route path="jobdetail" component={Detail}/>
   			<Route path="feature" component={requireAuth(Feature)}/>
         <Route path="profile" component={requireAuth(Profile)}/>
