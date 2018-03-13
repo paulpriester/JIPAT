@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form, FormControl} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';                  
 import { fetchJob } from './utils/api';
+import ModalButton from './modal';
 
 class SearchBar extends Component {
 	constructor(props) {
@@ -28,19 +29,18 @@ class SearchBar extends Component {
 
 	render () {
 		return (
-			<form onSubmit={this.onFormSubmit} className = "input-group">
-				<input
-					placeholder='Search for a job'
-					className='form-control'
-					value={this.state.term}
-					onChange={this.onInputChange}
-				/>
-
-				<span className='input-group-btn'>
-					<button type="submit" className='btn btn-secondary'>Submit</button>
-					<Button className='btn btn-secondary'>Add Job</Button>
-				</span>
-			</form>
+			<div>
+				<Form onSubmit={this.onFormSubmit}>
+					<FormControl
+						placeholder='Search for a job'
+						className='form-control'
+						value={this.state.term}
+						onChange={this.onInputChange}
+					/>
+						<Button type="submit" className='btn btn-secondary'>Submit</Button>
+						<ModalButton />
+				</Form>
+			</div>
 		);
 	}
 }

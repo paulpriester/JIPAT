@@ -1,0 +1,15 @@
+/* search_bar.js */
+.addJob {
+	float: right;
+}
+
+/* modal.js */
+.closeButton {
+	float: right;
+	cursor:pointer;
+}
+
+
+.input-span {
+	width:40em;
+}
