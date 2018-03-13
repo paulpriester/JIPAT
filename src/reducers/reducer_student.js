@@ -1,4 +1,3 @@
-
 export default function (state = {selectedStudent: '', allStudents:[]}, action) {
 	switch (action.type) {
 	case 'FETCH_STUDENT':

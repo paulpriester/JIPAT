@@ -24,6 +24,7 @@ import Profile_3 from './components/profile_3';
 import Invite from './components/admin/invite';
 import JobDetail from './components/JobDetail';
 import Students from './components/admin/students';
+import Dashboard from './components/student/dashboard';
 // import Test from './components/test';
 
 
@@ -48,6 +49,7 @@ ReactDOM.render(
         <Route path="jobdetail" component={Detail}/>
         <Route path="signupad" component={SignUpAd}/>
         <Route path="tmdashboard" component={TmDashboard}/>
+        <Route path="dashboard" component={Dashboard}/>
         <Route path="invite" component={Invite}/>
         <Route path="students" component={Students}/>
         <Route path="jobdetail" component={Detail}/>
