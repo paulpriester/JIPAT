@@ -36,8 +36,7 @@ class JobList extends Component{
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
-			  	<td><button onClick={()=> this.addJob()}> save job</button></td>
-			  	<td><button onClick={()=> this.removeJob(jobData._id)}> remove job</button></td>
+			  	<td><button onClick={()=> this.removeJob(jobData._id)}> Remove Job</button></td>
 	      	  </tr>
 		)
 	}
@@ -51,7 +50,6 @@ class JobList extends Component{
 							<th>Company</th>
 							<th>Location</th>
 							<th>Type Job</th>
-							<th>Save Job</th>
 							<th>Remove Job</th>
 						</tr>
 					</thead>

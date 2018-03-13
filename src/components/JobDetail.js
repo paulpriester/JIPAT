@@ -6,6 +6,10 @@ import { connect } from 'react-redux';
 
 class JobDetail extends Component {
 
+	handleClick() {
+		
+	}
+
 	renderJob(jobData) {
 		function stripHTML(text) {
 		 return text.replace(/<.*?>/gm, '');

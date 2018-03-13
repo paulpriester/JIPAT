@@ -61,6 +61,38 @@ class Profile extends Component{
               type="text"
             />
           </fieldset>
+          <fieldset className="form-group">
+            <label>linkedin:</label>
+            <Field
+              name="linked"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <label>Github:</label>
+            <Field
+              name="github"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <label>portfolio:</label>
+            <Field
+              name="portfolio"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <label>resume:</label>
+            <Field
+              name="resume"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
           {this.renderAlert()}
           <button action="submit" className="btn btn-primary">Submit</button>
         </form>

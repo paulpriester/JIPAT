@@ -76,7 +76,7 @@ export function removeJob(id) {
 	}
 }
 
-export function signUpUser({email,password,firstName,lastName,about}){
+export function signUpUser({email,password}){
 	return function(dispatch){
 
 		//submit email and password to the server
@@ -100,11 +100,12 @@ export function signUpUser({email,password,firstName,lastName,about}){
 	};
 }
 
-export function profile({firstName,lastName,about}){
+export function profile({firstName,lastName,about, portfolio,github,linkedin,resume}){
 	return function(dispatch){
-		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about})
+		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin})
 		.then(response=>{
 			dispatch({type:AUTH_USER});
+			browserHistory.push('/feature');
 		})
 		.catch(errorobj=>{
 			dispatch(authError(errorobj.response.data.error))});	
