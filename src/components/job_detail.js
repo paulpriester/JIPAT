@@ -3,11 +3,13 @@ import { Jumbotron, Button } from "react-bootstrap";
 import {Link} from "react-router";
 import JobList from './jobs'
 import { connect } from 'react-redux';
+import {saveCase} from '../actions';
 
 class JobDetail extends Component {
 
-	handleClick() {
-		
+	handleClick(id) {
+		console.log(id)
+		this.props.dispatch(saveCase(id))
 	}
 
 	renderJob(jobData) {
@@ -21,7 +23,8 @@ class JobDetail extends Component {
 				  	<p>Location <br />{jobData.location}</p>
 				  	<p>Type <br />{jobData.type}</p>
 				  	<p>Desciption <br /> {stripHTML(jobData.description)}</p>
-				  	<p>How to apply <br /><a href={jobData.how_to_apply}>apply</a></p>
+				  	<p >How to apply <br /><a href={jobData.how_to_apply}>apply</a></p>
+				  	<Button onClick={()=> this.handleClick(jobData._id)}>case</Button>
 		      	  </ul>
 		       )
 		}

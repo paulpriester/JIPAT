@@ -15,18 +15,19 @@ import SignIn from './components/auth/signin';
 import SignOut from './components/auth/signout';
 import SignUp from './components/auth/signup';
 import SignUpAd from './components/auth/signupad';
+
 import Feature from './components/feature';
 import TmDashboard from './components/admin/tmdashboard'
 import Welcome from './components/welcome';
-import Detail from './components/JobDetail';
 import Profile from './components/auth/profile';
 import Profile_2 from './components/profile_2';
 import Profile_3 from './components/profile_3';
+
 import Invite from './components/admin/invite';
-import JobDetail from './components/JobDetail';
+import JobDetail from './components/job_detail';
+import CaseDetail from './components/case_detail';
 import Students from './components/admin/students';
 import Dashboard from './components/student/dashboard';
-// import Test from './components/test';
 
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, reduxThunk)(createStore);
@@ -47,13 +48,13 @@ ReactDOM.render(
   			<Route path="signin" component={SignIn}/>
   			<Route path="signout" component={SignOut}/>
   			<Route path="signup" component={SignUp}/>
-        <Route path="jobdetail" component={Detail}/>
+        <Route path="jobdetail" component={JobDetail}/>
+        <Route path="casedetail" component={CaseDetail}/>
         <Route path="signupad" component={SignUpAd}/>
         <Route path="tmdashboard" component={TmDashboard}/>
         <Route path="dashboard" component={Dashboard}/>
         <Route path="invite" component={Invite}/>
         <Route path="students" component={Students}/>
-        <Route path="jobdetail" component={Detail}/>
   			<Route path="feature" component={requireAuth(Feature)}/>
         <Route path="profile" component={requireAuth(Profile)}/>
         <Route path="profile_2" component={requireAuth(Profile_2)}/>

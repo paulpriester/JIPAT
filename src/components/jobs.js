@@ -3,24 +3,24 @@ import api from './utils/api';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {savedJobs, removeJob, addJob} from '../actions';
+import {savedJobs, removeJob, addJob, saveCase} from '../actions';
 
 
 class JobList extends Component{
+	handleClick(id) {
+		console.log(id)
+		this.props.dispatch(saveCase(id))
+	}
 
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
+
 	}
 
 	removeJob(id) {
 		console.log(id)
 		this.props.dispatch(removeJob(id))
 	}
-
-	// addJob() {
-	// 	console.log(addJob())
-	// 	this.props.dispatch(addJob())
-	// }
 	
 	 renderJob(jobData,dispatch) {
 	 	var selectJob = function(job) {
@@ -37,6 +37,8 @@ class JobList extends Component{
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
 			  	<td><button onClick={()=> this.removeJob(jobData._id)}> Remove Job</button></td>
+			   	<td><button onClick={()=> this.handleClick(jobData._id)}>case</button></td>
+
 	      	  </tr>
 		)
 	}
@@ -51,6 +53,7 @@ class JobList extends Component{
 							<th>Location</th>
 							<th>Type Job</th>
 							<th>Remove Job</th>
+							<th>case</th>
 						</tr>
 					</thead>
 					<tbody>

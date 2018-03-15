@@ -28,6 +28,18 @@ export function signInUser({email,password}){
 	};
 }
 
+
+export function saveCase(id) {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/addcase/${id}`,{}, {
+			headers : {authorization: localStorage.getItem('token')}
+		})
+		.then(response => {
+			dispatch({type: 'SAVE_CASE', response})
+		})
+	}
+}
+
 export function savedJobs() {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchjobs`)
@@ -46,6 +58,15 @@ export function fetchStudents () {
 	}
 }
 
+export function fetchCases () {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchCase`)
+		.then(response => {
+			dispatch({type: 'FETCH_CASE', response})
+		})
+	}
+}
+
 export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/addjob`,{
@@ -59,7 +80,6 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 			created_at
 		})
 		.then(response => {
-			console.log(response,"complete")
 			dispatch({type: "SAVE_JOB",response})
 		})
 	}
@@ -70,7 +90,6 @@ export function removeJob(id) {
 	return function(dispatch) {
 		axios.delete(`${ROOT_URL}/deletejob/${id}`)
 		.then(response => {
-			console.log(response)
 			dispatch({type: 'SAVE_JOB', response})
 		})
 	}
@@ -78,24 +97,13 @@ export function removeJob(id) {
 
 export function signUpUser({email,password}){
 	return function(dispatch){
-
-		//submit email and password to the server
 		axios.post(`${ROOT_URL}/signup`,{email,password})
-		//if request succeed ..
 		.then(response=>{
-			//-update state to indicate user is authenticated and created
 			dispatch({type:AUTH_USER});
-			//-save JWT token
 			localStorage.setItem('token',response.data.token);
-			//localStorage is available on window scope hence no import
-			
-			//-redirect to the route '/feature'	
 			browserHistory.push('/profile');	
 		})
-		//if request is bad
-		//-show an error to the user
 		.catch(errorobj=>{
-			// console.log(response);
 			dispatch(authError(errorobj.response.data.error))});	
 	};
 }
@@ -115,43 +123,25 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 
 export function signUpAdmin({email,password}){
 	return function(dispatch){
-
-		//submit email and password to the server
 		axios.post(`${ROOT_URL}/signup`,{email,password})
-		//if request succeed ..
 		.then(response=>{
-			//-update state to indicate user is authenticated and created
 			dispatch({type:AUTH_USER});
-			//-save JWT token
 			localStorage.setItem('token',response.data.token);
-			//localStorage is available on window scope hence no import
-			
-			//-redirect to the route '/feature'	
 			browserHistory.push('/tmdashboard');	
 		})
-		//if request is bad
-		//-show an error to the user
 		.catch(errorobj=>{
-			// console.log(response);
 			dispatch(authError(errorobj.response.data.error))});	
 	};
 }
 
 export function inviteUser({email,name, admin}){
 	return function(dispatch){
-
-		//submit email and name to the server
 		axios.post(`${ROOT_URL}/invite`,{email,name, admin})
-		//if request succeed ..
 		.then(response=>{
 			dispatch({type:AUTH_USER});
-			//-redirect to the route '/feature'	
 			browserHistory.push('/');	
 		})
-		//if request is bad
-		//-show an error to the user
 		.catch(errorobj=>{
-			// console.log(response);
 			dispatch(authError(errorobj.response.data.error))});	
 	};
 }
