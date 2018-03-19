@@ -17,11 +17,11 @@ const renderInput=field=>{
 };
 
 class Profile extends Component{
-
+  
   handleFormSubmit(formProps){
-    //call action creator to signup user
     this.props.profile(formProps);
   }
+
   renderAlert(){
     if(this.props.errorMessage){
       return(
@@ -62,9 +62,9 @@ class Profile extends Component{
             />
           </fieldset>
           <fieldset className="form-group">
-            <label>linkedin:</label>
+            <label>Linkedin:</label>
             <Field
-              name="linked"
+              name="linkedin"
               component={renderInput}
               type="text"
             />
@@ -78,7 +78,7 @@ class Profile extends Component{
             />
           </fieldset>
           <fieldset className="form-group">
-            <label>portfolio:</label>
+            <label>Portfolio:</label>
             <Field
               name="portfolio"
               component={renderInput}
@@ -86,7 +86,7 @@ class Profile extends Component{
             />
           </fieldset>
           <fieldset className="form-group">
-            <label>resume:</label>
+            <label>Resume:</label>
             <Field
               name="resume"
               component={renderInput}
@@ -105,8 +105,6 @@ function validate(formProps){
     errors.firstName="Please Enter firstName";
   if(!formProps.lastName)
     errors.lastName="Please Enter a Password";
-  if(!formProps.about)
-    errors.about="Please Enter a Confirm Password";
   return errors;
 }
 

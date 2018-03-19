@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
-import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { Button, FormGroup,  ControlLabel } from 'react-bootstrap';
 
 const customStyles = {
   content : {
@@ -39,7 +39,8 @@ class ModalButton extends Component {
   }
 
   onSubmit({title,company,location,type,description,how_to_apply, created_at}) {
-    this.props.addJob({title,company,location,type,description,how_to_apply, created_at})
+    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at}))
+        this.setState({modalIsOpen: false});
   }
 
   render() {
@@ -95,6 +96,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps,actions)(reduxForm({
+export default connect(mapStateToProps)(reduxForm({
   form: 'create'
 })(ModalButton));
