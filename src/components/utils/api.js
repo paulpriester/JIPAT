@@ -16,13 +16,4 @@ export function fetchJob(job) {
 	}
 }
 
-export function savedJob() {
-	const url = `${SERVER_URL}`;
-	const request = axios.get(url);
-
-	return{
-		type: SAVED_JOB,
-		payload: request
-	}
-}
 

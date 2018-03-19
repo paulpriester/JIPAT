@@ -23,8 +23,10 @@ class JobDetail extends Component {
 				  	<p>Location <br />{jobData.location}</p>
 				  	<p>Type <br />{jobData.type}</p>
 				  	<p>Desciption <br /> {stripHTML(jobData.description)}</p>
-				  	<p >How to apply <br /><a href={jobData.how_to_apply}>apply</a></p>
-				  	<Button onClick={()=> this.handleClick(jobData._id)}>case</Button>
+				  	<p >How to apply <br /><a onClick={()=> this.handleClick(jobData._id)}
+				  							  href={stripHTML(jobData.how_to_apply)} 
+				  							  target="_blank">apply</a>
+				  							  </p>
 		      	  </ul>
 		       )
 		}

@@ -30,7 +30,9 @@ import {fetchCases} from '../../actions'
       <table className ='table table-hover'>
           <thead>
             <tr>
-              <th>id</th>
+              <th>Case ID</th>
+              <th>Status</th>
+
             </tr>
           </thead>
           <tbody>
