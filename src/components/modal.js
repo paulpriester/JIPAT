@@ -68,17 +68,17 @@ class ModalButton extends Component {
           	<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
               <FormGroup className='input-span'>
                 <ControlLabel>Title</ControlLabel>
-                  <FormControl name="title" component={renderField} type="text" />
+                  <Field name="title" component={renderField} type="text" />
                 <ControlLabel>Location</ControlLabel>
-                  <FormControl name="location" component={renderField} type="text" />
+                  <Field name="location" component={renderField} type="text" />
                 <ControlLabel>Type</ControlLabel>
-                  <FormControl name="type" component={renderField} type="text" />
+                  <Field name="type" component={renderField} type="text" />
                 <ControlLabel>Description</ControlLabel>
-                  <FormControl componentClass="textarea" name="description" component={renderField} type="text" />
+                  <Field componentClass="textarea" name="description" component={renderField} type="text" />
                 <ControlLabel>Apply Link</ControlLabel>
-                  <FormControl name="how_to_apply" component={renderField} type="text" />
+                  <Field name="how_to_apply" component={renderField} type="text" />
                 <ControlLabel>Date Created</ControlLabel>
-                  <FormControl name="created_at" component={renderField} type="text" />
+                  <Field name="created_at" component={renderField} type="text" />
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {savedJobs, removeJob, addJob} from '../actions';
+import Loading from './loading';
 
 
 class JobList extends Component{
@@ -43,20 +44,28 @@ class JobList extends Component{
 
 	render() {
 		return (
-				<table className='table table-hover'>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Company</th>
-							<th>Location</th>
-							<th>Type Job</th>
-							<th>Remove Job</th>
-						</tr>
-					</thead>
-					<tbody>
-						{this.props.allJobs.length != 0 && this.props.allJobs.map(i=>this.renderJob(i,this.props.dispatch))}
-					</tbody>
-				</table>
+			<div>
+				{
+					! this.props.allJobs.length
+					? <Loading />
+					: 
+					<table className="table table-hover">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Company</th>
+								<th>Location</th>
+								<th>Type Job</th>
+								<th>Remove Job</th>
+							</tr>
+						</thead>
+						<tbody>
+							{this.props.allJobs.map(i=>this.renderJob(i,this.props.dispatch))}
+						</tbody>
+					</table>
+								
+				}
+			</div>		
 		)
 	}
 }

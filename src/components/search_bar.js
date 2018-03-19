@@ -37,8 +37,8 @@ class SearchBar extends Component {
 						value={this.state.term}
 						onChange={this.onInputChange}
 					/>
-						<Button type="submit" className='btn btn-secondary'>Submit</Button>
-						<ModalButton />
+					<Button type="submit" className='btn btn-secondary'>Submit</Button>
+					<ModalButton />
 				</Form>
 			</div>
 		);

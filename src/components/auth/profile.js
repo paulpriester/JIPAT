@@ -36,7 +36,7 @@ class Profile extends Component{
           console.log({handleSubmit})
 
     return(
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <form className="container" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className="form-group">
             <label>First Name:</label>
             <Field
