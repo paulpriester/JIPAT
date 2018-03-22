@@ -27,18 +27,20 @@ import {fetchCases} from '../../actions'
 
   render () {
     return (
-      <table className ='table table-hover'>
-          <thead>
-            <tr>
-              <th>Case ID</th>
-              <th>Status</th>
+      <div className="container">
+        <table className ='table table-hover'>
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Status</th>
 
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.allCases.length != 0 && this.props.allCases.map(i=>this.renderCase(i,this.props.dispatch))}
-          </tbody>
-      </table>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.allCases.length != 0 && this.props.allCases.map(i=>this.renderCase(i,this.props.dispatch))}
+            </tbody>
+        </table>
+      </div>
     )
   }
 }

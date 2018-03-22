@@ -21,10 +21,14 @@ body {
 }
 
 /* header.js */
-.navLinks {
+.nav-item {
 	float:right !important;
 	position:relative;
 	bottom:20px;
+}
+
+.left {
+	margin-left: 1rem; 
 }
 
 .nav-link {
@@ -57,7 +61,8 @@ body {
 	cursor:pointer;
 }
 
-
-.input-span {
+.input-row {
 	width:40em;
+	position:relative;
+	bottom:15px;
 }
