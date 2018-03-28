@@ -20,6 +20,10 @@ body {
     height:30em;
 }
 
+.sign-in-button {
+
+}
+
 /* header.js */
 .nav-item {
 	float:right !important;

@@ -51,7 +51,7 @@ class JobList extends Component{
 								<th>Company</th>
 								<th>Location</th>
 								<th>Type Job</th>
-								<th>Remove Job</th>
+								<th>Apply for Job</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -17,17 +17,26 @@ class JobDetail extends Component {
 		 return text.replace(/<.*?>/gm, '');
 		}
 			return (
-				<ul key={jobData.id}>
-					<p>Title <br />{jobData.title}</p>
-					<p>Post Date <br />{jobData.created_at}</p>
-				  	<p>Location <br />{jobData.location}</p>
-				  	<p>Type <br />{jobData.type}</p>
-				  	<p>Desciption <br /> {stripHTML(jobData.description)}</p>
-				  	<p >How to apply <br /><a onClick={()=> this.handleClick(jobData._id)}
-				  							  href={stripHTML(jobData.how_to_apply)} 
-				  							  target="_blank">apply</a>
-				  							  </p>
-		      	  </ul>
+				<div className="container">
+					<ul key={jobData.id}>
+						<h3>Title</h3><p>{jobData.title}</p>
+						<br />
+						<h3>Post Date</h3><p>{jobData.created_at}</p>
+						<br />
+					  	<h3>Location</h3><p>{jobData.location}</p>
+					  	<br />
+					  	<h3>Type</h3><p>{jobData.type}</p>
+					  	<br />
+					  	<h3>Desciption</h3><p>{stripHTML(jobData.description)}</p>
+					  	<br />
+					  	<h3>How to apply</h3>
+					  	<a onClick={()=> 
+						  	this.handleClick(jobData._id)}
+						  	href={stripHTML(jobData.how_to_apply)} 
+						  	target="_blank"><Button type="submit" className='btn btn-secondary'>Apply</Button>
+					  	</a>	  							  
+			      	</ul>
+			    </div>
 		       )
 		}
 	
