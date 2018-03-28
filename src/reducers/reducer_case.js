@@ -1,4 +1,4 @@
-export default function (state = {selectedCase: '', allCases:[]}, action) {
+export default function (state = {selectedCase: '', allCases:[], opencase:[]}, action) {
 	switch (action.type) {
 	case 'FETCH_CASE':
 				console.log(action)
@@ -14,9 +14,13 @@ export default function (state = {selectedCase: '', allCases:[]}, action) {
 	case 'SAVE_CASE':
 		return {
 			...state,
-			allCases: action.response.data.concat(state.allCases)
+			allCases: action.response.data
 		}
-
+	case 'OPEN_CASE':
+		return {
+			...state,
+			opencase: action.payload
+		}
 	}
 	
 	return state;

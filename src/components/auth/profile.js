@@ -9,7 +9,7 @@ const renderInput=field=>{
   const {meta: {touched,error}}=field;
   return(
     <div>
-      <input {...field.input} type={field.type} className="form-control" />
+      <input {...field.input} type={field.type} placeholder='' className="form-control" />
       <div className="error">{touched?error:''}</div>
     </div>
     );  
@@ -17,7 +17,6 @@ const renderInput=field=>{
 };
 
 class Profile extends Component{
-  
   handleFormSubmit(formProps){
     this.props.profile(formProps);
   }
@@ -41,6 +40,7 @@ class Profile extends Component{
             <label>First Name:</label>
             <Field
               name="firstName"
+              placeholder= 'test'
               component={renderInput}
               type="text"
             />

@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
-import api from './utils/api';
+import api from '../utils/api';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {savedJobs, removeJob, addJob, saveCase} from '../actions';
+import {savedJobs, removeJob, addJob, saveCase} from '../../actions/index';
 
 
-class JobList extends Component{
+class JobList_Admin extends Component{
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
 
 	}
 
-	handleClick(id) {
+	removeJob(id) {
 		console.log(id)
-		this.props.dispatch(saveCase(id))
+		this.props.dispatch(removeJob(id))
 	}
 	
 	 renderJob(jobData,dispatch) {
@@ -31,7 +31,7 @@ class JobList extends Component{
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
-			  	<td><button onClick={()=> this.handleClick(jobData._id)}> Apply</button></td>
+			  	<td><button onClick={()=> this.removeJob(jobData._id)}> Remove Job</button></td>
 	      	  </tr>
 		)
 	}
@@ -45,7 +45,7 @@ class JobList extends Component{
 							<th>Company</th>
 							<th>Location</th>
 							<th>Type Job</th>
-							<th>Apply</th>
+							<th>Remove Job</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -61,4 +61,4 @@ function mapStateToProps({job} ) {
 	return  job ;
 }
 
-export default connect (mapStateToProps)(JobList);
+export default connect (mapStateToProps)(JobList_Admin);

@@ -11,13 +11,16 @@ class TmDashboard extends Component {
                   <Link className="nav-link" to="/students">Students</Link>
                 </li> 
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">Approve Access To Jobs</Link>
-                </li>
+                    <Link className="nav-link" to="/invite">Invite</Link>
+                  </li>   
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">Cases</Link>
+                  <Link className="nav-link" to="/admincases">Cases</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/"> Job Titles and Keywords</Link>
+                </li>
+                 <li className="nav-item">
+                  <Link className="nav-link" to="/">Approve Access To Jobs</Link>
                 </li>
               </ul>        
     );
@@ -26,6 +29,4 @@ class TmDashboard extends Component {
 
 export default TmDashboard;
 
-// <li className="nav-item">
-//                   <Link className="nav-link" to="/invite">Invite</Link>
-//                 </li>   
+                  

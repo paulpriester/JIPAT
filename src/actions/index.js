@@ -3,6 +3,9 @@ import {browserHistory} from 'react-router';
 import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB } from './types';
 
 const ROOT_URL='http://localhost:3090';
+const token = function() {
+	return {authorization: localStorage.getItem('token')}
+}
 
 export function signInUser({email,password}){
 	return function(dispatch){
@@ -11,14 +14,19 @@ export function signInUser({email,password}){
 		axios.post(`${ROOT_URL}/signin`,{email,password})
 		//if request good ..
 		.then(response=>{
+			console.log(response)
 			//-update state to indicate user is authenticated
-			dispatch({type:AUTH_USER});
+			dispatch({type:AUTH_USER, payload: response.data.type});
 			//-save JWT token
 			localStorage.setItem('token',response.data.token);
 			//localStorage is available on window scope hence no import
 			
-			//-redirect to the route '/feature'	
-			browserHistory.push('/feature');	
+			if(response.data.type == 'admin') {
+				browserHistory.push('/tmdashboard')
+			} else {
+				//-redirect to the route '/feature'	
+				browserHistory.push('/feature');	
+			}
 		})
 		//if request is bad
 		.catch(()=>{
@@ -28,15 +36,43 @@ export function signInUser({email,password}){
 	};
 }
 
+export function signUpUser({email,password}){
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/signup`,{email,password})
+		.then(response=>{
+			dispatch({type:AUTH_USER});
+			localStorage.setItem('token',response.data.token);
+			browserHistory.push('/profile');	
+		})
+		.catch(errorobj=>{
+			dispatch(authError(errorobj.response.data.error))});	
+	};
+}
+
+export function signUpAdmin({email,password}){
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/signupadmin`,{email,password})
+		.then(response=>{
+			dispatch({type: ADMIN_AUTH_USER});
+			localStorage.setItem('token',response.data.token);
+			browserHistory.push('/tmdashboard');	
+		})
+		.catch(errorobj=>{
+			dispatch(authError(errorobj.response.data.error))});	
+	};
+}
+
 
 export function saveCase(id) {
 	return function(dispatch) {
 		// Need to have a empty object because i am not returning anything
 		axios.post(`${ROOT_URL}/addcase/${id}`,{}, {
-			headers : {authorization: localStorage.getItem('token')}
+			headers : token()
 		})
 		.then(response => {
-			dispatch({type: 'SAVE_CASE', response})
+			if(response.data == "success"){
+				dispatch(fetchCases())
+			}
 		})
 	}
 }
@@ -62,7 +98,19 @@ export function fetchStudents () {
 
 export function fetchCases () {
 	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchCase`)
+		axios.get(`${ROOT_URL}/fetchCase`, {
+			//with a get request no need to have a object because we are not sending data to the DB.
+			headers : token()
+		})
+		.then(response => {
+			dispatch({type: 'FETCH_CASE', response})
+		})
+	}
+}
+
+export function fetchAllCases () {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchallcases`)
 		.then(response => {
 			dispatch({type: 'FETCH_CASE', response})
 		})
@@ -98,23 +146,31 @@ export function removeJob(id) {
 	}
 }
 
-export function signUpUser({email,password}){
-	return function(dispatch){
-		axios.post(`${ROOT_URL}/signup`,{email,password})
-		.then(response=>{
-			dispatch({type:AUTH_USER});
-			localStorage.setItem('token',response.data.token);
-			browserHistory.push('/profile');	
+export function removeCase(id) {
+	console.log(id)
+	return function(dispatch) {
+		axios.delete(`${ROOT_URL}/deletecase/${id}`,{
+			headers : token()
 		})
-		.catch(errorobj=>{
-			dispatch(authError(errorobj.response.data.error))});	
-	};
+		.then(response => {
+			dispatch({type: 'SAVE_CASE', response})
+		})
+	}
 }
 
+export function openCase(id) {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/update/${id}`)
+		.then(response => {
+			console.log(response)
+			dispatch({type: "OPEN_CASE",response})
+		})
+	}
+}
 export function profile({firstName,lastName,about, portfolio,github,linkedin,resume}){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin}, {
-			headers : {authorization: localStorage.getItem('token')}
+			headers : token()
 		})
 		.then(response=>{
 			dispatch({type:AUTH_USER});
@@ -124,19 +180,6 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 			dispatch(authError(errorobj.response.data.error))});	
 	};
 	
-}
-
-export function signUpAdmin({email,password}){
-	return function(dispatch){
-		axios.post(`${ROOT_URL}/signup`,{email,password})
-		.then(response=>{
-			dispatch({type:AUTH_USER});
-			localStorage.setItem('token',response.data.token);
-			browserHistory.push('/tmdashboard');	
-		})
-		.catch(errorobj=>{
-			dispatch(authError(errorobj.response.data.error))});	
-	};
 }
 
 export function inviteUser({email,name, admin}){
@@ -178,7 +221,7 @@ export function authError(error){
 export function fetchMessage(dispatch){
 	return function(dispatch){
 		axios.get(ROOT_URL,{
-			headers : {authorization: localStorage.getItem('token')}
+			headers : token()
 		})
 		.then(response=>{
 			dispatch({

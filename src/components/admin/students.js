@@ -20,6 +20,7 @@ import {fetchStudents} from '../../actions'
 
 		return (
 			<tr key={studentData.email}>
+			  	<td>{studentData.lastName}, {studentData.firstName}</td>	
 			  	<td>{studentData.email}</td>
 	      	  </tr>
 		)
@@ -30,6 +31,7 @@ import {fetchStudents} from '../../actions'
 			<table className ='table table-hover'>
 					<thead>
 						<tr>
+							<th>Name</th>
 							<th>Email</th>
 						</tr>
 					</thead>

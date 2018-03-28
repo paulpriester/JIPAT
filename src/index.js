@@ -8,7 +8,7 @@ import reduxThunk from 'redux-thunk';
 import ReduxPromise from 'redux-promise';
 import requireAuth from './components/auth/require_auth';
 import reducers from './reducers';
-import {AUTH_USER} from './actions/types';
+import {AUTH_USER, ADMIN_AUTH_USER} from './actions/types';
 
 import App from './components/app';
 import SignIn from './components/auth/signin';
@@ -17,7 +17,9 @@ import SignUp from './components/auth/signup';
 import SignUpAd from './components/auth/signupad';
 
 import Feature from './components/feature';
-import TmDashboard from './components/admin/tmdashboard'
+import AdminJobs from './components/admin/adminjobs';
+import TmDashboard from './components/admin/tmdashboard';
+import Cases from './components/admin/admincases';
 import Welcome from './components/welcome';
 import Profile from './components/auth/profile';
 import Profile_2 from './components/profile_2';
@@ -37,7 +39,7 @@ const token=localStorage.getItem('token');
 //If we have a token,consider the user to be signed in
 if(token){
 	//we need to update application state
-	store.dispatch({type: AUTH_USER});
+	store.dispatch({type: AUTH_USER},{type: ADMIN_AUTH_USER});
 }
 
 ReactDOM.render(
@@ -55,6 +57,8 @@ ReactDOM.render(
         <Route path="dashboard" component={Dashboard}/>
         <Route path="invite" component={Invite}/>
         <Route path="students" component={Students}/>
+        <Route path="admincases" component={Cases}/>
+        <Route path="joblist_admin" component={requireAuth(AdminJobs)}/>
   			<Route path="feature" component={requireAuth(Feature)}/>
         <Route path="profile" component={requireAuth(Profile)}/>
         <Route path="profile_2" component={requireAuth(Profile_2)}/>

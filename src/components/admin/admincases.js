@@ -2,34 +2,27 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {fetchCases, openCase, removeCase} from '../../actions'
+import {fetchAllCases, openCase, removeCase} from '../../actions'
 
 
- class Dashboard extends Component {
-  constructor (props) {
-    super(props);
+ class Cases extends Component {
+  constructor () {
+    super();
 
-    // this.state = {
-    //   status: this.handleChange()
-    // };
+    this.state = {
+      button: 'open'
+    };
 
     this.updateCase = this.updateCase.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
   }
-
-  // handleChange(e) {
-  //   const status = e.target.value;
-  //   this.props.onChange(status);
-  // }
-
   componentDidMount() {
-    this.props.dispatch(fetchCases())
+    this.props.dispatch(fetchAllCases())
   }
 
   updateCase(id) {
     this.props.dispatch(openCase(id))
     // const caseToggle = this.state.button == 'open' ? 'close' : 'open';
-    // this.setState({status: this.handleChange()})
+    // this.setState({button: caseToggle})
   }
 
   removeCase(id) {
@@ -46,13 +39,13 @@ import {fetchCases, openCase, removeCase} from '../../actions'
     }
 
     return (
-      <tr key={caseData._id}>
+         <tr key={caseData._id}>
           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
           <td>
-          <select>
+          <select >
                 <option value='open' onClick={()=> this.updateCase(caseData._id)}> Open </option>
-                <option value='close'  onClick={()=> this.updateCase(caseData._id)} eventKey="2"> Close </option>
-                <option value='placed'  onClick={()=> this.updateCase(caseData._id)} eventKey="3" active> Placed </option>
+                <option value='close' eventKey="2"> Close </option>
+                <option value='placed' eventKey="3" active> Placed </option>
                 <option divider />
                 <option eventKey="4">Separated link</option>
           </select>
@@ -87,4 +80,4 @@ function mapStateToProps({Case} ) {
   return  Case ;
 }
 
-export default connect (mapStateToProps)(Dashboard);
+export default connect (mapStateToProps)(Cases);
