@@ -3,7 +3,6 @@ import {Link} from 'react-router';
  
 
 class TmDashboard extends Component {
-
   render() {
     return (
               <ul className="nav navbar-nav">

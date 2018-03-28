@@ -3,17 +3,26 @@ import {Button, Jumbotron} from 'react-bootstrap';
 // import '../style/welcome.css';
 import {Link} from 'react-router';
 
+const customStyles = {
+	content: {
+		position: "relative",
+		top: "6em",
+	}
+}
+
 
 class Welcome extends Component {
 	render () {
 		return (
-			<div className='container'>
+			<div>
 			  <Jumbotron className="Jumbotron">
-			    <h1>Welcome to TKH </h1>
-			    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-			    <Button><Link className='button' to='/signin'>Sign in</Link></Button>
+			  	<div style={customStyles.content}>
+				    <h1>Welcome to TKH </h1>
+				    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+				    <Button><Link to='/signin'>Sign in</Link></Button>
+			    </div>
 			  </Jumbotron>
-			  <div className='about'>
+			  <div className='container about'>
 					<h1>ABOUT US</h1>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. A
 					enean euismod bibendum laoreet. Proin gravida dolor sit amet lac

@@ -1,27 +1,26 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import {Navbar} from 'react-bootstrap';
 
 class Header extends Component	{
 	renderLinks()	{
 		if (this.props.type == 'student' && this.props.authenticated) {
 			return	(
 				<div>
-				<li className="nav-item">
-					<Link className="nav-link" to="/feature">Jobs</Link>
-				</li>	
-				<li className="nav-item">
-					<Link className="nav-link" to="/dashboard">Dashboard</Link>
-				</li>	
-				<li className="nav-item">
-					<Link className="nav-link" to="/profile">Profile</Link>
-				</li>
-				<li className="nav-item">
-					<Link className="nav-link" to="/signout">Sign Out</Link>
-				</li>
-
-				</div>		
-				
+					<li className="nav-item">
+						<Link className="nav-link" to="/feature">Jobs</Link>
+					</li>	
+					<li className="nav-item">
+						<Link className="nav-link" to="/dashboard">Dashboard</Link>
+					</li>	
+					<li className="nav-item">
+						<Link className="nav-link" to="/profile">Profile</Link>
+					</li>
+					<li className="nav-item">
+						<Link className="nav-link" to="/signout">Sign Out</Link>
+					</li>
+				</div>	
 			);
 
 		} else if (this.props.type == 'admin' && this.props.authenticated){
@@ -39,30 +38,32 @@ class Header extends Component	{
 				<li className="nav-item">
 					<Link className="nav-link" to="/signout">Sign Out</Link>
 				</li>
+
 				</div>		
 				
 			);
 
 		} else	{
-			return [
-				<li className="nav-item" key={1}>
+			return (
+				<li className="nav-item navLinks" key={1}>
 					<Link className="nav-link" to="/signin">Sign In</Link>
 				</li>
-			];
+			);
 		}
 	}
 
 	render() {
 		return (
-			<nav className="navbar navbar-light">
-				<Link to="/feature" className=" navbar-brand">The Knowledge House</Link>
+			<Navbar>
+				<Link to="/feature" className="navbar-brand">The Knowledge House</Link>
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
 				</ul>
-			</nav>
+			</Navbar>
 		);
 	}
 }
+
 function mapStateToProps(state){
 	return{
 		type: state.auth.type,

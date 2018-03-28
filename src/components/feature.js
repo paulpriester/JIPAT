@@ -8,9 +8,9 @@ import ModalButton from './modal';
 export default class Feature extends Component{
 	render(){
 		return(
-			<div>
-			<SearchBar />
-			<JobList />
+			<div className='container'>
+				<SearchBar />
+				<JobList />
 			</div>
 		);
 	}

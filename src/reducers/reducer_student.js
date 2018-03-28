@@ -1,4 +1,4 @@
-export default function (state = {selectedStudent: '', allStudents:[]}, action) {
+export default function studentReducer (state = {selectedStudent: '', allStudents:[]}, action) {
 	switch (action.type) {
 	case 'FETCH_STUDENT':
 				console.log(action)
