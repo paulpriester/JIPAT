@@ -38,9 +38,7 @@ class Header extends Component	{
 				<li className="nav-item">
 					<Link className="nav-link" to="/signout">Sign Out</Link>
 				</li>
-
 				</div>		
-				
 			);
 
 		} else	{

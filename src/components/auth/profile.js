@@ -32,15 +32,13 @@ class Profile extends Component{
   }
   render(){
     const {handleSubmit}=this.props;
-          console.log({handleSubmit})
-
+    
     return(
         <form className="container" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className="form-group">
             <label>First Name:</label>
             <Field
               name="firstName"
-              placeholder= 'test'
               component={renderInput}
               type="text"
             />

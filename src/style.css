@@ -46,6 +46,11 @@ body {
 	bottom:20px;
 }
 
+.tabs {
+	background-color: black;
+	text-align: center;
+}
+
 /* search_bar.js */
 .addJob {
 	float: right;

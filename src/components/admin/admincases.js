@@ -2,27 +2,28 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {fetchAllCases, openCase, removeCase} from '../../actions'
+import {fetchAllCases, updateCase, removeCase} from '../../actions';
 
+class Cases extends Component {
 
- class Cases extends Component {
-  constructor () {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {
-      button: 'open'
-    };
-
-    this.updateCase = this.updateCase.bind(this);
+    this.state = { type: 'Open'};
   }
+
   componentDidMount() {
     this.props.dispatch(fetchAllCases())
   }
 
-  updateCase(id) {
-    this.props.dispatch(openCase(id))
-    // const caseToggle = this.state.button == 'open' ? 'close' : 'open';
-    // this.setState({button: caseToggle})
+   changeType(type) {
+    //function used to record the state of the case status.
+    this.setState({type: type})
+  }
+
+  updateCase(id,value) {
+    this.props.dispatch(updateCase(id,value))
+    console.log(value)
   }
 
   removeCase(id) {
@@ -42,22 +43,46 @@ import {fetchAllCases, openCase, removeCase} from '../../actions'
          <tr key={caseData._id}>
           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
           <td>
-          <select >
-                <option value='open' onClick={()=> this.updateCase(caseData._id)}> Open </option>
-                <option value='close' eventKey="2"> Close </option>
-                <option value='placed' eventKey="3" active> Placed </option>
-                <option divider />
-                <option eventKey="4">Separated link</option>
-          </select>
+            <select id="case-status"
+                onChange={e => this.updateCase(caseData._id, e.target.value)}>
+          <option value="Open">
+            Open
+          </option>
+          <option value="Applied">
+            Applied
+          </option>
+          <option value="Interview 1">
+            Interview 1
+          </option>
+          <option value="Interview 2">
+            Interview 2
+          </option>
+          <option value="Salary Negotation">
+            Salary Negotation
+          </option>
+          <option value="Close">
+            Close
+          </option>
+          <option value="Place">
+            Place
+          </option>
+        </select>
           </td>
-          <td></td>
+          <td>{caseData.openCase}</td>
           <td><button onClick={()=> this.removeCase(caseData._id)}> Remove Case</button></td>
       </tr>
     )
   }
 
   render () {
+        console.log(this.state.type)
     return (
+      <div>
+      <ul>
+        <li onClick= {() => this.changeType('Open')}> open</li>
+        <li onClick= {() => this.changeType('Close')}> close</li>
+        <li onClick= {() => this.changeType('Place')}> place</li>
+      </ul>
       <table className ='table table-hover'>
           <thead>
             <tr>
@@ -68,9 +93,10 @@ import {fetchAllCases, openCase, removeCase} from '../../actions'
             </tr>
           </thead>
           <tbody>
-            {this.props.allCases.length != 0 && this.props.allCases.map(i=>this.renderCase(i,this.props.dispatch))}
+            {this.props.allCases.length != 0 && this.props.allCases.filter(i=>i.openCase==this.state.type).map(i=>this.renderCase(i,this.props.dispatch))}
           </tbody>
       </table>
+      </div>
     )
   }
 }
