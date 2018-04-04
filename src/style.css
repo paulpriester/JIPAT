@@ -20,11 +20,19 @@ body {
     height:30em;
 }
 
+.sign-in-button {
+
+}
+
 /* header.js */
-.navLinks {
+.nav-item {
 	float:right !important;
 	position:relative;
 	bottom:20px;
+}
+
+.left {
+	margin-left: 1rem; 
 }
 
 .nav-link {
@@ -57,7 +65,26 @@ body {
 	cursor:pointer;
 }
 
-
-.input-span {
+.input-row {
 	width:40em;
+	position:relative;
+	bottom:15px;
+}
+
+/* search_bar.js */
+.show-grid {
+	padding:20px 0;
+}
+
+.show-grid-head {
+	padding:20px 0;
+	text-align: center
+}
+
+.profile-pic {
+	background-size:cover;
+	border-radius:10%;
+	border:4px solid purple;
+	box-shadow:5px 10px #888888;
+	cursor: pointer;
 }

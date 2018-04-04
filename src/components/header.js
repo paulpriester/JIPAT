@@ -1,14 +1,14 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {Navbar} from 'react-bootstrap';
+import {Navbar, Nav, NavItem} from 'react-bootstrap';
 
 class Header extends Component	{
 	renderLinks()	{
-		if (this.props.type == 'student' && this.props.authenticated) {
+		if (this.props.type == 'student' || this.props.authenticated) {
 			return	(
 				<div>
-					<li className="nav-item">
+					<li className="nav-item left">
 						<Link className="nav-link" to="/feature">Jobs</Link>
 					</li>	
 					<li className="nav-item">
@@ -23,32 +23,40 @@ class Header extends Component	{
 				</div>	
 			);
 
-		} else if (this.props.type == 'admin' && this.props.authenticated){
+		} else if (this.props.type == 'admin' || this.props.authenticated){
 			return	(
 				<div>
-				<li className="nav-item">
-					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
-				</li>
-				<li className="nav-item">
-					<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
-				</li>	
-				<li className="nav-item">
-					<Link className="nav-link" to="/admincases">Cases</Link>
-				</li>
-				<li className="nav-item">
-					<Link className="nav-link" to="/signout">Sign Out</Link>
-				</li>
-
+					<li className="nav-item">
+						<Link className="nav-link" to="/joblist_admin">Jobs</Link>
+					</li>
+					<li className="nav-item">
+						<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
+					</li>	
+					<li className="nav-item">
+						<Link className="nav-link" to="/admincases">Cases</Link>
+					</li>
+					<li className="nav-item">
+						<Link className="nav-link" to="/signout">Sign Out</Link>
+					</li>
+					<li>
+	                	<Link className="nav-link left" to="/signout">Sign Out</Link>
+					</li>	
+					<li className="nav-item">
+						<Link className="nav-link" to="/profile">Profile</Link>
+					</li>
+					<li className="nav-item">
+						<Link className="nav-link" to="/dashboard">Dashboard</Link>
+					</li>
 				</div>		
 				
 			);
 
 		} else	{
-			return (
+			return [
 				<li className="nav-item navLinks" key={1}>
 					<Link className="nav-link" to="/signin">Sign In</Link>
 				</li>
-			);
+			];
 		}
 	}
 

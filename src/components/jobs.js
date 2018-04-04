@@ -7,17 +7,16 @@ import Loading from './loading';
 import {savedJobs, removeJob, addJob, saveCase} from '../actions';
 
 
-class JobList extends Component{
+class JobList extends Component {
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
-
 	}
 
 	handleClick(id) {
 		console.log(id)
 		this.props.dispatch(saveCase(id))
 	}
-	
+
 	 renderJob(jobData,dispatch) {
 	 	var selectJob = function(job) {
 			dispatch({
@@ -33,7 +32,7 @@ class JobList extends Component{
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
 			  	<td><button onClick={()=> this.handleClick(jobData._id)}> Apply</button></td>
-	      	  </tr>
+	      	</tr>
 		)
 	}
 
@@ -51,11 +50,13 @@ class JobList extends Component{
 								<th>Company</th>
 								<th>Location</th>
 								<th>Type Job</th>
-								<th>Remove Job</th>
+								<th>Apply for Job</th>
 							</tr>
 						</thead>
 						<tbody>
-							{this.props.allJobs.map(i=>this.renderJob(i,this.props.dispatch))}
+							{
+								this.props.allJobs.map(i=>this.renderJob(i,this.props.dispatch))
+							}
 						</tbody>
 					</table>
 								

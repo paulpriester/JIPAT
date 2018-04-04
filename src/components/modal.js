@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
-import { Button, FormGroup,  ControlLabel } from 'react-bootstrap';
+import { Button, FormGroup,  ControlLabel, FormControl} from 'react-bootstrap';
 
 const customStyles = {
   content : {
@@ -12,6 +12,7 @@ const customStyles = {
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
+    height                : '90%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
     backgroundColor       : '#f2efef', 
@@ -45,15 +46,14 @@ class ModalButton extends Component {
 
   render() {
     const renderField = ({label,input, meta: {touched, error}}) => (
-    <div className="input-row">
-      <label>{label}</label>
-      <br />
-      <input {...input} type="text"/>
+    <FormGroup className="input-row">
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl className="input-edit" {...input} type="text"/>
       {touched && error &&
        <span className="error">{error}</span>}
-    </div>
+    </FormGroup>
   )
-    const { handleSubmit }= this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <span>
@@ -67,22 +67,19 @@ class ModalButton extends Component {
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2>Enter Job Info</h2>
           	<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-              <FormGroup className='input-span'>
-                <ControlLabel>Title</ControlLabel>
+                <label htmlFor="title">Title</label>
                   <Field name="title" component={renderField} type="text" />
-                <ControlLabel>Location</ControlLabel>
+                <label htmlFor="location">Location</label>
                   <Field name="location" component={renderField} type="text" />
-                <ControlLabel>Type</ControlLabel>
+                <label htmlFor="type">Type</label>
                   <Field name="type" component={renderField} type="text" />
-                <ControlLabel>Description</ControlLabel>
+                <label htmlFor="description">Description</label>
                   <Field componentClass="textarea" name="description" component={renderField} type="text" />
-                <ControlLabel>Apply Link</ControlLabel>
+                <label htmlFor="how_to_apply">Apply Link</label>
                   <Field name="how_to_apply" component={renderField} type="text" />
-                <ControlLabel>Date Created</ControlLabel>
+                <label htmlFor="created_at">Date Created</label>
                   <Field name="created_at" component={renderField} type="text" />
-                  <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
-             </FormGroup>
             </form>
         </Modal>
       </span>

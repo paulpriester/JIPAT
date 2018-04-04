@@ -19,7 +19,7 @@ class Welcome extends Component {
 			  	<div style={customStyles.content}>
 				    <h1>Welcome to TKH </h1>
 				    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				    <Button><Link to='/signin'>Sign in</Link></Button>
+				    <Button className="btn btn-secondary"><Link className="sign-in-button" to='/signin'>Sign in</Link></Button>
 			    </div>
 			  </Jumbotron>
 			  <div className='container about'>
