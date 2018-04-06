@@ -3,23 +3,18 @@ import { FETCH_JOB, FETCH_JOB_ERROR, FETCHING_JOB } from '../components/utils/ap
 const initialState = {
 	selectedJob: '', 
 	allJobs:[], 
-	error: "",
+	error: false,
 	fetching: true
 }
 
 export default function JobReducer (state = initialState, action) {
 	switch (action.type) {
-	case FETCHING_JOB:
-		console.log("fetching...")
-		return {
-			fetching: true
-		}
 	case FETCH_JOB:
 		console.log("ran")
 		return {
 			...state,
 			fetching: false,
-			error: "",
+			error: false,
 			allJobs: action.payload.data.concat(state.allJobs)
 		}
 	case FETCH_JOB_ERROR:
@@ -44,7 +39,6 @@ export default function JobReducer (state = initialState, action) {
 			...state,
 			allJobs: [action.response.data, ...state.allJobs]
 		}
-	}
-	
+	}	
 	return state;
 }

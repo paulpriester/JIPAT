@@ -10,7 +10,6 @@ const rootReducer = combineReducers({
   auth: authReducer,
   job : JobReducer,
   student: studentReducer,
-  student: studentReducer,
   Case: caseReducer
 });
 

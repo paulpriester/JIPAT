@@ -39,7 +39,7 @@ const token=localStorage.getItem('token');
 //If we have a token,consider the user to be signed in
 if(token){
 	//we need to update application state
-	store.dispatch({type: AUTH_USER},{type: ADMIN_AUTH_USER});
+	store.dispatch({type: AUTH_USER});
 }
 
 ReactDOM.render(

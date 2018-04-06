@@ -64,7 +64,7 @@ class Profile extends Component{
           </Row>
         </Grid>
       </div>
-    );
+    )
   }
 }
 

@@ -43,23 +43,23 @@ class JobList extends Component {
 					! this.props.allJobs.length
 					? <Loading />
 					: 
-					<table className="table table-hover">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Company</th>
-								<th>Location</th>
-								<th>Type Job</th>
-								<th>Apply for Job</th>
-							</tr>
-						</thead>
-						<tbody>
-							{
-								this.props.allJobs.map(i=>this.renderJob(i,this.props.dispatch))
-							}
-						</tbody>
-					</table>
-								
+					<span>
+						<h1 className="error">{this.props.error}</h1>
+						<table className="table table-hover">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Company</th>
+									<th>Location</th>
+									<th>Type Job</th>
+									<th>Apply for Job</th>
+								</tr>
+							</thead>
+							<tbody>
+								{this.props.allJobs.map(i=>this.renderJob(i,this.props.dispatch))}
+							</tbody>
+						</table>
+					</span>				
 				}
 			</div>		
 		)

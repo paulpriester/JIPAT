@@ -8,39 +8,33 @@ import ModalButton from './modal';
 class SearchBar extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			term: '', 
 			location: ''
 		};
 
 		this.searchInputChange = this.searchInputChange.bind(this);
-		this.locationInputChange = this.locationInputChange.bind(this);
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
-
 	searchInputChange(event) {
 		this.setState({
-			term: event.target.value
+			[event.target.name]: event.target.value
 		});
 	}
 
 	locationInputChange(event) {
 		this.setState({
-			location: event.target.value
+			[event.target.name]: event.target.value
 		});
 	}
 
 	onFormSubmit(event) {
 		event.preventDefault();
-
 		// We need to go and fetch api data.
 		this.props.fetchJob(this.state.term, this.state.location);
-		this.setState({ 
-			term: '', 
-			location: ''
-		});
-	console.log(this.state.location)
+		this.setState({ term: '' });
+		this.setState({ location: ''});
+		console.log(this.setState.location)
 	}
 
 	render () {
@@ -48,19 +42,21 @@ class SearchBar extends Component {
 			<div>
 				<Form onSubmit={this.onFormSubmit}>
 					<Col sm={5}>
-						<FormControl
+						<input
 							placeholder='Search for a job'
 							className='form-control'
+							name="term"
 							value={this.state.term}
 							onChange={this.searchInputChange}
 						/>
 					</Col>
 					<Col sm={5}>
-						<FormControl
+						<input
 							placeholder='Search for a location'
 							className='form-control'
+							name="location"
 							value={this.state.location}
-							onChange={this.locationInputChange}
+							onChange={this.searchInputChange}
 						/>
 					</Col>
 					<Col sm={1}>

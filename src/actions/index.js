@@ -53,7 +53,7 @@ export function signUpAdmin({email,password}){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/signupadmin`,{email,password})
 		.then(response=>{
-			dispatch({type: ADMIN_AUTH_USER});
+			dispatch({type: AUTH_USER});
 			localStorage.setItem('token',response.data.token);
 			browserHistory.push('/tmdashboard');	
 		})
@@ -117,6 +117,18 @@ export function fetchAllCases () {
 	}
 }
 
+export function updateCase(id,openCase) {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/update/${id}`,{openCase: openCase})
+		.then(response => {
+			console.log({openCase})
+			if(response.data == "successful"){
+				dispatch(fetchCases())
+			}
+		})
+	}
+}
+
 export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/addjob`,{
@@ -158,15 +170,6 @@ export function removeCase(id) {
 	}
 }
 
-export function openCase(id) {
-	return function(dispatch) {
-		axios.post(`${ROOT_URL}/update/${id}`)
-		.then(response => {
-			console.log(response)
-			dispatch({type: "OPEN_CASE",response})
-		})
-	}
-}
 export function profile({firstName,lastName,about, portfolio,github,linkedin,resume}){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin}, {
@@ -194,14 +197,14 @@ export function inviteUser({email,name, admin}){
 	};
 }
 
-export function findJob({title}) {
-	return function(dispatch) {
-		axios.post(`${ROOT_URL}/savedjobs`, {title})
-		.then(response => {
-			dispatch({type: FETCH_JOB});
-		})
-	}
-}
+// export function findJob({title}) {
+// 	return function(dispatch) {
+// 		axios.post(`${ROOT_URL}/savedjobs`, {title})
+// 		.then(response => {
+// 			dispatch({type: FETCH_JOB});
+// 		})
+// 	}
+// }
 
 
 export function signOutUser(){

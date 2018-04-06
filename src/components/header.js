@@ -22,7 +22,6 @@ class Header extends Component	{
 					</li>
 				</div>	
 			);
-
 		} else if (this.props.type == 'admin' || this.props.authenticated){
 			return	(
 				<div>
@@ -47,8 +46,19 @@ class Header extends Component	{
 					<li className="nav-item">
 						<Link className="nav-link" to="/dashboard">Dashboard</Link>
 					</li>
+				<li className="nav-item">
+					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
+				</li>
+				<li className="nav-item">
+					<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
+				</li>	
+				<li className="nav-item">
+					<Link className="nav-link" to="/admincases">Cases</Link>
+				</li>
+				<li className="nav-item">
+					<Link className="nav-link" to="/signout">Sign Out</Link>
+				</li>
 				</div>		
-				
 			);
 
 		} else	{
