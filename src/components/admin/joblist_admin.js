@@ -1,16 +1,27 @@
 import React, {Component} from 'react';
 import api from '../utils/api';
 import { connect } from 'react-redux';
-import {table} from 'react-bootstrap';
+import {table, ButtonToolbar, Button} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {savedJobs, removeJob, addJob, saveCase} from '../../actions/index';
 
 
 class JobList_Admin extends Component{
+	constructor(props) {
+    super(props);
+
+    this.state = { type: false};
+  }
+
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
-
 	}
+
+	changeType(type) {
+    //function used to record the state of the case status.
+
+    this.setState({type: this.state.type ? false : true})
+  }
 
 	removeJob(id) {
 		console.log(id)
@@ -31,13 +42,18 @@ class JobList_Admin extends Component{
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
-			  	<td><button onClick={()=> this.removeJob(jobData._id)}> Remove Job</button></td>
+			  	<td><button onClick={()=> this.removeJob(jobData._id)}> x</button></td>
 	      	  </tr>
 		)
 	}
 
 	render() {
+		        console.log(this.state.type)
 		return (
+				<div>
+			    <ButtonToolbar className='tabs' justified bsSize="large">
+			        <Button onClick= {() => this.changeType()}>Private</Button>
+			    </ButtonToolbar>
 				<table className='table table-hover'>
 					<thead>
 						<tr>
@@ -49,9 +65,10 @@ class JobList_Admin extends Component{
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.allJobs.length != 0 && this.props.allJobs.map(i=>this.renderJob(i,this.props.dispatch))}
+					{this.props.allJobs.length != 0 && this.props.allJobs.filter(i => i.jobPrivate==this.state.type).map(i=>this.renderJob(i,this.props.dispatch))}
 					</tbody>
 				</table>
+				</div>
 		)
 	}
 }

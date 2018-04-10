@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {table} from 'react-bootstrap';
+import {table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {fetchAllCases, updateCase, removeCase} from '../../actions';
+import {fetchAllCases, updateCase} from '../../actions';
 
 class Cases extends Component {
 
@@ -10,6 +10,8 @@ class Cases extends Component {
     super(props);
 
     this.state = { type: 'Open'};
+
+    this.updateCase = this.updateCase.bind(this)
   }
 
   componentDidMount() {
@@ -26,11 +28,6 @@ class Cases extends Component {
     console.log(value)
   }
 
-  removeCase(id) {
-    console.log(id)
-    this.props.dispatch(removeCase(id))
-  }
-
   renderCase(caseData,dispatch) {
     var selectCase = function(Case) {
       dispatch({
@@ -41,35 +38,35 @@ class Cases extends Component {
 
     return (
          <tr key={caseData._id}>
-          <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
+           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
+          <td>{caseData.studentName}</td>
+          <td>{caseData.company}</td>   
           <td>
             <select id="case-status"
                 onChange={e => this.updateCase(caseData._id, e.target.value)}>
-          <option value="Open">
+          <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open
           </option>
-          <option value="Applied">
+          <option value="Open" selected={caseData.openCase=="Applied" ? true : false}>
             Applied
           </option>
-          <option value="Interview 1">
+          <option value="Open" selected={caseData.openCase=="Interview 1" ? true : false}>
             Interview 1
           </option>
-          <option value="Interview 2">
+          <option value="Open"selected= {caseData.openCase=="Interview 2"? true : false}>
             Interview 2
           </option>
-          <option value="Salary Negotation">
+          <option value="Open" selected={caseData.openCase=="Salary Negotation" ? true : false}>
             Salary Negotation
           </option>
-          <option value="Close">
+          <option value="Close" selected={caseData.openCase=="Close" ? true : false}>
             Close
           </option>
-          <option value="Place">
+          <option value="Place" selected={caseData.openCase=="Place" ? true : false}>
             Place
           </option>
         </select>
           </td>
-          <td>{caseData.openCase}</td>
-          <td><button onClick={()=> this.removeCase(caseData._id)}> Remove Case</button></td>
       </tr>
     )
   }
@@ -78,18 +75,18 @@ class Cases extends Component {
         console.log(this.state.type)
     return (
       <div>
-      <ul>
-        <li onClick= {() => this.changeType('Open')}> open</li>
-        <li onClick= {() => this.changeType('Close')}> close</li>
-        <li onClick= {() => this.changeType('Place')}> place</li>
-      </ul>
+      <ButtonToolbar className='tabs' justified bsSize="large">
+        <Button onClick= {() => this.changeType('Open')}>Open</Button>
+        <Button onClick= {() => this.changeType('Close')}>Close</Button>
+        <Button onClick= {() => this.changeType('Place')}>Place</Button>
+      </ButtonToolbar>
       <table className ='table table-hover'>
           <thead>
             <tr>
               <th>Case ID</th>
-              <th></th>
+              <th>Student Name</th>
+              <th>Company</th>
               <th>Status</th>
-              <th>Remove</th>
             </tr>
           </thead>
           <tbody>
@@ -107,3 +104,4 @@ function mapStateToProps({Case} ) {
 }
 
 export default connect (mapStateToProps)(Cases);
+

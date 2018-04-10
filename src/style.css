@@ -21,6 +21,7 @@ body {
 }
 
 /* header.js */
+
 .navLinks {
 	float:right !important;
 	position:relative;
@@ -47,8 +48,9 @@ body {
 }
 
 .tabs {
-	background-color: black;
+	background-color: purple;
 	text-align: center;
+	border: 30px;
 }
 
 /* search_bar.js */

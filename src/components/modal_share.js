@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import {addJob} from '../actions';
+import {shareJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup,  ControlLabel } from 'react-bootstrap';
 
@@ -18,7 +18,7 @@ const customStyles = {
   }
 };
 
-class ModalButton extends Component {
+class Modal_Share extends Component {
   constructor() {
     super();
 
@@ -38,8 +38,8 @@ class ModalButton extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate}) {
-    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate}))
+  onSubmit({email, firstName}) {
+    this.props.dispatch(shareJob({email, firstName}))
         this.setState({modalIsOpen: false});
   }
 
@@ -53,20 +53,12 @@ class ModalButton extends Component {
        <span className="error">{error}</span>}
     </div>
   )
-   const privatecheck = ({label,valid, meta: {touched, error}}) => (
-    <div className="input-row">
-      <label>{label}</label>
-      <br />
-      <input {...valid} type="checkbox"/>
-      {touched && error &&
-       <span className="error">{error}</span>}
-    </div>
-  )
+   
     const { handleSubmit }= this.props;
 
     return (
       <span>
-        <Button className="btn btn-secondary" onClick={this.openModal}>Add Job</Button>
+        <Button className="btn btn-secondary" onClick={this.openModal}>Share Job</Button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
@@ -74,23 +66,13 @@ class ModalButton extends Component {
           contentLabel="Example Modal"
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2>Enter Job Info</h2>
+          <h2>Share Job</h2>
           	<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
               <FormGroup className='input-span'>
-                <ControlLabel>Title</ControlLabel>
-                  <Field name="title" component={renderField} />
-                <ControlLabel>Location</ControlLabel>
-                  <Field name="location" component={renderField} />
-                <ControlLabel>Type</ControlLabel>
-                  <Field name="type" component={renderField} />
-                <ControlLabel>Description</ControlLabel>
-                  <Field componentClass="textarea" name="description" component={renderField} />
-                <ControlLabel>Apply Link</ControlLabel>
-                  <Field name="how_to_apply" component={renderField} />
-                <ControlLabel>Date Created</ControlLabel>
-                  <Field name="created_at" component={renderField} />
-                <ControlLabel>Private</ControlLabel>
-                  <Field name="jobPrivate" component={privatecheck} />
+                <ControlLabel>Email</ControlLabel>
+                  <Field name="email" component={renderField} />
+                <ControlLabel>First Name</ControlLabel>
+                  <Field name="firstName" component={renderField} />
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
@@ -108,5 +90,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'create'
-})(ModalButton));
+  form: 'sharejob'
+})(Modal_Share));

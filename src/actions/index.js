@@ -1,4 +1,4 @@
- import axios from 'axios';
+import axios from 'axios';
 import {browserHistory} from 'react-router';
 import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB } from './types';
 
@@ -77,6 +77,17 @@ export function saveCase(id) {
 	}
 }
 
+export function addSkills({skills}){
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/addskills`,{skills})
+		.then(response=>{
+			dispatch({type: AUTH_USER});	
+		})
+		.catch(errorobj=>{
+			dispatch(authError(errorobj.response.data.error))});	
+	};
+}
+
 export function savedJobs() {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchjobs`)
@@ -129,7 +140,7 @@ export function updateCase(id,openCase) {
 	}
 }
 
-export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at}) {
+export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at,jobPrivate}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/addjob`,{
 			title,
@@ -139,7 +150,21 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 			jobid,
 			description,
 			how_to_apply,
-			created_at
+			created_at,
+			jobPrivate
+		})
+		.then(response => {
+			console.log(response)
+			dispatch({type: "ADD_JOB",response})
+		})
+	}
+}
+
+export function shareJob({email, firstName}) {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/sharejobs`,{
+			email,
+			firstName
 		})
 		.then(response => {
 			console.log(response)
