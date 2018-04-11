@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {table} from 'react-bootstrap';
+import {table,Button,ButtonToolbar} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {fetchCases, updateCase, removeCase} from '../../actions'
 
@@ -36,37 +36,36 @@ import {fetchCases, updateCase, removeCase} from '../../actions'
 
     return (
       <tr key={caseData.jobTitle}>
-          <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
+           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
           <td>{caseData.studentName}</td>
           <td>{caseData.company}</td>   
           <td>
             <select id="case-status"
                 onChange={e => this.updateCase(caseData._id, e.target.value)}>
-          <option value="Open">
+          <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open
           </option>
-          <option value="Open">
+          <option value="Applied" selected={caseData.openCase=="Applied" ? true : false}>
             Applied
           </option>
-          <option value="Open">
+          <option value="Interview" selected={caseData.openCase=="Interview 1" ? true : false}>
             Interview 1
           </option>
-          <option value="Open">
+          <option value="Interview"selected= {caseData.openCase=="Interview 2"? true : false}>
             Interview 2
           </option>
-          <option value="Open">
+          <option value="Salary Negotation" selected={caseData.openCase=="Salary Negotation" ? true : false}>
             Salary Negotation
           </option>
-          <option value="Close">
+          <option value="Close" selected={caseData.openCase=="Close" ? true : false}>
             Close
           </option>
-          <option value="Place">
+          <option value="Place" selected={caseData.openCase=="Place" ? true : false}>
             Place
           </option>
         </select>
           </td>
-          <td>{caseData.openCase}</td>
-         
+          <td>{caseData.date}</td>
       </tr>
     )
   }
@@ -75,11 +74,14 @@ import {fetchCases, updateCase, removeCase} from '../../actions'
     console.log(this.state.type)
     return (
       <div>
-       <ul>
-        <li onClick= {() => this.changeType('Open')}> open</li>
-        <li onClick= {() => this.changeType('Close')}> close</li>
-        <li onClick= {() => this.changeType('Place')}> place</li>
-      </ul>
+      <ButtonToolbar className='tabs' justified bsSize="large">
+        <Button onClick= {() => this.changeType('Open')}>Open</Button>
+        <Button onClick= {() => this.changeType('Close')}>Close</Button>
+        <Button onClick= {() => this.changeType('Place')}>Place</Button>
+        <Button onClick= {() => this.changeType('Applied')}>Applied</Button>
+        <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
+        <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
+      </ButtonToolbar>
       <table className ='table table-hover'>
           <thead>
             <tr>

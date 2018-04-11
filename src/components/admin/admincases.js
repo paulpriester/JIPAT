@@ -47,16 +47,16 @@ class Cases extends Component {
           <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open
           </option>
-          <option value="Open" selected={caseData.openCase=="Applied" ? true : false}>
+          <option value="Applied" selected={caseData.openCase=="Applied" ? true : false}>
             Applied
           </option>
-          <option value="Open" selected={caseData.openCase=="Interview 1" ? true : false}>
+          <option value="Interview" selected={caseData.openCase=="Interview 1" ? true : false}>
             Interview 1
           </option>
-          <option value="Open"selected= {caseData.openCase=="Interview 2"? true : false}>
+          <option value="Interview"selected= {caseData.openCase=="Interview 2"? true : false}>
             Interview 2
           </option>
-          <option value="Open" selected={caseData.openCase=="Salary Negotation" ? true : false}>
+          <option value="Salary Negotation" selected={caseData.openCase=="Salary Negotation" ? true : false}>
             Salary Negotation
           </option>
           <option value="Close" selected={caseData.openCase=="Close" ? true : false}>
@@ -67,6 +67,7 @@ class Cases extends Component {
           </option>
         </select>
           </td>
+          <td>{caseData.date}</td>
       </tr>
     )
   }
@@ -79,6 +80,9 @@ class Cases extends Component {
         <Button onClick= {() => this.changeType('Open')}>Open</Button>
         <Button onClick= {() => this.changeType('Close')}>Close</Button>
         <Button onClick= {() => this.changeType('Place')}>Place</Button>
+        <Button onClick= {() => this.changeType('Applied')}>Applied</Button>
+        <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
+        <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
       </ButtonToolbar>
       <table className ='table table-hover'>
           <thead>
@@ -87,6 +91,7 @@ class Cases extends Component {
               <th>Student Name</th>
               <th>Company</th>
               <th>Status</th>
+              <th>Date added</th>
             </tr>
           </thead>
           <tbody>
