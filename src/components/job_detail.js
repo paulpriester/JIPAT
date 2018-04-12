@@ -4,6 +4,7 @@ import {Link} from "react-router";
 import JobList from './jobs'
 import { connect } from 'react-redux';
 import {saveCase} from '../actions';
+import Modal_Share from './modal_share';
 
 class JobDetail extends Component {
 
@@ -45,6 +46,7 @@ class JobDetail extends Component {
 		return (
 			<div>	
 				{this.renderJob(this.props.selectedJob)}
+				<Modal_Share />
 			</div>
 		)
 	}

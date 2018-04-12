@@ -28,6 +28,7 @@ import JobDetail from './components/job_detail';
 import CaseDetail from './components/case_detail';
 import Students from './components/admin/students';
 import Dashboard from './components/student/dashboard';
+import Skills from './components/skills'
 
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, reduxThunk)(createStore);
@@ -54,6 +55,7 @@ ReactDOM.render(
         <Route path="tmdashboard" component={TmDashboard}/>
         <Route path="dashboard" component={Dashboard}/>
         <Route path="invite" component={Invite}/>
+        <Route path="skills" component={Skills}/>
         <Route path="students" component={Students}/>
         <Route path="admincases" component={Cases}/>
         <Route path="joblist_admin" component={requireAuth(AdminJobs)}/>

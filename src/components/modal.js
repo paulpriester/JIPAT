@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
-import { Button, FormGroup,  ControlLabel, FormControl} from 'react-bootstrap';
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 const customStyles = {
   content : {
@@ -12,10 +12,10 @@ const customStyles = {
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    height                : '90%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : '#f2efef', 
+    backgroundColor       : 'purple', 
+    color                 : 'white'
   }
 };
 
@@ -39,8 +39,8 @@ class ModalButton extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  onSubmit({title,company,location,type,description,how_to_apply, created_at}) {
-    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at}))
+  onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate}) {
+    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate}))
         this.setState({modalIsOpen: false});
   }
 
@@ -53,7 +53,15 @@ class ModalButton extends Component {
        <span className="error">{error}</span>}
     </FormGroup>
   )
-    const { handleSubmit } = this.props;
+   const privatecheck = ({label,valid, meta: {touched, error}}) => (
+    <FormGroup className="input-row">
+      <label>{label}</label>
+      <input {...valid} type="checkbox"/>
+      {touched && error &&
+       <span className="error">{error}</span>}
+    </FormGroup>
+  )
+    const { handleSubmit }= this.props;
 
     return (
       <span>
@@ -66,7 +74,8 @@ class ModalButton extends Component {
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2>Enter Job Info</h2>
-          	<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <br />
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <label htmlFor="title">Title</label>
                   <Field name="title" component={renderField} type="text" />
                 <label htmlFor="location">Location</label>
@@ -79,6 +88,8 @@ class ModalButton extends Component {
                   <Field name="how_to_apply" component={renderField} type="text" />
                 <label htmlFor="created_at">Date Created</label>
                   <Field name="created_at" component={renderField} type="text" />
+                <label className="checkbox" htmlFor="jobPrivate">Private</label>
+                  <Field name="jobPrivate" component={privatecheck} />
                 <button className="btn btn-secondary" type="submit">Submit</button>
             </form>
         </Modal>
