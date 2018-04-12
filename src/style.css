@@ -72,22 +72,45 @@ body {
 	bottom:15px;
 }
 
-/* search_bar.js */
+/* profile.js */
+.grid {
+	font-size:1.2em;
+}
+
+.jobs {
+	height:150px;
+	width:150px;
+	position:relative;
+	left:7.7em;
+	top:.3em;
+	border-radius:50%;
+	background-color:purple;
+	box-shadow:10px 10px 10px #888888;
+	color:white;
+}
+
 .show-grid {
 	padding:20px 0;
 }
 
 .show-grid-head {
 	padding:20px 0;
-	text-align: center
+	text-align: center;
+	border:1px solid black;
 }
 
 .profile-pic {
+	position: relative;
+	top:2.7em;
 	background-size:cover;
 	border-radius:10%;
 	border:4px solid purple;
 	box-shadow:5px 10px #888888;
 	cursor: pointer;
+}
+
+.right-border {
+	border-right:1px solid black;
 }
 
 /* jobs.js */
