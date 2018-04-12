@@ -2,6 +2,42 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.title{
+
+	color:#663096;
+	font-family: Roboto;
+	font-weight: 500;
+}
+
+
+.jumbo-title{
+
+	color:#fff;
+	font-family:Roboto;
+	font-weight:500;
+
+}
+
+.description{
+
+	color: #4b4b4b;
+	font-family: Roboto;
+	font-weight:100;
+}
+
+
+.jumbo-description{
+
+	color:#fff;
+	font-family:Roboto;
+	font-weight:100;
+}
+
+
+a:visited{
+
+	text-decoration: none;
+}
 /* app.js */
 .container {
 	position:relative;
@@ -12,16 +48,35 @@ body {
 .Jumbotron {
 	color:white;
 	text-align: center;
-	background: url('https://c2.staticflickr.com/2/1115/3175599592_582f971c59_z.jpg');
+	background:url('/images/banknote.png');
   	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+	background-size: cover;
+	border-radius: 0;
     height:30em;
 }
 
-/* header.js */
+.sign-in-btn{
 
+	background:#663096;
+	padding: 0.8em 5em;
+	/* border: 5px solid #fff; */
+	font-weight:100;	
+
+}
+
+.sign-in-btn a{
+
+	font-size:12pt;
+}
+
+.sign-in-btn a{
+
+	color:#fff;
+}
+
+/* header.js */
 .navLinks {
 	float:right !important;
 	position:relative;
@@ -35,7 +90,8 @@ body {
 }
 
 .navbar {
-	background-color:purple;
+	background-color:#663096;
+	border-radius:0;
 }
 
 .navbar-brand {
@@ -48,9 +104,8 @@ body {
 }
 
 .tabs {
-	background-color: purple;
+	background-color: black;
 	text-align: center;
-	border: 30px;
 }
 
 /* search_bar.js */

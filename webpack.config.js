@@ -19,7 +19,7 @@ module.exports = {
     {
       test: /\.css$/,
       loader:'style-loader!css-loader'
-    }
+    },
     {
                 test: /\.(ttf|eot|woff|woff2)$/,
                 loader: 'file-loader'
@@ -31,7 +31,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: './',
+    contentBase: './public',
     inline: true,
     port : 3000
   }

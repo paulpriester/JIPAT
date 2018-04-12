@@ -17,20 +17,20 @@ class Welcome extends Component {
 			<div>
 			  <Jumbotron className="Jumbotron">
 			  	<div style={customStyles.content}>
-				    <h1>Welcome to TKH </h1>
-				    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				    <Button><Link to='/signin'>Sign in</Link></Button>
+				    <h1 className="jumbo-title">Welcome to TKH </h1>
+				    <p className="jumbo-description">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+				    <Button className="sign-in-btn"><Link to='/signin'>Sign in</Link></Button>
 			    </div>
 			  </Jumbotron>
 			  <div className='container about'>
-					<h1>ABOUT US</h1>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. A
+					<h1 className="title">ABOUT US</h1>
+					<p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. A
 					enean euismod bibendum laoreet. Proin gravida dolor sit amet lac
 					us accumsan et viverra justo commodo. Proin sodales pulvinar sic temp
 					or. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. N
 					am fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sap
 					ien nunc accuan eget.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. A
+					<p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. A
 					enean euismod bibendum laoreet. Proin gravida dolor sit amet lac
 					us accumsan et viverra justo commodo. Proin sodales pulvinar sic temp
 					or. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. N
