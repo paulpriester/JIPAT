@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormControl} from 'react-bootstrap';
+import { Button, Form, FormControl, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';                  
 import { fetchJob } from './utils/api';
@@ -8,47 +8,63 @@ import ModalButton from './modal';
 class SearchBar extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			term: '', 
+			location: ''
+		};
 
-		this.state = {term: '',
-					  location: ''};
-
-		this.onInputChange = this.onInputChange.bind(this);
+		this.searchInputChange = this.searchInputChange.bind(this);
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
+	searchInputChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+		});
+	}
 
-	onInputChange(event) {
-		this.setState({[event.target.name]: event.target.value});
+	locationInputChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+		});
 	}
 
 	onFormSubmit(event) {
 		event.preventDefault();
-
 		// We need to go and fetch api data.
-		this.props.fetchJob(this.state.term,this.state.location);
+		this.props.fetchJob(this.state.term, this.state.location);
 		this.setState({ term: '' });
-		this.setState({ location: ''})
+		this.setState({ location: ''});
+		console.log(this.setState.location)
 	}
 
 	render () {
 		return (
 			<div>
 				<Form onSubmit={this.onFormSubmit}>
-					<input
-						placeholder='Search for a job'
-						name = 'term'
-						className='form-control'
-						value={this.state.term}
-						onChange={this.onInputChange}
-					/>
-					<input
-						placeholder='Search by location'
-						name= 'location'
-						className='form-control'
-						value={this.state.location}
-						onChange={this.onInputChange}
-					/>
-					<Button type="submit" className='btn btn-secondary'>Submit</Button>
-					<ModalButton />
+					<Col sm={5}>
+						<input
+							placeholder='Search for a job'
+							className='form-control'
+							name="term"
+							value={this.state.term}
+							onChange={this.searchInputChange}
+						/>
+					</Col>
+					<Col sm={5}>
+						<input
+							placeholder='Search for a location'
+							className='form-control'
+							name="location"
+							value={this.state.location}
+							onChange={this.searchInputChange}
+						/>
+					</Col>
+					<Col sm={1}>
+						<Button type="submit" className='btn btn-secondary'>Submit</Button>
+					</Col>
+					<Col sm={1}>
+						<ModalButton />
+					</Col>
 				</Form>
 			</div>
 		);

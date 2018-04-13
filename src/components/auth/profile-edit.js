@@ -2,29 +2,25 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-import * as actions from '../actions';
-import {browserHistory} from 'react-router';
+import * as actions from '../../actions';
 
 
 const renderInput=field=>{
   const {meta: {touched,error}}=field;
   return(
     <div>
-      <input {...field.input} type={field.type} className="form-control" />
+      <input {...field.input} type={field.type} placeholder='' className="form-control" />
       <div className="error">{touched?error:''}</div>
     </div>
     );  
   
 };
 
-class Profile_2 extends Component{
-
+class Profile extends Component{
   handleFormSubmit(formProps){
-    //call action creator to signup user
     this.props.profile(formProps);
-    browserHistory.push('/feature');  
-
   }
+
   renderAlert(){
     if(this.props.errorMessage){
       return(
@@ -39,19 +35,28 @@ class Profile_2 extends Component{
           console.log({handleSubmit})
 
     return(
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <form className="container" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className="form-group">
-            <label>Porfolio:</label>
+            <label>First Name:</label>
             <Field
-              name="Porfolio"
+              name="firstName"
+              placeholder= 'test'
               component={renderInput}
               type="text"
             />
           </fieldset>
           <fieldset className="form-group">
-            <label>Github:</label>
+            <label>Last Name:</label>
             <Field
-              name="Github"
+              name="lastName"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <label>About:</label>
+            <Field
+              name="about"
               component={renderInput}
               type="text"
             />
@@ -59,12 +64,27 @@ class Profile_2 extends Component{
           <fieldset className="form-group">
             <label>Linkedin:</label>
             <Field
-              name="Linkedin"
+              name="linkedin"
               component={renderInput}
               type="text"
             />
           </fieldset>
-
+          <fieldset className="form-group">
+            <label>Github:</label>
+            <Field
+              name="github"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <label>Portfolio:</label>
+            <Field
+              name="portfolio"
+              component={renderInput}
+              type="text"
+            />
+          </fieldset>
           <fieldset className="form-group">
             <label>Resume:</label>
             <Field
@@ -85,8 +105,6 @@ function validate(formProps){
     errors.firstName="Please Enter firstName";
   if(!formProps.lastName)
     errors.lastName="Please Enter a Password";
-  if(!formProps.about)
-    errors.about="Please Enter a Confirm Password";
   return errors;
 }
 
@@ -96,7 +114,7 @@ function mapStateToProps(state){
 
 export default reduxForm({
   validate,
-  form: 'profile2'
+  form: 'profile'
 })(
-  connect(mapStateToProps,actions)(Profile_2)
+  connect(mapStateToProps,actions)(Profile)
 );

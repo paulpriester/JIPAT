@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
-import { Button, FormGroup,  ControlLabel } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 const customStyles = {
   content : {
@@ -14,7 +14,8 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : '#f2efef', 
+    backgroundColor       : 'purple', 
+    color                 : 'white'
   }
 };
 
@@ -45,22 +46,20 @@ class ModalButton extends Component {
 
   render() {
     const renderField = ({label,input, meta: {touched, error}}) => (
-    <div className="input-row">
-      <label>{label}</label>
-      <br />
-      <input {...input} type="text"/>
+    <FormGroup className="input-row">
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl className="input-edit" {...input} type="text"/>
       {touched && error &&
        <span className="error">{error}</span>}
-    </div>
+    </FormGroup>
   )
    const privatecheck = ({label,valid, meta: {touched, error}}) => (
-    <div className="input-row">
+    <FormGroup className="input-row">
       <label>{label}</label>
-      <br />
       <input {...valid} type="checkbox"/>
       {touched && error &&
        <span className="error">{error}</span>}
-    </div>
+    </FormGroup>
   )
     const { handleSubmit }= this.props;
 
@@ -75,25 +74,23 @@ class ModalButton extends Component {
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2>Enter Job Info</h2>
-          	<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-              <FormGroup className='input-span'>
-                <ControlLabel>Title</ControlLabel>
-                  <Field name="title" component={renderField} />
-                <ControlLabel>Location</ControlLabel>
-                  <Field name="location" component={renderField} />
-                <ControlLabel>Type</ControlLabel>
-                  <Field name="type" component={renderField} />
-                <ControlLabel>Description</ControlLabel>
-                  <Field componentClass="textarea" name="description" component={renderField} />
-                <ControlLabel>Apply Link</ControlLabel>
-                  <Field name="how_to_apply" component={renderField} />
-                <ControlLabel>Date Created</ControlLabel>
-                  <Field name="created_at" component={renderField} />
-                <ControlLabel>Private</ControlLabel>
+          <br />
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                <label htmlFor="title">Title</label>
+                  <Field name="title" component={renderField} type="text" />
+                <label htmlFor="location">Location</label>
+                  <Field name="location" component={renderField} type="text" />
+                <label htmlFor="type">Type</label>
+                  <Field name="type" component={renderField} type="text" />
+                <label htmlFor="description">Description</label>
+                  <Field componentClass="textarea" name="description" component={renderField} type="text" />
+                <label htmlFor="how_to_apply">Apply Link</label>
+                  <Field name="how_to_apply" component={renderField} type="text" />
+                <label htmlFor="created_at">Date Created</label>
+                  <Field name="created_at" component={renderField} type="text" />
+                <label className="checkbox" htmlFor="jobPrivate">Private</label>
                   <Field name="jobPrivate" component={privatecheck} />
-                  <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
-             </FormGroup>
             </form>
         </Modal>
       </span>
