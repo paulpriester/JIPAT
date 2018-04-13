@@ -1,6 +1,6 @@
 import React from 'react';
-import './style.css';
 import ReactDOM from 'react-dom';
+import './style.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
@@ -22,8 +22,6 @@ import TmDashboard from './components/admin/tmdashboard';
 import Cases from './components/admin/admincases';
 import Welcome from './components/welcome';
 import Profile from './components/auth/profile';
-import Profile_2 from './components/profile_2';
-import Profile_3 from './components/profile_3';
 
 import Invite from './components/admin/invite';
 import JobDetail from './components/job_detail';
@@ -62,9 +60,7 @@ ReactDOM.render(
         <Route path="admincases" component={Cases}/>
         <Route path="joblist_admin" component={requireAuth(AdminJobs)}/>
   			<Route path="feature" component={requireAuth(Feature)}/>
-        <Route path="profile" component={requireAuth(Profile)}/>
-        <Route path="profile_2" component={requireAuth(Profile_2)}/>
-        <Route path="profile_3" component={requireAuth(Profile_3)}/>
+        <Route path="profile" component={Profile}/>
   		</Route>
   	</Router>
   </Provider>
