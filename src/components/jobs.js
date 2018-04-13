@@ -6,11 +6,9 @@ import {Link} from 'react-router';
 import Loading from './loading';
 import {savedJobs, removeJob, addJob, saveCase} from '../actions';
 
-
 class JobList extends Component{
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
-
 	}
 
 	handleClick(id) {

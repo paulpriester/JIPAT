@@ -24,8 +24,8 @@ export function signInUser({email,password}){
 			if(response.data.type == 'admin') {
 				browserHistory.push('/tmdashboard')
 			} else {
-				//-redirect to the route '/feature'	
-				browserHistory.push('/feature');	
+				//-redirect to the route '/'	
+				browserHistory.push('/dashboard');	
 			}
 		})
 		//if request is bad
@@ -75,17 +75,6 @@ export function saveCase(id) {
 			}
 		})
 	}
-}
-
-export function addSkills({skills}){
-	return function(dispatch){
-		axios.post(`${ROOT_URL}/addskills`,{skills})
-		.then(response=>{
-			dispatch({type: AUTH_USER});	
-		})
-		.catch(errorobj=>{
-			dispatch(authError(errorobj.response.data.error))});	
-	};
 }
 
 export function savedJobs() {
@@ -138,6 +127,35 @@ export function updateCase(id,openCase) {
 			}
 		})
 	}
+}
+
+export function fetchProfile () {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/profile`, {
+			headers : token()
+		})
+		.then(response => {
+			dispatch({type: 'FETCH_PROFILE', response})
+		})
+	}
+}
+
+export function fetchSkills () {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchskills`)
+		.then(response => {
+			dispatch({response})
+		})
+	}
+}
+
+export function addSkills({skill}){
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/addskills`,{skill})
+		.then(response=>{
+			dispatch(fetchSkills());	
+		})
+	};
 }
 
 export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at,jobPrivate}) {
@@ -197,7 +215,7 @@ export function removeCase(id) {
 
 export function profile({firstName,lastName,about, portfolio,github,linkedin,resume}){
 	return function(dispatch){
-		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin}, {
+		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin,resume}, {
 			headers : token()
 		})
 		.then(response=>{

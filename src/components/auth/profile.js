@@ -3,13 +3,14 @@ import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router";
 import { connect } from "react-redux";
 import * as actions from '../../actions';
+import {fetchProfile} from '../../actions';
 
 
 const renderInput=field=>{
   const {meta: {touched,error}}=field;
   return(
     <div>
-      <input {...field.input} type={field.type} placeholder='' className="form-control" />
+      <input {...field.input} type={field.type} placeholder={field.placeholder} className="form-control" />
       <div className="error">{touched?error:''}</div>
     </div>
     );  
@@ -17,6 +18,9 @@ const renderInput=field=>{
 };
 
 class Profile extends Component{
+  componentDidMount() {
+    this.props.dispatch(fetchProfile())
+  }
   handleFormSubmit(formProps){
     this.props.profile(formProps);
   }
@@ -31,6 +35,7 @@ class Profile extends Component{
     }
   }
   render(){
+    console.log(this.props)
     const {handleSubmit}=this.props;
     
     return(
@@ -41,6 +46,8 @@ class Profile extends Component{
               name="firstName"
               component={renderInput}
               type="text"
+              placeholder={this.props.information.firstName}
+
             />
           </fieldset>
           <fieldset className="form-group">
@@ -49,6 +56,8 @@ class Profile extends Component{
               name="lastName"
               component={renderInput}
               type="text"
+              placeholder={this.props.information.lastName}
+
             />
           </fieldset>
           <fieldset className="form-group">
@@ -57,6 +66,8 @@ class Profile extends Component{
               name="about"
               component={renderInput}
               type="text"
+              placeholder={this.props.information.about}
+
             />
           </fieldset>
           <fieldset className="form-group">
@@ -65,6 +76,8 @@ class Profile extends Component{
               name="linkedin"
               component={renderInput}
               type="text"
+              placeholder={this.props.information.linkedin}
+
             />
           </fieldset>
           <fieldset className="form-group">
@@ -73,6 +86,8 @@ class Profile extends Component{
               name="github"
               component={renderInput}
               type="text"
+              placeholder={this.props.information.github}
+
             />
           </fieldset>
           <fieldset className="form-group">
@@ -81,6 +96,8 @@ class Profile extends Component{
               name="portfolio"
               component={renderInput}
               type="text"
+              placeholder={this.props.information.portfolio}
+
             />
           </fieldset>
           <fieldset className="form-group">
@@ -89,6 +106,8 @@ class Profile extends Component{
               name="resume"
               component={renderInput}
               type="text"
+              placeholder={this.props.information.resume}
+
             />
           </fieldset>
           {this.renderAlert()}
@@ -107,7 +126,10 @@ function validate(formProps){
 }
 
 function mapStateToProps(state){
-  return {errorMessage: state.auth.error};
+  return {errorMessage: state.auth.error,
+          information: state.student.profile};
+
+
 }
 
 export default reduxForm({

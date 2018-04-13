@@ -1,7 +1,4 @@
 import React, {Component} from "react";
-import { Jumbotron, Button } from "react-bootstrap";
-import {Link} from "react-router";
-import JobList from './jobs'
 import { connect } from 'react-redux';
 import {saveCase} from '../actions';
 import Modal_Share from './modal_share';
@@ -28,8 +25,8 @@ class JobDetail extends Component {
 				  							  href={stripHTML(jobData.how_to_apply)} 
 				  							  target="_blank">apply</a>
 				  							  </p>
-		      	  </ul>
-		       )
+		      	</ul>
+		    )
 		}
 	
 	render() {

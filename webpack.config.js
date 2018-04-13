@@ -19,15 +19,15 @@ module.exports = {
     {
       test: /\.css$/,
       loader:'style-loader!css-loader'
-    }
+    },
     {
-                test: /\.(ttf|eot|woff|woff2)$/,
-                loader: 'file-loader'
-            },
-            {
-                test: /\.svg$/,
-                loader: 'svg-inline-loader'
-            }]
+      test: /\.(ttf|eot|woff|woff2)$/,
+      loader: 'file-loader'
+    },
+    {
+      test: /\.svg$/,
+      loader: 'svg-inline-loader'
+      }]
   },
   devServer: {
     historyApiFallback: true,
