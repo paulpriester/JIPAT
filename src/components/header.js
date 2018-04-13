@@ -52,7 +52,7 @@ class Header extends Component	{
 
 	render() {
 		return (
-			<Navbar>
+			<Navbar fluid>
 				<Link to="/feature" className="navbar-brand">The Knowledge House</Link>
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
