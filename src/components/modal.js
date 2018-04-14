@@ -76,21 +76,24 @@ class ModalButton extends Component {
           <h2>Enter Job Info</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                <label htmlFor="title">Title</label>
-                  <Field name="title" component={renderField} type="text" />
-                <label htmlFor="location">Location</label>
-                  <Field name="location" component={renderField} type="text" />
-                <label htmlFor="type">Type</label>
-                  <Field name="type" component={renderField} type="text" />
-                <label htmlFor="description">Description</label>
-                  <Field componentClass="textarea" name="description" component={renderField} type="text" />
-                <label htmlFor="how_to_apply">Apply Link</label>
-                  <Field name="how_to_apply" component={renderField} type="text" />
-                <label htmlFor="created_at">Date Created</label>
-                  <Field name="created_at" component={renderField} type="text" />
-                <label className="checkbox" htmlFor="jobPrivate">Private</label>
+               <FormGroup className='input-span'>
+                <ControlLabel>Title</ControlLabel>
+                  <Field name="title" component={renderField} />
+                <ControlLabel>Location</ControlLabel>
+                  <Field name="location" component={renderField} />
+                <ControlLabel>Type</ControlLabel>
+                  <Field name="type" component={renderField} />
+                <ControlLabel>Description</ControlLabel>
+                  <Field componentClass="textarea" name="description" component={renderField} />
+                <ControlLabel>Apply Link</ControlLabel>
+                  <Field name="how_to_apply" component={renderField} />
+                <ControlLabel>Date Created</ControlLabel>
+                  <Field name="created_at" component={renderField} />
+                <ControlLabel>Private</ControlLabel>
                   <Field name="jobPrivate" component={privatecheck} />
+                  <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
+             </FormGroup>
             </form>
         </Modal>
       </span>
