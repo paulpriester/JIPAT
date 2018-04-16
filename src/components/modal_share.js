@@ -38,8 +38,8 @@ class Modal_Share extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  onSubmit({email, firstName}) {
-    this.props.dispatch(shareJob({email, firstName}))
+  onSubmit({email, name}) {
+    this.props.dispatch(shareJob({email, name}))
         this.setState({modalIsOpen: false});
   }
 
@@ -53,7 +53,6 @@ class Modal_Share extends Component {
        <span className="error">{error}</span>}
     </div>
   )
-   
     const { handleSubmit }= this.props;
 
     return (
@@ -72,7 +71,7 @@ class Modal_Share extends Component {
                 <ControlLabel>Email</ControlLabel>
                   <Field name="email" component={renderField} />
                 <ControlLabel>First Name</ControlLabel>
-                  <Field name="firstName" component={renderField} />
+                  <Field name="name" component={renderField} />
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>

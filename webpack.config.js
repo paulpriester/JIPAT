@@ -21,18 +21,18 @@ module.exports = {
       loader:'style-loader!css-loader'
     },
     {
-                test: /\.(ttf|eot|woff|woff2)$/,
-                loader: 'file-loader'
-            },
-            {
-                test: /\.svg$/,
-                loader: 'svg-inline-loader'
-            }]
+      test: /\.(ttf|eot|woff|woff2)$/,
+      loader: 'file-loader'
+    },
+    {
+      test: /\.svg$/,
+      loader: 'svg-inline-loader'
+      }]
   },
   devServer: {
     historyApiFallback: true,
     contentBase: './public',
     inline: true,
-    port : 3000
+    port : 8080
   }
 };

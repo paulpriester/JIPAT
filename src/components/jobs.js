@@ -8,7 +8,6 @@ import {savedJobs, removeJob, addJob, saveCase} from '../actions';
 import jobStyles from '../../public/css/jobs.css'
 
 
-
 class JobList extends Component {
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
