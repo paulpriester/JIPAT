@@ -53,7 +53,7 @@ class ModalButton extends Component {
        <span className="error">{error}</span>}
     </FormGroup>
   )
-   const privatecheck = ({label,invalid,input, meta: {touched, error}}) => (
+   const privatecheck = ({label,input, meta: {touched, error}}) => (
     <FormGroup className="input-row">
       <label>{label}</label>
       <input {...input} type="checkbox"/>
