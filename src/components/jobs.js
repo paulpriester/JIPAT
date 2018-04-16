@@ -5,6 +5,8 @@ import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import Loading from './loading';
 import {savedJobs, removeJob, addJob, saveCase} from '../actions';
+import jobStyles from '../../public/css/jobs.css'
+
 
 
 class JobList extends Component {
