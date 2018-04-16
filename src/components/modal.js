@@ -53,10 +53,10 @@ class ModalButton extends Component {
        <span className="error">{error}</span>}
     </FormGroup>
   )
-   const privatecheck = ({label,valid, meta: {touched, error}}) => (
+   const privatecheck = ({label,invalid,input, meta: {touched, error}}) => (
     <FormGroup className="input-row">
       <label>{label}</label>
-      <input {...valid} type="checkbox"/>
+      <input {...input} type="checkbox"/>
       {touched && error &&
        <span className="error">{error}</span>}
     </FormGroup>
@@ -76,7 +76,7 @@ class ModalButton extends Component {
           <h2>Enter Job Info</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-               <FormGroup className='input-span'>
+                <FormGroup className='input-span'>
                 <ControlLabel>Title</ControlLabel>
                   <Field name="title" component={renderField} />
                 <ControlLabel>Location</ControlLabel>
@@ -108,5 +108,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'create'
+  form: 'create',
+  touched: false
 })(ModalButton));
