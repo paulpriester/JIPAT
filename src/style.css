@@ -14,6 +14,7 @@ body {
 }
 
 .description{
+	font-family: Roboto;
 	color: #4b4b4b;
 	font-weight:100;
 }
@@ -21,9 +22,9 @@ body {
 
 .jumbo-description{
 	color:#fff;
+	font-family:Roboto;
 	font-weight:100;
 }
-
 
 a:visited{
 	text-decoration: none;

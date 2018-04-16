@@ -10,7 +10,6 @@ const customStyles = {
 	}
 }
 
-
 class Welcome extends Component {
 	render () {
 		return (

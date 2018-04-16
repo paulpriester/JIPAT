@@ -11,7 +11,7 @@ export function signInUser({email,password}){
 	return function(dispatch){
 
 		//submit email and password to the server
-		axios.post(`${ROOT_URL}/signin`,{email,password})
+		axios.post(`${ROOT_URL}/signin`,{email, password})
 		//if request good ..
 		.then(response=>{
 			console.log(response)

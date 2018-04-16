@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import '../../public/css/modal.css'
 
 const customStyles = {
   content : {
@@ -14,8 +15,12 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : 'purple', 
-    color                 : 'white'
+    backgroundColor       : '#f2efef',
+    width:'30%',
+    height:'80%',
+    border: 'none',
+    display:'flex',
+    flexDirection:'column'
   }
 };
 
@@ -73,7 +78,7 @@ class ModalButton extends Component {
           contentLabel="Example Modal"
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2>Enter Job Info</h2>
+          <h2 className="modal-title">Enter Job Info</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
