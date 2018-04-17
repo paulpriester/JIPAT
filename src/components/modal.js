@@ -83,6 +83,8 @@ class ModalButton extends Component {
                   <Field name="location" component={renderField} />
                 <ControlLabel>Type</ControlLabel>
                   <Field name="type" component={renderField} />
+                <ControlLabel>Company</ControlLabel>
+                  <Field name="company" component={renderField} />
                 <ControlLabel>Description</ControlLabel>
                   <Field componentClass="textarea" name="description" component={renderField} />
                 <ControlLabel>Apply Link</ControlLabel>

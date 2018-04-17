@@ -10,6 +10,10 @@ class JobDetail extends Component {
 		this.props.dispatch(saveCase(id))
 	}
 
+	onClick(id) {
+    this.props.dispatch(sharejob(id));
+  }
+
 	renderJob(jobData) {
 		function stripHTML(text) {
 		 return text.replace(/<.*?>/gm, '');
