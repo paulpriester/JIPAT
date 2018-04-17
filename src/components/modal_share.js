@@ -38,22 +38,10 @@ class Modal_Share extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  renderJob(jobData) {
-    function stripHTML(text) {
-     return text.replace(/<.*?>/gm, '');
-    }
-      return (
-        <ul key={jobData.id}>
-            <p >How to apply <br /><a onClick={()=> this.handleClick(jobData._id)}
-                          href={stripHTML(jobData.how_to_apply)} 
-                          target="_blank">apply</a>
-                          </p>
-            </ul>
-        )
-    }
 
-  onSubmit({email, name0,_id}) {
-    this.props.dispatch(shareJob({email, name},_id));
+  onSubmit({email, name}) {
+    let id =  this.props.job
+    this.props.dispatch(shareJob({email, name, _id:id}));
         this.setState({modalIsOpen: false});
   }
 
