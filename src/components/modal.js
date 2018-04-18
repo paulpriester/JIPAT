@@ -82,20 +82,45 @@ class ModalButton extends Component {
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
+
                 <ControlLabel>Title</ControlLabel>
-                  <Field name="title" component={renderField} />
+                  <FormControl 
+                  name="title" 
+                  placeholder="Enter title"
+                  component={renderField} />
+
                 <ControlLabel>Location</ControlLabel>
-                  <Field name="location" component={renderField} />
+                  <FormControl 
+                  name="location" 
+                  placeholder="Enter location" 
+                  component={renderField} />
+
                 <ControlLabel>Type</ControlLabel>
-                  <Field name="type" component={renderField} />
+                  <FormControl 
+                  name="type" 
+                  placeholder="Enter type"
+                  component={renderField} />
+
                 <ControlLabel>Description</ControlLabel>
-                  <Field componentClass="textarea" name="description" component={renderField} />
+                  <FormControl 
+                  componentClass="textarea" 
+                  name="description" 
+                  placeholder="Enter description" 
+                  component={renderField} />
+
                 <ControlLabel>Apply Link</ControlLabel>
-                  <Field name="how_to_apply" component={renderField} />
+                  <FormControl 
+                  name="how_to_apply" 
+                  placeholder="Enter link to how to apply"                  
+                  component={renderField} 
+                  />
+
                 <ControlLabel>Date Created</ControlLabel>
                   <Field name="created_at" component={renderField} />
+
                 <ControlLabel>Private</ControlLabel>
                   <Field name="jobPrivate" component={privatecheck} />
+
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
