@@ -38,10 +38,14 @@ class Modal_Share extends Component {
     this.setState({modalIsOpen: false});
   }
 
+
   onSubmit({email, name}) {
-    this.props.dispatch(shareJob({email, name}))
+    let id =  this.props.job
+    this.props.dispatch(shareJob({email, name, _id:id}));
         this.setState({modalIsOpen: false});
   }
+
+
 
   render() {
     const renderField = ({label,input, meta: {touched, error}}) => (
@@ -73,7 +77,7 @@ class Modal_Share extends Component {
                 <ControlLabel>First Name</ControlLabel>
                   <Field name="name" component={renderField} />
                   <br />
-                <button className="btn btn-secondary" type="submit">Submit</button>
+                <button className="btn btn-secondary" type="submit" >Submit</button>
              </FormGroup>
             </form>
         </Modal>
@@ -82,11 +86,10 @@ class Modal_Share extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    errorMessage: state.errors
-  };
-};
+function mapStateToProps({ job }) {
+  console.log(job)
+  return  job ;
+}
 
 export default connect(mapStateToProps)(reduxForm({
   form: 'sharejob'

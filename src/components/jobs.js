@@ -57,7 +57,7 @@ class JobList extends Component {
 								</tr>
 							</thead>
 							<tbody>
-								{this.props.allJobs.map(i=>this.renderJob(i,this.props.dispatch))}
+								{this.props.allJobs.length != 0 && this.props.allJobs.filter(i => i.jobPrivate== false).map(i=>this.renderJob(i,this.props.dispatch))}
 							</tbody>
 						</table>
 					</span>				

@@ -1,14 +1,23 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
-import {saveCase} from '../actions';
+import {saveCase, fetchOneJob} from '../actions';
 import Modal_Share from './modal_share';
 
 class JobDetail extends Component {
+
+	componentWillMount () {
+			if(this.props.location.query.id)
+			this.props.dispatch(fetchOneJob(this.props.location.query.id));
+	}
 
 	handleClick(id) {
 		console.log(id)
 		this.props.dispatch(saveCase(id))
 	}
+
+	// onClick(id) {
+ //    this.props.dispatch(sharejob(id));
+ //  }
 
 	renderJob(jobData) {
 		function stripHTML(text) {
@@ -33,8 +42,8 @@ class JobDetail extends Component {
 		console.log(this.props);
 		return (
 			<div>	
-				{this.renderJob(this.props.selectedJob)}
-				<Modal_Share />
+				{this.props.selectedJob? this.renderJob(this.props.selectedJob): "Empty"}
+				<Modal_Share job={this.props.selectedJob._id}/>
 			</div>
 		)
 	}
