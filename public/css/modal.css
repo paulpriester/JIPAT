@@ -1,0 +1,18 @@
+.input-row{
+
+    /* background:black; */
+    width:50%;
+    align-self: center;
+    
+}
+
+.input-edit{
+    border:none;
+    /* background:red; */
+    width:50%;
+    align-self: center;
+}
+
+.modal-title{
+    text-align:center;
+}

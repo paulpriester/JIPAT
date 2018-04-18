@@ -33,6 +33,6 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './public',
     inline: true,
-    port : 3000
+    port : 8080
   }
 };

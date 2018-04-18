@@ -11,7 +11,7 @@ export function signInUser({email,password}){
 	return function(dispatch){
 
 		//submit email and password to the server
-		axios.post(`${ROOT_URL}/signin`,{email,password})
+		axios.post(`${ROOT_URL}/signin`,{email, password})
 		//if request good ..
 		.then(response=>{
 			console.log(response)
@@ -149,6 +149,16 @@ export function fetchSkills () {
 	}
 }
 
+export function fetchOneJob (id) {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchonejob/${id}`)
+		.then(response => {
+			console.log(response)
+			dispatch({type: 'SELECT_JOB',payload: response.data})
+		})
+	}
+}
+
 export function addSkills({skill}){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/addskills`,{skill})
@@ -178,11 +188,11 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 	}
 }
 
-export function shareJob({email, firstName}) {
+export function shareJob({email, name, _id}) {
 	return function(dispatch) {
-		axios.post(`${ROOT_URL}/sharejobs`,{
+		axios.post(`${ROOT_URL}/sharejobs/${_id}`,{
 			email,
-			firstName
+			name
 		})
 		.then(response => {
 			console.log(response)
