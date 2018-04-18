@@ -7,6 +7,12 @@ import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import '../../public/css/modal.css'
 
 const customStyles = {
+  
+  overlay:{
+
+    backgroundColor:"rgba(150, 150, 150, 0.7)"
+  },
+
   content : {
     top                   : '50%',
     left                  : '50%',
@@ -15,12 +21,11 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : '#f2efef',
+    backgroundColor       : '#fff',
     width:'30%',
     height:'80%',
     border: 'none',
-    display:'flex',
-    flexDirection:'column'
+  
   }
 };
 
@@ -75,7 +80,7 @@ class ModalButton extends Component {
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Modal"
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2 className="modal-title">Enter Job Info</h2>
@@ -96,17 +101,17 @@ class ModalButton extends Component {
                   component={renderField} />
 
                 <ControlLabel>Type</ControlLabel>
-<<<<<<< HEAD
-                  <FormControl 
+                <FormControl 
                   name="type" 
                   placeholder="Enter type"
                   component={renderField} />
-
-=======
-                  <Field name="type" component={renderField} />
+                 
                 <ControlLabel>Company</ControlLabel>
-                  <Field name="company" component={renderField} />
->>>>>>> 874e0524cd5ddfe9bd7f40c7df955141e5a6d84c
+                <FormControl 
+                  name="company" 
+                  placeholder="Enter Company"
+                  component={renderField} />
+
                 <ControlLabel>Description</ControlLabel>
                   <FormControl 
                   componentClass="textarea" 
@@ -122,13 +127,16 @@ class ModalButton extends Component {
                   />
 
                 <ControlLabel>Date Created</ControlLabel>
-                  <Field name="created_at" component={renderField} />
+                <FormControl 
+                  name="date" 
+                  placeholder="select date"                  
+                  component={renderField} 
+                  />
 
                 <ControlLabel>Private</ControlLabel>
                   <Field name="jobPrivate" component={privatecheck} />
 
-                  <br />
-                <button className="btn btn-secondary" type="submit">Submit</button>
+                <button className="btn btn-secondary modal-btn" type="submit">Submit</button>
              </FormGroup>
             </form>
         </Modal>
