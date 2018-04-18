@@ -28,8 +28,8 @@ class JobList extends Component {
 			<tr key={jobData.name}>
 			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
 			  	<td>{jobData.company}</td>
-			  	<td>{jobData.location}</td>
-			  	<td>{jobData.type}</td>
+			  	<td className="right-cell">{jobData.location}</td>
+			  	<td className="right-cell">{jobData.type}</td>
 			  	<td><button onClick={()=> this.handleClick(jobData._id)}> Apply</button></td>
 	      	</tr>
 		)
@@ -49,8 +49,8 @@ class JobList extends Component {
 								<tr>
 									<th>Name</th>
 									<th>Company</th>
-									<th>Location</th>
-									<th>Type Job</th>
+									<th className="right-cell">Location</th>
+									<th className="right-cell">Type Job</th>
 									<th>Apply for Job</th>
 								</tr>
 							</thead>

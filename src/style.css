@@ -35,6 +35,12 @@ a:visited{
 	top:20px;
 }
 
+/* jobs.js */
+.right-cell {
+	position: relative;
+	right:40px;
+}
+
 /* welcome.js */
 .Jumbotron {
 	color:white;
