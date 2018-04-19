@@ -44,7 +44,7 @@ class ModalButton extends Component {
         this.setState({modalIsOpen: false});
   }
 
-  render() {
+   renderLinks() {
     const renderField = ({label,input, meta: {touched, error}}) => (
     <FormGroup className="input-row">
       <ControlLabel>{label}</ControlLabel>
@@ -62,8 +62,44 @@ class ModalButton extends Component {
     </FormGroup>
   )
     const { handleSubmit }= this.props;
-
-    return (
+    if (this.props.type == 'student') {
+      return (
+      <span>
+        <Button className="btn btn-secondary" onClick={this.openModal}>Add Job</Button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <h5 className="closeButton" onClick={this.closeModal}>X</h5>
+          <h2>Enter Job Info</h2>
+          <br />
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                <FormGroup className='input-span'>
+                <ControlLabel>Title</ControlLabel>
+                  <Field name="title" component={renderField} />
+                <ControlLabel>Location</ControlLabel>
+                  <Field name="location" component={renderField} />
+                <ControlLabel>Type</ControlLabel>
+                  <Field name="type" component={renderField} />
+                <ControlLabel>Company</ControlLabel>
+                  <Field name="company" component={renderField} />
+                <ControlLabel>Description</ControlLabel>
+                  <Field componentClass="textarea" name="description" component={renderField} />
+                <ControlLabel>Apply Link</ControlLabel>
+                  <Field name="how_to_apply" component={renderField} />
+                <ControlLabel>Date Created</ControlLabel>
+                  <Field name="created_at" component={renderField} />
+                  <br />
+                <button className="btn btn-secondary" type="submit">Submit</button>
+             </FormGroup>
+            </form>
+        </Modal>
+      </span>
+      )
+    } else {
+      return (
       <span>
         <Button className="btn btn-secondary" onClick={this.openModal}>Add Job</Button>
         <Modal
@@ -99,12 +135,23 @@ class ModalButton extends Component {
             </form>
         </Modal>
       </span>
+      )
+    }
+  }
+
+
+  render() {
+    return (
+      <div>
+        {this.renderLinks()}
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    type: state.auth.type,
     errorMessage: state.errors
   };
 };
