@@ -87,9 +87,9 @@ export function savedJobs() {
 	}
 }
 
-export function fetchStudents () {
+export function fetchStudents (search) {
 	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchUsers`)
+		axios.get(`${ROOT_URL}/fetchUsers/${search}`)
 		.then(response => {
 			dispatch({type: 'FETCH_STUDENT', response})
 		})
@@ -230,7 +230,7 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 		})
 		.then(response=>{
 			dispatch({type:AUTH_USER});
-			browserHistory.push('/feature');
+			browserHistory.push('/profile');
 		})
 		.catch(errorobj=>{
 			dispatch(authError(errorobj.response.data.error))});	

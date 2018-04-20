@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import api from './utils/api';
 import { connect } from 'react-redux';
-import {table} from 'react-bootstrap';
+import {Table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import Loading from './loading';
 import {savedJobs, removeJob, addJob, saveCase} from '../actions';
@@ -30,8 +30,8 @@ class JobList extends Component {
 			<tr key={jobData.name}>
 			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
 			  	<td>{jobData.company}</td>
-			  	<td className="right-cell">{jobData.location}</td>
-			  	<td className="right-cell">{jobData.type}</td>
+			  	<td>{jobData.location}</td>
+			  	<td>{jobData.type}</td>
 			  	<td><button onClick={()=> this.handleClick(jobData._id)}> Apply</button></td>
 	      	</tr>
 		)
@@ -46,20 +46,20 @@ class JobList extends Component {
 					: 
 					<span>
 						<h1 className="error">{this.props.error}</h1>
-						<table className="table table-hover">
+						<Table responsive className="table table-hover">
 							<thead>
 								<tr>
 									<th>Name</th>
 									<th>Company</th>
-									<th className="right-cell">Location</th>
-									<th className="right-cell">Type Job</th>
+									<th>Location</th>
+									<th>Type Job</th>
 									<th>Apply for Job</th>
 								</tr>
 							</thead>
 							<tbody>
 								{this.props.allJobs.length != 0 && this.props.allJobs.filter(i => i.jobPrivate== false).map(i=>this.renderJob(i,this.props.dispatch))}
 							</tbody>
-						</table>
+						</Table>
 					</span>				
 				}
 			</div>		

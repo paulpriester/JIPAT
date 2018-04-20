@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {fetchAllCases, updateCase} from '../../actions';
+import SearchCases from './searchCases';
 
 class Cases extends Component {
 
@@ -73,7 +74,6 @@ class Cases extends Component {
   }
 
   render () {
-        console.log(this.state.type)
     return (
       <div>
       <ButtonToolbar className='tabs' justified bsSize="large">
@@ -84,6 +84,7 @@ class Cases extends Component {
         <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
         <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
       </ButtonToolbar>
+      <SearchCases />
       <table className ='table table-hover'>
           <thead>
             <tr>

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Form, FormControl, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { fetchStudents } from '../../actions/index';
 import { bindActionCreators } from 'redux';                  
-import { fetchJob } from './utils/api';
-import ModalButton from './modal';
 
-class SearchBar extends Component {
+class SearchCases extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -30,40 +29,26 @@ class SearchBar extends Component {
 
 	onFormSubmit(event) {
 		event.preventDefault();
-		// We need to go and fetch api data.
-		this.props.fetchJob(this.state.term, this.state.location);
+		this.props.fetchStudents(this.state.term);
 		this.setState({ term: '' });
-		this.setState({ location: ''});
-		console.log(this.setState.location)
+		console.log(this.setState.term)
 	}
 
 	render () {
 		return (
 			<div>
 				<Form onSubmit={this.onFormSubmit}>
-					<Col sm={5}>
+					<Col sm={11}>
 						<input
-							placeholder='Search for a job'
-							className='form-control media-span'
+							placeholder='Search for a student'
+							className='form-control'
 							name="term"
 							value={this.state.term}
 							onChange={this.searchInputChange}
 						/>
 					</Col>
-					<Col sm={5}>
-						<input
-							placeholder='Search for a location'
-							className='form-control media-span'
-							name="location"
-							value={this.state.location}
-							onChange={this.searchInputChange}
-						/>
-					</Col>
 					<Col sm={1}>
 						<Button type="submit" className='btn btn-secondary'>Submit</Button>
-					</Col>
-					<Col sm={1}>
-						<ModalButton />
 					</Col>
 				</Form>
 			</div>
@@ -72,7 +57,7 @@ class SearchBar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ fetchJob }, dispatch);
+	return bindActionCreators({ fetchStudents }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default connect(null, mapDispatchToProps)(SearchCases);

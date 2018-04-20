@@ -63,13 +63,8 @@ a:visited{
 
 }
 
-.sign-in-btn a{
-
+.sign-in-btn a {
 	font-size:12pt;
-}
-
-.sign-in-btn a{
-
 	color:#fff;
 }
 
@@ -174,4 +169,30 @@ a:visited{
 	position: relative;
 	top:25px;
 	bottom:25px;
+}
+
+/* tmdashboard.js */
+.box {
+	position:relative;
+	top:7em;
+	background-color: purple;
+	color:white;
+    margin:20px 47px;
+    height:200px;
+    padding:10px;
+    border:1px solid black;
+}
+
+.welcome-back {
+	font-size: 3.7em;
+}
+
+.tab-icon{
+	height:200px;
+	background-color:white;
+	margin:-11px;
+	border:1px purple solid;
+}
+
+@media (max-width: 600px) {
 }

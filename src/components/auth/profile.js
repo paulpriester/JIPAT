@@ -142,6 +142,8 @@ class Profile extends Component{
   render(){
     console.log(this.props)
     const {handleSubmit}=this.props;
+          console.log({handleSubmit})
+
     return(
         <form className="container" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className="form-group">
