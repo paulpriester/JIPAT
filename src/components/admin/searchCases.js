@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormControl, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { fetchStudents } from '../../actions/index';
+import { fetchStudents, filterCases} from '../../actions/index';
 import { bindActionCreators } from 'redux';                  
 
 class SearchCases extends Component {
@@ -19,6 +19,8 @@ class SearchCases extends Component {
 		this.setState({
 			[event.target.name]: event.target.value
 		});
+
+		this.props.filterCases(this.props.cases, event.target.value)
 	}
 
 	locationInputChange(event) {
@@ -57,7 +59,7 @@ class SearchCases extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ fetchStudents }, dispatch);
+	return bindActionCreators({ fetchStudents, filterCases }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(SearchCases);
