@@ -39,7 +39,7 @@ class Cases extends Component {
 
     return (
          <tr key={caseData._id}>
-           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
+          <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData.jobTitle}</Link></td>
           <td>{caseData.studentName}</td>
           <td>{caseData.company}</td>   
           <td>
@@ -88,14 +88,14 @@ class Cases extends Component {
       <table className ='table table-hover'>
           <thead>
             <tr>
-              <th>Case ID</th>
+              <th>Job Title</th>
               <th>Student Name</th>
               <th>Company</th>
               <th>Status</th>
               <th>Date added</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody>                    
             {this.props.allCases.length != 0 && this.props.allCases.filter(i=>i.openCase==this.state.type).map(i=>this.renderCase(i,this.props.dispatch))}
           </tbody>
       </table>
