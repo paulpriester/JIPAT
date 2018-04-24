@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormControl, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { filterCases} from '../../actions/index';
+import { filterCases } from '../../actions/index';
 import { bindActionCreators } from 'redux';                  
 
 class SearchCases extends Component {
