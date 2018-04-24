@@ -18,7 +18,7 @@ export function filterCases(cases, name){
 
 		else{
 			// change company name to student when database gets up and running
-			let filteredCases = cases.filter(i => i.company.toLowerCase().startsWith(name.toLowerCase()))
+			let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()))
 			dispatch({type:FILTERED_CASES, payload:filteredCases,typing:true})
 		}
 	}
