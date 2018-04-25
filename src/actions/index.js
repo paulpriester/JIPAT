@@ -8,14 +8,10 @@ const token = function() {
 }
 
 export function filterCases(cases, name){
-
 	return function(dispatch){
-
 		if(name === ""){
-
 			dispatch({type:FILTERED_CASES, payload:cases,typing:false})
 		}
-
 		else{
 			// change company name to student when database gets up and running
 			let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()))
