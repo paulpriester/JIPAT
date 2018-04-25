@@ -75,6 +75,8 @@ class Cases extends Component {
 
   render () {
     return (
+      
+      !this.props.isTyping ?
       <div>
       <ButtonToolbar className='tabs' justified bsSize="large">
         <Button onClick= {() => this.changeType('Open')}>Open</Button>
@@ -84,7 +86,8 @@ class Cases extends Component {
         <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
         <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
       </ButtonToolbar>
-      <SearchCases />
+      <SearchCases 
+      cases={this.props.allCases}/>
       <table className ='table table-hover'>
           <thead>
             <tr>
@@ -95,12 +98,33 @@ class Cases extends Component {
               <th>Date added</th>
             </tr>
           </thead>
+<<<<<<< HEAD
           <tbody>                    
             {this.props.allCases.length != 0 && this.props.allCases.filter(i=>i.openCase==this.state.type).map(i=>this.renderCase(i,this.props.dispatch))}
+=======
+          <tbody>
+            {this.props.filteredCases.length != 0 && this.props.filteredCases
+            .filter(i=>i.openCase==this.state.type)
+              .map(i=>this.renderCase(i,this.props.dispatch))}
+>>>>>>> c144bb6b61aa007989b829af8b33d275819f80cc
           </tbody>
       </table>
       </div>
-    )
+
+      : <div><SearchCases
+      cases={this.props.allCases}/>
+      <table className ='table table-hover'>
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Student Name</th>
+         </tr>
+      </thead>
+      <tbody>
+        {}
+      </tbody>
+    </table> </div>
+    ) 
   }
 }
 
