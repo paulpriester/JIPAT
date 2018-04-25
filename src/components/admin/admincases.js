@@ -38,8 +38,8 @@ class Cases extends Component {
     }
 
     return (
-         <tr key={caseData._id}>
-          <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData.jobTitle}</Link></td>
+        <tr key={caseData._id}>
+           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
           <td>{caseData.studentName}</td>
           <td>{caseData.company}</td>   
           <td>
@@ -91,22 +91,17 @@ class Cases extends Component {
       <table className ='table table-hover'>
           <thead>
             <tr>
-              <th>Job Title</th>
+              <th>Case ID</th>
               <th>Student Name</th>
               <th>Company</th>
               <th>Status</th>
               <th>Date added</th>
             </tr>
           </thead>
-<<<<<<< HEAD
-          <tbody>                    
-            {this.props.allCases.length != 0 && this.props.allCases.filter(i=>i.openCase==this.state.type).map(i=>this.renderCase(i,this.props.dispatch))}
-=======
           <tbody>
             {this.props.filteredCases.length != 0 && this.props.filteredCases
             .filter(i=>i.openCase==this.state.type)
               .map(i=>this.renderCase(i,this.props.dispatch))}
->>>>>>> c144bb6b61aa007989b829af8b33d275819f80cc
           </tbody>
       </table>
       </div>
@@ -134,4 +129,3 @@ function mapStateToProps({Case} ) {
 }
 
 export default connect (mapStateToProps)(Cases);
-
