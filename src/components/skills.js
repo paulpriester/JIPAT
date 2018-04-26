@@ -1,106 +1,98 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import {addSkills, fetchSkills} from '../actions';
+import {addSkills, fetchSkills, removeSkill} from '../actions';
+import { bindActionCreators } from 'redux';                  
 import {reduxForm, Field} from 'redux-form'; 
-import { Button, FormGroup,  ControlLabel, Jumbotron } from 'react-bootstrap';
+import { Button, FormGroup,  ControlLabel, Jumbotron,Form, FormControl, Col } from 'react-bootstrap';
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    position              : 'absolute',
-    backgroundColor       : '#f2efef', 
-  }
-};
 
 class Skills extends Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = {
-      modalIsOpen: false
+      skill: ''
     };
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
+    this.searchInputChange = this.searchInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
 
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
-
-  closeModal() {
-    this.setState({modalIsOpen: false});
-  }
-
-  onSubmit({skill}) {
-    this.props.dispatch(addSkills({skill}))
-        this.setState({modalIsOpen: false});
   }
 
   componentDidMount() {
-		this.props.dispatch(fetchSkills())
-	}
+    this.props.dispatch(fetchSkills())
+  }
 
-  // renderSkill(skillData,dispatch) {
-		// 	this.props.dispatch(fetchSkills);
-		// 	return (
-		// 		<ul >
-		// 			<p>Title <br />{skillData.skill}</p>
-		//       	  </ul>
-		// 	)
-		// }
+  searchInputChange(event) {
+    console.log(event.target.value)
+    this.setState({
+      skill: event.target.value
+    });
+  }
 
+  onFormSubmit(event) {
+    event.preventDefault();
+    // We need to go and fetch api data.
+    this.props.dispatch(addSkills({skill: this.state.skill}));
+    this.setState({ skill: '' });
+    console.log(this.setState.skill)
+  }
+
+  removeSkill(id) {
+    console.log(id)
+    this.props.dispatch(removeSkill(id))
+  }
+
+  renderSkill(skillData,dispatch) {
+    return (
+      <tr key={skillData.id}>
+          <td>{skillData.skill}</td>
+          <td><button onClick={()=> this.removeSkill(skillData._id)}> x</button></td>
+
+      </tr>
+    )
+  }
+
+  
   render() {
-    const renderField = ({label,input, meta: {touched, error}}) => (
-    <div className="input-row">
-      <label>{label}</label>
-      <br />
-      <input {...input} type="text"/>
-      {touched && error &&
-       <span className="error">{error}</span>}
-    </div>
-  )
-    const { handleSubmit }= this.props;
-
     return (
     <div>
-      <span>
-        <Button className="btn btn-secondary" onClick={this.openModal}>Add Skill</Button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2>Enter Skill</h2>
-          	<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-              <FormGroup className='input-span'>
-                <ControlLabel>Add skill</ControlLabel>
-                  <Field name="skill" component={renderField} />
-                  <br />
-                <button className="btn btn-secondary" type="submit">Submit</button>
-             </FormGroup>
-            </form>
-        </Modal>
-      </span>
-     </div>
-    );
+    <Form onSubmit={this.onFormSubmit}>
+          <Col sm={5}>
+            <input
+              placeholder='Input skill'
+              className='form-control'
+              name="skill"
+              value={this.state.skill}
+              onChange={this.searchInputChange}
+            />
+          </Col>
+          <Col sm={1}>
+            <Button type="submit" className='btn btn-secondary'>Add Skill</Button>
+          </Col>
+    </Form>
+
+        <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.props.allSkills.length != 0 && this.props.allSkills.map(i=>this.renderSkill(i,this.props.dispatch))}
+              </tbody>
+            </table>
+      
+    </div>
+    )
+    
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    errorMessage: state.errors
-  };
-};
+function mapStateToProps({skill} ) {
+  return  skill ;
+}
 
-export default connect(mapStateToProps)(reduxForm({
-  form: 'create'
-})(Skills));
+
+export default connect( mapStateToProps)(Skills);

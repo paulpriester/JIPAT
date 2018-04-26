@@ -2,6 +2,7 @@ import axios from 'axios';
 import {browserHistory} from 'react-router';
 import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES } from './types';
 
+
 const ROOT_URL='http://localhost:3090';
 const token = function() {
 	return {authorization: localStorage.getItem('token')}
@@ -144,20 +145,11 @@ export function updateCase(id,openCase) {
 
 export function fetchProfile () {
 	return function(dispatch) {
-		axios.get(`${ROOT_URL}/profile`, {
+		axios.get(`${ROOT_URL}/fetchprofile`, {
 			headers : token()
 		})
 		.then(response => {
 			dispatch({type: 'FETCH_PROFILE', response})
-		})
-	}
-}
-
-export function fetchSkills () {
-	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchskills`)
-		.then(response => {
-			dispatch({response})
 		})
 	}
 }
@@ -172,11 +164,21 @@ export function fetchOneJob (id) {
 	}
 }
 
+export function fetchSkills () {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchskills`)
+		.then(response => {
+			dispatch({type: 'FETCH_SKILL',response})
+		})
+	}
+}
+
 export function addSkills({skill}){
+	console.log({skill})
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/addskills`,{skill})
 		.then(response=>{
-			dispatch(fetchSkills());	
+			dispatch({type: 'ADD_SKILL', response});	
 		})
 	};
 }
@@ -214,6 +216,16 @@ export function shareJob({email, name, _id}) {
 	}
 }
 
+export function removeSkill(id) {
+	console.log(id)
+	return function(dispatch) {
+		axios.delete(`${ROOT_URL}/deleteskill/${id}`)
+		.then(response => {
+			dispatch({type: 'RETURN_SKILL', response})
+		})
+	}
+}
+
 export function removeJob(id) {
 	console.log(id)
 	return function(dispatch) {
@@ -236,14 +248,14 @@ export function removeCase(id) {
 	}
 }
 
-export function profile({firstName,lastName,about, portfolio,github,linkedin,resume}){
+export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}){
 	return function(dispatch){
-		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin,resume}, {
+		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}, {
 			headers : token()
 		})
 		.then(response=>{
-			dispatch({type:AUTH_USER});
-			browserHistory.push('/profile');
+			dispatch(fetchProfile());
+			// browserHistory.push('/feature');
 		})
 		.catch(errorobj=>{
 			dispatch(authError(errorobj.response.data.error))});	
@@ -262,16 +274,6 @@ export function inviteUser({email,name, admin}){
 			dispatch(authError(errorobj.response.data.error))});	
 	};
 }
-
-// export function findJob({title}) {
-// 	return function(dispatch) {
-// 		axios.post(`${ROOT_URL}/savedjobs`, {title})
-// 		.then(response => {
-// 			dispatch({type: FETCH_JOB});
-// 		})
-// 	}
-// }
-
 
 export function signOutUser(){
 	localStorage.removeItem('token');
