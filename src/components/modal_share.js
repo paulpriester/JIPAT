@@ -1,11 +1,19 @@
+
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import {shareJob} from '../actions';
+import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
-import { Button, FormGroup,  ControlLabel } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import '../../public/css/modal.css'
 
 const customStyles = {
+  
+  overlay:{
+
+    backgroundColor:"rgba(150, 150, 150, 0.7)"
+  },
+
   content : {
     top                   : '50%',
     left                  : '50%',
@@ -14,7 +22,11 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : '#f2efef', 
+    backgroundColor       : '#fff',
+    width:'30%',
+    height:'80%',
+    border: 'none',
+  
   }
 };
 
