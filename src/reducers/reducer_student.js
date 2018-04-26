@@ -1,4 +1,10 @@
-export default function studentReducer (state = {selectedStudent: '', allStudents:[], profile:{}}, action) {
+const initialState = {
+	selectedStudent: '', 
+	allStudents:[], 
+	profile:{}
+}
+
+export default function studentReducer (state = initialState, action) {
 	switch (action.type) {
 	case 'FETCH_STUDENT':
 				console.log(action)

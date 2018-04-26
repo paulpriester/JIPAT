@@ -22,7 +22,7 @@ import {fetchStudents} from '../../actions'
 			<tr key={studentData.email}>
 			  	<td>{studentData.lastName}, {studentData.firstName}</td>	
 			  	<td>{studentData.email}</td>
-	      	  </tr>
+	      	</tr>
 		)
 	}
 

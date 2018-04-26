@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {browserHistory} from 'react-router';
-import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB } from './types';
+import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES } from './types';
 
 
 const ROOT_URL='http://localhost:3090';
@@ -8,11 +8,24 @@ const token = function() {
 	return {authorization: localStorage.getItem('token')}
 }
 
+export function filterCases(cases, name){
+	return function(dispatch){
+		if(name === ""){
+			dispatch({type:FILTERED_CASES, payload:cases,typing:false})
+		}
+		else{
+			// change company name to student when database gets up and running
+			let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()))
+			dispatch({type:FILTERED_CASES, payload:filteredCases,typing:true})
+		}
+	}
+}
+
 export function signInUser({email,password}){
 	return function(dispatch){
 
 		//submit email and password to the server
-		axios.post(`${ROOT_URL}/signin`,{email,password})
+		axios.post(`${ROOT_URL}/signin`,{email, password})
 		//if request good ..
 		.then(response=>{
 			console.log(response)
@@ -88,9 +101,9 @@ export function savedJobs() {
 	}
 }
 
-export function fetchStudents () {
+export function fetchStudents (search) {
 	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchUsers`)
+		axios.get(`${ROOT_URL}/fetchUsers/${search}`)
 		.then(response => {
 			dispatch({type: 'FETCH_STUDENT', response})
 		})

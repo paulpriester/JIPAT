@@ -22,13 +22,12 @@ import TmDashboard from './components/admin/tmdashboard';
 import Cases from './components/admin/admincases';
 import Welcome from './components/welcome';
 import Profile from './components/auth/profile';
-
 import Invite from './components/admin/invite';
 import JobDetail from './components/job_detail';
 import CaseDetail from './components/case_detail';
 import Students from './components/admin/students';
 import Dashboard from './components/student/dashboard';
-import Skills from './components/skills'
+import Skills from './components/skills';
 
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, reduxThunk)(createStore);
@@ -63,5 +62,6 @@ ReactDOM.render(
         <Route path="profile" component={Profile}/>
   		</Route>
   	</Router>
-  </Provider>
-  , document.getElementById('app'));
+  </Provider>,
+  document.getElementById('app'));
+

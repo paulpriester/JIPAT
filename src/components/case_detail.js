@@ -37,7 +37,9 @@ class CaseDetail extends Component {
 					<h1 className="case-title">Job Description</h1>
 					<p className="case-description job-description">{caseData.jobDescription}</p>
 
-					<button onClick={()=> this.removeCase(caseData._id)}> Remove Case</button>
+					<button
+					className="apply-btn"
+					 onClick={()=> this.removeCase(caseData._id)}> Remove Case</button>
 
 		      	  </div>
 		       )
