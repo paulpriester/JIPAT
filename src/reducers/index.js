@@ -4,13 +4,15 @@ import authReducer from './auth_reducer';
 import JobReducer from './reducer_job';
 import studentReducer from './reducer_student';
 import caseReducer from './reducer_case';
+import skillReducer from './reducer_skill';
 
 const rootReducer = combineReducers({
   form, //form: form
   auth: authReducer,
   job : JobReducer,
   student: studentReducer,
-  Case: caseReducer
+  Case: caseReducer,
+  skill: skillReducer
 });
 
 export default rootReducer;

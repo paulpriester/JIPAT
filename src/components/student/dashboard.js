@@ -36,9 +36,9 @@ import {fetchCases, updateCase, removeCase} from '../../actions'
 
     return (
       <tr key={caseData.jobTitle}>
-           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
-          <td>{caseData.studentName}</td>
-          <td>{caseData.company}</td>   
+           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData.jobTitle}</Link></td>
+          <td>{caseData.company}</td> 
+          <td>{caseData.job_location}</td>  
           <td>
             <select id="case-status"
                 onChange={e => this.updateCase(caseData._id, e.target.value)}>
@@ -85,10 +85,11 @@ import {fetchCases, updateCase, removeCase} from '../../actions'
       <table className ='table table-hover'>
           <thead>
             <tr>
-              <th>Case ID</th>
-              <th>Student Name</th>
+              <th>Job Title</th>
               <th>Company</th>
+              <th>Location</th>
               <th>Status</th>
+              <th>Date Added</th>
             </tr>
           </thead>
           <tbody>

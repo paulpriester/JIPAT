@@ -3,7 +3,7 @@ import { Button, Form, FormControl, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';                  
 import { fetchJob } from './utils/api';
-import ModalButton from './modal';
+import ModalButton from './modal_addjob';
 
 class SearchBar extends Component {
 	constructor(props) {

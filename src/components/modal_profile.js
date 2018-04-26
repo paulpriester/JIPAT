@@ -39,8 +39,8 @@ class ModalProfile extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  onSubmit({firstName,lastName,about, portfolio,github,linkedin,resume}) {
-    this.props.dispatch(profile({firstName,lastName,about, portfolio,github,linkedin,resume}))
+  onSubmit({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}) {
+    this.props.dispatch(profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}))
         this.setState({modalIsOpen: false});
   }
 
@@ -53,19 +53,11 @@ class ModalProfile extends Component {
        <span className="error">{error}</span>}
     </FormGroup>
   )
-   const privatecheck = ({label,input, meta: {touched, error}}) => (
-    <FormGroup className="input-row">
-      <label>{label}</label>
-      <input {...input} type="checkbox"/>
-      {touched && error &&
-       <span className="error">{error}</span>}
-    </FormGroup>
-  )
     const { handleSubmit }= this.props;
 
     return (
       <span>
-        <Button className="btn btn-secondary" onClick={this.openModal}>Add Job</Button>
+        <Button className="btn btn-secondary" onClick={this.openModal}>Edit Profile</Button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
@@ -73,7 +65,7 @@ class ModalProfile extends Component {
           contentLabel="Example Modal"
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2>Enter Job Info</h2>
+          <h2>Edit Profile</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
@@ -91,6 +83,8 @@ class ModalProfile extends Component {
                   <Field name="portfolio" component={renderField} />
                 <ControlLabel>Resume:</ControlLabel>
                   <Field name="resume" component={renderField} />
+                <ControlLabel>Career Goals:</ControlLabel>
+                  <Field name="careergoals" component={renderField} />
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
