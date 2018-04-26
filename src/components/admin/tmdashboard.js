@@ -1,31 +1,36 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
- 
+import { Grid, Row, Col, Table } from 'react-bootstrap';
 
 class TmDashboard extends Component {
   render() {
     return (
-              <ul className="nav navbar-nav">
-                <li className="nav-item">
-                  <Link className="nav-link" to="/students">Students</Link>
-                </li> 
-                <li className="nav-item">
-                    <Link className="nav-link" to="/invite">Invite</Link>
-                  </li>   
-                <li className="nav-item">
-                  <Link className="nav-link" to="/admincases">Cases</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/"> Job Titles and Keywords</Link>
-                </li>
-                 <li className="nav-item">
-                  <Link className="nav-link" to="/">Approve Access To Jobs</Link>
-                </li>
-              </ul>        
-    );
+      <div>
+        <Grid>
+          <Row>
+            <Col md={5} className="box">
+              <h3 className="welcome-back">Welcome back, Grand Master</h3>
+            </Col>
+            <Col md={5} className="box">
+              <Col className="tab-icon" md={5}>
+              </Col>
+              <Col md={7}></Col>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={5} className="box">
+              <Col className="tab-icon" md={5}></Col>
+              <Col md={7}></Col>
+            </Col>
+            <Col md={5} className="box">
+              <Col className="tab-icon" md={5}></Col>
+              <Col md={7}></Col>
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    )
   }
 }
 
 export default TmDashboard;
-
-                  

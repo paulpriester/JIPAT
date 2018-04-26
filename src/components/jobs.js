@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import api from './utils/api';
 import { connect } from 'react-redux';
-import {table} from 'react-bootstrap';
+import {Table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import Loading from './loading';
 import {savedJobs, saveCase} from '../actions';
@@ -46,7 +46,7 @@ class JobList extends Component {
 					: 
 					<span>
 						<h1 className="error">{this.props.error}</h1>
-						<table className="table table-hover">
+						<Table responsive className="table table-hover">
 							<thead>
 								<tr>
 									<th>Name</th>
@@ -59,7 +59,7 @@ class JobList extends Component {
 							<tbody>
 								{this.props.allJobs.length != 0 && this.props.allJobs.filter(i => i.jobPrivate== false).map(i=>this.renderJob(i,this.props.dispatch))}
 							</tbody>
-						</table>
+						</Table>
 					</span>				
 				}
 			</div>		

@@ -44,7 +44,7 @@ class SearchBar extends Component {
 					<Col sm={5}>
 						<input
 							placeholder='Search for a job'
-							className='form-control'
+							className='form-control media-span'
 							name="term"
 							value={this.state.term}
 							onChange={this.searchInputChange}
@@ -53,7 +53,7 @@ class SearchBar extends Component {
 					<Col sm={5}>
 						<input
 							placeholder='Search for a location'
-							className='form-control'
+							className='form-control media-span'
 							name="location"
 							value={this.state.location}
 							onChange={this.searchInputChange}

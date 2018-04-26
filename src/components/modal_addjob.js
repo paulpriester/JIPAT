@@ -4,8 +4,15 @@ import { connect } from 'react-redux';
 import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import '../../public/css/modal.css'
 
 const customStyles = {
+  
+  overlay:{
+
+    backgroundColor:"rgba(150, 150, 150, 0.7)"
+  },
+
   content : {
     top                   : '50%',
     left                  : '50%',
@@ -14,8 +21,11 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : 'purple', 
-    color                 : 'white'
+    backgroundColor       : '#fff',
+    width:'30%',
+    height:'80%',
+    border: 'none',
+  
   }
 };
 
@@ -106,31 +116,68 @@ class ModalButton extends Component {
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Modal"
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2>Enter Job Info</h2>
+          <h2 className="modal-title">Enter Job Info</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
+
                 <ControlLabel>Title</ControlLabel>
-                  <Field name="title" component={renderField} />
+                  <FormControl 
+                  name="title" 
+                  placeholder="Enter title"
+                  component={renderField} />
+
                 <ControlLabel>Location</ControlLabel>
-                  <Field name="location" component={renderField} />
+                  <FormControl 
+                  name="location" 
+                  placeholder="Enter location" 
+                  component={renderField} />
+
                 <ControlLabel>Type</ControlLabel>
+                  <FormControl 
+                  name="type" 
+                  placeholder="Enter type"
+                  component={renderField} />
                   <Field name="type" component={renderField} />
                 <ControlLabel>Company</ControlLabel>
                   <Field name="company" component={renderField} />
+                <FormControl 
+                  name="type" 
+                  placeholder="Enter type"
+                  component={renderField} />
+                <ControlLabel>Company</ControlLabel>
+                <FormControl 
+                  name="company" 
+                  placeholder="Enter Company"
+                  component={renderField} />
                 <ControlLabel>Description</ControlLabel>
-                  <Field componentClass="textarea" name="description" component={renderField} />
+                  <FormControl 
+                  componentClass="textarea" 
+                  name="description" 
+                  placeholder="Enter description" 
+                  component={renderField} />
+
                 <ControlLabel>Apply Link</ControlLabel>
-                  <Field name="how_to_apply" component={renderField} />
+                  <FormControl 
+                  name="how_to_apply" 
+                  placeholder="Enter link to how to apply"                  
+                  component={renderField} 
+                  />
+
                 <ControlLabel>Date Created</ControlLabel>
-                  <Field name="created_at" component={renderField} />
+                <FormControl 
+                  name="date" 
+                  placeholder="select date"                  
+                  component={renderField} 
+                  />
+
                 <ControlLabel>Private</ControlLabel>
                   <Field name="jobPrivate" component={privatecheck} />
-                  <br />
-                <button className="btn btn-secondary" type="submit">Submit</button>
+
+                <button className="btn btn-secondary modal-btn" type="submit">Submit</button>
              </FormGroup>
             </form>
         </Modal>
