@@ -184,7 +184,12 @@ a:visited{
 }
 
 .welcome-back {
-	font-size: 3.7em;
+	font-size:3.7em;
+}
+
+.dash-links {
+	color:white;
+	font-size:2em;
 }
 
 .tab-icon{

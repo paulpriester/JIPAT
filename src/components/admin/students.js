@@ -20,7 +20,7 @@ import {fetchStudents} from '../../actions'
 
 		return (
 			<tr key={studentData.email}>
-			  	<td>{studentData.lastName}, {studentData.firstName}</td>	
+			  	<td><Link to="/profile">{studentData.lastName}, {studentData.firstName}</Link></td>	
 			  	<td>{studentData.email}</td>
 	      	</tr>
 		)
