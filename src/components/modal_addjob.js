@@ -80,29 +80,61 @@ class ModalButton extends Component {
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Modal"
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2>Enter Job Info</h2>
+          <h2 className="modal-title">Enter Job Info</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
+
                 <ControlLabel>Title</ControlLabel>
-                  <Field name="title" component={renderField} />
+                  <FormControl 
+                  name="title" 
+                  placeholder="Enter title"
+                  component={renderField} />
+
                 <ControlLabel>Location</ControlLabel>
-                  <Field name="location" component={renderField} />
+                  <FormControl 
+                  name="location" 
+                  placeholder="Enter location" 
+                  component={renderField} />
+
                 <ControlLabel>Type</ControlLabel>
-                  <Field name="type" component={renderField} />
+                  <FormControl 
+                  name="type" 
+                  placeholder="Enter type"
+                  component={renderField} />
+
+
                 <ControlLabel>Company</ControlLabel>
-                  <Field name="company" component={renderField} />
+                <FormControl 
+                  name="company" 
+                  placeholder="Enter Company"
+                  component={renderField} />
                 <ControlLabel>Description</ControlLabel>
-                  <Field componentClass="textarea" name="description" component={renderField} />
+                  <FormControl 
+                  componentClass="textarea" 
+                  name="description" 
+                  placeholder="Enter description" 
+                  component={renderField} />
+
                 <ControlLabel>Apply Link</ControlLabel>
-                  <Field name="how_to_apply" component={renderField} />
+                  <FormControl 
+                  name="how_to_apply" 
+                  placeholder="Enter link to how to apply"                  
+                  component={renderField} 
+                  />
+
                 <ControlLabel>Date Created</ControlLabel>
-                  <Field name="created_at" component={renderField} />
-                  <br />
-                <button className="btn btn-secondary" type="submit">Submit</button>
+                <FormControl 
+                  name="date" 
+                  placeholder="select date"                  
+                  component={renderField} 
+                  />
+
+
+                <button className="btn btn-secondary modal-btn" type="submit">Submit</button>
              </FormGroup>
             </form>
         </Modal>
@@ -141,13 +173,8 @@ class ModalButton extends Component {
                   name="type" 
                   placeholder="Enter type"
                   component={renderField} />
-                  <Field name="type" component={renderField} />
-                <ControlLabel>Company</ControlLabel>
-                  <Field name="company" component={renderField} />
-                <FormControl 
-                  name="type" 
-                  placeholder="Enter type"
-                  component={renderField} />
+
+
                 <ControlLabel>Company</ControlLabel>
                 <FormControl 
                   name="company" 

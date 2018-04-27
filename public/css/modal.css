@@ -1,6 +1,4 @@
 .input-row{
-
-    /* background:black; */
     width:50%;
     align-self: center;
     
@@ -8,7 +6,6 @@
 
 .input-edit{
     border:none;
-    /* background:red; */
     width:50%;
     align-self: center;
 }
@@ -27,7 +24,7 @@ input.form-control, textarea.form-control{
     margin-bottom:1em;
     font-family:Roboto;
     font-weight: 300;
-    color:#d3d3d3;
+    color:black;
 }
 
 
