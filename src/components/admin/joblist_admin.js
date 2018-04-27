@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import api from '../utils/api';
 import { connect } from 'react-redux';
-import {table, ButtonToolbar, Button} from 'react-bootstrap';
+import {table, ButtonToolbar, Button, Col} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {savedJobs, removeJob} from '../../actions/index';
 
@@ -51,9 +51,13 @@ class JobList_Admin extends Component{
 		        console.log(this.state.type)
 		return (
 				<div>
-			    <ButtonToolbar className='tabs' justified bsSize="large">
-			        <Button onClick= {() => this.changeType()}>Private</Button>
-			    </ButtonToolbar>
+			   
+				<Col sm={1}>
+				<Button 
+				className="btn btn-secondary btn-default btn-secondary"
+				type="button" 
+				onClick={()=>this.changeType()}>Private</Button>
+				</Col>
 				<table className='table table-hover'>
 					<thead>
 						<tr>
