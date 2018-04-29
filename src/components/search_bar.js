@@ -42,7 +42,7 @@ class SearchBar extends Component {
 			<div>
 				
 				<Form onSubmit={this.onFormSubmit}>
-					<Col sm={4}>
+					<Col sm={5}>
 						<input
 							placeholder='Search for a job'
 							className='form-control media-span'
@@ -51,7 +51,7 @@ class SearchBar extends Component {
 							onChange={this.searchInputChange}
 						/>
 					</Col>
-					<Col sm={4}>
+					<Col sm={5}>
 						<input
 							placeholder='Search for a location'
 							className='form-control media-span'
