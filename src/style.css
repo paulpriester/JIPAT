@@ -1,6 +1,6 @@
-/* body {
+body {
 	font-family: 'Montserrat', sans-serif;
-} */
+}
 
 .title{
 	color:#663096;
@@ -14,16 +14,16 @@
 }
 
 .description{
-	font-family: 'Montserrat', sans-serif;
+	font-family: Roboto;
 	color: #4b4b4b;
-	font-weight:300;
+	font-weight:100;
 }
 
 
 .jumbo-description{
 	color:#fff;
-	font-family:'Montserrat', sans-serif;
-	font-weight:300;
+	font-family:Roboto;
+	font-weight:100;
 }
 
 a:visited{
@@ -59,7 +59,7 @@ a:visited{
 	background:#663096;
 	padding: 0.8em 5em;
 	/* border: 5px solid #fff; */
-	font-weight:300;	
+	font-weight:100;	
 
 }
 
@@ -90,7 +90,7 @@ a:visited{
 
 .navbar-brand {
 	color:white !important;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Roboto Condensed', sans-serif;
 	font-size:25px;
 	letter-spacing:1px;
 }
@@ -197,4 +197,7 @@ a:visited{
 	background-color:white;
 	margin:-11px;
 	border:1px purple solid;
+}
+
+@media (max-width: 600px) {
 }

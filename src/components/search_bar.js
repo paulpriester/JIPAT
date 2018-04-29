@@ -40,7 +40,6 @@ class SearchBar extends Component {
 	render () {
 		return (
 			<div>
-				
 				<Form onSubmit={this.onFormSubmit}>
 					<Col sm={5}>
 						<input
