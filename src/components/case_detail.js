@@ -13,12 +13,11 @@ class CaseDetail extends Component {
 	    if(test == true) {
     		this.props.dispatch(removeCase(id))
     	}
-  }
+  	}
 
 	renderCase(caseData) {
 			return (
-				<div key={caseData.id}
-				className="case-container">
+				<div key={caseData.id} className="case-container"> 
 					<h1 className="case-title">Job Title</h1>
 					<p className="case-description">{caseData.jobTitle}</p>
 
@@ -39,11 +38,10 @@ class CaseDetail extends Component {
 
 					<button
 					className="apply-btn"
-					 onClick={()=> this.removeCase(caseData._id)}> Remove Case</button>
-
-		      	  </div>
-		       )
-		}
+					onClick={()=> this.removeCase(caseData._id)}> Remove Case</button>
+		        </div>
+		    )
+	}
 	
 	render() {
 		console.log(this.props);

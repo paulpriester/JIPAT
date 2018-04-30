@@ -7,7 +7,6 @@ import caseReducer from './reducer_case';
 import skillReducer from './reducer_skill';
 
 const rootReducer = combineReducers({
-  form, //form: form
   auth: authReducer,
   job : JobReducer,
   student: studentReducer,

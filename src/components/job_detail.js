@@ -32,7 +32,7 @@ class JobDetail extends Component {
 				  	<p>Desciption <br /> {stripHTML(jobData.description)}</p>
 				  	<p >How to apply <br /><a onClick={()=> this.handleClick(jobData._id)}
 				  							  href={stripHTML(jobData.how_to_apply)} 
-				  							  target="_blank">apply</a>
+				  							  target="_blank">Apply</a>
 				  							  </p>
 		      	</ul>
 		    )
