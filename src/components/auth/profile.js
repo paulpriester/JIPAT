@@ -11,6 +11,9 @@ class Profile extends Component{
 
   componentDidMount() {
     this.props.dispatch(fetchProfile());
+  }
+
+  componentWillMount () {
     this.props.dispatch(fetchcaselength());
   }
 
@@ -32,7 +35,7 @@ class Profile extends Component{
             </Col>
             <Col className="col-box" xs={3} md={3}>
               <h3>Jobs Applied</h3>
-              <div className="jobs col-box"></div>
+              <div className="jobs col-box">{this.props.caselength.length}</div>
             </Col>
           </Row>
           <Row className="show-grid">
@@ -60,7 +63,9 @@ class Profile extends Component{
 
 function mapStateToProps(state){
   return {errorMessage: state.auth.error,
-          information: state.student.profile};
+          information: state.student.profile,
+          caselength: state.student.caselength
+        }
 }
 
 export default connect(mapStateToProps) (Profile);

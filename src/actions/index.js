@@ -160,7 +160,7 @@ export function fetchcaselength () {
 			headers : token()
 		})
 		.then(response => {
-			dispatch({type: 'FETCH_PROFILE', response})
+			dispatch({type: 'FETCH_CASELENGTH', response})
 		})
 	}
 }
