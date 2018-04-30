@@ -39,11 +39,11 @@ class Cases extends Component {
 
     return (
         <tr key={caseData._id}>
-          <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
+           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
           <td>{caseData.studentName}</td>
           <td>{caseData.company}</td>   
           <td>
-          <select id="case-status"
+            <select id="case-status"
                 onChange={e => this.updateCase(caseData._id, e.target.value)}>
           <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open
@@ -75,6 +75,8 @@ class Cases extends Component {
 
   render () {
     return (
+      
+      !this.props.isTyping ?
       <div>
       <ButtonToolbar className='tabs' justified bsSize="large">
         <Button onClick= {() => this.changeType('Open')}>Open</Button>
@@ -103,6 +105,20 @@ class Cases extends Component {
           </tbody>
       </table>
       </div>
+
+      : <div><SearchCases
+      cases={this.props.allCases}/>
+      <table className ='table table-hover'>
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Student Name</th>
+         </tr>
+      </thead>
+      <tbody>
+        {}
+      </tbody>
+    </table> </div>
     ) 
   }
 }

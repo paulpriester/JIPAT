@@ -1,5 +1,5 @@
 body {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .title{
@@ -184,12 +184,7 @@ a:visited{
 }
 
 .welcome-back {
-	font-size:3.7em;
-}
-
-.dash-links {
-	color:white;
-	font-size:2em;
+	font-size: 3.7em;
 }
 
 .tab-icon{
