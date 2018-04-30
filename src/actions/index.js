@@ -50,6 +50,16 @@ export function signInUser({email,password}){
 	};
 }
 
+export function sendEmail({email}){
+
+	return function(dispatch){
+
+		//check if email exists, if not send back an error
+		axios.get(`${ROOT_URL}/`)
+	}
+
+}
+
 export function signUpUser({email,password}){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/signup`,{email,password})

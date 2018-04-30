@@ -8,3 +8,4 @@ export const SAVE_JOB = 'saved_job';
 export const USERS = 'users';
 export const EDIT_PROFILE = 'edit_profile';
 export const FILTERED_CASES = 'FILTERED_CASES'
+export const SEND_PASSWORD = "SEND_PASSWORD"

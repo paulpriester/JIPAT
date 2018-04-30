@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import {reduxForm, Field} from 'redux-form'; 
 import {connect} from 'react-redux';
-import { Link } from 'react-router'
-import * as actions from '../../actions';
+import * as actions from '../actions';
 
 const renderInput= field => <input {...field.input} type={field.type} className="form-control" />;
 
-class SignIn extends Component{
+class ForgotPass extends Component{
 
-	handleFormSubmit({email,password}){
-		console.log(email,password);
-		this.props.signInUser({email,password});
-	}
+	handleFormSubmit = ({email})=>{
+		console.log(email);
+		this.props.sendEmail({email});
+    }
+    
 	renderAlert(){
 		if(this.props.errorMessage){
 			return(
@@ -25,7 +25,7 @@ class SignIn extends Component{
 		const {handleSubmit}=this.props;
 		
 		return(
-				<form className="container" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+				<form className="container" onSubmit={handleSubmit(this.handleFormSubmit)}>
 					<fieldset className="form-group">
 						<label>Email:</label>
 						<Field
@@ -34,17 +34,9 @@ class SignIn extends Component{
 							type="email"
 						/>
 					</fieldset>
-					<fieldset className="form-group">
-						<label>Password:</label>
-						<Field
-							name="password"
-							component={renderInput}
-							type="password"
-						/>
-					</fieldset>
+					
 					{this.renderAlert()}
-					<button action="submit" className="btn btn-primary">Sign In</button>
-					<Link to={'/forgot'}>Forgot password?</Link>		
+					<button action="submit" className="btn btn-primary">Send Password</button>
 				</form>
 		);
 	}
@@ -57,5 +49,5 @@ function mapStateToProps(state){
 export default reduxForm({
 	form: 'signin'
 })(
-	connect(mapStateToProps,actions)(SignIn)
+	connect(mapStateToProps,actions)(ForgotPass)
 );

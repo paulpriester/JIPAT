@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './style.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory, Link} from 'react-router';
 import reduxThunk from 'redux-thunk';
 import ReduxPromise from 'redux-promise';
 import requireAuth from './components/auth/require_auth';
@@ -14,6 +14,7 @@ import App from './components/app';
 import SignIn from './components/auth/signin';
 import SignOut from './components/auth/signout';
 import SignUp from './components/auth/signup';
+import ForgotPass from './components/forgotPass';
 import SignUpAd from './components/auth/signupad';
 
 import Feature from './components/feature';
@@ -60,6 +61,7 @@ ReactDOM.render(
         <Route path="joblist_admin" component={requireAuth(AdminJobs)}/>
   			<Route path="feature" component={requireAuth(Feature)}/>
         <Route path="profile" component={Profile}/>
+        <Route path="forgot" component={ForgotPass}/>
   		</Route>
   	</Router>
   </Provider>,
