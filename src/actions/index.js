@@ -154,6 +154,18 @@ export function fetchProfile () {
 	}
 }
 
+export function fetchcaselength () {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchcaselength`, {
+			headers : token()
+		})
+		.then(response => {
+			dispatch({type: 'FETCH_PROFILE', response})
+		})
+	}
+}
+
+
 export function fetchOneJob (id) {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchonejob/${id}`)
