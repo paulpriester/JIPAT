@@ -15,7 +15,7 @@ class Header extends Component	{
 						<Link className="nav-link" to="/dashboard">Dashboard</Link>
 					</li>	
 					<li className="nav-item">
-						<Link className="nav-link" to="/profile">Profile</Link>
+						<Link className="nav-link" to="/profile/">Profile</Link>
 					</li>
 					<li className="nav-item">
 						<Link className="nav-link" to="/signout">Sign Out</Link>
@@ -50,9 +50,10 @@ class Header extends Component	{
 	}
 
 	render() {
+		console.log(this.props)
 		return (
 			<Navbar fluid>
-				<Link to="/feature" className="navbar-brand">The Knowledge House</Link>
+				<Link to="/" className="navbar-brand">The Knowledge House</Link>
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
 				</ul>

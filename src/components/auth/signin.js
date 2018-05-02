@@ -9,7 +9,8 @@ class SignIn extends Component{
 
 	handleFormSubmit({email,password}){
 		console.log(email,password);
-		this.props.signInUser({email,password});
+		let redirect = this.props.location.query.redirect? true : false
+		this.props.signInUser({email,password},redirect);
 	}
 	renderAlert(){
 		if(this.props.errorMessage){
@@ -21,6 +22,7 @@ class SignIn extends Component{
 		}
 	}
 	render(){
+		console.log(this.props)
 		const {handleSubmit}=this.props;
 		
 		return(

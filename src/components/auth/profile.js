@@ -9,15 +9,20 @@ import ModalProfile from '../modal_profile';
 
 class Profile extends Component{
 
-  componentDidMount() {
-    this.props.dispatch(fetchProfile());
-  }
+  // componentDidMount() {
+  //   console.log(id)
+  //   this.props.dispatch(fetchProfile());
+  // }
 
   componentWillMount () {
+    let id = this.props.params.id?this.props.params.id : ''
     this.props.dispatch(fetchcaselength());
+    this.props.dispatch(fetchProfile(id));
+
   }
 
   render(){
+    console.log(this.props);
     return(
       <div>
         <Grid fluid className="grid">

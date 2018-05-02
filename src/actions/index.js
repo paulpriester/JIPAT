@@ -21,7 +21,7 @@ export function filterCases(cases, name){
 	}
 }
 
-export function signInUser({email,password}){
+export function signInUser({email,password},redirect){
 	return function(dispatch){
 
 		//submit email and password to the server
@@ -33,9 +33,13 @@ export function signInUser({email,password}){
 			dispatch({type:AUTH_USER, payload: response.data.type});
 			//-save JWT token
 			localStorage.setItem('token',response.data.token);
+			localStorage.setItem('type',response.data.type);
 			//localStorage is available on window scope hence no import
 			
-			if(response.data.type == 'admin') {
+			if (redirect) {
+				browserHistory.goBack()
+			}
+			else if(response.data.type == 'admin') {
 				browserHistory.push('/tmdashboard')
 			} else {
 				//-redirect to the route '/'	
@@ -143,17 +147,6 @@ export function updateCase(id,openCase) {
 	}
 }
 
-export function fetchProfile () {
-	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchprofile`, {
-			headers : token()
-		})
-		.then(response => {
-			dispatch({type: 'FETCH_PROFILE', response})
-		})
-	}
-}
-
 export function fetchcaselength () {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchcaselength`, {
@@ -234,6 +227,19 @@ export function removeSkill(id) {
 		axios.delete(`${ROOT_URL}/deleteskill/${id}`)
 		.then(response => {
 			dispatch({type: 'RETURN_SKILL', response})
+		})
+	}
+}
+
+export function fetchProfile(id) {
+	console.log(id)
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchprofile/${id}`, {
+			headers : token()
+		})
+		.then(response => {
+			console.log(response)
+			dispatch({type: 'FETCH_PROFILE', response})
 		})
 	}
 }
