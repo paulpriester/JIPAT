@@ -15,6 +15,8 @@ import SignIn from './components/auth/signin';
 import SignOut from './components/auth/signout';
 import SignUp from './components/auth/signup';
 import SignUpAd from './components/auth/signupad';
+import ForgotPassword from './components/auth/forgot';
+import PasswordReset from './components/auth/reset';
 
 import Feature from './components/feature';
 import AdminJobs from './components/admin/adminjobs';
@@ -46,6 +48,8 @@ ReactDOM.render(
   		<Route path="/" component={App}>
   			<IndexRoute component={Welcome}/>
   			<Route path="signin" component={SignIn}/>
+        <Route path="forgot" component={ForgotPassword}/>
+        <Route path="reset/:tokenId" component={PasswordReset}/>
   			<Route path="signout" component={SignOut}/>
   			<Route path="signup" component={SignUp}/>
         <Route path="jobdetail" component={requireAuth(JobDetail)}/>
