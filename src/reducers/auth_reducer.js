@@ -29,6 +29,16 @@ export default function authReducer (state=[],action){
 			action.payload.data, 
 			...state  
 			];	
+		case 'PASSWORD_SUCCESS':
+			return {
+				...state,
+				message: action.payload
+			}
+		case 'PASSWORD_ERR':
+			return {
+				...state,
+				message: action.payload
+			}
 	}
 	return state;
 } 
