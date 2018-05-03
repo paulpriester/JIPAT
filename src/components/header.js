@@ -33,6 +33,7 @@ class Header extends Component	{
 				<li className="nav-item">
 					<Link className="nav-link" to="/signout">Sign Out</Link>
 				</li>
+				<li>
 					<Link className="nav-link" to="/admincases">Cases</Link>
 				</li>
 				<li className="nav-item">
