@@ -26,6 +26,9 @@ class Header extends Component	{
 			return	(
 				<div>
 				<li className="nav-item">
+					<Link className="nav-link" to="/signout">Sign Out</Link>
+				</li>
+				<li className="nav-item">
 					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
 				</li>
 				<li className="nav-item">
@@ -35,7 +38,7 @@ class Header extends Component	{
 					<Link className="nav-link" to="/admincases">Cases</Link>
 				</li>
 				<li className="nav-item">
-					<Link className="nav-link" to="/signout">Sign Out</Link>
+					<Link className="nav-link" to="/students">Students</Link>
 				</li>
 				</div>		
 			);

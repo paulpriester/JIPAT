@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {browserHistory} from 'react-router';
-import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES } from './types';
+import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES, FORGOT_PASSWORD, PASSWORD_RESET_MOUNT, PASSWORD_RESET} from './types';
 
 
 const ROOT_URL='http://localhost:3090';
@@ -18,6 +18,40 @@ export function filterCases(cases, name){
 			let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()))
 			dispatch({type:FILTERED_CASES, payload:filteredCases,typing:true})
 		}
+	}
+}
+
+export function forgotPassword({email}) {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/forgot`, {email})
+		.then(response => {
+			console.log(response)
+			if (response.data != "success") {
+				dispatch({type:'PASSWORD_ERR', payload: "There's no account associated with this email."});
+			} else {
+				dispatch({type: 'PASSWORD_SUCCESS', payload: "We've sent you an email with a link!"})
+			}
+			browserHistory.push('/forgot')
+		})
+	}
+}
+
+export function passwordResetMount(tokenId) {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/reset/${tokenId}`)
+	}
+}
+
+export function passwordReset(tokenId, {password, confirmPassword}) {
+	console.log(password, confirmPassword)
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/reset/${tokenId}`, {password, confirmPassword})
+		.then(response => {
+			console.log(response.data)
+			if (response.data == "success") {
+				browserHistory.push('/signin')
+			}
+		})
 	}
 }
 
@@ -101,9 +135,9 @@ export function savedJobs() {
 	}
 }
 
-export function fetchStudents (search) {
+export function fetchStudents () {
 	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchUsers/${search}`)
+		axios.get(`${ROOT_URL}/fetchUsers`)
 		.then(response => {
 			dispatch({type: 'FETCH_STUDENT', response})
 		})

@@ -59,8 +59,10 @@ class Profile extends Component{
 }
 
 function mapStateToProps(state){
-  return {errorMessage: state.auth.error,
-          information: state.student.profile};
+  return {
+    errorMessage: state.auth.error,
+    information: state.student.profile
+  };
 }
 
 export default connect(mapStateToProps) (Profile);
