@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
 import { Grid, Row, Col, Table } from 'react-bootstrap';
-import * as actions from '../../actions';
+// import * as actions from '../../actions';
 import {fetchProfile, fetchcaselength} from '../../actions';
 import Dashboard from '../student/dashboard';
 import ModalProfile from '../modal_profile';
