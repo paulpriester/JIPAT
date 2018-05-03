@@ -31,10 +31,12 @@ class Header extends Component	{
 			return	(
 				<div>
 				<li className="nav-item">
+					<Link className="nav-link" to="/signout">Sign Out</Link>
+				</li>
 					<Link className="nav-link" to="/admincases">Cases</Link>
 				</li>
 				<li className="nav-item">
-					<Link className="nav-link" to="/signout">Sign Out</Link>
+					<Link className="nav-link" to="/students">Students</Link>
 				</li>
 				<li className="nav-item">
 					<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
@@ -71,7 +73,7 @@ function mapStateToProps(state){
 	return{
 		type: state.auth.type,
 		authenticated: state.auth.authenticated,
-	    information: state.student.profile,
+	  information: state.student.profile
 
 	};
 }
