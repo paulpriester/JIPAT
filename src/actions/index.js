@@ -21,6 +21,7 @@ export function filterCases(cases, name){
 	}
 }
 
+
 export function forgotPassword({email}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/forgot`, {email})
@@ -57,7 +58,6 @@ export function passwordReset(tokenId, {password, confirmPassword}) {
 
 export function signInUser({email,password}){
 	return function(dispatch){
-
 		//submit email and password to the server
 		axios.post(`${ROOT_URL}/signin`,{email, password})
 		//if request good ..
@@ -67,9 +67,13 @@ export function signInUser({email,password}){
 			dispatch({type:AUTH_USER, payload: response.data.type});
 			//-save JWT token
 			localStorage.setItem('token',response.data.token);
+			localStorage.setItem('type',response.data.type);
 			//localStorage is available on window scope hence no import
 			
-			if(response.data.type == 'admin') {
+			if (redirect) {
+				browserHistory.goBack()
+			}
+			else if(response.data.type == 'admin') {
 				browserHistory.push('/tmdashboard')
 			} else {
 				//-redirect to the route '/'	
@@ -177,24 +181,13 @@ export function updateCase(id,openCase) {
 	}
 }
 
-export function fetchProfile () {
-	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchprofile`, {
-			headers : token()
-		})
-		.then(response => {
-			dispatch({type: 'FETCH_PROFILE', response})
-		})
-	}
-}
-
 export function fetchcaselength () {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchcaselength`, {
 			headers : token()
 		})
 		.then(response => {
-			dispatch({type: 'FETCH_PROFILE', response})
+			dispatch({type: 'FETCH_CASELENGTH', response})
 		})
 	}
 }
@@ -268,6 +261,19 @@ export function removeSkill(id) {
 		axios.delete(`${ROOT_URL}/deleteskill/${id}`)
 		.then(response => {
 			dispatch({type: 'RETURN_SKILL', response})
+		})
+	}
+}
+
+export function fetchProfile(id) {
+	console.log(id)
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchprofile/${id}`, {
+			headers : token()
+		})
+		.then(response => {
+			console.log(response)
+			dispatch({type: 'FETCH_PROFILE', response})
 		})
 	}
 }

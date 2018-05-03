@@ -2,8 +2,13 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import {fetchProfile} from '../actions'
 
 class Header extends Component	{
+	componentDidMount () {
+		 let id = this.props.params.id?this.props.params.id : ''
+		    this.props.dispatch(fetchProfile(id));
+	}
 	renderLinks()	{
 		if (this.props.type == 'student' && this.props.authenticated) {
 			return	(
@@ -15,7 +20,7 @@ class Header extends Component	{
 						<Link className="nav-link" to="/dashboard">Dashboard</Link>
 					</li>	
 					<li className="nav-item">
-						<Link className="nav-link" to="/profile">Profile</Link>
+						<Link className="nav-link" to="/profile/">Profile</Link>
 					</li>
 					<li className="nav-item">
 						<Link className="nav-link" to="/signout">Sign Out</Link>
@@ -28,18 +33,17 @@ class Header extends Component	{
 				<li className="nav-item">
 					<Link className="nav-link" to="/signout">Sign Out</Link>
 				</li>
-				<li className="nav-item">
-					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
-				</li>
-				<li className="nav-item">
-					<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
-				</li>	
-				<li className="nav-item">
 					<Link className="nav-link" to="/admincases">Cases</Link>
 				</li>
 				<li className="nav-item">
 					<Link className="nav-link" to="/students">Students</Link>
 				</li>
+				<li className="nav-item">
+					<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
+				</li>
+				<li className="nav-item">
+					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
+				</li>	
 				</div>		
 			);
 
@@ -53,9 +57,10 @@ class Header extends Component	{
 	}
 
 	render() {
+		console.log(this.props)
 		return (
 			<Navbar fluid>
-				<Link to="/feature" className="navbar-brand">The Knowledge House</Link>
+				<Link to="/" className="navbar-brand">{this.props.information.firstName}</Link>
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
 				</ul>
@@ -67,7 +72,9 @@ class Header extends Component	{
 function mapStateToProps(state){
 	return{
 		type: state.auth.type,
-		authenticated: state.auth.authenticated
+		authenticated: state.auth.authenticated,
+	  information: state.student.profile
+
 	};
 }
 export default connect(mapStateToProps)(Header);

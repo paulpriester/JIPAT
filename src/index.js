@@ -39,7 +39,7 @@ const token=localStorage.getItem('token');
 //If we have a token,consider the user to be signed in
 if(token){
 	//we need to update application state
-	store.dispatch({type: AUTH_USER});
+	store.dispatch({type: AUTH_USER, payload: localStorage.getItem('type')});
 }
 
 ReactDOM.render(
@@ -63,7 +63,7 @@ ReactDOM.render(
         <Route path="admincases" component={Cases}/>
         <Route path="joblist_admin" component={requireAuth(AdminJobs)}/>
   			<Route path="feature" component={requireAuth(Feature)}/>
-        <Route path="profile" component={Profile}/>
+        <Route path="profile(/:id)" component={Profile}/>
   		</Route>
   	</Router>
   </Provider>,
