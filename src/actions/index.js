@@ -274,9 +274,7 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 		.then(response=>{
 			dispatch(fetchProfile());
 			// browserHistory.push('/feature');
-		})
-		.catch(errorobj=>{
-			dispatch(authError(errorobj.response.data.error))});	
+		})	
 	};
 	
 }
