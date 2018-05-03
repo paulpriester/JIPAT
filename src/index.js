@@ -16,6 +16,8 @@ import SignOut from './components/auth/signout';
 import SignUp from './components/auth/signup';
 import ForgotPass from './components/forgotPass';
 import SignUpAd from './components/auth/signupad';
+import ForgotPassword from './components/auth/forgot';
+import PasswordReset from './components/auth/reset';
 
 import Feature from './components/feature';
 import AdminJobs from './components/admin/adminjobs';
@@ -38,7 +40,7 @@ const token=localStorage.getItem('token');
 //If we have a token,consider the user to be signed in
 if(token){
 	//we need to update application state
-	store.dispatch({type: AUTH_USER});
+	store.dispatch({type: AUTH_USER, payload: localStorage.getItem('type')});
 }
 
 ReactDOM.render(
@@ -47,6 +49,8 @@ ReactDOM.render(
   		<Route path="/" component={App}>
   			<IndexRoute component={Welcome}/>
   			<Route path="signin" component={SignIn}/>
+        <Route path="forgot" component={ForgotPassword}/>
+        <Route path="reset/:tokenId" component={PasswordReset}/>
   			<Route path="signout" component={SignOut}/>
   			<Route path="signup" component={SignUp}/>
         <Route path="jobdetail" component={requireAuth(JobDetail)}/>
@@ -60,8 +64,7 @@ ReactDOM.render(
         <Route path="admincases" component={Cases}/>
         <Route path="joblist_admin" component={requireAuth(AdminJobs)}/>
   			<Route path="feature" component={requireAuth(Feature)}/>
-        <Route path="profile" component={Profile}/>
-        <Route path="forgot" component={ForgotPass}/>
+        <Route path="profile(/:id)" component={Profile}/>
   		</Route>
   	</Router>
   </Provider>,
