@@ -12,12 +12,23 @@ class ForgotPassword extends Component{
 		this.props.forgotPassword({email})
 	}
 	renderAlert(){
-		if(this.props.errorMessage){
-			return(
+		console.log(this.props)
+		if(this.props.message == "There's no account associated with this email."){
+			return (
 				<div className="alert alert-danger">
-					<strong>Oops!</strong> {this.props.errorMessage}
+					<strong>Oops!</strong> {this.props.message}
 				</div>
-				);
+			);
+		} else if(this.props.message == "We've sent you an email with a link!") {
+			return (
+				<div className="alert alert-success">
+					{this.props.message}
+				</div>
+			)
+		} else {
+			return (
+				null
+			)
 		}
 	}
 	render(){
@@ -25,8 +36,6 @@ class ForgotPassword extends Component{
 		
 		return(
 				<form className="container" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-					<h1 className="error">{this.props.successMessage}</h1>
-					<h1 className="error">{this.props.errorMessage}</h1>
 					<h3>Please enter your email address.</h3>
 					<fieldset className="form-group">
 						<label>Email:</label>
@@ -45,8 +54,7 @@ class ForgotPassword extends Component{
 
 function mapStateToProps(state){
 	return {
-		errorMessage: state.auth.error,
-		successMessage: state.auth.success
+		message: state.auth.message
 	};
 }
 

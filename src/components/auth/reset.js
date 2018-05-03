@@ -12,9 +12,9 @@ class PasswordReset extends Component{
 		this.props.passwordResetMount(this.props.params.tokenId)
 	}
 
-	handleFormSubmit({password, comfirmPassword}){
+	handleFormSubmit({password, confirmPassword}){
 		console.log("An email haas been sent");
-		this.props.passwordReset({password, comfirmPassword})
+		this.props.passwordReset(this.props.params.tokenId, {password, confirmPassword})
 	}
 	renderAlert(){
 		if(this.props.errorMessage){
@@ -40,7 +40,7 @@ class PasswordReset extends Component{
 						/>
 						<label>Comfirm Password:</label>
 						<Field
-							name="comfirmPassword"
+							name="confirmPassword"
 							component={renderInput}
 							type="password"
 						/>

@@ -23,13 +23,13 @@ export function filterCases(cases, name){
 
 export function forgotPassword({email}) {
 	return function(dispatch) {
-		axios.post(`${ROOT_URL}/forgotpassword`, {email})
+		axios.post(`${ROOT_URL}/forgot`, {email})
 		.then(response => {
 			console.log(response)
-			if (!response.email) {
-				dispatch({type:'PASSWORD_ERR', response});
+			if (response.data != "success") {
+				dispatch({type:'PASSWORD_ERR', payload: "There's no account associated with this email."});
 			} else {
-				dispatch({type: 'PASSWORD_SUCCESS', response})
+				dispatch({type: 'PASSWORD_SUCCESS', payload: "We've sent you an email with a link!"})
 			}
 			browserHistory.push('/forgot')
 		})
@@ -42,12 +42,15 @@ export function passwordResetMount(tokenId) {
 	}
 }
 
-export function passwordReset({password, comfirmPassword}) {
+export function passwordReset(tokenId, {password, confirmPassword}) {
+	console.log(password, confirmPassword)
 	return function(dispatch) {
-		axios.post(`${ROOT_URL}/reset/${id}`, {password, comfirmPassword})
+		axios.post(`${ROOT_URL}/reset/${tokenId}`, {password, confirmPassword})
 		.then(response => {
-			console.log(response)
-			browserHistory.push('/signin')
+			console.log(response.data)
+			if (response.data == "success") {
+				browserHistory.push('/signin')
+			}
 		})
 	}
 }
