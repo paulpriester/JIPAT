@@ -5,10 +5,6 @@ import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import {fetchProfile} from '../actions'
 
 class Header extends Component	{
-	componentDidMount () {
-		 let id = this.props.params.id?this.props.params.id : ''
-		    this.props.dispatch(fetchProfile(id));
-	}
 	renderLinks()	{
 		if (this.props.type == 'student' && this.props.authenticated) {
 			return	(
