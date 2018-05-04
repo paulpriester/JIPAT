@@ -141,18 +141,14 @@ class ModalButton extends Component {
                   name="type" 
                   placeholder="Enter type"
                   component={renderField} />
-                  <Field name="type" component={renderField} />
-                <ControlLabel>Company</ControlLabel>
-                  <Field name="company" component={renderField} />
-                <FormControl 
-                  name="type" 
-                  placeholder="Enter type"
-                  component={renderField} />
+
+                
                 <ControlLabel>Company</ControlLabel>
                 <FormControl 
                   name="company" 
                   placeholder="Enter Company"
                   component={renderField} />
+                  
                 <ControlLabel>Description</ControlLabel>
                   <FormControl 
                   componentClass="textarea" 
