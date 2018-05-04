@@ -39,6 +39,11 @@ export default function authReducer (state=[],action){
 				...state,
 				message: action.payload
 			}
+		case 'FETCHING_EMAIL':
+			return {
+				...state,
+				fetchingEmail: true
+			}
 	}
 	return state;
 } 

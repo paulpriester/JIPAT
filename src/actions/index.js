@@ -26,7 +26,7 @@ export function forgotPassword({email}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/forgot`, {email})
 		.then(response => {
-			console.log(response)
+			dispatch({type: 'FETCHING_EMAIL'})
 			if (response.data != "success") {
 				dispatch({type:'PASSWORD_ERR', payload: "There's no account associated with this email."});
 			} else {
@@ -56,7 +56,7 @@ export function passwordReset(tokenId, {password, confirmPassword}) {
 	}
 }
 
-export function signInUser({email,password}){
+export function signInUser({email,password}, redirect){
 	return function(dispatch){
 		//submit email and password to the server
 		axios.post(`${ROOT_URL}/signin`,{email, password})
