@@ -4,8 +4,16 @@ import { connect } from 'react-redux';
 import {profile} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import '../../public/css/modal.css'
+
 
 const customStyles = {
+  
+  overlay:{
+
+    backgroundColor:"rgba(150, 150, 150, 0.7)"
+  },
+
   content : {
     top                   : '50%',
     left                  : '50%',
@@ -14,11 +22,13 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : 'purple', 
-    color                 : 'white'
+    backgroundColor       : '#fff',
+    width:'30%',
+    height:'80%',
+    border: 'none',
+  
   }
 };
-
 class ModalProfile extends Component {
   constructor() {
     super();
@@ -62,31 +72,67 @@ class ModalProfile extends Component {
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Modal"
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2>Edit Profile</h2>
+          <h2 className="modal-title">Edit Profile</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
+
                 <ControlLabel>First Name:</ControlLabel>
-                  <Field name="firstName" component={renderField} />
+                <FormControl 
+                  name="first-name" 
+                  placeholder="Enter first name"
+                  component={renderField} />
+
+                 
+
                 <ControlLabel>Last Name:</ControlLabel>
-                  <Field name="lastName" component={renderField} />
+                  <FormControl 
+                  name="last-name" 
+                  placeholder="Enter last name"
+                  component={renderField} />
+
                 <ControlLabel>About:</ControlLabel>
-                  <Field name="about" component={renderField} />
+                <FormControl 
+                  name="first-name" 
+                  placeholder="Enter about"
+                  component={renderField} />
+
                 <ControlLabel>Linkedin:</ControlLabel>
-                  <Field name="linkedin" component={renderField} />
+                <FormControl 
+                  name="linkedin" 
+                  placeholder="Enter Linkedin link"
+                  component={renderField} />
+
+
                 <ControlLabel>Github:</ControlLabel>
-                  <Field name="github" component={renderField} />
+                <FormControl 
+                  name="github" 
+                  placeholder="Enter Github link"
+                  component={renderField} />
+
                 <ControlLabel>Portfolio:</ControlLabel>
-                  <Field name="portfolio" component={renderField} />
+                  <FormControl 
+                  name="portfolio" 
+                  placeholder="Enter portfolio link"
+                  component={renderField} />
+
                 <ControlLabel>Resume:</ControlLabel>
-                  <Field name="resume" component={renderField} />
+                <FormControl 
+                  name="resume" 
+                  placeholder="Enter resume link"
+                  component={renderField} />
+
                 <ControlLabel>Career Goals:</ControlLabel>
-                  <Field name="careergoals" component={renderField} />
+                <FormControl 
+                  name="career goals" 
+                  placeholder="Enter career goals"
+                  component={renderField} />
+
                   <br />
-                <button className="btn btn-secondary" type="submit">Submit</button>
+                <button className="btn btn-secondary modal-btn" type="submit">Submit</button>
              </FormGroup>
             </form>
         </Modal>
