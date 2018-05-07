@@ -6,6 +6,11 @@ import {reduxForm, Field} from 'redux-form';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import '../../public/css/modal.css'
 
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+
+
 const customStyles = {
   
   overlay:{
@@ -34,7 +39,8 @@ class ModalButton extends Component {
     super();
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      startDate: moment()
     };
 
     this.openModal = this.openModal.bind(this);
@@ -48,11 +54,23 @@ class ModalButton extends Component {
   closeModal() {
     this.setState({modalIsOpen: false});
   }
+  
+
+
+  handleDate(date) {
+    this.setState({
+      startDate: date
+    });
+  }
+
+
 
   onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate}) {
     this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate}))
         this.setState({modalIsOpen: false});
   }
+
+
 
    renderLinks() {
     const renderField = ({label,input, meta: {touched, error}}) => (
@@ -123,7 +141,6 @@ class ModalButton extends Component {
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
-
                 <ControlLabel>Title</ControlLabel>
                   <FormControl 
                   name="title" 
@@ -148,7 +165,7 @@ class ModalButton extends Component {
                   name="company" 
                   placeholder="Enter Company"
                   component={renderField} />
-                  
+
                 <ControlLabel>Description</ControlLabel>
                   <FormControl 
                   componentClass="textarea" 
@@ -164,11 +181,13 @@ class ModalButton extends Component {
                   />
 
                 <ControlLabel>Date Created</ControlLabel>
-                <FormControl 
-                  name="date" 
-                  placeholder="select date"                  
-                  component={renderField} 
+                 
+                  <DatePicker 
+                  selected={this.state.date}
+                  onChange={this.handleDate} 
+                  placeholderText="Click to select a date"
                   />
+                  
 
                 <ControlLabel>Private</ControlLabel>
                   <Field name="jobPrivate" component={privatecheck} />
