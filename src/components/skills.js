@@ -48,7 +48,6 @@ class Skills extends Component {
       <tr key={skillData.id}>
           <td>{skillData.skill}</td>
           <td><button onClick={()=> this.removeSkill(skillData._id)}> x</button></td>
-
       </tr>
     )
   }

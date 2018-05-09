@@ -2,13 +2,9 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
-import {fetchProfile} from '../actions'
 
 class Header extends Component	{
-	// componentDidMount () {
-	// 	 let id = this.props.params.id?this.props.params.id : ''
-	// 	    this.props.dispatch(fetchProfile(id));
-	// }
+
 	renderLinks()	{
 		if (this.props.type == 'student' && this.props.authenticated) {
 			return	(
@@ -30,9 +26,6 @@ class Header extends Component	{
 		} else if (this.props.type == 'admin' && this.props.authenticated){
 			return	(
 				<div>
-				<li className="nav-item">
-					<Link className="nav-link" to="/signout">Sign Out</Link>
-				</li>
 				<li>
 					<Link className="nav-link" to="/admincases">Cases</Link>
 				</li>
@@ -45,6 +38,9 @@ class Header extends Component	{
 				<li className="nav-item">
 					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
 				</li>	
+				<li className="nav-item">
+					<Link className="nav-link" to="/signout">Sign Out</Link>
+				</li>
 				</div>		
 			);
 
@@ -61,7 +57,7 @@ class Header extends Component	{
 		console.log(this.props)
 		return (
 			<Navbar fluid>
-				<Link to="/" className="navbar-brand">{this.props.information.firstName}</Link>
+				<h2 className="navbar-brand">{this.props.information.firstName} {this.props.information.lastName}</h2>
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
 				</ul>

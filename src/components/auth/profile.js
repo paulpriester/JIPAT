@@ -2,23 +2,28 @@ import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
 import { Grid, Row, Col, Table } from 'react-bootstrap';
-// import * as actions from '../../actions';
-import {fetchProfile, fetchcaselength} from '../../actions';
+import {fetchProfile, fetchcaselength, fetchSavedSkills} from '../../actions';
 import Dashboard from '../student/dashboard';
 import ModalProfile from '../modal_profile';
+import ModalSkill from '../modal_skill';
+
 
 class Profile extends Component{
-
-  // componentDidMount() {
-  //   console.log(id)
-  //   this.props.dispatch(fetchProfile());
-  // }
 
   componentWillMount () {
     let id = this.props.params.id?this.props.params.id : ''
     this.props.dispatch(fetchcaselength());
     this.props.dispatch(fetchProfile(id));
+    this.props.dispatch(fetchSavedSkills())
 
+  }
+
+   renderSkill(skillData,dispatch) {
+    return (
+      <ul key={skillData.id}>
+          <li>{skillData.skill}</li>
+      </ul>
+    )
   }
 
   render(){
@@ -55,6 +60,8 @@ class Profile extends Component{
           </Row>
           <Row className="show-grid">
             <ModalProfile />
+            <ModalSkill />
+            {this.props.skill.map(this.renderSkill)}
             <Col xs={12} md={12}>
               <h3>Cases</h3>
               <Dashboard />
@@ -69,6 +76,7 @@ class Profile extends Component{
 function mapStateToProps(state){
   return {errorMessage: state.auth.error,
           information: state.student.profile,
+          skill: state.student.skills,
           caselength: state.student.caselength
         }
 }
