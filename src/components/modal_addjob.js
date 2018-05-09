@@ -4,12 +4,10 @@ import { connect } from 'react-redux';
 import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import '../../public/css/modal.css'
 
 const customStyles = {
   
   overlay:{
-
     backgroundColor:"rgba(150, 150, 150, 0.7)"
   },
 
@@ -22,9 +20,9 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
     backgroundColor       : '#fff',
-    width:'30%',
-    height:'80%',
-    border: 'none',
+    width                 : '63%',
+    height                : '80%',
+    border                : 'none',
   
   }
 };
@@ -56,21 +54,48 @@ class ModalButton extends Component {
 
    renderLinks() {
     const renderField = ({label,input, meta: {touched, error}}) => (
-    <FormGroup className="input-row">
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl className="input-edit" {...input} type="text"/>
-      {touched && error &&
-       <span className="error">{error}</span>}
-    </FormGroup>
-  )
-   const privatecheck = ({label,input, meta: {touched, error}}) => (
-    <FormGroup className="input-row">
-      <label>{label}</label>
-      <input {...input} type="checkbox"/>
-      {touched && error &&
-       <span className="error">{error}</span>}
-    </FormGroup>
-  )
+      <FormGroup className="input-row">
+        <ControlLabel>{label}</ControlLabel>
+        <FormControl className="input-edit" {...input} type="text"/>
+        {touched && error &&
+         <span className="error">{error}</span>}
+      </FormGroup>
+    )
+     const privatecheck = ({label,input, meta: {touched, error}}) => (
+        <FormGroup className="input-row">
+          <label>{label}</label>
+          <input {...input} type="checkbox"/>
+          {touched && error &&
+           <span className="error">{error}</span>}
+        </FormGroup>
+     )
+     const dropdownMenu = () => (
+          <select id="case-status">
+            <option value="Front-End">
+              Front-End
+            </option>
+            <option value="Back-End">
+              Back-End
+            </option>
+            <option value="Full-Stack">
+              Full-Stack
+            </option>
+            <option value="UX/UI Design">
+              UX/UI Design
+            </option>
+            <option value="Graphic Design">
+              Graphic Design
+            </option>
+          </select>
+     )
+
+   const datePicker = () => (
+        <DatePicker
+          onChange={this.onChange}
+          value={this.state.date}
+        />
+   )
+
     const { handleSubmit }= this.props;
     if (this.props.type == 'student') {
       return (
@@ -92,7 +117,9 @@ class ModalButton extends Component {
                 <ControlLabel>Location</ControlLabel>
                   <Field name="location" component={renderField} />
                 <ControlLabel>Type</ControlLabel>
-                  <Field name="type" component={renderField} />
+                  <br />
+                  <Field name="type" component={dropdownMenu} />
+                  <br /><br />
                 <ControlLabel>Company</ControlLabel>
                   <Field name="company" component={renderField} />
                 <ControlLabel>Description</ControlLabel>

@@ -24,14 +24,14 @@ export function filterCases(cases, name){
 
 export function forgotPassword({email}) {
 	return function(dispatch) {
+		dispatch({type: 'FETCHING_EMAIL'})
 		axios.post(`${ROOT_URL}/forgot`, {email})
 		.then(response => {
-			dispatch({type: 'FETCHING_EMAIL'})
 			if (response.data != "success") {
 				dispatch({type:'PASSWORD_ERR', payload: "There's no account associated with this email."});
 			} else {
 				dispatch({type: 'PASSWORD_SUCCESS', payload: "We've sent you an email with a link!"})
-			}
+			} 
 			browserHistory.push('/forgot')
 		})
 	}
@@ -307,7 +307,7 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 		})
 		.then(response=>{
 			dispatch(fetchProfile());
-			// browserHistory.push('/feature');
+			browserHistory.push('/profile');
 		})
 		.catch(errorobj=>{
 			dispatch(authError(errorobj.response.data.error))});	
