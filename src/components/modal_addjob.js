@@ -6,6 +6,17 @@ import {reduxForm, Field} from 'redux-form';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import '../../public/css/modal.css'
 
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import 'react-day-picker/lib/style.css'
+
+import MomentLocaleUtils, {
+  formatDate,
+  parseDate,
+} from 'react-day-picker/moment';
+
+import 'moment/locale/it';
+
+
 const customStyles = {
   
   overlay:{
@@ -34,7 +45,8 @@ class ModalButton extends Component {
     super();
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      selectedDay: undefined,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -48,11 +60,21 @@ class ModalButton extends Component {
   closeModal() {
     this.setState({modalIsOpen: false});
   }
+  
+
+
+  handleDayChange = (day) => {
+    this.setState({ selectedDay: day });
+  }
+
+
 
   onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate}) {
     this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate}))
         this.setState({modalIsOpen: false});
   }
+
+
 
    renderLinks() {
     const renderField = ({label,input, meta: {touched, error}}) => (
@@ -63,6 +85,8 @@ class ModalButton extends Component {
        <span className="error">{error}</span>}
     </FormGroup>
   )
+
+
    const privatecheck = ({label,input, meta: {touched, error}}) => (
     <FormGroup className="input-row">
       <label>{label}</label>
@@ -123,7 +147,6 @@ class ModalButton extends Component {
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
-
                 <ControlLabel>Title</ControlLabel>
                   <FormControl 
                   name="title" 
@@ -148,7 +171,7 @@ class ModalButton extends Component {
                   name="company" 
                   placeholder="Enter Company"
                   component={renderField} />
-                  
+
                 <ControlLabel>Description</ControlLabel>
                   <FormControl 
                   componentClass="textarea" 
@@ -164,11 +187,12 @@ class ModalButton extends Component {
                   />
 
                 <ControlLabel>Date Created</ControlLabel>
-                <FormControl 
-                  name="date" 
-                  placeholder="select date"                  
-                  component={renderField} 
-                  />
+                <DayPickerInput
+                  formatDate={formatDate}
+                  parseDate={parseDate}
+                  
+                />
+                  
 
                 <ControlLabel>Private</ControlLabel>
                   <Field name="jobPrivate" component={privatecheck} />

@@ -17,6 +17,7 @@ class JobList_Admin extends Component{
 		this.props.dispatch(savedJobs())
 	}
 
+
 	changeType(type) {
     //function used to record the state of the case status.
 
