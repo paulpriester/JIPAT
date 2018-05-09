@@ -6,9 +6,15 @@ import {reduxForm, Field} from 'redux-form';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import '../../public/css/modal.css'
 
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import 'react-day-picker/lib/style.css'
+
+import MomentLocaleUtils, {
+  formatDate,
+  parseDate,
+} from 'react-day-picker/moment';
+
+import 'moment/locale/it';
 
 
 const customStyles = {
@@ -40,7 +46,7 @@ class ModalButton extends Component {
 
     this.state = {
       modalIsOpen: false,
-      startDate: moment()
+      selectedDay: undefined,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -57,10 +63,8 @@ class ModalButton extends Component {
   
 
 
-  handleDate(date) {
-    this.setState({
-      startDate: date
-    });
+  handleDayChange = (day) => {
+    this.setState({ selectedDay: day });
   }
 
 
@@ -81,6 +85,8 @@ class ModalButton extends Component {
        <span className="error">{error}</span>}
     </FormGroup>
   )
+
+
    const privatecheck = ({label,input, meta: {touched, error}}) => (
     <FormGroup className="input-row">
       <label>{label}</label>
@@ -181,12 +187,11 @@ class ModalButton extends Component {
                   />
 
                 <ControlLabel>Date Created</ControlLabel>
-                 
-                  <DatePicker 
-                  selected={this.state.date}
-                  onChange={this.handleDate} 
-                  placeholderText="Click to select a date"
-                  />
+                <DayPickerInput
+                  formatDate={formatDate}
+                  parseDate={parseDate}
+                  
+                />
                   
 
                 <ControlLabel>Private</ControlLabel>
