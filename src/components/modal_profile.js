@@ -41,7 +41,7 @@ class ModalProfile extends Component {
 
   onSubmit({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}) {
     this.props.dispatch(profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}))
-        this.setState({modalIsOpen: false});
+    this.setState({modalIsOpen: false});
   }
 
   renderField = ({label,input, meta: {touched, error}}) => (

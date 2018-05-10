@@ -26,6 +26,13 @@ class ForgotPassword extends Component{
 					{this.props.message}
 				</div>
 			)
+		} else if(this.props.fetching) {
+			return (
+				<span className="center-loading">
+					<h4>Sending Email</h4>
+					<ReactLoading type="spin" color="black" height={0} width={50} />
+				</span>
+			)
 		} else {
 			return (
 				null
@@ -46,9 +53,9 @@ class ForgotPassword extends Component{
 							type="email"
 						/>
 					</fieldset>
-					<button action="submit" className="btn btn-primary">Send Email</button>
-					<br/><br/>
 					{this.renderAlert()}
+					<br/><br/><br/>
+					<button action="submit" className="btn btn-primary">Send Email</button>
 				</form>
 		);
 	}
