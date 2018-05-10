@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {reduxForm, Field} from 'redux-form'; 
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
+import ReactLoading from 'react-loading';
 
 const renderInput= field => <input {...field.input} type={field.type} className="form-control" />;
 
@@ -45,8 +46,9 @@ class ForgotPassword extends Component{
 							type="email"
 						/>
 					</fieldset>
-					{this.renderAlert()}
 					<button action="submit" className="btn btn-primary">Send Email</button>
+					<br/><br/>
+					{this.renderAlert()}
 				</form>
 		);
 	}
@@ -54,7 +56,8 @@ class ForgotPassword extends Component{
 
 function mapStateToProps(state){
 	return {
-		message: state.auth.message
+		message: state.auth.message,
+		fetching: state.auth.fetchingEmail
 	};
 }
 

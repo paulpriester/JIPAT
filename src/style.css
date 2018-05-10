@@ -2,6 +2,10 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
+input.form-control {
+	color:black;
+}
+
 .title{
 	color:#663096;
 	font-weight: 500;
@@ -93,6 +97,10 @@ a:visited{
 	font-family: 'Roboto Condensed', sans-serif;
 	font-size:25px;
 	letter-spacing:1px;
+}
+
+.right {
+	margin-left: 1rem
 }
 
 .tabs {
@@ -202,5 +210,9 @@ a:visited{
 	color:white;
 }
 
-@media (max-width: 600px) {
-}
+input.form-control, textarea.form-control{
+
+    margin-bottom:1em;
+    font-family:Roboto;
+    color:black;
+} 
