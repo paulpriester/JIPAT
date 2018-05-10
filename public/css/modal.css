@@ -22,7 +22,13 @@
     background:rgb(194, 194, 194);
 }
 
+input.form-control, textarea.form-control{
 
+    margin-bottom:1em;
+    font-family:Roboto;
+    font-weight: 300;
+    color: black;
+}
 
 .modal-btn{
 

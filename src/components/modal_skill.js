@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import {shareJob} from '../actions';
+import {profile} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
-import { Button, FormGroup,  ControlLabel } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+
 
 const customStyles = {
   content : {
@@ -14,11 +15,12 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : '#f2efef', 
+    backgroundColor       : 'purple', 
+    color                 : 'white'
   }
 };
 
-class Modal_Share extends Component {
+class ModalSkill extends Component {
   constructor() {
     super();
 
@@ -38,49 +40,54 @@ class Modal_Share extends Component {
     this.setState({modalIsOpen: false});
   }
 
-
-  onSubmit({email, name, msg}) {
-    let id =  this.props.job
-    this.props.dispatch(shareJob({email, name,msg, _id:id}));
+  onSubmit({skillcheck}) {
+    this.props.dispatch(profile({skillcheck}))
         this.setState({modalIsOpen: false});
   }
 
+  renderSkill(skillData,dispatch) {
+    var selectSkill = function(skill) {
+      dispatch({
+        type: 'SELECT_STUDENT',
+        payload: skill
+      })
+    }
 
-  renderField = ({label,input, meta: {touched, error}}) => (
-    <div className="input-row">
+    return (
+      <li>{skillData.skill}</li>
+    )
+  }
+  render() {
+
+    const privatecheck = ({label,input, meta: {touched, error}}) => (
+    <FormGroup className="input-row">
       <label>{label}</label>
-      <br />
-      <input {...input} type="text"/>
+      <input {...input} type="checkbox"/>
       {touched && error &&
        <span className="error">{error}</span>}
-    </div>
-  )
-  
-  render() {
+    </FormGroup>
+  )    
     const { handleSubmit }= this.props;
 
     return (
       <span>
-        <Button className="btn btn-secondary" onClick={this.openModal}>Share Job</Button>
+        <Button className="btn btn-secondary" onClick={this.openModal}>Edit Skills</Button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
+          ariaHideApp={false}
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2>Share Job</h2>
-          	<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-              <FormGroup className='input-span'>
-                <ControlLabel>Email</ControlLabel>
-                  <p>To send to multiple emails separate by a comma</p>
-                  <Field name="email" component={this.renderField} />
-                <ControlLabel>First Name</ControlLabel>
-                  <Field name="name" component={this.renderField} />
-                  <ControlLabel>Message</ControlLabel>
-                  <Field name="msg" component={this.renderField} />
+          <h2>Add skill</h2>
+          <br />
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                <FormGroup className='input-span'>
+                <ControlLabel>{this.skill}</ControlLabel>
+                  <Field name="firstName" component={privatecheck} />
                   <br />
-                <button className="btn btn-secondary" type="submit" >Submit</button>
+                <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
             </form>
         </Modal>
@@ -89,11 +96,12 @@ class Modal_Share extends Component {
   }
 }
 
-function mapStateToProps({ job }) {
-  console.log(job)
-  return  job ;
+function mapStateToProps(state){
+  return {errorMessage: state.auth.error,
+          skill: state.student.skills
+        }
 }
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'sharejob'
-})(Modal_Share));
+  form: 'profile',
+})(ModalSkill));

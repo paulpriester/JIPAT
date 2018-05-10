@@ -56,7 +56,8 @@ export function passwordReset(tokenId, {password, confirmPassword}) {
 	}
 }
 
-export function signInUser({email,password}, redirect){
+export function signInUser({email,password},redirect){
+
 	return function(dispatch){
 		//submit email and password to the server
 		axios.post(`${ROOT_URL}/signin`,{email, password})
@@ -73,7 +74,7 @@ export function signInUser({email,password}, redirect){
 			if (redirect) {
 				browserHistory.goBack()
 			}
-			else if(response.data.type == 'admin') {
+			 if(response.data.type == 'admin') {
 				browserHistory.push('/tmdashboard')
 			} else {
 				//-redirect to the route '/'	
@@ -212,6 +213,15 @@ export function fetchSkills () {
 	}
 }
 
+export function fetchSavedSkills () {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchskills`)
+		.then(response => {
+			dispatch({type: 'FETCH_SAVED_SKILLS',response})
+		})
+	}
+}
+
 export function addSkills({skill}){
 	console.log({skill})
 	return function(dispatch){
@@ -234,6 +244,8 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 			how_to_apply,
 			created_at,
 			jobPrivate
+		}, {
+			headers: token()
 		})
 		.then(response => {
 			console.log(response)
@@ -242,11 +254,12 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 	}
 }
 
-export function shareJob({email, name, _id}) {
+export function shareJob({email, name,msg, _id}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/sharejobs/${_id}`,{
 			email,
-			name
+			name,
+			msg
 		})
 		.then(response => {
 			console.log(response)
@@ -261,19 +274,6 @@ export function removeSkill(id) {
 		axios.delete(`${ROOT_URL}/deleteskill/${id}`)
 		.then(response => {
 			dispatch({type: 'RETURN_SKILL', response})
-		})
-	}
-}
-
-export function fetchProfile(id) {
-	console.log(id)
-	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchprofile/${id}`, {
-			headers : token()
-		})
-		.then(response => {
-			console.log(response)
-			dispatch({type: 'FETCH_PROFILE', response})
 		})
 	}
 }
@@ -300,17 +300,27 @@ export function removeCase(id) {
 	}
 }
 
+export function fetchProfile(id) {
+	console.log(id)
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchprofile/${id}?`, {
+			headers : token()
+		})
+		.then(response => {
+			console.log(response)
+			dispatch({type: 'FETCH_PROFILE', response})
+		})
+	}
+}
+
 export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}, {
 			headers : token()
 		})
 		.then(response=>{
-			dispatch(fetchProfile());
-			// browserHistory.push('/feature');
-		})
-		.catch(errorobj=>{
-			dispatch(authError(errorobj.response.data.error))});	
+			dispatch(fetchProfile(''))
+		})	
 	};
 	
 }

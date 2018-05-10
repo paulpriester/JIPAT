@@ -49,7 +49,7 @@ class JobList_Admin extends Component{
 	}
 
 	render() {
-		        console.log(this.state.type)
+		        console.log(this.props)
 		return (
 				<div>
 				<Col 
