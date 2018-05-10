@@ -13,10 +13,10 @@ class JobList extends Component {
 		this.props.dispatch(savedJobs())
 	}
 
-	handleClick(id) {
-		console.log(id)
-		this.props.dispatch(saveCase(id))
-	}
+	// handleClick(id) {
+	// 	console.log(id)
+	// 	this.props.dispatch(saveCase(id))
+	// }
 
 	 renderJob(jobData,dispatch) {
 	 	var selectJob = function(job) {
@@ -32,12 +32,13 @@ class JobList extends Component {
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
-			  	<td><button onClick={()=> this.handleClick(jobData._id)}> Apply</button></td>
+			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}><button> Info</button></Link></td>
 	      	</tr>
 		)
 	}
 
 	render() {
+		console.log(this.props)
 		return (
 			<div>
 				{

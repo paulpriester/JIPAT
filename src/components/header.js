@@ -26,9 +26,6 @@ class Header extends Component	{
 			return	(
 				<div>
 				<li className="nav-item">
-					<Link className="nav-link right" to="/signout">Sign Out</Link>
-				</li>
-				<li className="nav-item">
 					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
 				</li>
 				<li className="nav-item">
@@ -38,6 +35,9 @@ class Header extends Component	{
 					<Link className="nav-link" to="/admincases">Cases</Link>
 				</li>
 				<li className="nav-item">
+					<Link className="nav-link" to="/signout">Sign Out</Link>
+        </li>
+     		<li className="nav-item">
 					<Link className="nav-link" to="/students">Students</Link>
 				</li>
 				</div>		
@@ -55,7 +55,8 @@ class Header extends Component	{
 	render() {
 		return (
 			<Navbar fluid>
-				<Link to="/feature" className="navbar-brand">The Knowledge House</Link>
+				<h2 className="navbar-brand">{this.props.information.firstName} {this.props.information.lastName}</h2>
+
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
 				</ul>

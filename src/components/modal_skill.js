@@ -5,6 +5,7 @@ import {profile} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
+
 const customStyles = {
   content : {
     top                   : '50%',
@@ -19,7 +20,7 @@ const customStyles = {
   }
 };
 
-class ModalProfile extends Component {
+class ModalSkill extends Component {
   constructor() {
     super();
 
@@ -39,26 +40,38 @@ class ModalProfile extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  onSubmit({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}) {
-    this.props.dispatch(profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}))
-    this.setState({modalIsOpen: false});
+  onSubmit({skillcheck}) {
+    this.props.dispatch(profile({skillcheck}))
+        this.setState({modalIsOpen: false});
   }
 
-  renderField = ({label,input, meta: {touched, error}}) => (
+  renderSkill(skillData,dispatch) {
+    var selectSkill = function(skill) {
+      dispatch({
+        type: 'SELECT_STUDENT',
+        payload: skill
+      })
+    }
+
+    return (
+      <li>{skillData.skill}</li>
+    )
+  }
+  render() {
+
+    const privatecheck = ({label,input, meta: {touched, error}}) => (
     <FormGroup className="input-row">
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl className="input-edit" {...input} type="text"/>
+      <label>{label}</label>
+      <input {...input} type="checkbox"/>
       {touched && error &&
        <span className="error">{error}</span>}
     </FormGroup>
-  )
-
-  render() {
+  )    
     const { handleSubmit }= this.props;
 
     return (
       <span>
-        <Button className="btn btn-secondary" onClick={this.openModal}>Edit Profile</Button>
+        <Button className="btn btn-secondary" onClick={this.openModal}>Edit Skills</Button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
@@ -67,26 +80,12 @@ class ModalProfile extends Component {
           ariaHideApp={false}
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2>Edit Profile</h2>
+          <h2>Add skill</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
-                <ControlLabel>First Name:</ControlLabel>
-                  <Field name="firstName" component={this.renderField} />
-                <ControlLabel>Last Name:</ControlLabel>
-                  <Field name="lastName" component={this.renderField} />
-                <ControlLabel>About:</ControlLabel>
-                  <Field name="about" component={this.renderField} />
-                <ControlLabel>Linkedin:</ControlLabel>
-                  <Field name="linkedin" component={this.renderField} />
-                <ControlLabel>Github:</ControlLabel>
-                  <Field name="github" component={this.renderField} />
-                <ControlLabel>Portfolio:</ControlLabel>
-                  <Field name="portfolio" component={this.renderField} />
-                <ControlLabel>Resume:</ControlLabel>
-                  <Field name="resume" component={this.renderField} />
-                <ControlLabel>Career Goals:</ControlLabel>
-                  <Field name="careergoals" component={this.renderField} />
+                <ControlLabel>{this.skill}</ControlLabel>
+                  <Field name="firstName" component={privatecheck} />
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
@@ -97,12 +96,12 @@ class ModalProfile extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    errorMessage: state.errors
-  };
-};
+function mapStateToProps(state){
+  return {errorMessage: state.auth.error,
+          skill: state.student.skills
+        }
+}
 
 export default connect(mapStateToProps)(reduxForm({
   form: 'profile',
-})(ModalProfile));
+})(ModalSkill));

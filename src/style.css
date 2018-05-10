@@ -213,5 +213,13 @@ a:visited{
 	top:7em;
 }*/
 
-@media (max-width: 600px) {
+@media (max-width: 600px) { 
+  
 }
+
+input.form-control, textarea.form-control{
+
+    margin-bottom:1em;
+    font-family:Roboto;
+    color:black;
+} 
