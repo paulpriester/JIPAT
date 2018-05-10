@@ -313,7 +313,7 @@ export function fetchProfile(id) {
 	}
 }
 
-export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}){
+export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}) {
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}, {
 			headers : token()
@@ -323,7 +323,7 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 			browserHistory.push('/profile');
 		})
 		.catch(errorobj=>{
-			dispatch(authError(errorobj.response.data.error))});	
+			dispatch(authError(errorobj.response.data.error));	
 			dispatch(fetchProfile(''))
 		})	
 	};
