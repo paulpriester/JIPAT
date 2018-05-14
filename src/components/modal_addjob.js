@@ -9,10 +9,8 @@ import '../../public/css/modal.css'
 const customStyles = {
   
   overlay:{
-
     backgroundColor:"rgba(150, 150, 150, 0.7)"
   },
-
   content : {
     top                   : '50%',
     left                  : '50%',
@@ -28,27 +26,34 @@ const customStyles = {
   
   }
 };
-
 class ModalButton extends Component {
   constructor() {
     super();
-
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      selectedDay: undefined,
+      
     };
-
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
+  handleDayClick = (day, { selected })=> {
+    if (selected) {
+      // Unselect the day if already selected
+      this.setState({ selectedDay: undefined });
+      return;
+    }
+    this.setState({ selectedDay: day });
+  }
+
+
   openModal() {
     this.setState({modalIsOpen: true});
   }
-
   closeModal() {
     this.setState({modalIsOpen: false});
   }
-
   onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate}) {
     this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate}))
         this.setState({modalIsOpen: false});
@@ -64,7 +69,6 @@ class ModalButton extends Component {
                     />
             )
         }
-
     privatecheck = ({label,input, meta: {touched, error}}) => (
     <FormGroup className="input-row">
       <label>{label}</label>
@@ -73,10 +77,8 @@ class ModalButton extends Component {
        <span className="error">{error}</span>}
     </FormGroup>
   )
-
    renderLinks() {
     const { handleSubmit }= this.props;
-
     if (this.props.type == 'student') {
       return (
       <span>
@@ -87,7 +89,6 @@ class ModalButton extends Component {
           style={customStyles}
           contentLabel="Example Modal"
           ariaHideApp={false}
-
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2>Enter Job Info</h2>
@@ -106,8 +107,7 @@ class ModalButton extends Component {
                   <Field componentClass="textarea" name="description" component={this.FieldInput} />
                 <ControlLabel>Apply Link</ControlLabel>
                   <Field name="how_to_apply" component={this.FieldInput} />
-                <ControlLabel>Date Created</ControlLabel>
-                  <Field name="created_at" component={this.FieldInput} />
+
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
@@ -125,14 +125,12 @@ class ModalButton extends Component {
           style={customStyles}
           contentLabel="Example Modal"
           ariaHideApp={false}
-
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2 className="modal-title">Enter Job Info</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
-
                 <ControlLabel>Title</ControlLabel>
                   <Field
                   name="title" 
@@ -143,7 +141,6 @@ class ModalButton extends Component {
                   name="location" 
                   placeholder="Enter location" 
                   component={this.FieldInput} />
-
                 <ControlLabel>Type</ControlLabel>
                   <Field 
                   name="type" 
@@ -160,24 +157,14 @@ class ModalButton extends Component {
                   name="description" 
                   placeholder="Enter description" 
                   component={this.FieldInput} />
-
                 <ControlLabel>Apply Link</ControlLabel>
                   <Field 
                   name="how_to_apply" 
                   placeholder="Enter link to how to apply"                  
                   component={this.FieldInput} 
                   />
-
-                <ControlLabel>Date Created</ControlLabel>
-                <Field 
-                  name="date" 
-                  placeholder="select date"                  
-                  component={this.FieldInput} 
-                  />
-
                 <ControlLabel>Private</ControlLabel>
                   <Field name="jobPrivate" component={this.privatecheck} />
-
                 <button className="btn btn-secondary modal-btn" type="submit">Submit</button>
              </FormGroup>
             </form>
@@ -186,8 +173,6 @@ class ModalButton extends Component {
       )
     }
   }
-
-
   render() {
     console.log(this.props)
     return (
@@ -197,14 +182,12 @@ class ModalButton extends Component {
     );
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     type: state.auth.type,
     errorMessage: state.errors
   };
 };
-
 export default connect(mapStateToProps)(reduxForm({
   form: 'create',
   touched: false

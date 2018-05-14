@@ -7,6 +7,8 @@ import Loading from './loading';
 import {savedJobs, saveCase} from '../actions';
 import jobStyles from '../../public/css/jobs.css'
 
+import axios from 'axios'
+
 
 class JobList extends Component {
 	componentDidMount() {
@@ -26,9 +28,12 @@ class JobList extends Component {
 			})
 		}
 
+		
+
 		return (
 			<tr key={jobData.name}>
-			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
+							
+			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}>{jobData.title}</Link><button>Export CSV</button></td>
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>

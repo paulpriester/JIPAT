@@ -20,7 +20,10 @@ class JobDetail extends Component {
 		 return text.replace(/<.*?>/gm, '');
 		}
 			return (
+
+				
 				<ul key={jobData.id}>
+				
 					<p>Title <br />{jobData.title}</p>
 					<p>Company <br />{jobData.company}</p>
 					<p>Post Date <br />{jobData.created_at}</p>
