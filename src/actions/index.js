@@ -249,7 +249,7 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 		})
 		.then(response => {
 			console.log(response)
-			dispatch({type: "ADD_JOB",response})
+			dispatch({type: "ADD_JOB", response})
 		})
 	}
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import {addJob} from '../actions';
+import {addJob, selectJobType} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
@@ -49,7 +49,7 @@ class ModalButton extends Component {
 
   onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate}) {
     this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate}))
-        this.setState({modalIsOpen: false});
+        this.setState({modalIsOpen: false, jobType:''});
   }
 
    renderLinks() {
@@ -70,7 +70,10 @@ class ModalButton extends Component {
         </FormGroup>
      )
      const dropdownMenu = () => (
-          <select id="case-status">
+          <Field name="type" component="select">
+            <option disabled>
+              Select A Job Type
+            </option>
             <option value="Front-End">
               Front-End
             </option>
@@ -86,7 +89,7 @@ class ModalButton extends Component {
             <option value="Graphic Design">
               Graphic Design
             </option>
-          </select>
+          </Field>
      )
     const { handleSubmit }= this.props;
     if (this.props.type == 'student') {
@@ -110,7 +113,7 @@ class ModalButton extends Component {
                   <Field name="location" component={renderField} />
                 <ControlLabel>Type</ControlLabel>
                   <br />
-                  <Field name="type" component={dropdownMenu} />
+                  <Field name="type" component={dropdownMenu}/>
                   <br /><br />
                 <ControlLabel>Company</ControlLabel>
                   <Field name="company" component={renderField} />
