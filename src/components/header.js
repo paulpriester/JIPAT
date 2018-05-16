@@ -31,47 +31,49 @@ class Header extends Component	{
 	renderLinks()	{
 		if (this.props.type == 'student' && this.props.authenticated) {
 			return	(
-				<div>
+				<Nav className="ml-auto" navbar>
 					<NavItem>
-						<NavLink><Link className="nav-link" to="/signout">Sign Out</Link></NavLink>
+						<Link className="nav-link" to="/signout">Sign Out</Link>
 					</NavItem>
 					<NavItem>
-						<NavLink><Link className="nav-link" to="/feature">Jobs</Link></NavLink>
+						<Link className="nav-link" to="/feature">Jobs</Link>
 					</NavItem>	
 					<NavItem>
-						<NavLink><Link className="nav-link" to="/dashboard">Dashboard</Link></NavLink>
+						<Link className="nav-link" to="/dashboard">Dashboard</Link>
 					</NavItem>	
 					<NavItem>
-						<NavLink><Link className="nav-link" to="/profile">Profile</Link></NavLink>
+						<Link className="nav-link" to="/profile">Profile</Link>
 					</NavItem>
-				</div>	
+				</Nav>	
 			);
 		} else if (this.props.type == 'admin' && this.props.authenticated){
 			return	(
-				<div>
+				<Nav className="ml-auto" navbar>
 				<NavItem>
-					<NavLink><Link to="/joblist_admin">Jobs</Link></NavLink>
+					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
 				</NavItem>
 				<NavItem>
-					<NavLink><Link to="/tmdashboard">Dashboard</Link></NavLink>
+					<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
 				</NavItem>	
 				<NavItem>
-					<NavLink><Link to="/admincases">Cases</Link></NavLink>
+					<Link className="nav-link" to="/admincases">Cases</Link>
 				</NavItem>
 				<NavItem>
-					<NavLink><Link to="/signout">Sign Out</Link></NavLink>
+					<Link className="nav-link" to="/signout">Sign Out</Link>
         		</NavItem>
      			<NavItem>
-					<NavLink><Link to="/students">Students</Link></NavLink>
+					<Link className="nav-link" to="/students">Students</Link>
 				</NavItem>
-				</div>		
+				</Nav>		
 			);
 
 		} else	{
 			return [
-				<NavItem key={1}>
-					<NavLink><Link to="/signin">Sign In</Link></NavLink>
+				<Nav className="ml-auto" navbar>
+				<NavItem >
+					<Link className="nav-link" to="/signin">Sign In</Link>
 				</NavItem>
+				</Nav>
 			];
 		}
 	}
@@ -82,14 +84,7 @@ class Header extends Component	{
           <NavbarBrand>The Knowledge House</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
               	{this.renderLinks()}
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
-            </Nav>
           </Collapse>
         </Navbar>
 		);
