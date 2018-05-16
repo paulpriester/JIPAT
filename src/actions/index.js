@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {browserHistory} from 'react-router';
-import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES, FORGOT_PASSWORD, PASSWORD_RESET_MOUNT, PASSWORD_RESET} from './types';
+import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES, FORGOT_PASSWORD, PASSWORD_RESET_MOUNT, PASSWORD_RESET, CSV_EXPORT} from './types';
 
 
 const ROOT_URL='http://localhost:3090';
@@ -368,4 +368,14 @@ export function fetchMessage(dispatch){
 			});
 		});
 	};
+}
+
+export function exportToCSV(dispatch){
+	return function(dispatch){	
+	axios.get(`${ROOT_URL}/exporttocsv`)
+	.then(response =>{
+		dispatch({type:CSV_EXPORT,
+		payload: response})
+	})
+	}
 }

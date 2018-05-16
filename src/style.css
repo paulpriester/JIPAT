@@ -73,14 +73,8 @@ a:visited{
 	float:right !important;
 }
 
-.left {
-	margin-left: 1rem; 
-}
-
 .nav-link {
 	color:white !important;
-	position: relative;
-	top:3px;
 }
 
 .navbar {
@@ -93,15 +87,6 @@ a:visited{
 	font-family: 'Roboto Condensed', sans-serif;
 	font-size:25px;
 	letter-spacing:1px;
-}
-
-.right {
-	margin-left: 1rem
-}
-
-.tabs {
-	background-color: black;
-	text-align: center;
 }
 
 /* search_bar.js */
