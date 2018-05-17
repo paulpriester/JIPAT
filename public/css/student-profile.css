@@ -1,0 +1,153 @@
+/* #region*/ 
+    .student-profile-container{
+
+        display:flex;
+        flex-direction:column;
+        margin:1em;
+    }
+
+    .student-profile-job-info{
+
+        margin-top:1em;
+        padding-bottom:1em;
+        display:flex;
+        flex-direction:row;
+        justify-content: space-evenly;
+        border-bottom:1px solid black;
+    }
+
+    .student-applied{
+
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+    }
+
+    .applied-number{
+
+        align-self:center;
+        height: 150px;
+        width: 150px;
+    
+        border-radius: 50%;
+        background-color: purple;
+        box-shadow: 10px 10px 10px #888888;
+        color: white;
+    }
+
+    .student-about{
+
+        margin:1em 0 2em 0;     
+        display:flex;
+        flex-direction:row;
+    }
+
+    .student-about > div{
+        align-items: center;
+        width:50%;
+    }
+
+    .student-career-goals{
+
+        display:flex;
+        flex-direction:column;
+    }
+
+    .student-profile-btn-row{
+        margin: 2em 0 0 0;
+        display:flex;
+        flex-direction:row;
+    }
+
+    .student-jobs-detail{
+        margin: 2em  0;
+        display:flex;
+        flex-direction:row;
+        justify-content: space-evenly;
+    }
+
+    .student-jobs-detail > h3:not(:nth-child(5)){
+
+        padding-right:1em;
+        border-right: 1px solid black;
+    }
+
+/* #endregion*/
+
+@media(min-width:375px){
+
+    .student-profile-container{
+
+        max-width:375px;
+        display:flex;
+        flex-direction:column;
+        margin:1em;
+    }
+
+    .student-profile-job-info{
+
+        margin-top:1em;
+        padding-bottom:1em;
+        display:flex;
+        flex-direction:row;
+        justify-content: space-between;
+        border-bottom:1px solid black;
+    }
+
+    .student-applied{
+
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+    }
+
+    .applied-number{
+
+        align-self:center;
+        height: 150px;
+        width: 150px;
+    
+        border-radius: 50%;
+        background-color: purple;
+        box-shadow: 10px 10px 10px #888888;
+        color: white;
+    }
+
+    .student-about{
+
+        margin:1em 0 2em 0;     
+        display:flex;
+        flex-direction:column;
+    }
+
+    .student-about > div{
+        align-items: center;
+        width:50%;
+    }
+
+    .student-career-goals{
+
+        display:flex;
+        flex-direction:column;
+    }
+
+    .student-profile-btn-row{
+        margin: 2em 0 0 0;
+        display:flex;
+        flex-direction:row;
+    }
+
+    .student-jobs-detail{
+        margin: 2em  0;
+        display:flex;
+        flex-direction:row;
+        justify-content: space-evenly;
+    }
+
+    .student-jobs-detail > h3:not(:nth-child(5)){
+
+        padding-right:1em;
+        border-right: 1px solid black;
+    }
+
+}
