@@ -35,6 +35,15 @@ a:visited{
 	top:20px;
 }
 
+/*signout.js*/
+.goodbye {
+	font-size:8em;
+	font-weight:bold;
+	text-align:center;
+	position:relative;
+	top:1.6em;
+}
+
 /* jobs.js */
 .right-cell {
 	position: relative;
@@ -69,6 +78,10 @@ a:visited{
 }
 
 /* header.js */
+.logo {
+	color:white;
+}
+
 .nav-link {
 	color:white !important;
 }
@@ -86,9 +99,7 @@ a:visited{
 }
 
 /* search_bar.js */
-.addJob {
-	float: right;
-}
+
 
 /* modal.js */
 .closeButton {
@@ -159,27 +170,29 @@ a:visited{
 /* tmdashboard.js */
 .box {
 	position:relative;
-	top:7em;
+	top:10em;
 	background-color: purple;
 	color:white;
-    margin:20px 47px;
     height:200px;
-    padding:10px;
     border:1px solid black;
 }
 
 .welcome-back {
-	font-size: 3.7em;
+	font-size: 2.7em;
 }
 
 .tab-icon{
-	height:200px;
 	background-color:white;
 	color: purple;
-	font-size:9em;
-	padding:29px 0 0 22px;
-	margin:-11px;
 	border:1px purple solid;
+	height:100%;
+}
+
+.icon {
+	font-size:150px;
+	position:relative;
+	top:27px;
+	left:26px;
 }
 
 .admin-links {
@@ -195,5 +208,16 @@ a:visited{
 }*/
 
 @media (max-width: 600px) { 
-  
+  /* tmdashboard.js*/
+  .admin-links {
+  	color:purple;
+  	font-size:20px;
+  	position:relative;
+  	bottom:100px;
+  	left:200px;
+  }
+
+  .admin-links:hover {
+  	text-decoration:underline;
+  }
 }

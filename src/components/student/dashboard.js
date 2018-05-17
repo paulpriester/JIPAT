@@ -73,7 +73,7 @@ import {fetchCases, updateCase, removeCase} from '../../actions'
   render () {
     console.log(this.state.type)
     return (
-      <div>
+      <div className="container">
       <ButtonToolbar className='tabs' justified bsSize="large">
         <Button onClick= {() => this.changeType('Open')}>Open</Button>
         <Button onClick= {() => this.changeType('Close')}>Close</Button>

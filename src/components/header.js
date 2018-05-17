@@ -33,9 +33,6 @@ class Header extends Component	{
 			return	(
 				<Nav className="ml-auto" navbar>
 					<NavItem>
-						<Link className="nav-link" to="/signout">Sign Out</Link>
-					</NavItem>
-					<NavItem>
 						<Link className="nav-link" to="/feature">Jobs</Link>
 					</NavItem>	
 					<NavItem>
@@ -44,26 +41,29 @@ class Header extends Component	{
 					<NavItem>
 						<Link className="nav-link" to="/profile">Profile</Link>
 					</NavItem>
+					<NavItem>
+						<Link className="nav-link" to="/signout">Sign Out</Link>
+					</NavItem>
 				</Nav>	
 			);
 		} else if (this.props.type == 'admin' && this.props.authenticated){
 			return	(
 				<Nav className="ml-auto" navbar>
-				<NavItem>
-					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
-				</NavItem>
-				<NavItem>
-					<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
-				</NavItem>	
-				<NavItem>
-					<Link className="nav-link" to="/admincases">Cases</Link>
-				</NavItem>
-				<NavItem>
-					<Link className="nav-link" to="/signout">Sign Out</Link>
-        		</NavItem>
-     			<NavItem>
-					<Link className="nav-link" to="/students">Students</Link>
-				</NavItem>
+					<NavItem>
+						<Link className="nav-link" to="/joblist_admin">Jobs</Link>
+					</NavItem>
+					<NavItem>
+						<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
+					</NavItem>	
+					<NavItem>
+						<Link className="nav-link" to="/admincases">Cases</Link>
+					</NavItem>
+	     			<NavItem>
+						<Link className="nav-link" to="/students">Students</Link>
+					</NavItem>
+					<NavItem>
+						<Link className="nav-link" to="/signout">Sign Out</Link>
+	        		</NavItem>
 				</Nav>		
 			);
 

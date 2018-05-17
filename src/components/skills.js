@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {addSkills, fetchSkills, removeSkill} from '../actions';
 import { bindActionCreators } from 'redux';                  
 import {reduxForm, Field} from 'redux-form'; 
-import { Button, FormGroup,  ControlLabel, Jumbotron,Form, FormControl, Col } from 'react-bootstrap';
+import { Table, Input, Button, FormGroup, Form, Col } from 'reactstrap';
 
 
 class Skills extends Component {
@@ -55,10 +55,11 @@ class Skills extends Component {
   
   render() {
     return (
-    <div>
+    <div className="container">
     <Form onSubmit={this.onFormSubmit}>
-          <Col sm={5}>
-            <input
+        <FormGroup row>
+          <Col sm={10}>
+            <Input
               placeholder='Input skill'
               className='form-control'
               name="skill"
@@ -66,12 +67,13 @@ class Skills extends Component {
               onChange={this.searchInputChange}
             />
           </Col>
-          <Col sm={1}>
+          <Col sm={2}>
             <Button type="submit" className='btn btn-secondary'>Add Skill</Button>
           </Col>
+        </FormGroup>
     </Form>
 
-        <table className="table table-hover">
+        <Table>
               <thead>
                 <tr>
                   <th>Name</th>
@@ -81,7 +83,7 @@ class Skills extends Component {
               <tbody>
                 {this.props.allSkills.length != 0 && this.props.allSkills.map(i=>this.renderSkill(i,this.props.dispatch))}
               </tbody>
-            </table>
+            </Table>
       
     </div>
     )

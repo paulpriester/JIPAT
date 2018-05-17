@@ -77,7 +77,7 @@ class Cases extends Component {
     return (
       
       !this.props.isTyping ?
-      <div>
+      <div className="container">
       <ButtonToolbar className='tabs' justified bsSize="large">
         <Button onClick= {() => this.changeType('Open')}>Open</Button>
         <Button onClick= {() => this.changeType('Close')}>Close</Button>
