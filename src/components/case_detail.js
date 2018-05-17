@@ -46,7 +46,7 @@ class CaseDetail extends Component {
 		}
 	
 	render() {
-		console.log(this.props);
+		// console.log(this.props);
 		return (
 			<div>	
 				{this.renderCase(this.props.selectedCase)}

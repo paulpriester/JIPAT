@@ -15,6 +15,16 @@ class JobDetail extends Component {
 		this.props.dispatch(saveCase(id))
 	}
 
+	renderCase(caseData) {
+      return (
+        <div key={caseData.id}
+        className="case-container">
+          <h1 className="case-title">Job Title</h1>
+          <p className="case-description">{caseData.jobTitle}</p>
+         </div>
+           )
+    }
+
 	renderJob(jobData) {
 		function stripHTML(text) {
 		 return text.replace(/<.*?>/gm, '');
@@ -34,21 +44,27 @@ class JobDetail extends Component {
 		      	</ul>
 		    )
 		}
-	
+
 	render() {
 		console.log(this.props);
 		return (
 			<div>	
-				{this.props.selectedJob? this.renderJob(this.props.selectedJob): "Empty"}
-				<Modal_Share job={this.props.selectedJob._id}/>
+				{this.props.job.selectedJob? this.renderJob(this.props.job.selectedJob): "Empty"}
+				<Modal_Share job={this.props.job.selectedJob._id}/>
+				<p>People </p>
+				<p>{this.props.case.filter(i => i.job_id== this.props.job.selectedJob.jobid).map(this.renderCase).length}</p>
 			</div>
 		)
 	}
+
+
 }
 
-function mapStateToProps({ job }) {
-	console.log(job)
-	return  job ;
+function mapStateToProps(state) {
+	return  {
+		job: state.job,
+		case: state.Case.allCases
+	} 
 }
 
 export default connect (mapStateToProps)(JobDetail);

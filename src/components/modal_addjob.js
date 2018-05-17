@@ -4,7 +4,14 @@ import { connect } from 'react-redux';
 import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import '../../public/css/modal.css'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import 'react-day-picker/lib/style.css'
+import MomentLocaleUtils, {
+  formatDate,
+  parseDate,
+} from 'react-day-picker/moment';
+import DayPicker from 'react-day-picker';
+import 'moment/locale/it';import '../../public/css/modal.css'
 
 const customStyles = {
   
@@ -49,9 +56,38 @@ class ModalButton extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate}) {
-    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate}))
+handleDayClick = (day, { selected })=> {
+    if (selected) {
+      // Unselect the day if already selected
+      this.setState({ selectedDay: undefined });
+      return;
+    }
+    this.setState({ selectedDay: day });
+  }
+  parseDate = (str, format, locale) => {
+    const parsed = dateFnsParse(str, format, { locale });
+    if (DateUtils.isDate(parsed)) {
+      return parsed;
+    }
+    return undefined;
+  }
+  formatDate = (date, format, locale) => {
+    return dateFnsFormat(date, format, { locale });
+  }
+
+  onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate,date}) {
+    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate,date}))
         this.setState({modalIsOpen: false});
+  }
+
+    DateInput = ({input,value}) =>{
+     return( 
+      <DayPickerInput 
+                  formatDate={formatDate}
+                  parseDate={parseDate}
+                  placeholder={`${formatDate(new Date())}`}
+        />
+     )
   }
 
     FieldInput = ({ input,value, meta, type, placeholder}) => {
@@ -106,8 +142,7 @@ class ModalButton extends Component {
                   <Field componentClass="textarea" name="description" component={this.FieldInput} />
                 <ControlLabel>Apply Link</ControlLabel>
                   <Field name="how_to_apply" component={this.FieldInput} />
-                <ControlLabel>Date Created</ControlLabel>
-                  <Field name="created_at" component={this.FieldInput} />
+
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
@@ -155,7 +190,7 @@ class ModalButton extends Component {
                   placeholder="Enter Company"
                   component={this.FieldInput} />
                 <ControlLabel>Description</ControlLabel>
-                  <FormControl 
+                  <Field
                   componentClass="textarea" 
                   name="description" 
                   placeholder="Enter description" 
@@ -165,13 +200,6 @@ class ModalButton extends Component {
                   <Field 
                   name="how_to_apply" 
                   placeholder="Enter link to how to apply"                  
-                  component={this.FieldInput} 
-                  />
-
-                <ControlLabel>Date Created</ControlLabel>
-                <Field 
-                  name="date" 
-                  placeholder="select date"                  
                   component={this.FieldInput} 
                   />
 
