@@ -69,10 +69,6 @@ a:visited{
 }
 
 /* header.js */
-.nav-item {
-	float:right !important;
-}
-
 .nav-link {
 	color:white !important;
 }
