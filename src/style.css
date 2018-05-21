@@ -1,0 +1,206 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.title{
+	color:#663096;
+	font-weight: 500;
+}
+
+.jumbo-title{
+	color:#fff;
+	font-weight:500;
+
+}
+
+.description{
+	font-family: Roboto;
+	color: #4b4b4b;
+	font-weight:100;
+}
+
+
+.jumbo-description{
+	color:#fff;
+	font-family:Roboto;
+	font-weight:100;
+}
+
+a:visited{
+	text-decoration: none;
+}
+/* app.js */
+.container {
+	position:relative;
+	top:20px;
+}
+
+/* jobs.js */
+.right-cell {
+	position: relative;
+	right:40px;
+}
+
+/* welcome.js */
+.Jumbotron {
+	color:white;
+	text-align: center;
+	background:url('/images/banknote.png');
+  	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+	background-size: cover;
+	border-radius: 0;
+    height:30em;
+}
+
+.sign-in-btn{
+
+	background:#663096;
+	padding: 0.8em 5em;
+	/* border: 5px solid #fff; */
+	font-weight:100;	
+
+}
+
+.sign-in-btn a {
+	font-size:12pt;
+	color:#fff;
+}
+
+/* header.js */
+.nav-item {
+	float:right !important;
+}
+
+.left {
+	margin-left: 1rem; 
+}
+
+.nav-link {
+	color:white !important;
+	position: relative;
+	top:3px;
+}
+
+.navbar {
+	background-color:#663096;
+	border-radius:0;
+}
+
+.navbar-brand {
+	color:white !important;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size:25px;
+	letter-spacing:1px;
+}
+
+.tabs {
+	background-color: black;
+	text-align: center;
+}
+
+/* search_bar.js */
+.addJob {
+	float: right;
+}
+
+/* modal.js */
+.closeButton {
+	float: right;
+	cursor:pointer;
+}
+
+.input-row {
+	width:40em;
+	position:relative;
+	bottom:15px;
+}
+
+.checkbox {
+	position:relative;
+	bottom:15px;
+}
+
+/* profile.js */
+.grid {
+	font-size:1.2em;
+}
+
+.jobs {
+	height:150px;
+	width:150px;
+	position:relative;
+	left:7.7em;
+	top:.3em;
+	border-radius:50%;
+	background-color:purple;
+	box-shadow:10px 10px 10px #888888;
+	color:white;
+}
+
+.show-grid {
+	padding:20px 0;
+}
+
+.show-grid-head {
+	padding:20px 0;
+	text-align: center;
+	border:1px solid black;
+}
+
+.profile-pic {
+	position: relative;
+	top:2.7em;
+	background-size:cover;
+	border-radius:10%;
+	border:4px solid purple;
+	box-shadow:5px 10px #888888;
+	cursor: pointer;
+}
+
+.right-border {
+	border-right:1px solid black;
+}
+
+/* jobs.js */
+.error {
+	text-align: center;
+	position: relative;
+	top:25px;
+	bottom:25px;
+}
+
+/* tmdashboard.js */
+.box {
+	position:relative;
+	top:7em;
+	background-color: purple;
+	color:white;
+    margin:20px 47px;
+    height:200px;
+    padding:10px;
+    border:1px solid black;
+}
+
+.welcome-back {
+	font-size: 3.7em;
+}
+
+.tab-icon{
+	height:200px;
+	background-color:white;
+	color: purple;
+	font-size:9em;
+	padding:29px 0 0 22px;
+	margin:-11px;
+	border:1px purple solid;
+}
+
+.admin-links {
+	font-size:3.3em;
+	color:white;
+}
+
+@media (max-width: 600px) {
+}

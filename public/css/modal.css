@@ -1,0 +1,47 @@
+.input-row{
+
+    /* background:black; */
+    width:50%;
+    align-self: center;
+    
+}
+
+.input-edit{
+    border:none;
+    /* background:red; */
+    width:50%;
+    align-self: center;
+}
+
+.modal-title{
+    text-align:center;
+}
+
+.overlay{
+
+    background:rgb(194, 194, 194);
+}
+
+input.form-control, textarea.form-control{
+
+    margin-bottom:1em;
+    font-family:Roboto;
+    font-weight: 300;
+    color: black;
+}
+
+
+.modal-btn{
+
+    width:100%;
+    background: #663096;
+    color:#fff;
+    outline:none;
+}
+
+.modal-btn:hover{
+
+    border:2px solid #663096;
+    background: transparent;
+    color:#663096;
+}
