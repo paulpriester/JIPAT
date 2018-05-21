@@ -4,8 +4,15 @@ import { connect } from 'react-redux';
 import {profile} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import '../../public/css/modal.css'
 
 const customStyles = {
+  
+  overlay:{
+
+    backgroundColor:"rgba(150, 150, 150, 0.7)"
+  },
+
   content : {
     top                   : '50%',
     left                  : '50%',
@@ -14,8 +21,11 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : 'purple', 
-    color                 : 'white'
+    backgroundColor       : '#fff',
+    width:'30%',
+    height:'80%',
+    border: 'none',
+  
   }
 };
 
@@ -44,14 +54,16 @@ class ModalProfile extends Component {
         this.setState({modalIsOpen: false});
   }
 
-  renderField = ({label,input, meta: {touched, error}}) => (
-    <FormGroup className="input-row">
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl className="input-edit" {...input} type="text"/>
-      {touched && error &&
-       <span className="error">{error}</span>}
-    </FormGroup>
-  )
+  renderField = ({ input,value, meta, type, placeholder}) => {
+    return (
+        <FormControl
+            type={type}
+            placeholder={placeholder}
+            value={input.value}
+            onChange={input.onChange}
+            />
+    )
+}
 
   render() {
     const { handleSubmit }= this.props;

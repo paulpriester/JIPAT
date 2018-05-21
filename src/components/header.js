@@ -55,7 +55,7 @@ class Header extends Component	{
 	render() {
 		return (
 			<Navbar fluid>
-				<h2 className="navbar-brand">{this.props.information.firstName} {this.props.information.lastName}</h2>
+				<h2 className="navbar-brand">jklfsklfskdsfkl; lafsdkl;sdfkl;sdfkl;dfsl;sdfl;</h2>
 
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
