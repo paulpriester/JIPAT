@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import api from '../utils/api';
 import { connect } from 'react-redux';
-import {table, ButtonToolbar, Button} from 'react-bootstrap';
+import {table, ButtonToolbar, Button, Col} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {savedJobs, removeJob, fetchAllCases} from '../../actions/index';
 
@@ -18,6 +18,7 @@ class JobList_Admin extends Component{
 		this.props.dispatch(fetchAllCases())
 
 	}
+
 
 	changeType(type) {
     //function used to record the state of the case status.
@@ -53,9 +54,17 @@ class JobList_Admin extends Component{
 		        console.log(this.props)
 		return (
 				<div>
-			    <ButtonToolbar className='tabs' justified bsSize="large">
+				<Col 
+				sm={1}>
+						<Button 
+						className='btn btn-secondary'
+						onClick= {() => this.changeType()}>
+						Private
+						</Button>
+					</Col>
+			    {/* <ButtonToolbar className='tabs' justified bsSize="large">
 			        <Button onClick= {() => this.changeType()}>Private</Button>
-			    </ButtonToolbar>
+			    </ButtonToolbar> */}
 				<table className='table table-hover'>
 					<thead>
 						<tr>

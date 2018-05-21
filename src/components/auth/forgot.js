@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {reduxForm, Field} from 'redux-form'; 
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
+import ReactLoading from 'react-loading';
 
 const renderInput= field => <input {...field.input} type={field.type} className="form-control" />;
 
@@ -25,6 +26,13 @@ class ForgotPassword extends Component{
 					{this.props.message}
 				</div>
 			)
+		} else if(this.props.fetching) {
+			return (
+				<span className="center-loading">
+					<h4>Sending Email</h4>
+					<ReactLoading type="spin" color="black" height={0} width={50} />
+				</span>
+			)
 		} else {
 			return (
 				null
@@ -46,6 +54,7 @@ class ForgotPassword extends Component{
 						/>
 					</fieldset>
 					{this.renderAlert()}
+					<br/><br/><br/>
 					<button action="submit" className="btn btn-primary">Send Email</button>
 				</form>
 		);
@@ -54,7 +63,8 @@ class ForgotPassword extends Component{
 
 function mapStateToProps(state){
 	return {
-		message: state.auth.message
+		message: state.auth.message,
+		fetching: state.auth.fetchingEmail
 	};
 }
 

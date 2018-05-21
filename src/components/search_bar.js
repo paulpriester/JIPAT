@@ -62,7 +62,8 @@ class SearchBar extends Component {
 					<Col sm={1}>
 						<Button type="submit" className='btn btn-secondary'>Submit</Button>
 					</Col>
-					<Col sm={1}>
+					<Col 
+					sm={1}>
 						<ModalButton />
 					</Col>
 				</Form>

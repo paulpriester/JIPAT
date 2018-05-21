@@ -32,12 +32,20 @@ export default function authReducer (state=[],action){
 		case 'PASSWORD_SUCCESS':
 			return {
 				...state,
-				message: action.payload
+				message: action.payload,
+				fetchingEmail: false
 			}
 		case 'PASSWORD_ERR':
 			return {
 				...state,
-				message: action.payload
+				message: action.payload,
+				fetchingEmail: false
+			}
+		case 'FETCHING_EMAIL':
+			return {
+				...state,
+				message: "",
+				fetchingEmail: true
 			}
 	}
 	return state;

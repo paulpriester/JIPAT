@@ -95,6 +95,10 @@ a:visited{
 	letter-spacing:1px;
 }
 
+.right {
+	margin-left: 1rem
+}
+
 .tabs {
 	background-color: black;
 	text-align: center;
@@ -200,7 +204,15 @@ a:visited{
 .admin-links {
 	font-size:3.3em;
 	color:white;
+	float: center;
 }
 
-@media (max-width: 600px) {
+/* forgot.js */
+/*.center-loading {
+	position: relative;
+	top:7em;
+}*/
+
+@media (max-width: 600px) { 
+  
 }

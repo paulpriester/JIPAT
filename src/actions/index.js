@@ -24,14 +24,14 @@ export function filterCases(cases, name){
 
 export function forgotPassword({email}) {
 	return function(dispatch) {
+		dispatch({type: 'FETCHING_EMAIL'})
 		axios.post(`${ROOT_URL}/forgot`, {email})
 		.then(response => {
-			console.log(response)
 			if (response.data != "success") {
 				dispatch({type:'PASSWORD_ERR', payload: "There's no account associated with this email."});
 			} else {
 				dispatch({type: 'PASSWORD_SUCCESS', payload: "We've sent you an email with a link!"})
-			}
+			} 
 			browserHistory.push('/forgot')
 		})
 	}
@@ -57,6 +57,7 @@ export function passwordReset(tokenId, {password, confirmPassword}) {
 }
 
 export function signInUser({email,password},redirect){
+
 	return function(dispatch){
 		//submit email and password to the server
 		axios.post(`${ROOT_URL}/signin`,{email, password})
@@ -262,7 +263,7 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 		})
 		.then(response => {
 			console.log(response)
-			dispatch({type: "ADD_JOB",response})
+			dispatch({type: "ADD_JOB", response})
 		})
 	}
 }
@@ -326,12 +327,17 @@ export function fetchProfile(id) {
 	}
 }
 
-export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}){
+export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}) {
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}, {
 			headers : token()
 		})
 		.then(response=>{
+			dispatch(fetchProfile());
+			browserHistory.push('/profile');
+		})
+		.catch(errorobj=>{
+			dispatch(authError(errorobj.response.data.error));	
 			dispatch(fetchProfile(''))
 		})	
 	};
