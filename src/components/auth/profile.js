@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-import { Grid, Row, Col, Table } from 'react-bootstrap';
+import { Grid, Row, Col, Table,Button } from 'react-bootstrap';
 import {fetchProfile, fetchcaselength, fetchSavedSkills} from '../../actions';
 import Dashboard from '../student/dashboard';
 import ModalProfile from '../modal_profile';
 import ModalSkill from '../modal_skill';
+// import {csv} from '../../actions'
+
 
 
 class Profile extends Component{
@@ -18,16 +20,23 @@ class Profile extends Component{
 
   }
 
-   renderSkill(skillData,dispatch) {
-    return (
-      <ul key={skillData.id}>
-          <li>{skillData.skill}</li>
-      </ul>
-    )
-  }
+  // handleClick() {
+  //   console.log('clicked')
+  //   this.props.dispatch(csv())
+  // }
+
+  renderCase(caseData) {
+      return (
+        <div key={caseData.id}
+        className="case-container">
+          <h1 className="case-title">Job Title</h1>
+          <p className="case-description">{caseData.jobTitle}</p>
+         </div>
+           )
+    }
 
   render(){
-    console.log(this.props);
+    console.log(this.props)
     return(
       <div>
         <Grid fluid className="grid">
@@ -51,7 +60,7 @@ class Profile extends Component{
           <Row className="show-grid">
             <Col xs={6} md={6} className="right-border">
               <h3>About Me</h3>
-              <p> {this.props.information.about}    </p>
+              <p> {this.props.information.about} </p>
             </Col>
             <Col xs={6} md={6}>
               <h3>Career Goals</h3>
@@ -59,9 +68,37 @@ class Profile extends Component{
             </Col>
           </Row>
           <Row className="show-grid">
+            <Col xs={6} md={6} className="right-border">
+              <h3>Skills</h3>
+              <p> {this.props.information.skills} </p>
+            </Col>
+          </Row>
+          <Row className="show-grid">
             <ModalProfile />
             <ModalSkill />
-            {this.props.skill.map(this.renderSkill)}
+
+            <Row className="show-grid">
+            <Col xs={2} md={2} className="right-border">
+              <h2>Jobs Open</h2>
+              <p>{this.props.case.filter(i => i.openCase== 'Open').map(this.renderCase).length}</p>
+            </Col>
+            <Col xs={2} md={2} className="right-border">
+              <h2>Jobs Close</h2>
+              <p>{this.props.case.filter(i => i.openCase== 'Close').map(this.renderCase).length}</p>
+            </Col>
+            <Col xs={2} md={2} className="right-border">
+              <h2>Jobs Interview</h2>
+              <p>{this.props.case.filter(i => i.openCase== 'Interview').map(this.renderCase).length}</p>
+            </Col>
+            <Col xs={2} md={2} className="right-border">
+              <h2>Jobs Interview 2</h2>
+              <p>{this.props.case.filter(i => i.openCase== 'Salary Negotation').map(this.renderCase).length}</p>
+            </Col>
+            <Col xs={2} md={2} className="right-border">
+              <h2>Jobs Placed</h2>
+              <p>{this.props.case.filter(i => i.openCase== 'Place').map(this.renderCase).length}</p>
+            </Col>
+          </Row>
             <Col xs={12} md={12}>
               <h3>Cases</h3>
               <Dashboard />
@@ -77,6 +114,7 @@ function mapStateToProps(state){
   return {errorMessage: state.auth.error,
           information: state.student.profile,
           skill: state.student.skills,
+          case: state.student.cases,
           caselength: state.student.caselength
         }
 }

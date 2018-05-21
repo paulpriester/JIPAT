@@ -55,8 +55,12 @@ class Header extends Component	{
 	render() {
 		return (
 			<Navbar fluid>
+<<<<<<< HEAD
 				<h2 className="navbar-brand">jklfsklfskdsfkl; lafsdkl;sdfkl;sdfkl;dfsl;sdfl;</h2>
 
+=======
+				<h2 className="navbar-brand">The Knowledge House</h2>
+>>>>>>> f76edf3a0c91767def998bdb190af53ee0548ced
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
 				</ul>
@@ -68,7 +72,8 @@ class Header extends Component	{
 function mapStateToProps(state){
 	return{
 		type: state.auth.type,
-		authenticated: state.auth.authenticated
+		authenticated: state.auth.authenticated,
+	    information: state.student.profile
 	};
 }
 export default connect(mapStateToProps)(Header);

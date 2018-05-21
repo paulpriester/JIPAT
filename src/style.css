@@ -2,10 +2,6 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-input.form-control {
-	color:black;
-}
-
 .title{
 	color:#663096;
 	font-weight: 500;
@@ -208,11 +204,15 @@ a:visited{
 .admin-links {
 	font-size:3.3em;
 	color:white;
+	float: center;
 }
 
-input.form-control, textarea.form-control{
+/* forgot.js */
+/*.center-loading {
+	position: relative;
+	top:7em;
+}*/
 
-    margin-bottom:1em;
-    font-family:Roboto;
-    color:black;
-} 
+@media (max-width: 600px) { 
+  
+}

@@ -43,7 +43,7 @@ class Cases extends Component {
           <td>{caseData.studentName}</td>
           <td>{caseData.company}</td>   
           <td>
-            <select id="case-status"
+          <select id="case-status"
                 onChange={e => this.updateCase(caseData._id, e.target.value)}>
           <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open

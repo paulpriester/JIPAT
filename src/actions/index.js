@@ -24,14 +24,14 @@ export function filterCases(cases, name){
 
 export function forgotPassword({email}) {
 	return function(dispatch) {
+		dispatch({type: 'FETCHING_EMAIL'})
 		axios.post(`${ROOT_URL}/forgot`, {email})
 		.then(response => {
-			dispatch({type: 'FETCHING_EMAIL'})
 			if (response.data != "success") {
 				dispatch({type:'PASSWORD_ERR', payload: "There's no account associated with this email."});
 			} else {
 				dispatch({type: 'PASSWORD_SUCCESS', payload: "We've sent you an email with a link!"})
-			}
+			} 
 			browserHistory.push('/forgot')
 		})
 	}
@@ -165,6 +165,7 @@ export function fetchAllCases () {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchallcases`)
 		.then(response => {
+			console.log(response)
 			dispatch({type: 'FETCH_CASE', response})
 		})
 	}
@@ -232,7 +233,19 @@ export function addSkills({skill}){
 	};
 }
 
-export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at,jobPrivate}) {
+export function addUserSkills(Skills){
+	console.log(Skills)
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/adduserskills`,{Skills}, {
+			headers : token()
+		})
+		.then(response=>{
+			dispatch(fetchSavedSkills());	
+		})
+	};
+}
+
+export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at,jobPrivate,date}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/addjob`,{
 			title,
@@ -243,13 +256,14 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 			description,
 			how_to_apply,
 			created_at,
-			jobPrivate
+			jobPrivate,
+			date
 		}, {
 			headers: token()
 		})
 		.then(response => {
 			console.log(response)
-			dispatch({type: "ADD_JOB",response})
+			dispatch({type: "ADD_JOB", response})
 		})
 	}
 }
@@ -313,12 +327,17 @@ export function fetchProfile(id) {
 	}
 }
 
-export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}){
+export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}) {
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}, {
 			headers : token()
 		})
 		.then(response=>{
+			dispatch(fetchProfile());
+			browserHistory.push('/profile');
+		})
+		.catch(errorobj=>{
+			dispatch(authError(errorobj.response.data.error));	
 			dispatch(fetchProfile(''))
 		})	
 	};

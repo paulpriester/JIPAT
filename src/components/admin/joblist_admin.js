@@ -3,7 +3,7 @@ import api from '../utils/api';
 import { connect } from 'react-redux';
 import {table, ButtonToolbar, Button, Col} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {savedJobs, removeJob} from '../../actions/index';
+import {savedJobs, removeJob, fetchAllCases} from '../../actions/index';
 
 
 class JobList_Admin extends Component{
@@ -15,6 +15,8 @@ class JobList_Admin extends Component{
 
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
+		this.props.dispatch(fetchAllCases())
+
 	}
 
 
@@ -74,7 +76,7 @@ class JobList_Admin extends Component{
 						</tr>
 					</thead>
 					<tbody>
-					{this.props.allJobs.length != 0 && this.props.allJobs.filter(i => i.jobPrivate==this.state.type).map(i=>this.renderJob(i,this.props.dispatch))}
+					{this.props.job.allJobs.length != 0 && this.props.job.allJobs.filter(i => i.jobPrivate==this.state.type).map(i=>this.renderJob(i,this.props.dispatch))}
 					</tbody>
 				</table>
 				</div>
@@ -83,8 +85,11 @@ class JobList_Admin extends Component{
 }
 
 
-function mapStateToProps({job} ) {
-	return  job ;
+function mapStateToProps(state) {
+	return  {
+		job: state.job,
+		case: state.Case.allCases
+	} 
 }
 
 export default connect (mapStateToProps)(JobList_Admin);
