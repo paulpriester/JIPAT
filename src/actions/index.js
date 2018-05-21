@@ -92,8 +92,8 @@ export function signInUser({email,password},redirect){
 			axios.post(`${ROOT_URL}/update/${id}`,{openCase: openCase})
 			.then(response => {
 				console.log({openCase})
-				localStorage.getItem('type', response.type)
-				if(response.data == "successful" && response.type == 'admin'){
+				// localStorage.getItem('type', response.type)
+				if(response.data == "successful" ){
 					dispatch(fetchAllCases())
 				} else {
 					dispatch(fetchCases())
