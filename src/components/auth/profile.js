@@ -71,12 +71,11 @@ class Profile extends Component{
 
           </div>
 
-            <div className="student-career-goals">
+
 
                 <h3>Career Goals</h3>
                 <p> {this.props.information.careergoals} </p>
 
-            </div>
 
           </div>
 
