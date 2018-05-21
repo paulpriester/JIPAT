@@ -89,23 +89,28 @@
         margin-top:1em;
         padding-bottom:1em;
         display:flex;
-        flex-direction:row;
+        flex-direction:column;
         justify-content: space-between;
         border-bottom:1px solid black;
     }
 
-    .student-applied{
+    .student-profile-job-info h3{
+
+        font-size:16pt;
+    }
+
+    /* .student-applied{
 
         display:flex;
         flex-direction:column;
-        justify-content: center;
-    }
+        justify-content: flex-start;
+    } */
 
     .applied-number{
 
         align-self:center;
-        height: 150px;
-        width: 150px;
+        height: 100px;
+        width: 100px;
     
         border-radius: 50%;
         background-color: purple;
