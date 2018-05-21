@@ -243,7 +243,7 @@
     .student-profile-container{
 
 
-        max-width:1440px;        
+        max-width:768px;        
         display:flex;
         flex-direction:column;
         margin:1em;
