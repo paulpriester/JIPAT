@@ -8,6 +8,7 @@ export const SAVE_JOB = 'saved_job';
 export const USERS = 'users';
 export const EDIT_PROFILE = 'edit_profile';
 export const FILTERED_CASES = 'FILTERED_CASES';
+export const FILTERED_STUDENTS = 'FILTERED_STUDENTS';
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
 export const PASSWORD_RESET = 'PASSWORD_RESET';
 export const PASSWORD_RESET_MOUNT = 'PASSWORD_RESET_MOUNT';

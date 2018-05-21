@@ -19,7 +19,6 @@ export default function (state = {selectedCase: '', allCases:[], filteredCases:[
 
 	case 'FILTERED_CASES':
 		return{
-
 			...state,
 			filteredCases:action.payload,
 			typing: action.typing

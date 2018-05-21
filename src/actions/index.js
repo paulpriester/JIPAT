@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {browserHistory} from 'react-router';
-import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES, FORGOT_PASSWORD, PASSWORD_RESET_MOUNT, PASSWORD_RESET, CSV_EXPORT} from './types';
+import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES, FILTERED_STUDENTS, FORGOT_PASSWORD, PASSWORD_RESET_MOUNT, PASSWORD_RESET, CSV_EXPORT} from './types';
 
 
-const ROOT_URL='https://tkhjobboard.herokuapp.com';
+const ROOT_URL='http://localhost:3090';
 const token = function() {
 	return {authorization: localStorage.getItem('token')}
 }
@@ -21,6 +21,18 @@ export function filterCases(cases, name){
 	}
 }
 
+export function filterStudents(students, name){
+	return function(dispatch){
+		if(name === ""){
+			dispatch({type:FILTERED_STUDENTS, payload:students, typing:false})
+		}
+		else{
+			// change company name to student when database gets up and running
+			let filteredStudents = students.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()))
+			dispatch({type:FILTERED_STUDENTS, payload:filteredStudents,typing:true})
+		}
+	}
+}
 
 export function forgotPassword({email}) {
 	return function(dispatch) {

@@ -34,6 +34,12 @@ export default function studentReducer (state = initialState, action) {
 			...state,
 			caselength: action.response.data
 		}
+	case 'FILTERED_STUDENTS':
+		return{
+			...state,
+			filteredStudents:action.payload,
+			typing: action.typing
+		}
 	}
 	
 	return state;
