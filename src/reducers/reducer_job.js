@@ -27,7 +27,8 @@ export default function JobReducer (state = initialState, action) {
 	case 'SELECT_JOB':
 		return {
 			...state,
-			selectedJob: action.payload
+			selectedJob: action.payload,
+			cases: action.payload.data
 		}
 	case 'SAVE_JOB':
 		return {

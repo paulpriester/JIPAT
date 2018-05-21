@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {Table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import Loading from './loading';
-import {savedJobs, saveCase} from '../actions';
+import {savedJobs} from '../actions';
 import jobStyles from '../../public/css/jobs.css'
 
 
@@ -12,11 +12,6 @@ class JobList extends Component {
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
 	}
-
-	// handleClick(id) {
-	// 	console.log(id)
-	// 	this.props.dispatch(saveCase(id))
-	// }
 
 	 renderJob(jobData,dispatch) {
 	 	var selectJob = function(job) {

@@ -3,6 +3,7 @@ const initialState = {
 	allStudents:[], 
 	profile:{},
 	skills:[],
+	cases: [],
 	caselength: {}
 }
 
@@ -29,10 +30,12 @@ export default function studentReducer (state = initialState, action) {
 			...state,
 			skills: action.response.data
 		}
-	case 'FETCH_CASELENGTH': 
+	case 'FETCH_CASELENGTH':
+	console.log(action.response) 
 		return {
 			...state,
-			caselength: action.response.data
+			caselength: action.response.data,
+			cases: action.response.data.cases
 		}
 	}
 	
