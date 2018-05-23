@@ -27,7 +27,7 @@ class SearchStudents extends Component {
 				<Form onSubmit={this.onFormSubmit}>
 					<Col sm={12}>
 						<input
-							placeholder='Search for a student'
+							placeholder='Search by first name'
 							className='form-control'
 							name="term"
 							value={this.state.term}

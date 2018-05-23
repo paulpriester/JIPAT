@@ -1,6 +1,7 @@
 const initialState = {
 	selectedStudent: '', 
 	allStudents:[], 
+	filteredStudents: [],
 	profile:{},
 	skills:[],
 	caselength: {}
@@ -12,7 +13,8 @@ export default function studentReducer (state = initialState, action) {
 				console.log(action)
 		return {
 			...state,
-			allStudents: action.response.data.concat(state.allStudents)
+			allStudents: action.response.data,
+			filteredStudents: action.response.data
 		}
 	case 'SELECT_STUDENT':
 		return {

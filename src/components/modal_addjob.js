@@ -47,8 +47,8 @@ class ModalButton extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate}) {
-    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate}))
+  onSubmit({title,company,location,type,email,description,how_to_apply, created_at, jobPrivate}) {
+    this.props.dispatch(addJob({title,company,location,type,email,description,how_to_apply, created_at, jobPrivate}))
         this.setState({modalIsOpen: false, jobType:''});
   }
 
@@ -115,6 +115,8 @@ class ModalButton extends Component {
                   <br />
                   <Field name="type" component={dropdownMenu}/>
                   <br /><br />
+                <ControlLabel>Email</ControlLabel>
+                  <Field name="email" component={renderField} />
                 <ControlLabel>Company</ControlLabel>
                   <Field name="company" component={renderField} />
                 <ControlLabel>Description</ControlLabel>

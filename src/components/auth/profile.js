@@ -92,11 +92,12 @@ class Profile extends Component{
 }
 
 function mapStateToProps(state){
-  return {errorMessage: state.auth.error,
-          information: state.student.profile,
-          skill: state.student.skills,
-          caselength: state.student.caselength
-        }
+  return {
+    errorMessage: state.auth.error,
+    information: state.student.profile,
+    skill: state.student.skills,
+    caselength: state.student.caselength
+  }
 }
 
 export default connect(mapStateToProps) (Profile);

@@ -31,6 +31,8 @@ class JobDetail extends Component {
 				  							  href={stripHTML(jobData.how_to_apply)} 
 				  							  target="_blank">apply</a>
 				  							  </p>
+				  	<p>Email</p>
+					<a href={`mailto:${jobData.email}`}>{jobData.email}</a>
 		      	</ul>
 		    )
 		}

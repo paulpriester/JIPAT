@@ -28,7 +28,7 @@ export function filterStudents(students, name){
 		}
 		else{
 			// change company name to student when database gets up and running
-			let filteredStudents = students.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()))
+			let filteredStudents = students.filter(i => i.firstName.toLowerCase().startsWith(name.toLowerCase()))
 			dispatch({type:FILTERED_STUDENTS, payload:filteredStudents,typing:true})
 		}
 	}
@@ -244,13 +244,14 @@ export function addSkills({skill}){
 	};
 }
 
-export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at,jobPrivate}) {
+export function addJob({title,company,location,type,email,jobid,description,how_to_apply, created_at,jobPrivate}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/addjob`,{
 			title,
 			company,
 			location,
 			type,
+			email,
 			jobid,
 			description,
 			how_to_apply,

@@ -40,7 +40,7 @@ import SearchStudents from './searchStudents';
 							</tr>
 						</thead>
 						<tbody>
-							{this.props.allStudents.length != 0 && this.props.allStudents.map(i=>this.renderStudent(i,this.props.dispatch))}
+							{this.props.filteredStudents.length != 0 && this.props.filteredStudents.map(i=>this.renderStudent(i,this.props.dispatch))}
 						</tbody>
 				</Table>
 			</div>
