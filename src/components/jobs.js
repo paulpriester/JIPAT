@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import api from './utils/api';
 import { connect } from 'react-redux';
-import {Table} from 'react-bootstrap';
+import {Table} from 'reactstrap';
 import {Link} from 'react-router';
 import Loading from './loading';
 import {savedJobs} from '../actions';
@@ -42,7 +42,7 @@ class JobList extends Component {
 					: 
 					<span>
 						<h1 className="error">{this.props.error}</h1>
-						<Table responsive className="table table-hover">
+						<Table responsive>
 							<thead>
 								<tr>
 									<th>Name</th>

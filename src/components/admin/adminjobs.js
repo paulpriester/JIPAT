@@ -8,7 +8,7 @@ import ModalButton from '../modal_addjob';
 export default class AdminJobs extends Component{
 	render(){
 		return(
-			<div>
+			<div className='container'>
 			<SearchBar />
 			<JobList_Admin />
 			</div>

@@ -1,34 +1,38 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import { Grid, Row, Col, Table } from 'react-bootstrap';
+import { Container, Row, Col } from 'reactstrap';
 import * as FontAwesome from 'react-icons/lib/fa'
 
 class TmDashboard extends Component {
   render() {
     return (
-      <div>
-        <Grid>
+      <Container>
           <Row>
-            <Col md={5} className="box">
-              <h3 className="welcome-back">Welcome back, Grand Master</h3>
+            <Col className="box" sm={6}>
+              <p className="welcome-back">Welcome back, Grand Master</p>
             </Col>
-            <Col md={5} className="box">
-              <Col className="tab-icon" md={5}><FontAwesome.FaBriefcase /></Col>
-              <Col md={7}><Link className="admin-links" to="/adminCases">Manage Cases</Link></Col>
+            <Col className="box" sm={6}>
+            <Row>
+              <Col className="tab-icon" sm={5}><FontAwesome.FaBriefcase className="icon"/></Col>
+              <Col sm={7}><Link className="admin-links" to="/adminCases">Manage Cases</Link></Col>
+            </Row>
             </Col>
           </Row>
           <Row>
-            <Col md={5} className="box">
-              <Col className="tab-icon" md={5}><FontAwesome.FaMale /></Col>
-              <Col md={7}><Link className="admin-links" to="/students">Manage Students</Link></Col>
+            <Col className="box" sm={6}>
+              <Row>
+                <Col className="tab-icon" sm={5}><FontAwesome.FaMale className="icon"/></Col>
+                <Col sm={7}><Link className="admin-links" to="/students">Manage Students</Link></Col>
+              </Row>
             </Col>
-            <Col md={5} className="box">
-              <Col className="tab-icon" md={5}><FontAwesome.FaCode /></Col>
-              <Col md={7}><Link className="admin-links" to="/skills">Manage Skills</Link></Col>
+            <Col className="box" sm={6}>
+              <Row>
+                <Col className="tab-icon" sm={5}><FontAwesome.FaCode className="icon"/></Col>
+                <Col sm={7}><Link className="admin-links" to="/skills">Manage Skills</Link></Col>
+              </Row>
             </Col>
           </Row>
-        </Grid>
-      </div>
+      </Container>
     )
   }
 }

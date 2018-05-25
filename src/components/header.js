@@ -1,70 +1,92 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from 'reactstrap';
 
 class Header extends Component	{
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
 	renderLinks()	{
 		if (this.props.type == 'student' && this.props.authenticated) {
 			return	(
-				<div>
-					<li className="nav-item">
-						<Link className="nav-link right" to="/signout">Sign Out</Link>
-					</li>
-					<li className="nav-item left">
+				<Nav className="ml-auto" navbar>
+					<NavItem>
 						<Link className="nav-link" to="/feature">Jobs</Link>
-					</li>	
-					<li className="nav-item">
+					</NavItem>	
+					<NavItem>
 						<Link className="nav-link" to="/dashboard">Dashboard</Link>
-					</li>	
-					<li className="nav-item">
+					</NavItem>	
+					<NavItem>
 						<Link className="nav-link" to="/profile">Profile</Link>
-					</li>
-				</div>	
+					</NavItem>
+					<NavItem>
+						<Link className="nav-link" to="/signout">Sign Out</Link>
+					</NavItem>
+				</Nav>	
 			);
 		} else if (this.props.type == 'admin' && this.props.authenticated){
 			return	(
-				<div>
-				<li className="nav-item">
-					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
-				</li>
-				<li className="nav-item">
-					<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
-				</li>	
-				<li className="nav-item">
-					<Link className="nav-link" to="/admincases">Cases</Link>
-				</li>
-				<li className="nav-item">
-					<Link className="nav-link" to="/signout">Sign Out</Link>
-        </li>
-     		<li className="nav-item">
-					<Link className="nav-link" to="/students">Students</Link>
-				</li>
-				</div>		
+				<Nav className="ml-auto" navbar>
+					<NavItem>
+						<Link className="nav-link" to="/joblist_admin">Jobs</Link>
+					</NavItem>
+					<NavItem>
+						<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
+					</NavItem>	
+					<NavItem>
+						<Link className="nav-link" to="/admincases">Cases</Link>
+					</NavItem>
+	     			<NavItem>
+						<Link className="nav-link" to="/students">Students</Link>
+					</NavItem>
+					<NavItem>
+						<Link className="nav-link" to="/signout">Sign Out</Link>
+	        		</NavItem>
+				</Nav>		
 			);
 
 		} else	{
 			return [
-				<li className="nav-item navLinks" key={1}>
+				<Nav className="ml-auto" navbar>
+				<NavItem >
 					<Link className="nav-link" to="/signin">Sign In</Link>
-				</li>
+				</NavItem>
+				</Nav>
 			];
 		}
 	}
 
 	render() {
 		return (
-			<Navbar fluid>
-<<<<<<< HEAD
-				<h2 className="navbar-brand">jklfsklfskdsfkl; lafsdkl;sdfkl;sdfkl;dfsl;sdfl;</h2>
-
-=======
-				<h2 className="navbar-brand">The Knowledge House</h2>
->>>>>>> f76edf3a0c91767def998bdb190af53ee0548ced
-				<ul className="nav navbar-nav">
-					{this.renderLinks()}			
-				</ul>
-			</Navbar>
+        <Navbar light expand="md">
+          <NavbarBrand><Link to="/feature" className="logo">The Knowledge House</Link></NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+              	{this.renderLinks()}
+          </Collapse>
+        </Navbar>
 		);
 	}
 }
@@ -72,8 +94,7 @@ class Header extends Component	{
 function mapStateToProps(state){
 	return{
 		type: state.auth.type,
-		authenticated: state.auth.authenticated,
-	    information: state.student.profile
+		authenticated: state.auth.authenticated
 	};
 }
 export default connect(mapStateToProps)(Header);

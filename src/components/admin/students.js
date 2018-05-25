@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {table} from 'react-bootstrap';
+import {Table} from 'reactstrap';
 import {Link} from 'react-router';
-import {fetchStudents} from '../../actions'
+import {fetchStudents} from '../../actions';
+import SearchStudents from './searchStudents';
 
 
  class Students extends Component {
@@ -28,17 +29,36 @@ import {fetchStudents} from '../../actions'
 
 	render () {
 		return (
-			<table className ='table table-hover'>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Email</th>
-						</tr>
-					</thead>
-					<tbody>
-						{this.props.allStudents.length != 0 && this.props.allStudents.map(i=>this.renderStudent(i,this.props.dispatch))}
-					</tbody>
-			</table>
+			!this.props.isTyping ?
+			<div className="container">
+				<SearchStudents students={this.props.allStudents}/>
+				<Table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+						<tbody>
+							{this.props.filteredStudents.length != 0 && this.props.filteredStudents.map(i=>this.renderStudent(i,this.props.dispatch))}
+						</tbody>
+				</Table>
+			</div>
+			:
+			<div className="container">
+				<SearchStudents students={this.props.allStudents}/>
+				<Table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+						<tbody>
+							{}
+						</tbody>
+				</Table>
+			</div>
 		)
 	}
 }

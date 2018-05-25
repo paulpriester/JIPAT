@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormControl, Col} from 'react-bootstrap';
+import { Button, Form, FormGroup, Col, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';                  
 import { fetchJob } from './utils/api';
@@ -41,31 +41,32 @@ class SearchBar extends Component {
 		return (
 			<div>
 				<Form onSubmit={this.onFormSubmit}>
-					<Col sm={5}>
-						<input
-							placeholder='Search for a job'
-							className='form-control media-span'
-							name="term"
-							value={this.state.term}
-							onChange={this.searchInputChange}
-						/>
-					</Col>
-					<Col sm={5}>
-						<input
-							placeholder='Search for a location'
-							className='form-control media-span'
-							name="location"
-							value={this.state.location}
-							onChange={this.searchInputChange}
-						/>
-					</Col>
-					<Col sm={1}>
-						<Button type="submit" className='btn btn-secondary'>Submit</Button>
-					</Col>
-					<Col 
-					sm={1}>
-						<ModalButton />
-					</Col>
+					<FormGroup row>
+						<Col sm={5}>
+							<Input
+								placeholder='Search for a job'
+								className='form-control media-span'
+								name="term"
+								value={this.state.term}
+								onChange={this.searchInputChange}
+							/>
+						</Col>
+						<Col sm={5}>
+							<Input
+								placeholder='Search for a location'
+								className='form-control media-span'
+								name="location"
+								value={this.state.location}
+								onChange={this.searchInputChange}
+							/>
+						</Col>
+						<Col sm={1}>
+							<Button type="submit" className='btn btn-secondary'>Submit</Button>
+						</Col>
+						<Col sm={1}>
+							<ModalButton />
+						</Col>
+					</FormGroup>
 				</Form>
 			</div>
 		);
