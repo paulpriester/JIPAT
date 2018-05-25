@@ -36,7 +36,7 @@ class SearchBar extends Component {
 		this.setState({ location: ''});
 		console.log(this.setState.location)
 	}
-
+	
 	render () {
 		return (
 			<div>

@@ -115,8 +115,6 @@ class ModalButton extends Component {
                   <br />
                   <Field name="type" component={dropdownMenu}/>
                   <br /><br />
-                <ControlLabel>Email</ControlLabel>
-                  <Field name="email" component={renderField} />
                 <ControlLabel>Company</ControlLabel>
                   <Field name="company" component={renderField} />
                 <ControlLabel>Description</ControlLabel>
@@ -125,6 +123,8 @@ class ModalButton extends Component {
                   <Field name="how_to_apply" component={renderField} />
                 <ControlLabel>Date Created</ControlLabel>
                   <Field name="created_at" component={renderField} />
+                <ControlLabel>Email</ControlLabel>
+                  <Field name="email" type="email" component={renderField} />
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>

@@ -177,6 +177,7 @@ export function fetchAllCases () {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchallcases`)
 		.then(response => {
+			console.log(response)
 			dispatch({type: 'FETCH_CASE', response})
 		})
 	}
@@ -244,7 +245,19 @@ export function addSkills({skill}){
 	};
 }
 
-export function addJob({title,company,location,type,email,jobid,description,how_to_apply, created_at,jobPrivate}) {
+export function addUserSkills(Skills){
+	console.log(Skills)
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/adduserskills`,{Skills}, {
+			headers : token()
+		})
+		.then(response=>{
+			dispatch(fetchSavedSkills());	
+		})
+	};
+}
+
+export function addJob({title,company,location,type,email,jobid,description,how_to_apply, created_at,jobPrivate,date}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/addjob`,{
 			title,
@@ -256,7 +269,8 @@ export function addJob({title,company,location,type,email,jobid,description,how_
 			description,
 			how_to_apply,
 			created_at,
-			jobPrivate
+			jobPrivate,
+			date
 		}, {
 			headers: token()
 		})
@@ -326,9 +340,9 @@ export function fetchProfile(id) {
 	}
 }
 
-export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}) {
+export function profile({firstName,lastName,about,portfolio,github,linkedin,resume,careergoals}) {
 	return function(dispatch){
-		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}, {
+		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about,portfolio,github,linkedin,resume,careergoals}, {
 			headers : token()
 		})
 		.then(response=>{

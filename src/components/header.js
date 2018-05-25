@@ -81,7 +81,7 @@ class Header extends Component	{
 	render() {
 		return (
         <Navbar light expand="md">
-          <NavbarBrand>The Knowledge House</NavbarBrand>
+          <NavbarBrand><Link to="/feature" className="logo">The Knowledge House</Link></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
               	{this.renderLinks()}

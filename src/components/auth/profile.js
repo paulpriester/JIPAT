@@ -31,7 +31,6 @@ class Profile extends Component{
     
     return(
       <div className="edit-profile">
-              {/* <img className="profile-pic" src="https://www.bing.com/th?id=A5e81ae1f568f729aa4810dde8c952a58&w=110&h=110&c=7&rs=1&qlt=80&pcl=f9f9f9&cdv=1&pid=16.1" /> */}    
             <Row>
               <Col className="border-profile" sm="3">
                 <h3>Name:</h3>
@@ -39,15 +38,19 @@ class Profile extends Component{
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>Github:</h3>
-                <p>{this.props.information.github}</p>
+                <a href={this.props.information.github}>{this.props.information.github}</a>
+                <h3>Portfolio:</h3>
+                <a href={this.props.information.portfolio}>{this.props.information.portfolio}</a>
               </Col>
               <Col className="border-profile" sm="3">
-                <h3>LinkedIn/Resume:</h3>
-                <p>{this.props.information.github}</p>
+                <h3>LinkedIn:</h3>
+                <a href={this.props.information.linkedin}>{this.props.information.linkedin}</a>
+                <h3>Resume:</h3>
+                <a href={this.props.information.resume}>{this.props.information.resume}</a>
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>Jobs Applied:</h3>
-                <p className="jobs">{this.props.information.github}</p>
+                <p className="jobs">{this.props.caselength.length}</p>
               </Col>
             </Row>
           <Row>
@@ -101,5 +104,4 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps) (Profile);
-
 

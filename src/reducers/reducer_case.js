@@ -1,4 +1,4 @@
-export default function (state = {selectedCase: '', allCases:[], filteredCases:[],typing:false}, action) {
+export default function (state = {selectedCase: '', allCases:[],savedcases:[], filteredCases:[],typing:false}, action) {
 	switch (action.type) {
 	case 'FETCH_CASE':
 		return {
@@ -14,7 +14,7 @@ export default function (state = {selectedCase: '', allCases:[], filteredCases:[
 	case 'SAVE_CASE':
 		return {
 			...state,
-			allCases: action.response.data
+			savedcases: action.response.data
 		}
 
 	case 'FILTERED_CASES':

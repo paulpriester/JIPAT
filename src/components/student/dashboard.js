@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Button,ButtonToolbar, Table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {fetchCases, updateCase, removeCase} from '../../actions'
+import {fetchCases, updateCase} from '../../actions'
 
 
  class Dashboard extends Component {
@@ -45,9 +45,6 @@ import {fetchCases, updateCase, removeCase} from '../../actions'
           <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open
           </option>
-          <option value="Applied" selected={caseData.openCase=="Applied" ? true : false}>
-            Applied
-          </option>
           <option value="Interview" selected={caseData.openCase=="Interview 1" ? true : false}>
             Interview 1
           </option>
@@ -71,14 +68,13 @@ import {fetchCases, updateCase, removeCase} from '../../actions'
   }
 
   render () {
-    console.log(this.state.type)
+    // console.log(this.state.type)
     return (
       <div className="container">
       <ButtonToolbar className='tabs' justified bsSize="large">
         <Button onClick= {() => this.changeType('Open')}>Open</Button>
         <Button onClick= {() => this.changeType('Close')}>Close</Button>
         <Button onClick= {() => this.changeType('Place')}>Place</Button>
-        <Button onClick= {() => this.changeType('Applied')}>Applied</Button>
         <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
         <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
       </ButtonToolbar>
