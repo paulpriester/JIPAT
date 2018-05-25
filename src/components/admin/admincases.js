@@ -4,6 +4,7 @@ import {table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'r
 import {Link} from 'react-router';
 import {fetchAllCases, updateCase} from '../../actions';
 import SearchCases from './searchCases';
+import moment from 'moment'
 
 class Cases extends Component {
 
@@ -68,7 +69,7 @@ class Cases extends Component {
           </option>
         </select>
           </td>
-          <td>{caseData.date}</td>
+          <td>{moment(caseData.date).format('MMMM Do YYYY')}</td>
       </tr>
     )
   }
