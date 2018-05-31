@@ -28,6 +28,7 @@ import {fetchCases, updateCase} from '../../actions'
 
   renderCase(caseData,dispatch) {
     var selectCase = function(Case) {
+      console.log(Case)
       dispatch({
         type: 'SELECT_CASE',
         payload: Case

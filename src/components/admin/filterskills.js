@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import {addUserSkills} from '../actions';
+import {filterSkills} from '../../actions';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 
@@ -19,7 +19,7 @@ const customStyles = {
   }
 };
 
-class ModalSkill extends Component {
+class FilterSkill extends Component {
   constructor() {
     super();
 
@@ -42,9 +42,10 @@ class ModalSkill extends Component {
     this.setState({modalIsOpen: false, Skills: []});
   }
 
-  onSubmit() {
-    this.props.dispatch(addUserSkills(this.state.Skills))
-        this.closeModal();
+  onSubmit(e) {
+    e.preventDefault()
+    this.props.dispatch(filterSkills(this.props.student, this.state.Skills))
+    this.closeModal()
   }
 
   handleChange(e){
@@ -60,7 +61,6 @@ class ModalSkill extends Component {
     this.setState({
       Skills: newArray
     })
-    
   }
 
 
@@ -79,10 +79,10 @@ class ModalSkill extends Component {
   render() {
 
     const { onSubmit }= this.props;
-    console.log(this.state)
+    console.log(this.props)
     return (
       <span>
-        <Button className="btn btn-secondary" onClick={this.openModal}>Edit Skills</Button>
+        <Button className="btn btn-secondary" onClick={this.openModal}>Filter By Skill</Button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
@@ -108,9 +108,11 @@ class ModalSkill extends Component {
 }
 
 function mapStateToProps(state){
-  return {errorMessage: state.auth.error,
-          skill: state.student.skills
+  return {
+          skill: state.student.skills,
+          student: state.student.allStudents,
+          filteredstudent: state.student.filteredStudent
         }
 }
 
-export default connect(mapStateToProps)(ModalSkill);
+export default connect(mapStateToProps)(FilterSkill);

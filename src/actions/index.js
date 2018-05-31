@@ -8,15 +8,28 @@ const token = function() {
 	return {authorization: localStorage.getItem('token')}
 }
 
-export function filterCases(cases, name){
+export function filterCases(cases, name, date){
 	return function(dispatch){
-		if(name === ""){
+		if(name === "" && date === ""){
 			dispatch({type:FILTERED_CASES, payload:cases,typing:false})
 		}
 		else{
 			// change company name to student when database gets up and running
-			let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()))
+			let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()) && i.date.includes(date))
 			dispatch({type:FILTERED_CASES, payload:filteredCases,typing:true})
+		}
+	}
+}
+
+
+export function filterSkills(student, skill){
+	return function(dispatch){
+		if(skill === ""){
+			dispatch({type:'FILTERED_SKILL', payload: student})
+		}
+		else{
+			let filteredSkill = student.filter(i => i.skills.includes(skill))
+			dispatch({type:'FILTERED_SKILL', payload:filteredSkill})
 		}
 	}
 }
@@ -95,9 +108,7 @@ export function signInUser({email,password},redirect){
 				// localStorage.getItem('type', response.type)
 				if(response.data == "successful" ){
 					dispatch(fetchAllCases())
-				} else {
-					dispatch(fetchCases())
-				}
+				} 
 			})
 		}
 	}
@@ -184,16 +195,6 @@ export function fetchAllCases () {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
 export function fetchcaselength () {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchcaselength`, {
@@ -212,6 +213,16 @@ export function fetchOneJob (id) {
 		.then(response => {
 			console.log(response)
 			dispatch({type: 'SELECT_JOB',payload: response.data})
+		})
+	}
+}
+
+export function fetchOneCase (id) {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchonecase/${id}`)
+		.then(response => {
+			console.log(response)
+			dispatch({type: 'SELECT_CASE',payload: response.data})
 		})
 	}
 }
@@ -251,7 +262,7 @@ export function addUserSkills(Skills){
 			headers : token()
 		})
 		.then(response=>{
-			dispatch(fetchSavedSkills());	
+			dispatch(fetchProfile(''));	
 		})
 	};
 }

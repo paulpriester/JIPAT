@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-import { Grid, Row, Col, Table,Button } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import {fetchProfile, fetchcaselength, fetchSavedSkills} from '../../actions';
 import Dashboard from '../student/dashboard';
 import ModalProfile from '../modal_profile';
 import ModalSkill from '../modal_skill';
-// import {csv} from '../../actions'
 
 
 
@@ -19,11 +18,6 @@ class Profile extends Component{
     this.props.dispatch(fetchSavedSkills())
 
   }
-
-  // handleClick() {
-  //   console.log('clicked')
-  //   this.props.dispatch(csv())
-  // }
 
   renderCase(caseData) {
       return (
@@ -70,7 +64,7 @@ class Profile extends Component{
           <Row className="show-grid">
             <Col xs={6} md={6} className="right-border">
               <h3>Skills</h3>
-              <p> {this.props.information.skills} </p>
+              {this.props.information.skills && this.props.information.skills.map(i => <p>{i}</p>)}
             </Col>
           </Row>
           <Row className="show-grid">
@@ -80,23 +74,23 @@ class Profile extends Component{
             <Row className="show-grid">
             <Col xs={2} md={2} className="right-border">
               <h2>Jobs Open</h2>
-              <p>{this.props.case.filter(i => i.openCase== 'Open').map(this.renderCase).length}</p>
+              <p>{this.props.case.filter(i => i.openCase == 'Open').map(this.renderCase).length}</p>
             </Col>
             <Col xs={2} md={2} className="right-border">
               <h2>Jobs Close</h2>
-              <p>{this.props.case.filter(i => i.openCase== 'Close').map(this.renderCase).length}</p>
+              <p>{this.props.case.filter(i => i.openCase == 'Close').map(this.renderCase).length}</p>
             </Col>
             <Col xs={2} md={2} className="right-border">
               <h2>Jobs Interview</h2>
-              <p>{this.props.case.filter(i => i.openCase== 'Interview').map(this.renderCase).length}</p>
+              <p>{this.props.case.filter(i => i.openCase == 'Interview').map(this.renderCase).length}</p>
             </Col>
             <Col xs={2} md={2} className="right-border">
-              <h2>Jobs Interview 2</h2>
-              <p>{this.props.case.filter(i => i.openCase== 'Salary Negotation').map(this.renderCase).length}</p>
+              <h2>Salary Negotation</h2>
+              <p>{this.props.case.filter(i => i.openCase == 'Salary Negotation').map(this.renderCase).length}</p>
             </Col>
             <Col xs={2} md={2} className="right-border">
               <h2>Jobs Placed</h2>
-              <p>{this.props.case.filter(i => i.openCase== 'Place').map(this.renderCase).length}</p>
+              <p>{this.props.case.filter(i => i.openCase == 'Place').map(this.renderCase).length}</p>
             </Col>
           </Row>
             <Col xs={12} md={12}>

@@ -3,10 +3,16 @@ import { Jumbotron, Button } from "react-bootstrap";
 import {Link} from "react-router";
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
-import {removeCase} from '../actions'
+import {removeCase, fetchAllCases,fetchOneCase} from '../actions'
 import '../../public/css/case-detail.css'
 
 class CaseDetail extends Component {
+
+	componentDidMount() {
+		if(this.props.location.query.id)
+		this.props.dispatch(fetchOneCase(this.props.location.query.id));
+    	this.props.dispatch(fetchAllCases())
+  }
 
     removeCase(id) {
 	    var test = confirm('Are You sure want to delete?');

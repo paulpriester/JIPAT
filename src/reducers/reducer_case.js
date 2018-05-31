@@ -1,13 +1,15 @@
-export default function (state = {selectedCase: '', allCases:[],savedcases:[], filteredCases:[],typing:false}, action) {
+export default function (state = {selectedCase: '', allCases:[],savedcases:[], filteredCases:[],typing:false,open:true}, action) {
 	switch (action.type) {
 	case 'FETCH_CASE':
-	console.log(action)
+	// console.log(action)
 		return {
 			...state,
 			allCases: action.response.data,
-			filteredCases:action.response.data
+			filteredCases:action.response.data,
+			open: false
 		}
 	case 'SELECT_CASE':
+	console.log(action)
 		return {
 			...state,
 			selectedCase: action.payload,

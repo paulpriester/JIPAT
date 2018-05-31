@@ -23,11 +23,11 @@ class JobList extends Component {
 
 		return (
 			<tr key={jobData.name}>
-			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
+			  	<td><Link className='detail' to={{pathname: '/jobdetail' , search: `?id=${jobData._id}`}} onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
-			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}><button> Info</button></Link></td>
+			  	<td><Link className='detail' to={{pathname: '/jobdetail' , search: `?id=${jobData._id}`}} onClick={()=> selectJob(jobData)}><button> Info</button></Link></td>
 	      	</tr>
 		)
 	}

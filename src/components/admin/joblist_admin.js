@@ -3,7 +3,7 @@ import api from '../utils/api';
 import { connect } from 'react-redux';
 import {table, ButtonToolbar, Button} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {savedJobs, removeJob, fetchAllCases} from '../../actions/index';
+import {savedJobs, removeJob} from '../../actions/index';
 
 
 class JobList_Admin extends Component{
@@ -15,8 +15,6 @@ class JobList_Admin extends Component{
 
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
-		this.props.dispatch(fetchAllCases())
-
 	}
 
 	changeType(type) {
@@ -40,7 +38,7 @@ class JobList_Admin extends Component{
 
 		return (
 			<tr key={jobData.name}>
-			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
+			  	<td><Link className='detail' to={{pathname: '/jobdetail' , search: `?id=${jobData._id}`}} onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>

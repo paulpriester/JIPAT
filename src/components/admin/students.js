@@ -36,7 +36,7 @@ import {fetchStudents} from '../../actions'
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.allStudents.length != 0 && this.props.allStudents.map(i=>this.renderStudent(i,this.props.dispatch))}
+						{this.props.allStudents.length != 0 && this.props.allStudents.filter(i => i.admin == false).map(i=>this.renderStudent(i,this.props.dispatch))}
 					</tbody>
 			</table>
 		)
