@@ -39,7 +39,7 @@ class JobDetail extends Component {
 
     renderStudent(studentData) {
     	return (
-    		<p>{studentData.firstName}</p>
+    		<p>{studentData.firstName} {studentData.lastName}</p>
     	)
     }
 

@@ -100,19 +100,6 @@ export function signInUser({email,password},redirect){
 	};
 }
 
-	export function updateCase(id,openCase) {
-		return function(dispatch) {
-			axios.post(`${ROOT_URL}/update/${id}`,{openCase: openCase})
-			.then(response => {
-				console.log({openCase})
-				// localStorage.getItem('type', response.type)
-				if(response.data == "successful" ){
-					dispatch(fetchAllCases())
-				} 
-			})
-		}
-	}
-
 export function signUpUser({email,password}){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/signup`,{email,password})
@@ -194,6 +181,20 @@ export function fetchAllCases () {
 		})
 	}
 }
+
+	export function updateCase(id,openCase) {
+		return function(dispatch) {
+			axios.post(`${ROOT_URL}/update/${id}`,{openCase: openCase})
+			.then(response => {
+				console.log({openCase})
+				// localStorage.getItem('type', response.type)
+				if(response.data == "successful" ){
+					dispatch(fetchCases())
+					//need to make a difference between admin and student
+				} 
+			})
+		}
+	}
 
 export function fetchcaselength () {
 	return function(dispatch) {

@@ -26,6 +26,16 @@ class Profile extends Component{
     )
   }
 
+  renderCase(caseData) {
+      return (
+        <div key={caseData.id}
+        className="case-container">
+          <h1 className="case-title">Job Title</h1>
+          <p className="case-description">{caseData.jobTitle}</p>
+         </div>
+           )
+    }
+
   render(){
     console.log(this.props);
     
@@ -60,7 +70,7 @@ class Profile extends Component{
             </Col>
             <Col className="border-profile" sm="4">
               <h3>Skills</h3>
-              {this.props.skill.map(this.renderSkill)}
+              {this.props.information.skills && this.props.information.skills.map(i => <p>{i}</p>)}
               <ModalProfile />
               <ModalSkill />
             </Col>
@@ -72,18 +82,23 @@ class Profile extends Component{
           <Row>
           <Col className="border-profile">
             <h3>Jobs Open:</h3>
+            <p>{this.props.case.filter(i => i.openCase == 'Open').map(this.renderCase).length}</p>
           </Col>
           <Col className="border-profile">
             <h3>Jobs Closed:</h3>
+            <p>{this.props.case.filter(i => i.openCase == 'Close').map(this.renderCase).length}</p>
           </Col>
           <Col className="border-profile">
-            <h3>Job Interviews:</h3>
+            <h2>Jobs Interview</h2>
+            <p>{this.props.case.filter(i => i.openCase == 'Interview').map(this.renderCase).length}</p>
           </Col>
           <Col className="border-profile">
-            <h3>Job Interviews 2:</h3>
+            <h2>Salary Negotation</h2>
+            <p>{this.props.case.filter(i => i.openCase == 'Salary Negotation').map(this.renderCase).length}</p>
           </Col>
           <Col className="border-profile">
-            <h3>Jobs Placed:</h3>
+            <h2>Jobs Placed</h2>
+              <p>{this.props.case.filter(i => i.openCase == 'Place').map(this.renderCase).length}</p>
           </Col>
           </Row>
             <br></br>
@@ -99,6 +114,7 @@ function mapStateToProps(state){
     errorMessage: state.auth.error,
     information: state.student.profile,
     skill: state.student.skills,
+    case: state.student.cases,
     caselength: state.student.caselength
   }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {Button,ButtonToolbar, Table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {fetchCases, updateCase} from '../../actions'
-
+import moment from 'moment'
 
  class Dashboard extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ import {fetchCases, updateCase} from '../../actions'
           </option>
         </select>
           </td>
-          <td>{caseData.date}</td>
+          <td>{moment(caseData.date).format('MMMM Do YYYY')}</td>
       </tr>
     )
   }
