@@ -5,6 +5,8 @@ import {Link} from 'react-router';
 import {fetchAllCases, updateCase} from '../../actions';
 import SearchCases from './searchCases';
 import moment from 'moment'
+import 'moment/locale/en-nz'
+
 class Cases extends Component {
 
   constructor(props) {

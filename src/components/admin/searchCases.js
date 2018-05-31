@@ -46,6 +46,7 @@ class SearchCases extends Component {
 							onChange={this.searchInputChange}
 						/>
 					</Col>
+					<p>Example 5-21-2018</p>
 				</Form>
 			</div>
 		);
