@@ -6,18 +6,13 @@ import Dashboard from '../student/dashboard';
 import ModalProfile from '../modal_profile';
 import ModalSkill from '../modal_skill';
 import { Row, Col } from 'reactstrap';
-
-
 class Profile extends Component{
-
   componentWillMount () {
     let id = this.props.params.id?this.props.params.id : ''
     this.props.dispatch(fetchcaselength());
     this.props.dispatch(fetchProfile(id));
     this.props.dispatch(fetchSavedSkills())
-
   }
-
    renderSkill(skillData,dispatch) {
     return (
       <ul key={skillData.id}>
@@ -25,7 +20,6 @@ class Profile extends Component{
       </ul>
     )
   }
-
   renderCase(caseData) {
       return (
         <div key={caseData.id}
@@ -35,7 +29,6 @@ class Profile extends Component{
          </div>
            )
     }
-
   render(){
     console.log(this.props);
     
@@ -108,7 +101,6 @@ class Profile extends Component{
     )
   }
 }
-
 function mapStateToProps(state){
   return {
     errorMessage: state.auth.error,
@@ -118,6 +110,4 @@ function mapStateToProps(state){
     caselength: state.student.caselength
   }
 }
-
 export default connect(mapStateToProps) (Profile);
-

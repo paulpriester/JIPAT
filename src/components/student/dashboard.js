@@ -4,7 +4,6 @@ import {Button,ButtonToolbar, Table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {fetchCases, updateCase} from '../../actions'
 import moment from 'moment'
-import 'moment/locale/en-nz'
 
  class Dashboard extends Component {
   constructor(props) {
@@ -61,7 +60,7 @@ import 'moment/locale/en-nz'
           </option>
         </select>
           </td>
-          <td>{moment(caseData.date).format('MMMM Do YYYY').locale()}</td>
+          <td>{moment(caseData.date).format('MMMM Do YYYY')}</td>
       </tr>
     )
   }
