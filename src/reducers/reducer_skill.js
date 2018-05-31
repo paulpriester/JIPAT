@@ -1,7 +1,7 @@
 export default function (state = {selectedSkill: '', allSkills:[]}, action) {
 	switch (action.type) {
 	case 'FETCH_SKILL':
-		console.log(action)
+		// console.log(action)
 		return {
 			...state,
 			allSkills: action.response.data

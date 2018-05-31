@@ -4,8 +4,7 @@ import {table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'r
 import {Link} from 'react-router';
 import {fetchAllCases, updateCase} from '../../actions';
 import SearchCases from './searchCases';
- import Moment from 'react-moment';
-
+import moment from 'moment'
 class Cases extends Component {
 
   constructor(props) {
@@ -65,7 +64,7 @@ class Cases extends Component {
           </option>
         </select>
           </td>
-          <td><Moment date= {caseData.date} /></td>
+          <td>{moment(caseData.date).format('MMMM Do YYYY')}</td>
       </tr>
     )
   }
@@ -145,3 +144,6 @@ function mapStateToProps({Case}) {
 }
 
 export default connect (mapStateToProps)(Cases);
+
+
+

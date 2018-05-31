@@ -35,6 +35,15 @@ a:visited{
 	top:20px;
 }
 
+/*signout.js*/
+.goodbye {
+	font-size:8em;
+	font-weight:bold;
+	text-align:center;
+	position:relative;
+	top:1.6em;
+}
+
 /* jobs.js */
 .right-cell {
 	position: relative;
@@ -69,18 +78,18 @@ a:visited{
 }
 
 /* header.js */
-.nav-item {
-	float:right !important;
+.logo {
+	color:white;
+	font-size:1.3em;
 }
 
-.left {
-	margin-left: 1rem; 
+.logo:hover {
+	color:white;
+	text-decoration:none;
 }
 
 .nav-link {
 	color:white !important;
-	position: relative;
-	top:3px;
 }
 
 .navbar {
@@ -95,15 +104,8 @@ a:visited{
 	letter-spacing:1px;
 }
 
-.tabs {
-	background-color: black;
-	text-align: center;
-}
-
 /* search_bar.js */
-.addJob {
-	float: right;
-}
+
 
 /* modal.js */
 .closeButton {
@@ -123,44 +125,22 @@ a:visited{
 }
 
 /* profile.js */
-.grid {
-	font-size:1.2em;
+.edit-profile {
+	text-align:center;
 }
 
 .jobs {
 	height:150px;
 	width:150px;
-	position:relative;
-	left:7.7em;
-	top:.3em;
 	border-radius:50%;
 	background-color:purple;
-	box-shadow:10px 10px 10px #888888;
 	color:white;
+	margin:0 auto;
+	font-size:6em;
 }
 
-.show-grid {
-	padding:20px 0;
-}
-
-.show-grid-head {
-	padding:20px 0;
-	text-align: center;
+.border-profile {
 	border:1px solid black;
-}
-
-.profile-pic {
-	position: relative;
-	top:2.7em;
-	background-size:cover;
-	border-radius:10%;
-	border:4px solid purple;
-	box-shadow:5px 10px #888888;
-	cursor: pointer;
-}
-
-.right-border {
-	border-right:1px solid black;
 }
 
 /* jobs.js */
@@ -174,29 +154,33 @@ a:visited{
 /* tmdashboard.js */
 .box {
 	position:relative;
-	top:7em;
+	top:10em;
 	background-color: purple;
 	color:white;
-    margin:20px 47px;
     height:200px;
-    padding:10px;
     border:1px solid black;
 }
 
 .welcome-back {
-	font-size: 3.7em;
+	font-size: 2.7em;
 }
 
 .tab-icon{
-	height:200px;
 	background-color:white;
 	color: purple;
 	font-size:9em;
 	padding:29px 0 0 22px;
 	margin:-11px;
 	border:1px purple solid;
+	height:100%;
 }
 
+.icon {
+	font-size:150px;
+	position:relative;
+	top:27px;
+	left:26px;
+}
 
 .admin-links {
 	font-size:3.3em;
@@ -204,4 +188,22 @@ a:visited{
 }
 
 @media (max-width: 600px) {
+	float: center;
+}
+
+/* forgot.js */
+/*.center-loading {
+	position: relative;
+	top:7em;
+}*/
+
+@media (max-width: 600px) { 
+  /* tmdashboard.js*/
+  .admin-links {
+  	color:purple;
+  	font-size:20px;
+  	position:relative;
+  	bottom:100px;
+  	left:200px;
+  }
 }

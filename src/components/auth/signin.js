@@ -10,7 +10,6 @@ class SignIn extends Component{
 
 	handleFormSubmit({email,password}){
 		console.log(email,password);
-
 		let redirect = this.props.location.query.redirect? true : false
 		this.props.signInUser({email,password},redirect);
 	}
@@ -24,6 +23,7 @@ class SignIn extends Component{
 		}
 	}
 	render(){
+		console.log(this.props)
 		const {handleSubmit}=this.props;
 		
 		return(
@@ -45,7 +45,6 @@ class SignIn extends Component{
 						/>
 					</fieldset>
 					{this.renderAlert()}
-
 					<Link to="/forgot">Forgot Password</Link>
 					<br /><br />
 					<button action="submit" className="btn btn-primary">Sign In</button>

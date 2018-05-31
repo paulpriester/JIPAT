@@ -21,7 +21,6 @@ export default function (state = {selectedCase: '', allCases:[],savedcases:[], f
 
 	case 'FILTERED_CASES':
 		return{
-
 			...state,
 			filteredCases:action.payload,
 			typing: action.typing

@@ -1,26 +1,33 @@
 import React, {Component} from 'react';
 import api from '../utils/api';
 import { connect } from 'react-redux';
-import {table, ButtonToolbar, Button} from 'react-bootstrap';
+import {Table, ButtonToolbar, Button, Col} from 'reactstrap';
 import {Link} from 'react-router';
-import {savedJobs, removeJob} from '../../actions/index';
+import {savedJobs, removeJob, fetchAllCases} from '../../actions/index';
 
 
 class JobList_Admin extends Component{
 	constructor(props) {
-    super(props);
+	    super(props);
 
-    this.state = { type: false};
-  }
+	    this.state = {
+	    	type: false,
+	    	text: "Private"
+	 	};
+
+  	}
 
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
+		this.props.dispatch(fetchAllCases())
+
 	}
 
 	changeType(type) {
-    //function used to record the state of the case status.
-
-    this.setState({type: this.state.type ? false : true})
+    this.setState({
+    	type: this.state.type ? false : true,
+    	text: this.state.type ? "Private" : "Non-Private"
+    })
   }
 
 	removeJob(id) {
@@ -51,10 +58,8 @@ class JobList_Admin extends Component{
 		        console.log(this.props)
 		return (
 				<div>
-			    <ButtonToolbar className='tabs' justified bsSize="large">
-			        <Button onClick= {() => this.changeType()}>Private</Button>
-			    </ButtonToolbar>
-				<table className='table table-hover'>
+					<Button onClick= {() => this.changeType()}>{this.state.text}</Button>
+				<Table responsive>
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -67,7 +72,7 @@ class JobList_Admin extends Component{
 					<tbody>
 					{this.props.job.allJobs.length != 0 && this.props.job.allJobs.filter(i => i.jobPrivate==this.state.type).map(i=>this.renderJob(i,this.props.dispatch))}
 					</tbody>
-				</table>
+				</Table>
 				</div>
 		)
 	}

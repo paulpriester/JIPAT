@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {table,Button,ButtonToolbar} from 'react-bootstrap';
+import {Button,ButtonToolbar, Table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {fetchCases, updateCase} from '../../actions'
 
@@ -71,7 +71,7 @@ import {fetchCases, updateCase} from '../../actions'
   render () {
     // console.log(this.state.type)
     return (
-      <div>
+      <div className="container">
       <ButtonToolbar className='tabs' justified bsSize="large">
         <Button onClick= {() => this.changeType('Open')}>Open</Button>
         <Button onClick= {() => this.changeType('Close')}>Close</Button>
@@ -79,7 +79,7 @@ import {fetchCases, updateCase} from '../../actions'
         <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
         <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
       </ButtonToolbar>
-      <table className ='table table-hover'>
+      <Table responsive className ='table table-hover'>
           <thead>
             <tr>
               <th>Job Title</th>
@@ -92,7 +92,7 @@ import {fetchCases, updateCase} from '../../actions'
           <tbody>
             {this.props.allCases.length != 0 && this.props.allCases.filter(i=>i.openCase==this.state.type).map(i=>this.renderCase(i,this.props.dispatch))}
           </tbody>
-      </table>
+      </Table>
       </div>
     )
   }
