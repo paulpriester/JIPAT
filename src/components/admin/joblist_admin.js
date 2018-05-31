@@ -38,7 +38,7 @@ class JobList_Admin extends Component{
 
 		return (
 			<tr key={jobData.name}>
-			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
+			  	<td><Link className='detail' to={{pathname: '/jobdetail' , search: `?id=${jobData._id}`}} onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
@@ -48,7 +48,7 @@ class JobList_Admin extends Component{
 	}
 
 	render() {
-		        console.log(this.state.type)
+		        console.log(this.props)
 		return (
 				<div>
 			    <ButtonToolbar className='tabs' justified bsSize="large">
@@ -65,7 +65,7 @@ class JobList_Admin extends Component{
 						</tr>
 					</thead>
 					<tbody>
-					{this.props.allJobs.length != 0 && this.props.allJobs.filter(i => i.jobPrivate==this.state.type).map(i=>this.renderJob(i,this.props.dispatch))}
+					{this.props.job.allJobs.length != 0 && this.props.job.allJobs.filter(i => i.jobPrivate==this.state.type).map(i=>this.renderJob(i,this.props.dispatch))}
 					</tbody>
 				</table>
 				</div>
@@ -74,8 +74,11 @@ class JobList_Admin extends Component{
 }
 
 
-function mapStateToProps({job} ) {
-	return  job ;
+function mapStateToProps(state) {
+	return  {
+		job: state.job,
+		case: state.Case.allCases
+	} 
 }
 
 export default connect (mapStateToProps)(JobList_Admin);

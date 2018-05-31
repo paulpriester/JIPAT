@@ -4,7 +4,14 @@ import { connect } from 'react-redux';
 import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import '../../public/css/modal.css'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import 'react-day-picker/lib/style.css'
+import MomentLocaleUtils, {
+  formatDate,
+  parseDate,
+} from 'react-day-picker/moment';
+import DayPicker from 'react-day-picker';
+import 'moment/locale/it';import '../../public/css/modal.css'
 
 const customStyles = {
   
@@ -49,21 +56,52 @@ class ModalButton extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate}) {
-    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate}))
+handleDayClick = (day, { selected })=> {
+    if (selected) {
+      // Unselect the day if already selected
+      this.setState({ selectedDay: undefined });
+      return;
+    }
+    this.setState({ selectedDay: day });
+  }
+  parseDate = (str, format, locale) => {
+    const parsed = dateFnsParse(str, format, { locale });
+    if (DateUtils.isDate(parsed)) {
+      return parsed;
+    }
+    return undefined;
+  }
+  formatDate = (date, format, locale) => {
+    return dateFnsFormat(date, format, { locale });
+  }
+
+  onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate,date}) {
+    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate,date}))
         this.setState({modalIsOpen: false});
   }
 
-   renderLinks() {
-    const renderField = ({label,input, meta: {touched, error}}) => (
-    <FormGroup className="input-row">
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl className="input-edit" {...input} type="text"/>
-      {touched && error &&
-       <span className="error">{error}</span>}
-    </FormGroup>
-  )
-   const privatecheck = ({label,input, meta: {touched, error}}) => (
+    DateInput = ({input,value}) =>{
+     return( 
+      <DayPickerInput 
+                  formatDate={formatDate}
+                  parseDate={parseDate}
+                  placeholder={`${formatDate(new Date())}`}
+        />
+     )
+  }
+
+    FieldInput = ({ input,value, meta, type, placeholder}) => {
+            return (
+                <FormControl
+                    type={type}
+                    placeholder={placeholder}
+                    value={input.value}
+                    onChange={input.onChange}
+                    />
+            )
+        }
+
+    privatecheck = ({label,input, meta: {touched, error}}) => (
     <FormGroup className="input-row">
       <label>{label}</label>
       <input {...input} type="checkbox"/>
@@ -71,7 +109,10 @@ class ModalButton extends Component {
        <span className="error">{error}</span>}
     </FormGroup>
   )
+
+   renderLinks() {
     const { handleSubmit }= this.props;
+
     if (this.props.type == 'student') {
       return (
       <span>
@@ -81,6 +122,8 @@ class ModalButton extends Component {
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
+          ariaHideApp={false}
+
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2>Enter Job Info</h2>
@@ -88,19 +131,18 @@ class ModalButton extends Component {
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
                 <ControlLabel>Title</ControlLabel>
-                  <Field name="title" component={renderField} />
+                  <Field name="title" component={this.FieldInput} placeholder= 'Enter Title'/>
                 <ControlLabel>Location</ControlLabel>
-                  <Field name="location" component={renderField} />
+                  <Field name="location" component={this.FieldInput} />
                 <ControlLabel>Type</ControlLabel>
-                  <Field name="type" component={renderField} />
+                  <Field name="type" component={this.FieldInput} />
                 <ControlLabel>Company</ControlLabel>
-                  <Field name="company" component={renderField} />
+                  <Field name="company" component={this.FieldInput} />
                 <ControlLabel>Description</ControlLabel>
-                  <Field componentClass="textarea" name="description" component={renderField} />
+                  <Field componentClass="textarea" name="description" component={this.FieldInput} />
                 <ControlLabel>Apply Link</ControlLabel>
-                  <Field name="how_to_apply" component={renderField} />
-                <ControlLabel>Date Created</ControlLabel>
-                  <Field name="created_at" component={renderField} />
+                  <Field name="how_to_apply" component={this.FieldInput} />
+
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
@@ -116,7 +158,9 @@ class ModalButton extends Component {
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Modal"
+          contentLabel="Example Modal"
+          ariaHideApp={false}
+
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2 className="modal-title">Enter Job Info</h2>
@@ -125,57 +169,42 @@ class ModalButton extends Component {
                 <FormGroup className='input-span'>
 
                 <ControlLabel>Title</ControlLabel>
-                  <FormControl 
+                  <Field
                   name="title" 
-                  placeholder="Enter title"
-                  component={renderField} />
-
+                  placeholder="Enter Title" 
+                  component={this.FieldInput} />
                 <ControlLabel>Location</ControlLabel>
-                  <FormControl 
+                  <Field 
                   name="location" 
                   placeholder="Enter location" 
-                  component={renderField} />
+                  component={this.FieldInput} />
 
                 <ControlLabel>Type</ControlLabel>
-                  <FormControl 
+                  <Field 
                   name="type" 
                   placeholder="Enter type"
-                  component={renderField} />
-                  <Field name="type" component={renderField} />
+                  component={this.FieldInput} />
                 <ControlLabel>Company</ControlLabel>
-                  <Field name="company" component={renderField} />
-                <FormControl 
-                  name="type" 
-                  placeholder="Enter type"
-                  component={renderField} />
-                <ControlLabel>Company</ControlLabel>
-                <FormControl 
+                <Field 
                   name="company" 
                   placeholder="Enter Company"
-                  component={renderField} />
+                  component={this.FieldInput} />
                 <ControlLabel>Description</ControlLabel>
-                  <FormControl 
+                  <Field
                   componentClass="textarea" 
                   name="description" 
                   placeholder="Enter description" 
-                  component={renderField} />
+                  component={this.FieldInput} />
 
                 <ControlLabel>Apply Link</ControlLabel>
-                  <FormControl 
+                  <Field 
                   name="how_to_apply" 
                   placeholder="Enter link to how to apply"                  
-                  component={renderField} 
-                  />
-
-                <ControlLabel>Date Created</ControlLabel>
-                <FormControl 
-                  name="date" 
-                  placeholder="select date"                  
-                  component={renderField} 
+                  component={this.FieldInput} 
                   />
 
                 <ControlLabel>Private</ControlLabel>
-                  <Field name="jobPrivate" component={privatecheck} />
+                  <Field name="jobPrivate" component={this.privatecheck} />
 
                 <button className="btn btn-secondary modal-btn" type="submit">Submit</button>
              </FormGroup>
@@ -188,6 +217,7 @@ class ModalButton extends Component {
 
 
   render() {
+    console.log(this.props)
     return (
       <div>
         {this.renderLinks()}

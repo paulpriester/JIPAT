@@ -39,16 +39,14 @@ class Modal_Share extends Component {
   }
 
 
-  onSubmit({email, name}) {
+  onSubmit({email, name, msg}) {
     let id =  this.props.job
-    this.props.dispatch(shareJob({email, name, _id:id}));
+    this.props.dispatch(shareJob({email, name,msg, _id:id}));
         this.setState({modalIsOpen: false});
   }
 
 
-
-  render() {
-    const renderField = ({label,input, meta: {touched, error}}) => (
+  renderField = ({label,input, meta: {touched, error}}) => (
     <div className="input-row">
       <label>{label}</label>
       <br />
@@ -57,6 +55,8 @@ class Modal_Share extends Component {
        <span className="error">{error}</span>}
     </div>
   )
+  
+  render() {
     const { handleSubmit }= this.props;
 
     return (
@@ -70,12 +70,15 @@ class Modal_Share extends Component {
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2>Share Job</h2>
-          	<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
               <FormGroup className='input-span'>
                 <ControlLabel>Email</ControlLabel>
-                  <Field name="email" component={renderField} />
+                  <p>To send to multiple emails separate by a comma</p>
+                  <Field name="email" component={this.renderField} />
                 <ControlLabel>First Name</ControlLabel>
-                  <Field name="name" component={renderField} />
+                  <Field name="name" component={this.renderField} />
+                  <ControlLabel>Message</ControlLabel>
+                  <Field name="msg" component={this.renderField} />
                   <br />
                 <button className="btn btn-secondary" type="submit" >Submit</button>
              </FormGroup>

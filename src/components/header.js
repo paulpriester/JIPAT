@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
 
 class Header extends Component	{
+
 	renderLinks()	{
 		if (this.props.type == 'student' && this.props.authenticated) {
 			return	(
@@ -15,7 +16,7 @@ class Header extends Component	{
 						<Link className="nav-link" to="/dashboard">Dashboard</Link>
 					</li>	
 					<li className="nav-item">
-						<Link className="nav-link" to="/profile">Profile</Link>
+						<Link className="nav-link" to="/profile/">Profile</Link>
 					</li>
 					<li className="nav-item">
 						<Link className="nav-link" to="/signout">Sign Out</Link>
@@ -25,15 +26,18 @@ class Header extends Component	{
 		} else if (this.props.type == 'admin' && this.props.authenticated){
 			return	(
 				<div>
+				<li>
+					<Link className="nav-link" to="/admincases">Cases</Link>
+				</li>
 				<li className="nav-item">
-					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
+					<Link className="nav-link" to="/students">Students</Link>
 				</li>
 				<li className="nav-item">
 					<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
-				</li>	
-				<li className="nav-item">
-					<Link className="nav-link" to="/admincases">Cases</Link>
 				</li>
+				<li className="nav-item">
+					<Link className="nav-link" to="/joblist_admin">Jobs</Link>
+				</li>	
 				<li className="nav-item">
 					<Link className="nav-link" to="/signout">Sign Out</Link>
 				</li>
@@ -50,9 +54,10 @@ class Header extends Component	{
 	}
 
 	render() {
+		console.log(this.props)
 		return (
 			<Navbar fluid>
-				<Link to="/feature" className="navbar-brand">The Knowledge House</Link>
+				<h2 className="navbar-brand">{this.props.information.firstName} {this.props.information.lastName}</h2>
 				<ul className="nav navbar-nav">
 					{this.renderLinks()}			
 				</ul>
@@ -64,7 +69,8 @@ class Header extends Component	{
 function mapStateToProps(state){
 	return{
 		type: state.auth.type,
-		authenticated: state.auth.authenticated
+		authenticated: state.auth.authenticated,
+	    information: state.student.profile
 	};
 }
 export default connect(mapStateToProps)(Header);

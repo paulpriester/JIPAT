@@ -4,7 +4,7 @@ export default function (state = {selectedSkill: '', allSkills:[]}, action) {
 		console.log(action)
 		return {
 			...state,
-			allSkills: action.response.data.concat(state.allSkills)
+			allSkills: action.response.data
 		}
 	case 'SELECT_SKILL':
 		return {

@@ -190,8 +190,17 @@ a:visited{
 .tab-icon{
 	height:200px;
 	background-color:white;
+	color: purple;
+	font-size:9em;
+	padding:29px 0 0 22px;
 	margin:-11px;
 	border:1px purple solid;
+}
+
+
+.admin-links {
+	font-size:3.3em;
+	color:white;
 }
 
 @media (max-width: 600px) {

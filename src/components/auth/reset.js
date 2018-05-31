@@ -1,18 +1,20 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router';
 import {reduxForm, Field} from 'redux-form'; 
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
 
 const renderInput= field => <input {...field.input} type={field.type} className="form-control" />;
 
-class SignIn extends Component{
+class PasswordReset extends Component{
 
-	handleFormSubmit({email,password}){
-		console.log(email,password);
+	componentDidMount(){
+		console.log(this.props.params.tokenId);
+		this.props.passwordResetMount(this.props.params.tokenId)
+	}
 
-		let redirect = this.props.location.query.redirect? true : false
-		this.props.signInUser({email,password},redirect);
+	handleFormSubmit({password, confirmPassword}){
+		console.log("An email haas been sent");
+		this.props.passwordReset(this.props.params.tokenId, {password, confirmPassword})
 	}
 	renderAlert(){
 		if(this.props.errorMessage){
@@ -28,27 +30,23 @@ class SignIn extends Component{
 		
 		return(
 				<form className="container" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+					<h3>Please enter your new password.</h3>
 					<fieldset className="form-group">
-						<label>Email:</label>
-						<Field
-							name="email"
-							component={renderInput}
-							type="email"
-						/>
-					</fieldset>
-					<fieldset className="form-group">
-						<label>Password:</label>
+						<label>New Password:</label>
 						<Field
 							name="password"
 							component={renderInput}
 							type="password"
 						/>
+						<label>Comfirm Password:</label>
+						<Field
+							name="confirmPassword"
+							component={renderInput}
+							type="password"
+						/>
 					</fieldset>
 					{this.renderAlert()}
-
-					<Link to="/forgot">Forgot Password</Link>
-					<br /><br />
-					<button action="submit" className="btn btn-primary">Sign In</button>
+					<button action="submit" className="btn btn-primary">Send Email</button>
 				</form>
 		);
 	}
@@ -59,7 +57,7 @@ function mapStateToProps(state){
 }
 
 export default reduxForm({
-	form: 'signin'
+	form: 'passwordreset'
 })(
-	connect(mapStateToProps,actions)(SignIn)
+	connect(mapStateToProps,actions)(PasswordReset)
 );

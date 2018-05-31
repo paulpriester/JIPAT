@@ -44,8 +44,7 @@ class ModalProfile extends Component {
         this.setState({modalIsOpen: false});
   }
 
-  render() {
-    const renderField = ({label,input, meta: {touched, error}}) => (
+  renderField = ({label,input, meta: {touched, error}}) => (
     <FormGroup className="input-row">
       <ControlLabel>{label}</ControlLabel>
       <FormControl className="input-edit" {...input} type="text"/>
@@ -53,6 +52,8 @@ class ModalProfile extends Component {
        <span className="error">{error}</span>}
     </FormGroup>
   )
+
+  render() {
     const { handleSubmit }= this.props;
 
     return (
@@ -63,6 +64,7 @@ class ModalProfile extends Component {
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
+          ariaHideApp={false}
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2>Edit Profile</h2>
@@ -70,21 +72,21 @@ class ModalProfile extends Component {
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
                 <ControlLabel>First Name:</ControlLabel>
-                  <Field name="firstName" component={renderField} />
+                  <Field name="firstName" component={this.renderField} />
                 <ControlLabel>Last Name:</ControlLabel>
-                  <Field name="lastName" component={renderField} />
+                  <Field name="lastName" component={this.renderField} />
                 <ControlLabel>About:</ControlLabel>
-                  <Field name="about" component={renderField} />
+                  <Field name="about" component={this.renderField} />
                 <ControlLabel>Linkedin:</ControlLabel>
-                  <Field name="linkedin" component={renderField} />
+                  <Field name="linkedin" component={this.renderField} />
                 <ControlLabel>Github:</ControlLabel>
-                  <Field name="github" component={renderField} />
+                  <Field name="github" component={this.renderField} />
                 <ControlLabel>Portfolio:</ControlLabel>
-                  <Field name="portfolio" component={renderField} />
+                  <Field name="portfolio" component={this.renderField} />
                 <ControlLabel>Resume:</ControlLabel>
-                  <Field name="resume" component={renderField} />
+                  <Field name="resume" component={this.renderField} />
                 <ControlLabel>Career Goals:</ControlLabel>
-                  <Field name="careergoals" component={renderField} />
+                  <Field name="careergoals" component={this.renderField} />
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>

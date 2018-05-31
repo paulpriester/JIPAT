@@ -4,18 +4,13 @@ import { connect } from 'react-redux';
 import {Table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import Loading from './loading';
-import {savedJobs, saveCase} from '../actions';
+import {savedJobs} from '../actions';
 import jobStyles from '../../public/css/jobs.css'
 
 
 class JobList extends Component {
 	componentDidMount() {
 		this.props.dispatch(savedJobs())
-	}
-
-	handleClick(id) {
-		console.log(id)
-		this.props.dispatch(saveCase(id))
 	}
 
 	 renderJob(jobData,dispatch) {
@@ -28,16 +23,17 @@ class JobList extends Component {
 
 		return (
 			<tr key={jobData.name}>
-			  	<td><Link className='detail' to='/jobdetail' onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
+			  	<td><Link className='detail' to={{pathname: '/jobdetail' , search: `?id=${jobData._id}`}} onClick={()=> selectJob(jobData)}>{jobData.title}</Link></td>
 			  	<td>{jobData.company}</td>
 			  	<td>{jobData.location}</td>
 			  	<td>{jobData.type}</td>
-			  	<td><button onClick={()=> this.handleClick(jobData._id)}> Apply</button></td>
+			  	<td><Link className='detail' to={{pathname: '/jobdetail' , search: `?id=${jobData._id}`}} onClick={()=> selectJob(jobData)}><button> Info</button></Link></td>
 	      	</tr>
 		)
 	}
 
 	render() {
+		console.log(this.props)
 		return (
 			<div>
 				{

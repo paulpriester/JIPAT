@@ -1,26 +1,34 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router';
 import {reduxForm, Field} from 'redux-form'; 
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
 
 const renderInput= field => <input {...field.input} type={field.type} className="form-control" />;
 
-class SignIn extends Component{
+class ForgotPassword extends Component{
 
-	handleFormSubmit({email,password}){
-		console.log(email,password);
-
-		let redirect = this.props.location.query.redirect? true : false
-		this.props.signInUser({email,password},redirect);
+	handleFormSubmit({email}){
+		console.log("An email has been sent");
+		this.props.forgotPassword({email})
 	}
 	renderAlert(){
-		if(this.props.errorMessage){
-			return(
+		console.log(this.props)
+		if(this.props.message == "There's no account associated with this email."){
+			return (
 				<div className="alert alert-danger">
-					<strong>Oops!</strong> {this.props.errorMessage}
+					<strong>Oops!</strong> {this.props.message}
 				</div>
-				);
+			);
+		} else if(this.props.message == "We've sent you an email with a link!") {
+			return (
+				<div className="alert alert-success">
+					{this.props.message}
+				</div>
+			)
+		} else {
+			return (
+				null
+			)
 		}
 	}
 	render(){
@@ -28,6 +36,7 @@ class SignIn extends Component{
 		
 		return(
 				<form className="container" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+					<h3>Please enter your email address.</h3>
 					<fieldset className="form-group">
 						<label>Email:</label>
 						<Field
@@ -36,30 +45,21 @@ class SignIn extends Component{
 							type="email"
 						/>
 					</fieldset>
-					<fieldset className="form-group">
-						<label>Password:</label>
-						<Field
-							name="password"
-							component={renderInput}
-							type="password"
-						/>
-					</fieldset>
 					{this.renderAlert()}
-
-					<Link to="/forgot">Forgot Password</Link>
-					<br /><br />
-					<button action="submit" className="btn btn-primary">Sign In</button>
+					<button action="submit" className="btn btn-primary">Send Email</button>
 				</form>
 		);
 	}
 }
 
 function mapStateToProps(state){
-	return {errorMessage: state.auth.error};
+	return {
+		message: state.auth.message
+	};
 }
 
 export default reduxForm({
-	form: 'signin'
+	form: 'forgotpassword'
 })(
-	connect(mapStateToProps,actions)(SignIn)
+	connect(mapStateToProps,actions)(ForgotPassword)
 );

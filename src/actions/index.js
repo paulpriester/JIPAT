@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {browserHistory} from 'react-router';
-import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES } from './types';
+import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES, FORGOT_PASSWORD, PASSWORD_RESET_MOUNT, PASSWORD_RESET} from './types';
 
 
 const ROOT_URL='http://localhost:3090';
@@ -8,34 +8,84 @@ const token = function() {
 	return {authorization: localStorage.getItem('token')}
 }
 
-export function filterCases(cases, name){
+export function filterCases(cases, name, date){
 	return function(dispatch){
-		if(name === ""){
+		if(name === "" && date === ""){
 			dispatch({type:FILTERED_CASES, payload:cases,typing:false})
 		}
 		else{
 			// change company name to student when database gets up and running
-			let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()))
+			let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()) && i.date.includes(date))
 			dispatch({type:FILTERED_CASES, payload:filteredCases,typing:true})
 		}
 	}
 }
 
-export function signInUser({email,password}){
-	return function(dispatch){
 
+export function filterSkills(student, skill){
+	return function(dispatch){
+		if(skill === ""){
+			dispatch({type:'FILTERED_SKILL', payload: student})
+		}
+		else{
+			let filteredSkill = student.filter(i => i.skills.includes(skill))
+			dispatch({type:'FILTERED_SKILL', payload:filteredSkill})
+		}
+	}
+}
+
+
+export function forgotPassword({email}) {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/forgot`, {email})
+		.then(response => {
+			console.log(response)
+			if (response.data != "success") {
+				dispatch({type:'PASSWORD_ERR', payload: "There's no account associated with this email."});
+			} else {
+				dispatch({type: 'PASSWORD_SUCCESS', payload: "We've sent you an email with a link!"})
+			}
+			browserHistory.push('/forgot')
+		})
+	}
+}
+
+export function passwordResetMount(tokenId) {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/reset/${tokenId}`)
+	}
+}
+
+export function passwordReset(tokenId, {password, confirmPassword}) {
+	console.log(password, confirmPassword)
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/reset/${tokenId}`, {password, confirmPassword})
+		.then(response => {
+			console.log(response.data)
+			if (response.data == "success") {
+				browserHistory.push('/signin')
+			}
+		})
+	}
+}
+
+export function signInUser({email,password},redirect){
+	return function(dispatch){
 		//submit email and password to the server
 		axios.post(`${ROOT_URL}/signin`,{email, password})
 		//if request good ..
 		.then(response=>{
-			console.log(response)
 			//-update state to indicate user is authenticated
 			dispatch({type:AUTH_USER, payload: response.data.type});
 			//-save JWT token
 			localStorage.setItem('token',response.data.token);
+			localStorage.setItem('type',response.data.type);
 			//localStorage is available on window scope hence no import
 			
-			if(response.data.type == 'admin') {
+			if (redirect) {
+				browserHistory.goBack()
+			}
+			 if(response.data.type == 'admin') {
 				browserHistory.push('/tmdashboard')
 			} else {
 				//-redirect to the route '/'	
@@ -49,6 +99,19 @@ export function signInUser({email,password}){
 		});		
 	};
 }
+
+	export function updateCase(id,openCase) {
+		return function(dispatch) {
+			axios.post(`${ROOT_URL}/update/${id}`,{openCase: openCase})
+			.then(response => {
+				console.log({openCase})
+				// localStorage.getItem('type', response.type)
+				if(response.data == "successful" ){
+					dispatch(fetchAllCases())
+				} 
+			})
+		}
+	}
 
 export function signUpUser({email,password}){
 	return function(dispatch){
@@ -101,9 +164,9 @@ export function savedJobs() {
 	}
 }
 
-export function fetchStudents (search) {
+export function fetchStudents () {
 	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchUsers/${search}`)
+		axios.get(`${ROOT_URL}/fetchUsers`)
 		.then(response => {
 			dispatch({type: 'FETCH_STUDENT', response})
 		})
@@ -126,30 +189,8 @@ export function fetchAllCases () {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchallcases`)
 		.then(response => {
+			console.log(response)
 			dispatch({type: 'FETCH_CASE', response})
-		})
-	}
-}
-
-export function updateCase(id,openCase) {
-	return function(dispatch) {
-		axios.post(`${ROOT_URL}/update/${id}`,{openCase: openCase})
-		.then(response => {
-			console.log({openCase})
-			if(response.data == "successful"){
-				dispatch(fetchCases())
-			}
-		})
-	}
-}
-
-export function fetchProfile () {
-	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchprofile`, {
-			headers : token()
-		})
-		.then(response => {
-			dispatch({type: 'FETCH_PROFILE', response})
 		})
 	}
 }
@@ -160,7 +201,7 @@ export function fetchcaselength () {
 			headers : token()
 		})
 		.then(response => {
-			dispatch({type: 'FETCH_PROFILE', response})
+			dispatch({type: 'FETCH_CASELENGTH', response})
 		})
 	}
 }
@@ -176,11 +217,30 @@ export function fetchOneJob (id) {
 	}
 }
 
+export function fetchOneCase (id) {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchonecase/${id}`)
+		.then(response => {
+			console.log(response)
+			dispatch({type: 'SELECT_CASE',payload: response.data})
+		})
+	}
+}
+
 export function fetchSkills () {
 	return function(dispatch) {
 		axios.get(`${ROOT_URL}/fetchskills`)
 		.then(response => {
 			dispatch({type: 'FETCH_SKILL',response})
+		})
+	}
+}
+
+export function fetchSavedSkills () {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchskills`)
+		.then(response => {
+			dispatch({type: 'FETCH_SAVED_SKILLS',response})
 		})
 	}
 }
@@ -195,7 +255,19 @@ export function addSkills({skill}){
 	};
 }
 
-export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at,jobPrivate}) {
+export function addUserSkills(Skills){
+	console.log(Skills)
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/adduserskills`,{Skills}, {
+			headers : token()
+		})
+		.then(response=>{
+			dispatch(fetchProfile(''));	
+		})
+	};
+}
+
+export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at,jobPrivate,date}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/addjob`,{
 			title,
@@ -206,7 +278,10 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 			description,
 			how_to_apply,
 			created_at,
-			jobPrivate
+			jobPrivate,
+			date
+		}, {
+			headers: token()
 		})
 		.then(response => {
 			console.log(response)
@@ -215,11 +290,12 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 	}
 }
 
-export function shareJob({email, name, _id}) {
+export function shareJob({email, name,msg, _id}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/sharejobs/${_id}`,{
 			email,
-			name
+			name,
+			msg
 		})
 		.then(response => {
 			console.log(response)
@@ -260,17 +336,27 @@ export function removeCase(id) {
 	}
 }
 
+export function fetchProfile(id) {
+	console.log(id)
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchprofile/${id}?`, {
+			headers : token()
+		})
+		.then(response => {
+			console.log(response)
+			dispatch({type: 'FETCH_PROFILE', response})
+		})
+	}
+}
+
 export function profile({firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/profile`,{firstName,lastName,about, portfolio,github,linkedin,resume,careergoals}, {
 			headers : token()
 		})
 		.then(response=>{
-			dispatch(fetchProfile());
-			// browserHistory.push('/feature');
-		})
-		.catch(errorobj=>{
-			dispatch(authError(errorobj.response.data.error))});	
+			dispatch(fetchProfile(''))
+		})	
 	};
 	
 }

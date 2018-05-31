@@ -20,7 +20,7 @@ import {fetchStudents} from '../../actions'
 
 		return (
 			<tr key={studentData.email}>
-			  	<td>{studentData.lastName}, {studentData.firstName}</td>	
+			  	<td><Link onClick={() => selectStudent(studentData)} to="/profile">{studentData.firstName} {studentData.lastName}</Link></td>	
 			  	<td>{studentData.email}</td>
 	      	</tr>
 		)
@@ -36,7 +36,7 @@ import {fetchStudents} from '../../actions'
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.allStudents.length != 0 && this.props.allStudents.map(i=>this.renderStudent(i,this.props.dispatch))}
+						{this.props.allStudents.length != 0 && this.props.allStudents.filter(i => i.admin == false).map(i=>this.renderStudent(i,this.props.dispatch))}
 					</tbody>
 			</table>
 		)
@@ -45,7 +45,7 @@ import {fetchStudents} from '../../actions'
 
 function mapStateToProps({student} ) {
 	console.log(student)
-	return  student ;
+	return student ;
 }
 
 export default connect (mapStateToProps)(Students);

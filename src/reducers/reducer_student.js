@@ -1,7 +1,11 @@
 const initialState = {
 	selectedStudent: '', 
 	allStudents:[], 
-	profile:{}
+	profile:{},
+	skills:[],
+	cases: [],
+	filteredStudent: [],
+	caselength: {}
 }
 
 export default function studentReducer (state = initialState, action) {
@@ -10,7 +14,8 @@ export default function studentReducer (state = initialState, action) {
 				console.log(action)
 		return {
 			...state,
-			allStudents: action.response.data.concat(state.allStudents)
+			allStudents: action.response.data,
+			filteredStudent: action.response.data
 		}
 	case 'SELECT_STUDENT':
 		return {
@@ -21,6 +26,25 @@ export default function studentReducer (state = initialState, action) {
 		return {
 			...state,
 			profile: action.response.data
+		}
+	case 'FETCH_SAVED_SKILLS': 
+		return {
+			...state,
+			skills: action.response.data
+		}
+	case 'FETCH_CASELENGTH':
+	console.log(action.response) 
+		return {
+			...state,
+			caselength: action.response.data,
+			cases: action.response.data.cases
+		}
+	case 'FILTERED_SKILL':
+	console.log(action.response)
+		return{
+			...state,
+			filteredStudent:action.payload
+			
 		}
 	}
 	
