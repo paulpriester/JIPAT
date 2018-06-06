@@ -15,8 +15,8 @@ class CaseDetail extends Component {
   }
 
     removeCase(id) {
-	    var test = confirm('Are You sure want to delete?');
-	    if(test == true) {
+	    var prompt = confirm('Are You sure want to delete?');
+	    if(prompt == true) {
     		this.props.dispatch(removeCase(id))
     	}
   }

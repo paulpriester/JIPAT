@@ -1,35 +1,36 @@
 import axios from 'axios';
 import {browserHistory} from 'react-router';
 import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES, FORGOT_PASSWORD, PASSWORD_RESET_MOUNT, PASSWORD_RESET} from './types';
-
+import moment from 'moment'
 
 const ROOT_URL='http://localhost:3090';
 const token = function() {
 	return {authorization: localStorage.getItem('token')}
 }
 
-export function filterCases(cases, name, date){
+export function filterCases(cases, name, startdate, enddate){
 	return function(dispatch){
-		if(name === "" && date === ""){
-			dispatch({type:FILTERED_CASES, payload:cases,typing:false})
-		}
-		else{
-			// change company name to student when database gets up and running
-			let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()) && i.date.includes(date))
-			dispatch({type:FILTERED_CASES, payload:filteredCases,typing:true})
-		}
+		// change company name to student when database gets up and running
+		let filteredCases = cases.filter(i => i.studentName.toLowerCase().startsWith(name.toLowerCase()) && (startdate.isSameOrBefore(i.date, 'day') && enddate.isSameOrAfter(i.date, 'day')) )
+		dispatch({type:FILTERED_CASES, payload:filteredCases,typing:true})
 	}
 }
 
 
 export function filterSkills(student, skill){
 	return function(dispatch){
-		if(skill === ""){
+		if(skill.length === 0){
 			dispatch({type:'FILTERED_SKILL', payload: student})
 		}
 		else{
-			let filteredSkill = student.filter(i => i.skills.includes(skill))
-			dispatch({type:'FILTERED_SKILL', payload:filteredSkill})
+			let filteredStudent = student
+			console.log(filteredStudent)
+			for(let i =0 ; i<skill.length; i++){
+				console.log(skill[i])
+				filteredStudent = filteredStudent.filter(currentStudent => currentStudent.skills.includes(skill[i]) )
+			}
+			console.log(filteredStudent)
+			dispatch({type:'FILTERED_SKILL', payload:filteredStudent})
 		}
 	}
 }
@@ -187,11 +188,15 @@ export function fetchAllCases () {
 			axios.post(`${ROOT_URL}/update/${id}`,{openCase: openCase})
 			.then(response => {
 				console.log({openCase})
-				// localStorage.getItem('type', response.type)
-				if(response.data == "successful" ){
+				console.log(response)
+				let type = localStorage.getItem('type')
+				if(response.data == "successful" && type == 'student'){
 					dispatch(fetchCases())
+					dispatch(fetchcaselength())
 					//need to make a difference between admin and student
-				} 
+				} else {
+					dispatch(fetchAllCases())
+				}
 			})
 		}
 	}
@@ -321,6 +326,15 @@ export function removeJob(id) {
 		axios.delete(`${ROOT_URL}/deletejob/${id}`)
 		.then(response => {
 			dispatch({type: 'SAVE_JOB', response})
+		})
+	}
+}
+
+export function removeUser(id) {
+	return function(dispatch) {
+		axios.delete(`${ROOT_URL}/deleteuser/${id}`)
+		.then(response => {
+			dispatch(fetchStudents())
 		})
 	}
 }

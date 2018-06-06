@@ -63,10 +63,9 @@ class JobDetail extends Component {
 		      	</ul>
 		    )
 		}
-
-	render() {
-		console.log(this.props);
-		return (
+	renderJobdetail () {
+		if (this.props.type == 'admin') {
+			return (
 
 			<div>	
 				{this.props.job.selectedJob? this.renderJob(this.props.job.selectedJob): "Empty"}
@@ -100,8 +99,24 @@ class JobDetail extends Component {
 			</Row>
 
 				<FilterSkill />
-				{this.props.filteredstudent.map(this.renderStudent)}
+				{this.props.ready && this.props.filteredstudent.filter(i => i.admin == false).map(this.renderStudent)}
 			</div>
+		)
+		} else {
+			return (
+
+			<div>	
+				{this.props.job.selectedJob? this.renderJob(this.props.job.selectedJob): "Empty"}
+				<Modal_Share job={this.props.job.selectedJob._id}/>
+			</div>
+		)
+		}
+	}
+	
+	render() {
+		console.log(this.props);
+		return (
+			<div>{this.renderJobdetail()}</div>
 		)
 	}
 }
@@ -112,7 +127,9 @@ function mapStateToProps(state) {
 		job: state.job,
 		case: state.Case.allCases,
 	    skill: state.student.skills,
-        filteredstudent: state.student.filteredStudent
+	    type: state.auth.type,
+        filteredstudent: state.student.filteredStudent,
+        ready: state.student.ready
 	} 
 }
 

@@ -4,7 +4,7 @@ import {Button,ButtonToolbar, Table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {fetchCases, updateCase} from '../../actions'
 import moment from 'moment'
-import 'moment/locale/en-nz'
+// import 'moment/locale/en-nz'
 
  class Dashboard extends Component {
   constructor(props) {
@@ -47,8 +47,8 @@ import 'moment/locale/en-nz'
           <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open
           </option>
-          <option value="Interview" selected={caseData.openCase=="Interview 1" ? true : false}>
-            Interview 1
+          <option value="Interview" selected={caseData.openCase=="Interview" ? true : false}>
+            Interview 
           </option>
           <option value="Salary Negotation" selected={caseData.openCase=="Salary Negotation" ? true : false}>
             Salary Negotation
@@ -61,7 +61,7 @@ import 'moment/locale/en-nz'
           </option>
         </select>
           </td>
-          <td>{moment(caseData.date).format('MMMM Do YYYY').locale()}</td>
+          <td>{moment(caseData.date).format('MMMM Do YYYY')}</td>
       </tr>
     )
   }
