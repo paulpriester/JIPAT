@@ -6,6 +6,7 @@ import Dashboard from '../student/dashboard';
 import ModalProfile from '../modal_profile';
 import ModalSkill from '../modal_skill';
 import { Row, Col } from 'reactstrap';
+
 class Profile extends Component{
   componentWillMount () {
     let id = this.props.params.id?this.props.params.id : ''
@@ -34,45 +35,44 @@ class Profile extends Component{
     
     return(
       <div className="edit-profile">
-            <Row>
+            <Row className="width-row">
               <Col className="border-profile" sm="3">
-                <h3>Name:</h3>
+                <h3>Name: <ModalProfile profile={this.props.information} /></h3>
                 <p>{this.props.information.firstName} {this.props.information.lastName}</p>
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>Github:</h3>
-                <a href={this.props.information.github}>{this.props.information.github}</a>
+                <a className="link-width" href={this.props.information.github}>{this.props.information.github}</a>
                 <h3>Portfolio:</h3>
-                <a href={this.props.information.portfolio}>{this.props.information.portfolio}</a>
+                <a className="link-width" href={this.props.information.portfolio}>{this.props.information.portfolio}</a>
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>LinkedIn:</h3>
-                <a href={this.props.information.linkedin}>{this.props.information.linkedin}</a>
+                <a className="link-width" href={this.props.information.linkedin}>{this.props.information.linkedin}</a>
                 <h3>Resume:</h3>
-                <a href={this.props.information.resume}>{this.props.information.resume}</a>
+                <a className="link-width" href={this.props.information.resume}>{this.props.information.resume}</a>
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>Jobs Applied:</h3>
                 <p className="jobs">{this.props.caselength.length}</p>
               </Col>
             </Row>
-          <Row>
+          <Row className="width-row">
             <Col className="border-profile" sm="4">
               <h3>About Me</h3>  
               <p>{this.props.information.about}</p>
             </Col>
             <Col className="border-profile" sm="4">
-              <h3>Skills</h3>
+              <h3>Skills <ModalSkill /></h3>
               {this.props.information.skills && this.props.information.skills.map(i => <p>{i}</p>)}
-              <ModalProfile />
-              <ModalSkill />
+              {this.props.skill.map(this.renderSkill)}
             </Col>
             <Col className="border-profile" sm="4">
               <h3>Career Goals</h3>
               <p> {this.props.information.careergoals}</p>
             </Col>
           </Row>
-          <Row>
+          <Row className="width-row">
           <Col className="border-profile">
             <h3>Jobs Open:</h3>
             <p>{this.props.case.filter(i => i.openCase == 'Open').map(this.renderCase).length}</p>
