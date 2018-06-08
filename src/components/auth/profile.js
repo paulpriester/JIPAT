@@ -1,14 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-import {fetchProfile, fetchcaselength, fetchSavedSkills} from '../../actions';
+import {profileImage, fetchProfile, fetchcaselength, fetchSavedSkills} from '../../actions';
 import Dashboard from '../student/dashboard';
 import ModalProfile from '../modal_profile';
 import ModalSkill from '../modal_skill';
 import { Row, Col } from 'reactstrap';
-
+import Dropzone from 'react-dropzone'
+import axios from 'axios'
 
 class Profile extends Component{
+
+  constructor(props){
+
+    super(props)
+
+    this.state = {
+
+      showUpload:false
+
+    }
+  }
 
   componentWillMount () {
     let id = this.props.params.id?this.props.params.id : ''
@@ -18,6 +30,7 @@ class Profile extends Component{
 
   }
 
+
    renderSkill(skillData,dispatch) {
     return (
       <ul key={skillData.id}>
@@ -26,6 +39,30 @@ class Profile extends Component{
     )
   }
 
+  handleDrop = files => {
+    // Push all the axios request promise into a single array
+    const uploaders = files.map(file => {
+      // Initial FormData
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "wpwu5lo1"); // Replace the preset name with your own
+      formData.append("api_key", "561924296619786"); // Replace API key with your own Cloudinary key
+      
+      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+      axios.post("https://api.cloudinary.com/v1_1/dxpck5nb2/image/upload", formData, {
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+      })
+      .then(res => {
+        const image = res.data.secure_url;
+        this.props.dispatch(profileImage(image));
+      })
+      
+    })
+  
+  }
+
+ 
+  
   render(){
     console.log(this.props);
     
@@ -33,8 +70,29 @@ class Profile extends Component{
       <div className="edit-profile">
             <Row>
               <Col className="border-profile" sm="3">
-                <h3>Name:</h3>
-                <p>{this.props.information.firstName} {this.props.information.lastName}</p>
+
+                  <a href="#"
+                  onClick={()=>this.setState(prev =>({
+
+                    showUpload:!prev.showUpload
+
+                  }))}>Edit</a>
+                
+                {this.state.showUpload ?
+                  <Dropzone 
+                    onDrop={this.handleDrop} 
+                    multiple 
+                    accept="image/*" 
+                    // style={styles.dropzone}
+                  >
+                    <p>Drop your files or click here to upload</p>
+                  </Dropzone>
+
+                  :
+
+                  null
+                }
+                
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>Github:</h3>
