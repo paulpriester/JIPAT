@@ -4,12 +4,10 @@ import {Button,ButtonToolbar, Table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {fetchCases, updateCase} from '../../actions'
 import moment from 'moment'
-// import 'moment/locale/en-nz'
 
  class Dashboard extends Component {
   constructor(props) {
     super(props);
-
     this.state = { type: 'Open'};
   }
 
@@ -38,7 +36,7 @@ import moment from 'moment'
 
     return (
       <tr key={caseData.jobTitle}>
-           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData.jobTitle}</Link></td>
+          <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData.jobTitle}</Link></td>
           <td>{caseData.company}</td> 
           <td>{caseData.job_location}</td>  
           <td>

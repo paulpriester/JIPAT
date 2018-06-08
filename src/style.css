@@ -124,9 +124,28 @@ a:visited{
 	bottom:15px;
 }
 
+/* modal_addjob.js*/
+.private-name {
+	position:relative;
+	bottom:23px;
+} 
+
+/*modal_profile.js*/
+.fade-button {
+	font-size:15px;
+	cursor: pointer;
+	color: #727272;
+	display: inline;
+}
+
 /* profile.js */
 .edit-profile {
 	text-align:center;
+}
+
+.width-row {
+	max-width:100%;
+	margin:0px !important;
 }
 
 .jobs {
@@ -143,12 +162,31 @@ a:visited{
 	border:1px solid black;
 }
 
+.link-width {
+	overflow: hidden;
+	text-overflow:ellipsis;
+	max-width:100%;
+	display:inline-block;
+	white-space: nowrap;
+}
+
 /* jobs.js */
 .error {
 	text-align: center;
 	position: relative;
 	top:25px;
 	bottom:25px;
+}
+
+/* job_detail.js*/
+.detail-case {
+	text-align: center;
+	margin:0px !important;
+}
+
+/* dashboard.js */
+.tabs {
+	width:100% !important;
 }
 
 /* tmdashboard.js */
@@ -168,10 +206,6 @@ a:visited{
 .tab-icon{
 	background-color:white;
 	color: purple;
-	font-size:9em;
-	padding:29px 0 0 22px;
-	margin:-11px;
-	border:1px purple solid;
 	height:100%;
 }
 

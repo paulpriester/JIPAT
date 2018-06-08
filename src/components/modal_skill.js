@@ -14,8 +14,7 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : 'purple', 
-    color                 : 'white'
+    color                 : 'black'
   }
 };
 
@@ -82,7 +81,7 @@ class ModalSkill extends Component {
     console.log(this.state)
     return (
       <span>
-        <Button className="btn btn-secondary" onClick={this.openModal}>Edit Skills</Button>
+        <p className="fade-button" onClick={this.openModal}>(Edit Skills)</p>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}

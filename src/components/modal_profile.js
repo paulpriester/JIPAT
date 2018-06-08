@@ -14,12 +14,11 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : 'purple', 
-    color                 : 'white'
+    color                 : 'black'
   }
 };
 
-class ModalProfile extends Component {
+class ModalProfile extends React.Component {
   constructor() {
     super();
 
@@ -29,6 +28,13 @@ class ModalProfile extends Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+  }
+
+  componentDidMount(){
+    setTimeout(() => {
+      console.log(this.props.profile);
+      this.props.initialize(this.props.profile);
+    }, 1000);
   }
 
   openModal() {
@@ -55,10 +61,9 @@ class ModalProfile extends Component {
 
   render() {
     const { handleSubmit }= this.props;
-
     return (
       <span>
-        <Button className="btn btn-secondary" onClick={this.openModal}>Edit Profile</Button>
+        <p className="fade-button" onClick={this.openModal}>(Edit Profile)</p>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
@@ -103,6 +108,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(reduxForm({
-  form: 'profile',
-})(ModalProfile));
+export default reduxForm({
+  form: 'profile'
+})(ModalProfile);

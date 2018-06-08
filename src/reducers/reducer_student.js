@@ -8,7 +8,6 @@ const initialState = {
 	caselength: {},
 	ready: false
 }
-
 export default function studentReducer (state = initialState, action) {
 	switch (action.type) {
 	case 'FETCH_STUDENT':
@@ -40,7 +39,6 @@ export default function studentReducer (state = initialState, action) {
 			cases: action.response.data.cases
 		}
 	case 'FILTERED_SKILL':
-	console.log(action)
 		return{
 			...state,
 			filteredStudent:action.payload,
@@ -48,6 +46,5 @@ export default function studentReducer (state = initialState, action) {
 			
 		}
 	}
-	
 	return state;
 }
