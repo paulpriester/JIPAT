@@ -373,7 +373,16 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 			dispatch(fetchProfile(''))
 		})	
 	};
-	
+}
+
+export function addScore(id,score){
+	console.log(score)
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/studentscore/${id}`,{score})
+		.then(response=>{
+			dispatch(fetchUsers())
+		})	
+	};
 }
 
 export function inviteUser({email,name, admin}){
