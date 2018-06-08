@@ -4,14 +4,7 @@ import { connect } from 'react-redux';
 import {addJob} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import DayPickerInput from 'react-day-picker/DayPickerInput'
-import 'react-day-picker/lib/style.css'
-import MomentLocaleUtils, {
-  formatDate,
-  parseDate,
-} from 'react-day-picker/moment';
-import DayPicker from 'react-day-picker';
-import 'moment/locale/it';import '../../public/css/modal.css'
+
 
 const customStyles = {
   
@@ -56,38 +49,9 @@ class ModalButton extends Component {
     this.setState({modalIsOpen: false});
   }
 
-handleDayClick = (day, { selected })=> {
-    if (selected) {
-      // Unselect the day if already selected
-      this.setState({ selectedDay: undefined });
-      return;
-    }
-    this.setState({ selectedDay: day });
-  }
-  parseDate = (str, format, locale) => {
-    const parsed = dateFnsParse(str, format, { locale });
-    if (DateUtils.isDate(parsed)) {
-      return parsed;
-    }
-    return undefined;
-  }
-  formatDate = (date, format, locale) => {
-    return dateFnsFormat(date, format, { locale });
-  }
-
   onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate,date}) {
     this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate,date}))
         this.setState({modalIsOpen: false});
-  }
-
-    DateInput = ({input,value}) =>{
-     return( 
-      <DayPickerInput 
-                  formatDate={formatDate}
-                  parseDate={parseDate}
-                  placeholder={`${formatDate(new Date())}`}
-        />
-     )
   }
 
     FieldInput = ({ input,value, meta, type, placeholder}) => {
