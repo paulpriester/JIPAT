@@ -8,7 +8,6 @@ import moment from 'moment'
  class Dashboard extends Component {
   constructor(props) {
     super(props);
-
     this.state = { type: 'Open'};
   }
 
@@ -37,7 +36,7 @@ import moment from 'moment'
 
     return (
       <tr key={caseData.jobTitle}>
-           <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData.jobTitle}</Link></td>
+          <td><Link className='detail' to='/casedetail' onClick={()=> selectCase(caseData)}>{caseData.jobTitle}</Link></td>
           <td>{caseData.company}</td> 
           <td>{caseData.job_location}</td>  
           <td>
@@ -46,8 +45,8 @@ import moment from 'moment'
           <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open
           </option>
-          <option value="Interview" selected={caseData.openCase=="Interview 1" ? true : false}>
-            Interview 1
+          <option value="Interview" selected={caseData.openCase=="Interview" ? true : false}>
+            Interview 
           </option>
           <option value="Salary Negotation" selected={caseData.openCase=="Salary Negotation" ? true : false}>
             Salary Negotation

@@ -6,13 +6,31 @@ import Dashboard from '../student/dashboard';
 import ModalProfile from '../modal_profile';
 import ModalSkill from '../modal_skill';
 import { Row, Col } from 'reactstrap';
+import axios from 'axios';
 
 class Profile extends Component{
+  state = {
+    selectedFile: null
+  }
+
   componentWillMount () {
     let id = this.props.params.id?this.props.params.id : ''
     this.props.dispatch(fetchcaselength());
     this.props.dispatch(fetchProfile(id));
     this.props.dispatch(fetchSavedSkills())
+  }
+  fileSelectHandler = event => {
+    this.setState({
+      selectedFile: event.target.files[0]
+    })
+  }
+  fileUploadHandler = () => {
+    const fd = ('image', this.state.selectedFile, this.state.selectedFile.name);
+    console.log(fd);
+    axios.post('http://localhost:3090/profileImage', fd)
+    .then(res => {
+      console.log(res);
+    })
   }
    renderSkill(skillData,dispatch) {
     return (
@@ -21,23 +39,14 @@ class Profile extends Component{
       </ul>
     )
   }
-  renderCase(caseData) {
-      return (
-        <div key={caseData.id}
-        className="case-container">
-          <h1 className="case-title">Job Title</h1>
-          <p className="case-description">{caseData.jobTitle}</p>
-         </div>
-           )
-    }
+
   render(){
-    console.log(this.props);
-    
     return(
       <div className="edit-profile">
             <Row className="width-row">
               <Col className="border-profile" sm="3">
-                <h3>Name: <ModalProfile profile={this.props.information} /></h3>
+                <input type="file" onChange={this.fileSelectHandler} />
+                <button onClick={this.fileUploadHandler}>Upload!</button>
                 <p>{this.props.information.firstName} {this.props.information.lastName}</p>
               </Col>
               <Col className="border-profile" sm="3">
@@ -75,23 +84,23 @@ class Profile extends Component{
           <Row className="width-row">
           <Col className="border-profile">
             <h3>Jobs Open:</h3>
-            <p>{this.props.case.filter(i => i.openCase == 'Open').map(this.renderCase).length}</p>
+            <p>{this.props.case.filter(i => i.openCase == 'Open').length}</p>
           </Col>
           <Col className="border-profile">
             <h3>Jobs Closed:</h3>
-            <p>{this.props.case.filter(i => i.openCase == 'Close').map(this.renderCase).length}</p>
+            <p>{this.props.case.filter(i => i.openCase == 'Close').length}</p>
           </Col>
           <Col className="border-profile">
             <h2>Jobs Interview</h2>
-            <p>{this.props.case.filter(i => i.openCase == 'Interview').map(this.renderCase).length}</p>
+            <p>{this.props.case.filter(i => i.openCase == 'Interview').length}</p>
           </Col>
           <Col className="border-profile">
             <h2>Salary Negotation</h2>
-            <p>{this.props.case.filter(i => i.openCase == 'Salary Negotation').map(this.renderCase).length}</p>
+            <p>{this.props.case.filter(i => i.openCase == 'Salary Negotation').length}</p>
           </Col>
           <Col className="border-profile">
             <h2>Jobs Placed</h2>
-              <p>{this.props.case.filter(i => i.openCase == 'Place').map(this.renderCase).length}</p>
+              <p>{this.props.case.filter(i => i.openCase == 'Place').length}</p>
           </Col>
           </Row>
             <br></br>

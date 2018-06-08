@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import {fetchAllCases, updateCase} from '../../actions';
 import SearchCases from './searchCases';
 import moment from 'moment'
-import 'moment/locale/en-nz'
+// import 'moment/locale/en-nz'
 
 class Cases extends Component {
 
@@ -85,7 +85,8 @@ class Cases extends Component {
         <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
       </ButtonToolbar>
 
-      <SearchCases cases={this.props.allCases}/>
+      <SearchCases cases={this.props.allCases}
+                    filteredcases = {this.props.filteredCases}/>
 
       <table className ='table table-hover'>
           <thead>

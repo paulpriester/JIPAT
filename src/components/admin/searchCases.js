@@ -2,27 +2,51 @@ import React, { Component } from 'react';
 import { Button, Form, FormControl, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { filterCases } from '../../actions/index';
-import { bindActionCreators } from 'redux';                  
+import { bindActionCreators } from 'redux';   
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+moment.locale('en')
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+
 
 class SearchCases extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			term: '',
-			date: ''
+			startDate: moment(),
+			endDate: moment()
 		};
 
 		this.searchInputChange = this.searchInputChange.bind(this);
+		this.handleChangeStart = this.handleChangeStart.bind(this);
+		this.handleChangeEnd = this.handleChangeEnd.bind(this);
 	}
 	searchInputChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value
 		},function(){
-			this.props.filterCases(this.props.cases, this.state.term, this.state.date)
+			this.props.filterCases(this.props.cases, this.state.term, this.state.startDate,this.state.endDate)
 		});
 	}
 
+	 handleChangeStart(date) {
+    this.setState({
+      startDate: date
+    },function(){
+			this.props.filterCases(this.props.cases, this.state.term, this.state.startDate,this.state.endDate)
+		});
+  }
+  	handleChangeEnd(date) {
+  		this.setState({
+  			endDate: date
+  		},function(){
+			this.props.filterCases(this.props.cases,this.state.term, this.state.startDate,this.state.endDate)
+		})
+  	}
+
 	render () {
+		console.log(this.state)
 		return (
 			<div>
 				<Form onSubmit={this.onFormSubmit}>
@@ -36,18 +60,21 @@ class SearchCases extends Component {
 						/>
 					</Col>
 				</Form>
-				<Form onSubmit={this.onFormSubmit}>
-					<Col sm={12}>
-						<input
-							placeholder='Search by Date'
-							className='form-control'
-							name="date"
-							value={this.state.date}
-							onChange={this.searchInputChange}
-						/>
-					</Col>
-					<p>Example 5-21-2018</p>
-				</Form>
+				<DatePicker
+				    selected={this.state.startDate}
+				    selectsStart
+				    startDate={this.state.startDate}
+				    endDate={this.state.endDate}
+				    onChange={this.handleChangeStart}
+				/>
+
+				<DatePicker
+				    selected={this.state.endDate}
+				    selectsEnd
+				    startDate={this.state.startDate}
+				    endDate={this.state.endDate}
+				    onChange={this.handleChangeEnd}
+				/>
 			</div>
 		);
 	}
