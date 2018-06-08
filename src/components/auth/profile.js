@@ -29,6 +29,8 @@ class Profile extends Component{
               <Col className="border-profile" sm="3">
                 <h3>Name: <ModalProfile profile={this.props.information} /></h3>
                 <p>{this.props.information.firstName} {this.props.information.lastName}</p>
+                <h3>W.R. Score:</h3>
+                <p>{this.props.information.score}</p>
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>Github:</h3>

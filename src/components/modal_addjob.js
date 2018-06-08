@@ -52,6 +52,26 @@ class ModalButton extends Component {
         this.setState({modalIsOpen: false, jobType:''});
   }
 
+    FieldInput = ({ input,value, meta, type, placeholder}) => {
+            return (
+                <FormControl
+                    type={type}
+                    placeholder={placeholder}
+                    value={input.value}
+                    onChange={input.onChange}
+                    />
+            )
+        }
+
+    privatecheck = ({label,input, meta: {touched, error}}) => (
+    <FormGroup className="input-row">
+      <label>{label}</label>
+      <input {...input} type="checkbox"/>
+      {touched && error &&
+       <span className="error">{error}</span>}
+    </FormGroup>
+  )
+
    renderLinks() {
     const renderField = ({label,input, meta: {touched, error}}) => (
       <FormGroup className="input-row">

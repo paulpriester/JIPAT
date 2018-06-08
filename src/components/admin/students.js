@@ -2,13 +2,28 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {fetchStudents, removeUser} from '../../actions';
+import {fetchStudents, removeUser, addScore} from '../../actions';
+import { Input,InputGroupAddon,Button } from 'reactstrap';
 import InviteModal from './invite_modal';
 
 
  class Students extends Component {
+ 	constructor (props) {
+ 		super(props);
+ 		this.state = {
+
+ 		}
+ 		this.handleChange = this.handleChange.bind(this)
+ 		this.addScore = this.addScore.bind(this)
+ 	}
 	componentDidMount() {
 		this.props.dispatch(fetchStudents())
+	}
+
+	handleChange (e, id) {
+		this.setState ({
+			[id]: e.target.value
+		})
 	}
 
 	removeUser(id) {
@@ -16,6 +31,10 @@ import InviteModal from './invite_modal';
 		if(prompt == true) {
 			this.props.dispatch(removeUser(id))
 		}
+	}
+
+	addScore(id) {
+		this.props.dispatch(addScore(id, this.state[id]))
 	}
 
 	renderStudent(studentData,dispatch) {
@@ -30,12 +49,19 @@ import InviteModal from './invite_modal';
 			<tr key={studentData.email}>
 			  	<td><Link onClick={() => selectStudent(studentData)} to={{pathname: '/profile' , search: `?id=${studentData._id}`}}>{studentData.firstName} {studentData.lastName}</Link></td>	
 			  	<td>{studentData.email}</td>
-			  	<td><button onClick={()=> this.removeUser(studentData._id)}>X</button></td>
+			  	<td>{studentData.score}</td>
+			  	<td>
+			  	<form onSubmit = {()=> this.addScore(studentData._id)}>
+			  	 <Input onChange = {(e) => this.handleChange(e, studentData._id)} placeholder='Score'/>
+          		</form>
+			  	</td>
+			  	<td><button onClick={()=> this.removeUser(studentData._id)}>Remove</button></td>
 	      	</tr>
 		)
 	}
 
 	render () {
+		console.log(this.state)
 		return (
 			<div>
 			<InviteModal />
@@ -44,7 +70,9 @@ import InviteModal from './invite_modal';
 						<tr>
 							<th>Name</th>
 							<th>Email</th>
-							<th>Remove</th>
+							<th>Score</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
