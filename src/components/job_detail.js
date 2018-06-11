@@ -59,9 +59,10 @@ class JobDetail extends Component {
 				  	<h3>How to apply:</h3>
 				  		<a onClick={()=> this.handleClick(jobData._id)} 
 				  		   href={stripHTML(jobData.how_to_apply)} 
-				  		   target="_blank">apply
+				  		   target="_blank">Apply
 				  		</a>
 				  	<h3>Email:</h3> <a href={`mailto:${jobData.email}`}>{jobData.email}</a>
+				  	<h3>Share Job:</h3><Modal_Share job={this.props.job.selectedJob._id}/>
 		      	</ul>
 		    )
 		}
@@ -108,7 +109,6 @@ class JobDetail extends Component {
 
 			<div>	
 				{this.props.job.selectedJob? this.renderJob(this.props.job.selectedJob): "Empty"}
-				<Modal_Share job={this.props.job.selectedJob._id}/>
 			</div>
 		)
 		}
