@@ -273,13 +273,14 @@ export function addUserSkills(Skills){
 	};
 }
 
-export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at,jobPrivate,date}) {
+export function addJob({title,company,location,type,email,jobid,description,how_to_apply, created_at,jobPrivate,date}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/addjob`,{
 			title,
 			company,
 			location,
 			type,
+			email,
 			jobid,
 			description,
 			how_to_apply,
@@ -290,7 +291,6 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 			headers: token()
 		})
 		.then(response => {
-			console.log(response)
 			dispatch({type: "ADD_JOB",response})
 		})
 	}
