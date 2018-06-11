@@ -147,6 +147,3 @@ function mapStateToProps({Case}) {
 }
 
 export default connect (mapStateToProps)(Cases);
-
-
-
