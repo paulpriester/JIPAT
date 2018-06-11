@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {fetchStudents, removeUser, addScore} from '../../actions';
-import { Input,InputGroupAddon,Button } from 'reactstrap';
+import { Input,InputGroupAddon,InputGroup,Button } from 'reactstrap';
 import InviteModal from './invite_modal';
 
 
@@ -11,14 +11,21 @@ import InviteModal from './invite_modal';
  	constructor (props) {
  		super(props);
  		this.state = {
-
  		}
  		this.handleChange = this.handleChange.bind(this)
  		this.addScore = this.addScore.bind(this)
  	}
+
 	componentDidMount() {
 		this.props.dispatch(fetchStudents())
 	}
+
+	changeType(id) {
+    this.setState({
+    	["score" + id]: this.state["score" + id] ? false : true})
+  }
+
+
 
 	handleChange (e, id) {
 		this.setState ({
@@ -35,6 +42,7 @@ import InviteModal from './invite_modal';
 
 	addScore(id) {
 		this.props.dispatch(addScore(id, this.state[id]))
+		this.changeType(id)
 	}
 
 	renderStudent(studentData,dispatch) {
@@ -51,9 +59,15 @@ import InviteModal from './invite_modal';
 			  	<td>{studentData.email}</td>
 			  	<td>{studentData.score}</td>
 			  	<td>
-			  	<form onSubmit = {()=> this.addScore(studentData._id)}>
-			  	 <Input onChange = {(e) => this.handleChange(e, studentData._id)} placeholder='Score'/>
-          		</form>
+			  	{
+			  		!this.state["score" + studentData._id] ? <button onClick= {() => this.changeType(studentData._id)}>Score</button>: 
+			  		<form onSubmit = {()=> this.addScore(studentData._id)}>
+						<InputGroup>
+						  	 <Input onChange = {(e) => this.handleChange(e, studentData._id)} placeholder='Score'/>
+			         		 <InputGroupAddon addonType="append"><Button color="secondary" onClick={()=> this.addScore(studentData._id)}>Submit</Button></InputGroupAddon>
+			         	</InputGroup>
+			          </form>    
+			      }
 			  	</td>
 			  	<td><button onClick={()=> this.removeUser(studentData._id)}>Remove</button></td>
 	      	</tr>
@@ -70,7 +84,7 @@ import InviteModal from './invite_modal';
 						<tr>
 							<th>Name</th>
 							<th>Email</th>
-							<th>Score</th>
+							<th>W.R. Score</th>
 							<th></th>
 							<th></th>
 						</tr>

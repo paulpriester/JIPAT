@@ -380,7 +380,7 @@ export function addScore(id,score){
 	return function(dispatch){
 		axios.post(`${ROOT_URL}/studentscore/${id}`,{score})
 		.then(response=>{
-			dispatch(fetchUsers())
+			dispatch(fetchStudents())
 		})	
 	};
 }
