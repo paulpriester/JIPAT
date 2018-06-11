@@ -17,7 +17,8 @@ class Profile extends Component{
 
     this.state = {
 
-      showUpload:false
+      showUpload:false,
+      uploadText: 'Edit'
 
     }
   }
@@ -70,15 +71,12 @@ class Profile extends Component{
       <div className="edit-profile">
             <Row>
               <Col className="border-profile" sm="3">
-
-                  <a href="#"
-                  onClick={()=>this.setState(prev =>({
-
-                    showUpload:!prev.showUpload
-
-                  }))}>Edit</a>
+                
+                <img src={this.props.information.image}/>
                 
                 {this.state.showUpload ?
+
+                <Col md={{offset:3}}>
                   <Dropzone 
                     onDrop={this.handleDrop} 
                     multiple 
@@ -88,10 +86,19 @@ class Profile extends Component{
                     <p>Drop your files or click here to upload</p>
                   </Dropzone>
 
+                  </Col>
+
                   :
 
                   null
                 }
+
+                <a href="#"
+                  onClick={()=>this.setState(prev =>({
+
+                    showUpload:!prev.showUpload
+
+                  }))}>Edit</a>
                 
               </Col>
               <Col className="border-profile" sm="3">
@@ -168,4 +175,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps) (Profile);
-
