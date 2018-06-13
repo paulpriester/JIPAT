@@ -1,5 +1,6 @@
 body {
 	font-family: 'Open Sans', sans-serif;
+	zoom:80%;
 }
 
 .title{
@@ -29,6 +30,7 @@ body {
 a:visited{
 	text-decoration: none;
 }
+
 /* app.js */
 .container {
 	position:relative;
@@ -124,13 +126,18 @@ a:visited{
 	bottom:15px;
 }
 
-/* modal_addjob.js*/
+/* modal.js*/
 .private-name {
 	position:relative;
-	bottom:23px;
+	bottom:17px;
 } 
 
-/*modal_profile.js*/
+.private-box {
+	position:relative;
+	top:3px;
+	left:5px;
+}
+
 .fade-button {
 	font-size:15px;
 	cursor: pointer;

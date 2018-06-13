@@ -75,10 +75,10 @@ import InviteModal from './invite_modal';
 	}
 
 	render () {
-		console.log(this.state)
 		return (
 			<div>
 			<InviteModal />
+			
 			<table className ='table table-hover'>
 					<thead>
 						<tr>
