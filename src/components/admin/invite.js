@@ -34,7 +34,7 @@ class Invite extends Component{
 						/>
 					</fieldset>
 					<fieldset className="form-group">
-						<label>name:</label>
+						<label>Name:</label>
 						<Field
 							name="name"
 							component={renderInput}
@@ -47,6 +47,7 @@ class Invite extends Component{
 							name="admin"
 							component="input"
 							type="checkbox"
+							className="private-box"
 						/>
 					</fieldset>
 					<button action="submit" className="btn btn-primary">Invite</button>

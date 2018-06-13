@@ -2,13 +2,35 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {fetchStudents, removeUser} from '../../actions';
+import {fetchStudents, removeUser, addScore} from '../../actions';
+import { Input,InputGroupAddon,InputGroup,Button } from 'reactstrap';
 import InviteModal from './invite_modal';
 
 
  class Students extends Component {
+ 	constructor (props) {
+ 		super(props);
+ 		this.state = {
+ 		}
+ 		this.handleChange = this.handleChange.bind(this)
+ 		this.addScore = this.addScore.bind(this)
+ 	}
+
 	componentDidMount() {
 		this.props.dispatch(fetchStudents())
+	}
+
+	changeType(id) {
+    this.setState({
+    	["score" + id]: this.state["score" + id] ? false : true})
+  }
+
+
+
+	handleChange (e, id) {
+		this.setState ({
+			[id]: e.target.value
+		})
 	}
 
 	removeUser(id) {
@@ -16,6 +38,11 @@ import InviteModal from './invite_modal';
 		if(prompt == true) {
 			this.props.dispatch(removeUser(id))
 		}
+	}
+
+	addScore(id) {
+		this.props.dispatch(addScore(id, this.state[id]))
+		this.changeType(id)
 	}
 
 	renderStudent(studentData,dispatch) {
@@ -30,7 +57,19 @@ import InviteModal from './invite_modal';
 			<tr key={studentData.email}>
 			  	<td><Link onClick={() => selectStudent(studentData)} to={{pathname: '/profile' , search: `?id=${studentData._id}`}}>{studentData.firstName} {studentData.lastName}</Link></td>	
 			  	<td>{studentData.email}</td>
-			  	<td><button onClick={()=> this.removeUser(studentData._id)}>X</button></td>
+			  	<td>{studentData.score}</td>
+			  	<td>
+			  	{
+			  		!this.state["score" + studentData._id] ? <button onClick= {() => this.changeType(studentData._id)}>Score</button>: 
+			  		<form onSubmit = {()=> this.addScore(studentData._id)}>
+						<InputGroup>
+						  	 <Input onChange = {(e) => this.handleChange(e, studentData._id)} placeholder='Score'/>
+			         		 <InputGroupAddon addonType="append"><Button color="secondary" onClick={()=> this.addScore(studentData._id)}>Submit</Button></InputGroupAddon>
+			         	</InputGroup>
+			          </form>    
+			      }
+			  	</td>
+			  	<td><button onClick={()=> this.removeUser(studentData._id)}>Remove</button></td>
 	      	</tr>
 		)
 	}
@@ -39,12 +78,15 @@ import InviteModal from './invite_modal';
 		return (
 			<div>
 			<InviteModal />
+			
 			<table className ='table table-hover'>
 					<thead>
 						<tr>
 							<th>Name</th>
 							<th>Email</th>
-							<th>Remove</th>
+							<th>W.R. Score</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>

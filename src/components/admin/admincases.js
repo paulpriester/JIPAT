@@ -6,31 +6,23 @@ import {fetchAllCases, updateCase} from '../../actions';
 import SearchCases from './searchCases';
 import moment from 'moment'
 // import 'moment/locale/en-nz'
-
 class Cases extends Component {
-
   constructor(props) {
     super(props);
-
     this.state = { type: 'Open'};
-
     this.updateCase = this.updateCase.bind(this)
   }
-
   componentDidMount() {
     this.props.dispatch(fetchAllCases())
   }
-
    changeType(type) {
     //function used to record the state of the case status.
     this.setState({type: type})
   }
-
   updateCase(id,value) {
     this.props.dispatch(updateCase(id,value))
     console.log(value)
   }
-
   renderCase(caseData,dispatch) {
     var selectCase = function(Case) {
       dispatch({
@@ -38,7 +30,6 @@ class Cases extends Component {
         payload: Case
       })
     }
-
     return (
         <tr key={caseData._id}>
            <td><Link className='detail' to={{pathname: '/casedetail' , search: `?id=${caseData._id}`}} onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
@@ -70,13 +61,12 @@ class Cases extends Component {
       </tr>
     )
   }
-
   render () {
     console.log(this.props)
     return (
       
       !this.props.isTyping ?
-      <div>
+      <div className="container">
       <ButtonToolbar className='tabs' justified bsSize="large">
         <Button onClick= {() => this.changeType('Open')}>Open</Button>
         <Button onClick= {() => this.changeType('Close')}>Close</Button>
@@ -84,10 +74,8 @@ class Cases extends Component {
         <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
         <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
       </ButtonToolbar>
-
       <SearchCases cases={this.props.allCases}
                     filteredcases = {this.props.filteredCases}/>
-
       <table className ='table table-hover'>
           <thead>
             <tr>
@@ -110,20 +98,17 @@ class Cases extends Component {
                  (this.props.filteredCases.filter(i => i.openCase =='Open').length
                 +(this.props.filteredCases.filter(i => i.openCase == 'Interview').length))*100).toFixed(1) + '%': "No Students"}
         </p>
-
      <p>Conversion Rate from Interview to Close</p>
         <p>    {this.props.filteredCases.length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Close').length) /
                  (this.props.filteredCases.filter(i => i.openCase =='Close').length
                 +(this.props.filteredCases.filter(i => i.openCase == 'Interview').length))*100).toFixed(1) + '%' : "No Students"}
         </p>
-
         <p>Conversion Rate from Interview to Place</p>
       <p>    {this.props.filteredCases.length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Place').length) /
                (this.props.filteredCases.filter(i => i.openCase =='Place').length
               +(this.props.filteredCases.filter(i => i.openCase == 'Interview').length))*100).toFixed(1) + '%' : "No Students"}
       </p>
       </div>
-
       : <div>
       <SearchCases cases={this.props.allCases}/>
       <table className ='table table-hover'>
@@ -141,12 +126,7 @@ class Cases extends Component {
     ) 
   }
 }
-
 function mapStateToProps({Case}) {
   return  Case 
 }
-
 export default connect (mapStateToProps)(Cases);
-
-
-

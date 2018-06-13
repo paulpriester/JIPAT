@@ -3,7 +3,7 @@ import {browserHistory} from 'react-router';
 import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES, FORGOT_PASSWORD, PASSWORD_RESET_MOUNT, PASSWORD_RESET} from './types';
 import moment from 'moment'
 
-const ROOT_URL='http://localhost:3090';
+const ROOT_URL='https://tkhjobboard.herokuapp.com';
 const token = function() {
 	return {authorization: localStorage.getItem('token')}
 }
@@ -273,13 +273,14 @@ export function addUserSkills(Skills){
 	};
 }
 
-export function addJob({title,company,location,type,jobid,description,how_to_apply, created_at,jobPrivate,date}) {
+export function addJob({title,company,location,type,email,jobid,description,how_to_apply, created_at,jobPrivate,date}) {
 	return function(dispatch) {
 		axios.post(`${ROOT_URL}/addjob`,{
 			title,
 			company,
 			location,
 			type,
+			email,
 			jobid,
 			description,
 			how_to_apply,
@@ -290,7 +291,6 @@ export function addJob({title,company,location,type,jobid,description,how_to_app
 			headers: token()
 		})
 		.then(response => {
-			console.log(response)
 			dispatch({type: "ADD_JOB",response})
 		})
 	}
@@ -384,6 +384,15 @@ export function profileImage(image) {
 			console.log(res)
 		})
 	}
+}
+export function addScore(id,score){
+	console.log(score)
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/studentscore/${id}`,{score})
+		.then(response=>{
+			dispatch(fetchStudents())
+		})	
+	};
 }
 
 export function inviteUser({email,name, admin}){

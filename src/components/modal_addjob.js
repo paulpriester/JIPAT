@@ -1,22 +1,13 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import {addJob} from '../actions';
+import {addJob, selectJobType} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import DayPickerInput from 'react-day-picker/DayPickerInput'
-import 'react-day-picker/lib/style.css'
-import MomentLocaleUtils, {
-  formatDate,
-  parseDate,
-} from 'react-day-picker/moment';
-import DayPicker from 'react-day-picker';
-import 'moment/locale/it';import '../../public/css/modal.css'
 
 const customStyles = {
   
   overlay:{
-
     backgroundColor:"rgba(150, 150, 150, 0.7)"
   },
 
@@ -29,9 +20,9 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
     backgroundColor       : '#fff',
-    width:'30%',
-    height:'80%',
-    border: 'none',
+    width                 : '50%',
+    height                : '80%',
+    border                : 'none',
   
   }
 };
@@ -56,38 +47,9 @@ class ModalButton extends Component {
     this.setState({modalIsOpen: false});
   }
 
-handleDayClick = (day, { selected })=> {
-    if (selected) {
-      // Unselect the day if already selected
-      this.setState({ selectedDay: undefined });
-      return;
-    }
-    this.setState({ selectedDay: day });
-  }
-  parseDate = (str, format, locale) => {
-    const parsed = dateFnsParse(str, format, { locale });
-    if (DateUtils.isDate(parsed)) {
-      return parsed;
-    }
-    return undefined;
-  }
-  formatDate = (date, format, locale) => {
-    return dateFnsFormat(date, format, { locale });
-  }
-
-  onSubmit({title,company,location,type,description,how_to_apply, created_at, jobPrivate,date}) {
-    this.props.dispatch(addJob({title,company,location,type,description,how_to_apply, created_at, jobPrivate,date}))
-        this.setState({modalIsOpen: false});
-  }
-
-    DateInput = ({input,value}) =>{
-     return( 
-      <DayPickerInput 
-                  formatDate={formatDate}
-                  parseDate={parseDate}
-                  placeholder={`${formatDate(new Date())}`}
-        />
-     )
+  onSubmit({title,company,location,type,email,description,how_to_apply, created_at, jobPrivate}) {
+    this.props.dispatch(addJob({title,company,location,type,email,description,how_to_apply, created_at, jobPrivate}))
+        this.setState({modalIsOpen: false, jobType:''});
   }
 
     FieldInput = ({ input,value, meta, type, placeholder}) => {
@@ -111,8 +73,45 @@ handleDayClick = (day, { selected })=> {
   )
 
    renderLinks() {
+    const renderField = ({label,input, meta: {touched, error}}) => (
+      <FormGroup className="input-row">
+        <ControlLabel>{label}</ControlLabel>
+        <FormControl className="input-edit" {...input} type="text"/>
+        {touched && error &&
+         <span className="error">{error}</span>}
+      </FormGroup>
+    )
+     const privatecheck = ({label,input, meta: {touched, error}}) => (
+        <FormGroup className="input-row">
+          <label>{label}</label>
+          <input {...input} type="checkbox"/>
+          {touched && error &&
+           <span className="error">{error}</span>}
+        </FormGroup>
+     )
+     const dropdownMenu = () => (
+          <Field name="type" component="select">
+            <option disabled>
+              Select A Job Type
+            </option>
+            <option value="Front-End">
+              Front-End
+            </option>
+            <option value="Back-End">
+              Back-End
+            </option>
+            <option value="Full-Stack">
+              Full-Stack
+            </option>
+            <option value="UX/UI Design">
+              UX/UI Design
+            </option>
+            <option value="Graphic Design">
+              Graphic Design
+            </option>
+          </Field>
+     )
     const { handleSubmit }= this.props;
-
     if (this.props.type == 'student') {
       return (
       <span>
@@ -122,8 +121,6 @@ handleDayClick = (day, { selected })=> {
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
-          ariaHideApp={false}
-
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2>Enter Job Info</h2>
@@ -131,18 +128,23 @@ handleDayClick = (day, { selected })=> {
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
                 <ControlLabel>Title</ControlLabel>
-                  <Field name="title" component={this.FieldInput} placeholder= 'Enter Title'/>
+                  <Field name="title" component={renderField} />
                 <ControlLabel>Location</ControlLabel>
-                  <Field name="location" component={this.FieldInput} />
+                  <Field name="location" component={renderField} />
                 <ControlLabel>Type</ControlLabel>
-                  <Field name="type" component={this.FieldInput} />
+                  <br />
+                  <Field name="type" component={dropdownMenu}/>
+                  <br /><br />
                 <ControlLabel>Company</ControlLabel>
-                  <Field name="company" component={this.FieldInput} />
+                  <Field name="company" component={renderField} />
                 <ControlLabel>Description</ControlLabel>
-                  <Field componentClass="textarea" name="description" component={this.FieldInput} />
+                  <Field componentClass="textarea" name="description" component={renderField} />
                 <ControlLabel>Apply Link</ControlLabel>
-                  <Field name="how_to_apply" component={this.FieldInput} />
-
+                  <Field name="how_to_apply" component={renderField} />
+                <ControlLabel>Date Created</ControlLabel>
+                  <Field name="created_at" component={renderField} />
+                <ControlLabel>Email</ControlLabel>
+                  <Field name="email" type="email" component={renderField} />
                   <br />
                 <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
@@ -159,54 +161,34 @@ handleDayClick = (day, { selected })=> {
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
-          ariaHideApp={false}
-
         >
           <h5 className="closeButton" onClick={this.closeModal}>X</h5>
-          <h2 className="modal-title">Enter Job Info</h2>
+          <h2>Enter Job Info</h2>
           <br />
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <FormGroup className='input-span'>
-
                 <ControlLabel>Title</ControlLabel>
-                  <Field
-                  name="title" 
-                  placeholder="Enter Title" 
-                  component={this.FieldInput} />
+                  <Field name="title" component={renderField} />
                 <ControlLabel>Location</ControlLabel>
-                  <Field 
-                  name="location" 
-                  placeholder="Enter location" 
-                  component={this.FieldInput} />
-
+                  <Field name="location" component={renderField} />
                 <ControlLabel>Type</ControlLabel>
-                  <Field 
-                  name="type" 
-                  placeholder="Enter type"
-                  component={this.FieldInput} />
+                  <br />
+                  <Field name="type" component={dropdownMenu}/>
+                  <br /><br />
                 <ControlLabel>Company</ControlLabel>
-                <Field 
-                  name="company" 
-                  placeholder="Enter Company"
-                  component={this.FieldInput} />
+                  <Field name="company" component={renderField} />
                 <ControlLabel>Description</ControlLabel>
-                  <Field
-                  componentClass="textarea" 
-                  name="description" 
-                  placeholder="Enter description" 
-                  component={this.FieldInput} />
-
+                  <Field componentClass="textarea" name="description" component={renderField} />
                 <ControlLabel>Apply Link</ControlLabel>
-                  <Field 
-                  name="how_to_apply" 
-                  placeholder="Enter link to how to apply"                  
-                  component={this.FieldInput} 
-                  />
-
-                <ControlLabel>Private</ControlLabel>
-                  <Field name="jobPrivate" component={this.privatecheck} />
-
-                <button className="btn btn-secondary modal-btn" type="submit">Submit</button>
+                  <Field name="how_to_apply" component={renderField} />
+                <ControlLabel>Date Created</ControlLabel>
+                  <Field name="created_at" component={renderField} />
+                <ControlLabel>Email</ControlLabel>
+                  <Field name="email" type="email" component={renderField} />
+                <ControlLabel className="private-name">Private</ControlLabel>
+                  <Field name="jobPrivate" component={privatecheck} />
+                  <br />
+                <button className="btn btn-secondary" type="submit">Submit</button>
              </FormGroup>
             </form>
         </Modal>
@@ -217,7 +199,6 @@ handleDayClick = (day, { selected })=> {
 
 
   render() {
-    console.log(this.props)
     return (
       <div>
         {this.renderLinks()}

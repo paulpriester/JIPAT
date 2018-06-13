@@ -65,11 +65,10 @@ class Profile extends Component{
  
   
   render(){
-    console.log(this.props);
     
     return(
       <div className="edit-profile">
-            <Row>
+            <Row className="width-row">
               <Col className="border-profile" sm="3">
                 
                 <img src={this.props.information.image}/>
@@ -101,6 +100,14 @@ class Profile extends Component{
                   }))}>Edit</a>
                 
               </Col>
+
+              <Col className="border-profile" sm="3">
+                <h3>Name: <ModalProfile profile={this.props.information} /></h3>
+                <p>{this.props.information.firstName} {this.props.information.lastName}</p>
+                <h3>W.R. Score:</h3>
+                <p>{this.props.information.score}</p>
+              </Col>
+              
               <Col className="border-profile" sm="3">
                 <h3>Github:</h3>
                 <a href={this.props.information.github}>{this.props.information.github}</a>
@@ -109,16 +116,16 @@ class Profile extends Component{
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>LinkedIn:</h3>
-                <a href={this.props.information.linkedin}>{this.props.information.linkedin}</a>
+                <a className="link-width" href={this.props.information.linkedin}>{this.props.information.linkedin}</a>
                 <h3>Resume:</h3>
-                <a href={this.props.information.resume}>{this.props.information.resume}</a>
+                <a className="link-width" href={this.props.information.resume}>{this.props.information.resume}</a>
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>Jobs Applied:</h3>
                 <p className="jobs">{this.props.caselength.length}</p>
               </Col>
             </Row>
-          <Row>
+            <Row className="width-row">
             <Col className="border-profile" sm="4">
               <h3>About Me</h3>  
               <p>{this.props.information.about}</p>
@@ -134,7 +141,7 @@ class Profile extends Component{
               <p> {this.props.information.careergoals}</p>
             </Col>
           </Row>
-          <Row>
+          <Row className="width-row">
           <Col className="border-profile">
             <h3>Jobs Open:</h3>
             <p>{this.props.case.filter(i => i.openCase == 'Open').length}</p>

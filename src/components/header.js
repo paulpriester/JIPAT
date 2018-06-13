@@ -51,11 +51,14 @@ class Header extends Component	{
 			return	(
 				<Nav className="ml-auto" navbar>
 					<NavItem>
+						<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
+					</NavItem>	
+					<NavItem>
 						<Link className="nav-link" to="/joblist_admin">Jobs</Link>
 					</NavItem>
 					<NavItem>
-						<Link className="nav-link" to="/tmdashboard">Dashboard</Link>
-					</NavItem>	
+						<Link className="nav-link" to="/skills">Skills</Link>
+	        		</NavItem>
 					<NavItem>
 						<Link className="nav-link" to="/admincases">Cases</Link>
 					</NavItem>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Form, FormControl, Col} from 'react-bootstrap';
+import { Button, Form, FormControl} from 'react-bootstrap';
+import {  FormGroup, Col} from 'reactstrap';
 import { connect } from 'react-redux';
 import { filterCases } from '../../actions/index';
 import { bindActionCreators } from 'redux';   
@@ -60,6 +61,10 @@ class SearchCases extends Component {
 						/>
 					</Col>
 				</Form>
+				<h2>Filter Cases by Date</h2>
+				<FormGroup row>
+				<Col sm={2}>
+				<p>Start Date: </p>
 				<DatePicker
 				    selected={this.state.startDate}
 				    selectsStart
@@ -67,7 +72,9 @@ class SearchCases extends Component {
 				    endDate={this.state.endDate}
 				    onChange={this.handleChangeStart}
 				/>
-
+				</Col>
+				<Col sm={2}>
+				<p>End Date: </p>
 				<DatePicker
 				    selected={this.state.endDate}
 				    selectsEnd
@@ -75,6 +82,8 @@ class SearchCases extends Component {
 				    endDate={this.state.endDate}
 				    onChange={this.handleChangeEnd}
 				/>
+				</Col>
+				</FormGroup>
 			</div>
 		);
 	}
