@@ -375,6 +375,16 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 	};
 }
 
+export function profileImage(image) {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/upload`, {image}, {
+			headers : token()
+		})
+		.then(res => {
+			console.log(res)
+		})
+	}
+}
 export function addScore(id,score){
 	console.log(score)
 	return function(dispatch){
