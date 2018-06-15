@@ -11,7 +11,6 @@ import InviteModal from './invite_modal';
  	constructor (props) {
  		super(props);
  		this.state = {
- 			text: 'Pending Users',
  			type: true
  		}
  		this.handleChange = this.handleChange.bind(this)
@@ -29,7 +28,6 @@ import InviteModal from './invite_modal';
   	changeUser (type){
   		this.setState({
   			type: this.state.type ? false : true,
-  			text: this.state.type ? 'Approved Users': 'Pending Users'
   		})
   	}
 
@@ -91,7 +89,9 @@ import InviteModal from './invite_modal';
 		return (
 			<div>
 			<InviteModal />
-			<Button onClick= {() => this.changeUser()}>{this.state.text}</Button>
+			<Button onClick= {() => this.changeUser()}>Approved User</Button>
+			<Button onClick= {() => this.changeUser()}>Pending User</Button>
+
 
 			<table className ='table table-hover'>
 					<thead>

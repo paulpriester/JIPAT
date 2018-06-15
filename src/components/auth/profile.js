@@ -24,7 +24,8 @@ class Profile extends Component{
   }
 
   componentWillMount () {
-    let id = this.props.params.id?this.props.params.id : ''
+    let id = this.props.location.query.id?this.props.location.query.id : ''
+    console.log(id)
     this.props.dispatch(fetchcaselength());
     this.props.dispatch(fetchProfile(id));
     this.props.dispatch(fetchSavedSkills())
@@ -65,7 +66,8 @@ class Profile extends Component{
  
   
   render(){
-    
+        console.log(this.props)
+
     return(
       <div className="edit-profile">
             <Row className="width-row">
