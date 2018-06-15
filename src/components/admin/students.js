@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {fetchStudents, removeUser, addScore} from '../../actions';
+import {fetchStudents, removeUser, addScore, activateUser} from '../../actions';
 import { Input,InputGroupAddon,InputGroup,Button } from 'reactstrap';
 import InviteModal from './invite_modal';
 
@@ -11,6 +11,8 @@ import InviteModal from './invite_modal';
  	constructor (props) {
  		super(props);
  		this.state = {
+ 			text: 'Pending Users',
+ 			type: true
  		}
  		this.handleChange = this.handleChange.bind(this)
  		this.addScore = this.addScore.bind(this)
@@ -24,8 +26,12 @@ import InviteModal from './invite_modal';
     this.setState({
     	["score" + id]: this.state["score" + id] ? false : true})
   }
-
-
+  	changeUser (type){
+  		this.setState({
+  			type: this.state.type ? false : true,
+  			text: this.state.type ? 'Approved Users': 'Pending Users'
+  		})
+  	}
 
 	handleChange (e, id) {
 		this.setState ({
@@ -38,6 +44,11 @@ import InviteModal from './invite_modal';
 		if(prompt == true) {
 			this.props.dispatch(removeUser(id))
 		}
+	}
+
+	approveUser(id, type) {
+		console.log(id)
+		this.props.dispatch(activateUser(id, type))
 	}
 
 	addScore(id) {
@@ -69,6 +80,8 @@ import InviteModal from './invite_modal';
 			          </form>    
 			      }
 			  	</td>
+			  	<td>{studentData.active?<button onClick={()=> this.approveUser(studentData._id, false)}>Deactivate</button>:
+			  	<button onClick={()=> this.approveUser(studentData._id, true)}>Approve</button>}</td>
 			  	<td><button onClick={()=> this.removeUser(studentData._id)}>Remove</button></td>
 	      	</tr>
 		)
@@ -79,6 +92,7 @@ import InviteModal from './invite_modal';
 		return (
 			<div>
 			<InviteModal />
+			<Button onClick= {() => this.changeUser()}>{this.state.text}</Button>
 			<table className ='table table-hover'>
 					<thead>
 						<tr>
@@ -86,11 +100,12 @@ import InviteModal from './invite_modal';
 							<th>Email</th>
 							<th>W.R. Score</th>
 							<th></th>
+							<th>Approve/Deactivate</th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.allStudents.length != 0 && this.props.allStudents.filter(i => i.admin == false).map(i=>this.renderStudent(i,this.props.dispatch))}
+						{this.props.allStudents.length != 0 && this.props.allStudents.filter(i => i.admin == false && i.active == this.state.type).map(i=>this.renderStudent(i,this.props.dispatch))}
 					</tbody>
 			</table>
 			</div>

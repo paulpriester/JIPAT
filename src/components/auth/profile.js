@@ -57,7 +57,6 @@ class Profile extends Component{
             <Col className="border-profile" sm="4">
               <h3>Skills <ModalSkill /></h3>
               {this.props.information.skills && this.props.information.skills.map(i => <p>{i}</p>)}
-              {this.props.skill.map(this.renderSkill)}
             </Col>
             <Col className="border-profile" sm="4">
               <h3>Career Goals</h3>

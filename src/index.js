@@ -53,7 +53,7 @@ ReactDOM.render(
         <Route path="reset/:tokenId" component={PasswordReset}/>
   			<Route path="signout" component={SignOut}/>
   			<Route path="signup" component={SignUp}/>
-        <Route path="jobdetail" component={requireAuth(JobDetail)}/>
+        <Route path="jobdetail" component={JobDetail}/>
         <Route path="casedetail" component={CaseDetail}/>
         <Route path="signupad" component={SignUpAd}/>
         <Route path="tmdashboard" component={TmDashboard}/>
@@ -62,7 +62,7 @@ ReactDOM.render(
         <Route path="skills" component={Skills}/>
         <Route path="students" component={Students}/>
         <Route path="admincases" component={Cases}/>
-        <Route path="joblist_admin" component={requireAuth(AdminJobs)}/>
+        <Route path="joblist_admin" component={AdminJobs}/>
   			<Route path="feature" component={requireAuth(Feature)}/>
         <Route path="profile(/:id)" component={Profile}/>
   		</Route>

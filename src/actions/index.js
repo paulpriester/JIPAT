@@ -3,7 +3,8 @@ import {browserHistory} from 'react-router';
 import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,FETCH_MESSAGE,UPDATE_USER, FETCH_JOB, SAVED_JOB, FILTERED_CASES, FORGOT_PASSWORD, PASSWORD_RESET_MOUNT, PASSWORD_RESET} from './types';
 import moment from 'moment'
 
-const ROOT_URL='https://tkhjobboard.herokuapp.com';
+const ROOT_URL='http://localhost:3090';
+// 'http://localhost:3090'
 const token = function() {
 	return {authorization: localStorage.getItem('token')}
 }
@@ -20,7 +21,7 @@ export function filterCases(cases, name, startdate, enddate){
 export function filterSkills(student, skill){
 	return function(dispatch){
 		if(skill.length === 0){
-			dispatch({type:'FILTERED_SKILL', payload: student})
+			dispatch({type:'FILTERED_SKILL', payload: []})
 		}
 		else{
 			let filteredStudent = student
@@ -375,6 +376,8 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 	};
 }
 
+
+
 export function addScore(id,score){
 	console.log(score)
 	return function(dispatch){
@@ -384,6 +387,18 @@ export function addScore(id,score){
 		})	
 	};
 }
+
+
+export function activateUser(id,type){
+	return function(dispatch){
+		axios.post(`${ROOT_URL}/activate/${id}`,{active: type})
+		.then(response=>{
+			dispatch(fetchStudents())
+		})	
+	};
+}
+
+
 
 export function inviteUser({email,name, admin}){
 	return function(dispatch){
