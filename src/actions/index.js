@@ -5,6 +5,7 @@ import moment from 'moment'
 
 const ROOT_URL='http://localhost:3090';
 // 'http://localhost:3090'
+// const ROOT_URL='https://tkhjobboard.herokuapp.com';
 const token = function() {
 	return {authorization: localStorage.getItem('token')}
 }
@@ -376,7 +377,16 @@ export function profile({firstName,lastName,about, portfolio,github,linkedin,res
 	};
 }
 
-
+export function profileImage(image) {
+	return function(dispatch) {
+		axios.post(`${ROOT_URL}/upload`, {image}, {
+			headers : token()
+		})
+		.then(res => {
+			console.log(res)
+		})
+	}
+}
 
 export function addScore(id,score){
 	console.log(score)

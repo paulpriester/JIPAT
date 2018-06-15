@@ -1,19 +1,37 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-import {fetchProfile, fetchcaselength, fetchSavedSkills} from '../../actions';
+import {profileImage, fetchProfile, fetchcaselength, fetchSavedSkills} from '../../actions';
 import Dashboard from '../student/dashboard';
 import ModalProfile from '../modal_profile';
 import ModalSkill from '../modal_skill';
 import { Row, Col } from 'reactstrap';
+import Dropzone from 'react-dropzone'
+import axios from 'axios'
 
 class Profile extends Component{
+
+  constructor(props){
+
+    super(props)
+
+    this.state = {
+
+      showUpload:false,
+      uploadText: 'Edit'
+
+    }
+  }
+
   componentWillMount () {
     let id = this.props.params.id?this.props.params.id : ''
     this.props.dispatch(fetchcaselength());
     this.props.dispatch(fetchProfile(id));
     this.props.dispatch(fetchSavedSkills())
+
   }
+
+
    renderSkill(skillData,dispatch) {
     return (
       <ul key={skillData.id}>
@@ -21,22 +39,80 @@ class Profile extends Component{
       </ul>
     )
   }
+
+  handleDrop = files => {
+    // Push all the axios request promise into a single array
+    const uploaders = files.map(file => {
+      // Initial FormData
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "wpwu5lo1"); // Replace the preset name with your own
+      formData.append("api_key", "561924296619786"); // Replace API key with your own Cloudinary key
+      
+      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+      axios.post("https://api.cloudinary.com/v1_1/dxpck5nb2/image/upload", formData, {
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+      })
+      .then(res => {
+        const image = res.data.secure_url;
+        this.props.dispatch(profileImage(image));
+      })
+      
+    })
+  
+  }
+
+ 
   
   render(){
+    
     return(
       <div className="edit-profile">
             <Row className="width-row">
+              <Col className="border-profile" sm="3">
+                
+                <img src={this.props.information.image}/>
+                
+                {this.state.showUpload ?
+
+                <Col md={{offset:3}}>
+                  <Dropzone 
+                    onDrop={this.handleDrop} 
+                    multiple 
+                    accept="image/*" 
+                    // style={styles.dropzone}
+                  >
+                    <p>Drop your files or click here to upload</p>
+                  </Dropzone>
+
+                  </Col>
+
+                  :
+
+                  null
+                }
+
+                <a href="#"
+                  onClick={()=>this.setState(prev =>({
+
+                    showUpload:!prev.showUpload
+
+                  }))}>Edit</a>
+                
+              </Col>
+
               <Col className="border-profile" sm="3">
                 <h3>Name: <ModalProfile profile={this.props.information} /></h3>
                 <p>{this.props.information.firstName} {this.props.information.lastName}</p>
                 <h3>W.R. Score:</h3>
                 <p>{this.props.information.score}</p>
               </Col>
+              
               <Col className="border-profile" sm="3">
                 <h3>Github:</h3>
-                <a className="link-width" href={this.props.information.github}>{this.props.information.github}</a>
+                <a href={this.props.information.github}>{this.props.information.github}</a>
                 <h3>Portfolio:</h3>
-                <a className="link-width" href={this.props.information.portfolio}>{this.props.information.portfolio}</a>
+                <a href={this.props.information.portfolio}>{this.props.information.portfolio}</a>
               </Col>
               <Col className="border-profile" sm="3">
                 <h3>LinkedIn:</h3>
@@ -49,14 +125,16 @@ class Profile extends Component{
                 <p className="jobs">{this.props.caselength.length}</p>
               </Col>
             </Row>
-          <Row className="width-row">
+            <Row className="width-row">
             <Col className="border-profile" sm="4">
               <h3>About Me</h3>  
               <p>{this.props.information.about}</p>
             </Col>
             <Col className="border-profile" sm="4">
-              <h3>Skills <ModalSkill /></h3>
+              <h3>Skills</h3>
               {this.props.information.skills && this.props.information.skills.map(i => <p>{i}</p>)}
+              <ModalProfile />
+              <ModalSkill />
             </Col>
             <Col className="border-profile" sm="4">
               <h3>Career Goals</h3>
@@ -92,6 +170,7 @@ class Profile extends Component{
     )
   }
 }
+
 function mapStateToProps(state){
   return {
     errorMessage: state.auth.error,
@@ -101,4 +180,5 @@ function mapStateToProps(state){
     caselength: state.student.caselength
   }
 }
+
 export default connect(mapStateToProps) (Profile);

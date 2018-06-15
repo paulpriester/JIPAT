@@ -88,11 +88,11 @@ import InviteModal from './invite_modal';
 	}
 
 	render () {
-		console.log(this.state)
 		return (
 			<div>
 			<InviteModal />
 			<Button onClick= {() => this.changeUser()}>{this.state.text}</Button>
+
 			<table className ='table table-hover'>
 					<thead>
 						<tr>

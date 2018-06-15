@@ -14,8 +14,8 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
-    backgroundColor       : 'purple', 
-    color                 : 'white'
+    backgroundColor       : 'white', 
+    color                 : 'black'
   }
 };
 
@@ -54,6 +54,8 @@ class InviteModal extends Component {
           ariaHideApp={false}
         >
         <h5 className="closeButton" onClick={this.closeModal}>X</h5>
+          <h2>Invite Students</h2>
+          <br />
           <Invite />
         </Modal>
       </span>
