@@ -25,9 +25,15 @@ import InviteModal from './invite_modal';
     this.setState({
     	["score" + id]: this.state["score" + id] ? false : true})
   }
+
+  	trueUser (type) {
+  		this.setState({
+  			type: true
+  		})
+  	}
   	changeUser (type){
   		this.setState({
-  			type: this.state.type ? false : true,
+  			type: false
   		})
   	}
 
@@ -89,7 +95,7 @@ import InviteModal from './invite_modal';
 		return (
 			<div>
 			<InviteModal />
-			<Button onClick= {() => this.changeUser()}>Approved User</Button>
+			<Button onClick= {() => this.trueUser()}>Approved User</Button>
 			<Button onClick= {() => this.changeUser()}>Pending User</Button>
 
 

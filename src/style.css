@@ -145,6 +145,16 @@ a:visited{
 	display: inline;
 }
 
+.skills-inline {
+	display: inline !important;
+	padding: 0 35px;
+}
+
+.checkbox-skill {
+	position: relative;
+	left: 10px;
+}
+
 /* profile.js */
 .edit-profile {
 	text-align:center;

@@ -90,12 +90,12 @@ class Modal_Share extends Component {
 
   renderSkill(skillData,fn) {
       return (
-          <span>
-          <p>
-          <label>{skillData.skill}</label>
-         <input onClick={fn} name="Skills" type='checkbox' id= {skillData.skill} value={skillData.skill}  />
+        <span>
+          <p className="skills-inline">
+           <label>{skillData.skill}</label>
+           <input className="checkbox-skill" onClick={fn} name="Skills" type='checkbox' id= {skillData.skill} value={skillData.skill}  />
          </p>
-         </span>
+        </span>
       )
     }
 
@@ -147,7 +147,7 @@ class Modal_Share extends Component {
             <form onSubmit={this.onFilterSubmit}>
 
                 {this.props.skill.map(i=>this.renderSkill(i,this.handleChange))} 
-
+                  <br />
                 <input className="btn btn-secondary" type="submit" />
             </form>
                 {this.props.ready && this.props.filteredstudent.map(this.renderStudent)}
