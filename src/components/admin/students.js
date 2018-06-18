@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
 import {fetchStudents, removeUser, addScore} from '../../actions';
-import { Input,InputGroupAddon,InputGroup,Button } from 'reactstrap';
+import {Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'react-bootstrap';
+import { Input,InputGroupAddon,InputGroup } from 'reactstrap';
 import InviteModal from './invite_modal';
 
 
@@ -11,9 +12,11 @@ import InviteModal from './invite_modal';
  	constructor (props) {
  		super(props);
  		this.state = {
+ 			type: 'Active'
  		}
  		this.handleChange = this.handleChange.bind(this)
  		this.addScore = this.addScore.bind(this)
+ 		this.changeTabType = this.changeTabType.bind(this)
  	}
 
 	componentDidMount() {
@@ -23,9 +26,13 @@ import InviteModal from './invite_modal';
 	changeType(id) {
     this.setState({
     	["score" + id]: this.state["score" + id] ? false : true})
-  }
+    }
 
-
+    changeTabType(tab) {
+    	this.setState({
+    		type: tab
+    	})
+    }
 
 	handleChange (e, id) {
 		this.setState ({
@@ -76,9 +83,12 @@ import InviteModal from './invite_modal';
 
 	render () {
 		return (
-			<div>
+			<div className="container">
 			<InviteModal />
-			
+			<br />
+		    <ButtonToolbar className='tabs' justified bsSize="large">
+		      <Button onClick= {() => this.changeTabType('Active')}>Pending</Button>
+		    </ButtonToolbar>
 			<table className ='table table-hover'>
 					<thead>
 						<tr>

@@ -50,18 +50,7 @@ class SearchCases extends Component {
 		console.log(this.state)
 		return (
 			<div>
-				<Form onSubmit={this.onFormSubmit}>
-					<Col sm={12}>
-						<input
-							placeholder='Search for a student'
-							className='form-control'
-							name="term"
-							value={this.state.term}
-							onChange={this.searchInputChange}
-						/>
-					</Col>
-				</Form>
-				<h2>Filter Cases by Date</h2>
+				<h2>Filter Cases</h2>
 				<FormGroup row>
 				<Col sm={2}>
 				<p>Start Date: </p>
@@ -84,6 +73,17 @@ class SearchCases extends Component {
 				/>
 				</Col>
 				</FormGroup>
+				<Form onSubmit={this.onFormSubmit}>
+					<Col sm={12}>
+						<input
+							placeholder='Search for a student'
+							className='form-control'
+							name="term"
+							value={this.state.term}
+							onChange={this.searchInputChange}
+						/>
+					</Col>
+				</Form>
 			</div>
 		);
 	}

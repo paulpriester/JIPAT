@@ -21,7 +21,6 @@ class Cases extends Component {
   }
   updateCase(id,value) {
     this.props.dispatch(updateCase(id,value))
-    console.log(value)
   }
   renderCase(caseData,dispatch) {
     var selectCase = function(Case) {
@@ -32,20 +31,19 @@ class Cases extends Component {
     }
     return (
         <tr key={caseData._id}>
-           <td><Link className='detail' to={{pathname: '/casedetail' , search: `?id=${caseData._id}`}} onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
+          <td><Link className='detail' to={{pathname: '/casedetail' , search: `?id=${caseData._id}`}} onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
           <td>{caseData.studentName}</td>
           <td>{caseData.jobTitle}</td>
           <td>{caseData.company}</td>   
           <td>
-            <select id="case-status"
-                onChange={e => this.updateCase(caseData._id, e.target.value)}>
+          <select id="case-status"
+                  onChange={e => this.updateCase(caseData._id, e.target.value)}>
           <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open
           </option>
           <option value="Interview" selected={caseData.openCase=="Interview" ? true : false}>
             Interview 
           </option>
-       
           <option value="Salary Negotation" selected={caseData.openCase=="Salary Negotation" ? true : false}>
             Salary Negotation
           </option>
@@ -81,7 +79,7 @@ class Cases extends Component {
             <tr>
               <th>Case ID</th>
               <th>Student Name</th>
-               <th>Job Title</th>
+              <th>Job Title</th>
               <th>Company</th>
               <th>Status</th>
               <th>Date added</th>
