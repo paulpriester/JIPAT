@@ -25,11 +25,14 @@ class Profile extends Component{
 
   componentWillMount () {
     let id = this.props.location.query.id?this.props.location.query.id : ''
-    console.log(id)
-    this.props.dispatch(fetchcaselength());
-    this.props.dispatch(fetchProfile(id));
-    this.props.dispatch(fetchSavedSkills())
 
+    this.props.dispatch(fetchcaselength(id));
+    this.props.dispatch(fetchProfile(id));
+    this.props.dispatch(fetchSavedSkills());
+  }
+
+  componentWillUnmount () {
+    this.props.dispatch({type: 'CLEAR_CASELENGTH'})
   }
 
 
@@ -57,10 +60,8 @@ class Profile extends Component{
       .then(res => {
         const image = res.data.secure_url;
         this.props.dispatch(profileImage(image));
-      })
-      
+      })     
     })
-  
   }
 
  
@@ -71,38 +72,26 @@ class Profile extends Component{
     return(
       <div className="edit-profile">
             <Row className="width-row">
-              <Col className="border-profile" sm="3">
-                
-                <img src={this.props.information.image}/>
-                
+              <Col className="border-profile" sm="3">                
+                <img src={this.props.information.image}/>                
                 {this.state.showUpload ?
-
                 <Col md={{offset:3}}>
                   <Dropzone 
                     onDrop={this.handleDrop} 
-                    multiple 
                     accept="image/*" 
                     // style={styles.dropzone}
                   >
                     <p>Drop your files or click here to upload</p>
                   </Dropzone>
-
                   </Col>
-
                   :
-
                   null
                 }
-
                 <a href="#"
                   onClick={()=>this.setState(prev =>({
-
                     showUpload:!prev.showUpload
-
                   }))}>Edit</a>
-                
               </Col>
-
               <Col className="border-profile" sm="3">
                 <h3>Name: <ModalProfile profile={this.props.information} /></h3>
                 <p>{this.props.information.firstName} {this.props.information.lastName}</p>
@@ -167,7 +156,7 @@ class Profile extends Component{
           </Row>
             <br></br>
               <h3>Cases</h3>
-              <Dashboard />
+              <Dashboard profile = {true} id = {this.props.location.query.id?this.props.location.query.id : ''}/>
       </div>
     )
   }

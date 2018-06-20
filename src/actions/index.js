@@ -90,7 +90,7 @@ export function signInUser({email,password},redirect){
 			}
 			 if(response.data.type == 'admin') {
 				browserHistory.push('/tmdashboard')
-			} else {
+			} else if (response.data.type == 'student') {
 				//-redirect to the route '/'	
 				browserHistory.push('/dashboard');	
 			}
@@ -163,17 +163,6 @@ export function fetchStudents () {
 	}
 }
 
-export function fetchCases () {
-	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchCase`, {
-			//with a get request no need to have a object because we are not sending data to the DB.
-			headers : token()
-		})
-		.then(response => {
-			dispatch({type: 'FETCH_CASE', response})
-		})
-	}
-}
 
 export function fetchAllCases () {
 	return function(dispatch) {
@@ -202,18 +191,6 @@ export function fetchAllCases () {
 			})
 		}
 	}
-
-export function fetchcaselength () {
-	return function(dispatch) {
-		axios.get(`${ROOT_URL}/fetchcaselength`, {
-			headers : token()
-		})
-		.then(response => {
-			dispatch({type: 'FETCH_CASELENGTH', response})
-		})
-	}
-}
-
 
 export function fetchOneJob (id) {
 	return function(dispatch) {
@@ -362,6 +339,33 @@ export function fetchProfile(id) {
 		.then(response => {
 			console.log(response)
 			dispatch({type: 'FETCH_PROFILE', response})
+		})
+	}
+}
+
+export function fetchCases (id) {
+	console.log(id)
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchCase/${id}?`, {
+			//with a get request no need to have a object because we are not sending data to the DB.
+			headers : token()
+		})
+		.then(response => {
+			console.log(response)
+			dispatch({type: 'FETCH_CASE', response})
+		})
+	}
+}
+
+export function fetchcaselength (id) {
+	console.log(id)
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/fetchcaselength/${id}?`, {
+			headers : token()
+		})
+		.then(response => {
+			console.log(response)
+			dispatch({type: 'FETCH_CASELENGTH', response})
 		})
 	}
 }

@@ -72,29 +72,30 @@ class JobDetail extends Component {
 			return (
 			<div>	
 				{this.props.job.selectedJob? this.renderJob(this.props.job.selectedJob): "Empty"}
+				<h2> Cases </h2>
 			 <Row className="detail-case">
 				 <Col>
-					<h4>Open Cases </h4>
+					<h4>Open  </h4>
 					<Modal_Jobview selectedCase={this.props.case.filter(i => i.job_id == this.props.job.selectedJob.jobid && i.openCase == 'Open')} case={this.props.case.studentName}/>
 				 </Col>
 
 	            <Col>
-					<h4>Close Cases </h4>
+					<h4>Close  </h4>
 					<Modal_Jobview selectedCase={this.props.case.filter(i => i.job_id == this.props.job.selectedJob.jobid && i.openCase == 'Close')} case={this.props.case.studentName}/>
 			    </Col>
 
 	            <Col>
-					<h4>Interview Cases </h4>
+					<h4>Interview  </h4>
 					<Modal_Jobview selectedCase={this.props.case.filter(i => i.job_id == this.props.job.selectedJob.jobid && i.openCase == 'Interview')} case={this.props.case.studentName}/>
 			    </Col>
 
 	            <Col>
-					<h4>Salary Negotation Cases </h4>
+					<h4>Salary Negotation  </h4>
 					<Modal_Jobview selectedCase={this.props.case.filter(i => i.job_id == this.props.job.selectedJob.jobid && i.openCase == 'Salary Negotation')} case={this.props.case.studentName}/>
 		   		</Col>
 
 	             <Col>
-					<h4>Place Cases </h4>
+					<h4>Place  </h4>
 					<Modal_Jobview selectedCase={this.props.case.filter(i => i.job_id == this.props.job.selectedJob.jobid && i.openCase == 'Place')} case={this.props.case.studentName}/>
 				 </Col>
 			</Row>
@@ -104,12 +105,10 @@ class JobDetail extends Component {
 		)
 		} else {
 			return (
-
 			<div>	
 				{this.props.job.selectedJob? this.renderJob(this.props.job.selectedJob): "Empty"}
-				 <Modal_Share job={this.props.job.selectedJob._id}/>
 			</div>
-		)
+			)
 		}
 	}
 	
