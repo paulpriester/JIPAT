@@ -25,11 +25,14 @@ class Profile extends Component{
 
   componentWillMount () {
     let id = this.props.location.query.id?this.props.location.query.id : ''
-    console.log(id)
-    this.props.dispatch(fetchcaselength());
-    this.props.dispatch(fetchProfile(id));
-    this.props.dispatch(fetchSavedSkills())
 
+    this.props.dispatch(fetchcaselength(id));
+    this.props.dispatch(fetchProfile(id));
+    this.props.dispatch(fetchSavedSkills());
+  }
+
+  componentWillUnmount () {
+    this.props.dispatch({type: 'CLEAR_CASELENGTH'})
   }
 
 
@@ -167,7 +170,7 @@ class Profile extends Component{
           </Row>
             <br></br>
               <h3>Cases</h3>
-              <Dashboard />
+              <Dashboard profile = {true} id = {this.props.location.query.id?this.props.location.query.id : ''}/>
       </div>
     )
   }

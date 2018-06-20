@@ -105,12 +105,10 @@ class JobDetail extends Component {
 		)
 		} else {
 			return (
-
 			<div>	
 				{this.props.job.selectedJob? this.renderJob(this.props.job.selectedJob): "Empty"}
-				 <Modal_Share job={this.props.job.selectedJob._id}/>
 			</div>
-		)
+			)
 		}
 	}
 	

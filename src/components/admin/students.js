@@ -95,8 +95,8 @@ import InviteModal from './invite_modal';
 		return (
 			<div>
 			<InviteModal />
-			<Button onClick= {() => this.trueUser()}>Approved User</Button>
-			<Button onClick= {() => this.changeUser()}>Pending User</Button>
+			<Button onClick= {() => this.trueUser()}>Approved Users</Button>
+			<Button onClick= {() => this.changeUser()}>Pending Users</Button>
 
 
 			<table className ='table table-hover'>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormControl} from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import {  FormGroup, Col} from 'reactstrap';
 import { connect } from 'react-redux';
 import { filterCases } from '../../actions/index';

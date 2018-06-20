@@ -86,7 +86,7 @@ class Header extends Component	{
 		console.log(this.props)
 		return (
         <Navbar light expand="md">
-          <NavbarBrand><Link to="/feature" className="logo">The Knowledge House</Link></NavbarBrand>
+          <NavbarBrand>The Knowledge House</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
               	{this.renderLinks()}

@@ -38,6 +38,13 @@ export default function studentReducer (state = initialState, action) {
 			caselength: action.response.data,
 			cases: action.response.data.cases
 		}
+	case 'CLEAR_CASELENGTH': 
+	console.log(action)
+		 return {
+		 	...state,
+		 	caselength: {},
+		 	cases: []
+		 }
 	case 'FILTERED_SKILL':
 		return{
 			...state,
