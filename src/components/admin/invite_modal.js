@@ -53,7 +53,7 @@ class InviteModal extends Component {
           contentLabel="Example Modal"
           ariaHideApp={false}
         >
-          <h5 className="closeButton" onClick={this.closeModal}>X</h5>
+        <h5 className="closeButton" onClick={this.closeModal}>X</h5>
           <h2>Invite Students</h2>
           <br />
           <Invite />

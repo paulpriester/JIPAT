@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormControl} from 'react-bootstrap';
-import {  FormGroup, Col} from 'reactstrap';
+import { Button, Form, FormControl, FormGroup, Row, Col} from 'reactstrap';
 import { connect } from 'react-redux';
 import { filterCases } from '../../actions/index';
 import { bindActionCreators } from 'redux';   
@@ -50,31 +49,34 @@ class SearchCases extends Component {
 		console.log(this.state)
 		return (
 			<div>
-				<h2>Filter Cases</h2>
-				<FormGroup row>
-				<Col sm={2}>
-				<p>Start Date: </p>
-				<DatePicker
-				    selected={this.state.startDate}
-				    selectsStart
-				    startDate={this.state.startDate}
-				    endDate={this.state.endDate}
-				    onChange={this.handleChangeStart}
-				/>
-				</Col>
-				<Col sm={2}>
-				<p>End Date: </p>
-				<DatePicker
-				    selected={this.state.endDate}
-				    selectsEnd
-				    startDate={this.state.startDate}
-				    endDate={this.state.endDate}
-				    onChange={this.handleChangeEnd}
-				/>
-				</Col>
-				</FormGroup>
-				<Form onSubmit={this.onFormSubmit}>
-					<Col sm={12}>
+				<h1>Filter Cases</h1>
+				<br/>
+				<h5>Filter by Date</h5>
+				<Row>
+					<Col sm="3">
+					<p>Start Date: </p>
+					<DatePicker
+					    selected={this.state.startDate}
+					    selectsStart
+					    startDate={this.state.startDate}
+					    endDate={this.state.endDate}
+					    onChange={this.handleChangeStart}
+					/>
+					</Col>
+					<Col sm="3">
+					<p>End Date: </p>
+					<DatePicker
+					    selected={this.state.endDate}
+					    selectsEnd
+					    startDate={this.state.startDate}
+					    endDate={this.state.endDate}
+					    onChange={this.handleChangeEnd}
+					/>
+					</Col>
+				</Row>
+				<br/>
+				<Row onSubmit={this.onFormSubmit}>
+					<Col sm="12">
 						<input
 							placeholder='Search for a student'
 							className='form-control'
@@ -83,7 +85,7 @@ class SearchCases extends Component {
 							onChange={this.searchInputChange}
 						/>
 					</Col>
-				</Form>
+				</Row>
 			</div>
 		);
 	}

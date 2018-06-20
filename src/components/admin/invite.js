@@ -26,6 +26,7 @@ class Invite extends Component{
 		return(
 				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 					<fieldset className="form-group">
+						<h2> Invite User </h2>
 						<label>Email:</label>
 						<Field
 							name="email"

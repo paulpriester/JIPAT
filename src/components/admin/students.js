@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {table} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {fetchStudents, removeUser, addScore} from '../../actions';
-import {Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'react-bootstrap';
-import { Input,InputGroupAddon,InputGroup } from 'reactstrap';
+import {fetchStudents, removeUser, addScore, activateUser} from '../../actions';
+import { Input,InputGroupAddon,InputGroup,Button } from 'reactstrap';
 import InviteModal from './invite_modal';
 
 
@@ -12,11 +11,10 @@ import InviteModal from './invite_modal';
  	constructor (props) {
  		super(props);
  		this.state = {
- 			type: 'Active'
+ 			type: true
  		}
  		this.handleChange = this.handleChange.bind(this)
  		this.addScore = this.addScore.bind(this)
- 		this.changeTabType = this.changeTabType.bind(this)
  	}
 
 	componentDidMount() {
@@ -26,13 +24,18 @@ import InviteModal from './invite_modal';
 	changeType(id) {
     this.setState({
     	["score" + id]: this.state["score" + id] ? false : true})
-    }
+ 	}
 
-    changeTabType(tab) {
-    	this.setState({
-    		type: tab
-    	})
-    }
+  	trueUser (type) {
+  		this.setState({
+  			type: true
+  		})
+  	}
+  	changeUser (type){
+  		this.setState({
+  			type: false
+  		})
+  	}
 
 	handleChange (e, id) {
 		this.setState ({
@@ -45,6 +48,11 @@ import InviteModal from './invite_modal';
 		if(prompt == true) {
 			this.props.dispatch(removeUser(id))
 		}
+	}
+
+	approveUser(id, type) {
+		console.log(id)
+		this.props.dispatch(activateUser(id, type))
 	}
 
 	addScore(id) {
@@ -76,6 +84,8 @@ import InviteModal from './invite_modal';
 			          </form>    
 			      }
 			  	</td>
+			  	<td>{studentData.active?<button onClick={()=> this.approveUser(studentData._id, false)}>Deactivate</button>:
+			  	<button onClick={()=> this.approveUser(studentData._id, true)}>Approve</button>}</td>
 			  	<td><button onClick={()=> this.removeUser(studentData._id)}>Remove</button></td>
 	      	</tr>
 		)
@@ -86,9 +96,8 @@ import InviteModal from './invite_modal';
 			<div className="container">
 			<InviteModal />
 			<br />
-		    <ButtonToolbar className='tabs' justified bsSize="large">
-		      <Button onClick= {() => this.changeTabType('Active')}>Pending</Button>
-		    </ButtonToolbar>
+			<Button onClick= {() => this.trueUser()}>Approved User</Button>
+			<Button onClick= {() => this.changeUser()}>Pending User</Button>
 			<table className ='table table-hover'>
 					<thead>
 						<tr>
@@ -96,11 +105,12 @@ import InviteModal from './invite_modal';
 							<th>Email</th>
 							<th>W.R. Score</th>
 							<th></th>
+							<th>Approve/Deactivate</th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.allStudents.length != 0 && this.props.allStudents.filter(i => i.admin == false).map(i=>this.renderStudent(i,this.props.dispatch))}
+						{this.props.allStudents.length != 0 && this.props.allStudents.filter(i => i.admin == false && i.active == this.state.type).map(i=>this.renderStudent(i,this.props.dispatch))}
 					</tbody>
 			</table>
 			</div>

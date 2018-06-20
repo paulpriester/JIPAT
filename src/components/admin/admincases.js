@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'react-bootstrap';
+import {table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'reactstrap';
 import {Link} from 'react-router';
 import {fetchAllCases, updateCase} from '../../actions';
 import SearchCases from './searchCases';
@@ -65,6 +65,8 @@ class Cases extends Component {
       
       !this.props.isTyping ?
       <div className="container">
+      <SearchCases cases={this.props.allCases}
+                    filteredcases = {this.props.filteredCases}/>
       <ButtonToolbar className='tabs' justified bsSize="large">
         <Button onClick= {() => this.changeType('Open')}>Open</Button>
         <Button onClick= {() => this.changeType('Close')}>Close</Button>
@@ -72,8 +74,6 @@ class Cases extends Component {
         <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
         <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
       </ButtonToolbar>
-      <SearchCases cases={this.props.allCases}
-                    filteredcases = {this.props.filteredCases}/>
       <table className ='table table-hover'>
           <thead>
             <tr>
@@ -127,4 +127,5 @@ class Cases extends Component {
 function mapStateToProps({Case}) {
   return  Case 
 }
+
 export default connect (mapStateToProps)(Cases);

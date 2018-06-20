@@ -58,7 +58,7 @@ class JobList_Admin extends Component{
 		        console.log(this.props)
 		return (
 				<div>
-					<Button onClick= {() => this.changeType()}>{this.state.text}</Button>
+				<Button onClick= {() => this.changeType()}>{this.state.text}</Button>
 				<Table responsive>
 					<thead>
 						<tr>
