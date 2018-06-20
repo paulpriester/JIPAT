@@ -10,7 +10,8 @@ class Cases extends Component {
   constructor(props) {
     super(props);
     this.state = { type: 'Open'};
-    this.updateCase = this.updateCase.bind(this)
+    this.updateCase = this.updateCase.bind(this);
+    this.changeType = this.changeType.bind(this);
   }
   componentDidMount() {
     this.props.dispatch(fetchAllCases())
@@ -65,15 +66,11 @@ class Cases extends Component {
       
       !this.props.isTyping ?
       <div className="container">
-      <SearchCases cases={this.props.allCases}
-                    filteredcases = {this.props.filteredCases}/>
-      <ButtonToolbar className='tabs' justified bsSize="large">
-        <Button onClick= {() => this.changeType('Open')}>Open</Button>
-        <Button onClick= {() => this.changeType('Close')}>Close</Button>
-        <Button onClick= {() => this.changeType('Place')}>Place</Button>
-        <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
-        <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
-      </ButtonToolbar>
+      <SearchCases 
+        cases={this.props.allCases}
+        filteredcases = {this.props.filteredCases}
+        changeType = {this.changeType}
+      />
       <table className ='table table-hover'>
           <thead>
             <tr>
@@ -92,17 +89,17 @@ class Cases extends Component {
           </tbody>
       </table>
       <p>Conversion Rate from Open to Interview</p>
-        <p>    {this.props.filteredCases.length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Interview').length) /
+        <p>    {this.props.filteredCases.filter(i => i.openCase =='Open').length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Interview').length) /
                  (this.props.filteredCases.filter(i => i.openCase =='Open').length
                 +(this.props.filteredCases.filter(i => i.openCase == 'Interview').length))*100).toFixed(1) + '%': "No Students"}
         </p>
      <p>Conversion Rate from Interview to Close</p>
-        <p>    {this.props.filteredCases.length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Close').length) /
+        <p>    {this.props.filteredCases.filter(i => i.openCase =='Close').length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Close').length) /
                  (this.props.filteredCases.filter(i => i.openCase =='Close').length
                 +(this.props.filteredCases.filter(i => i.openCase == 'Interview').length))*100).toFixed(1) + '%' : "No Students"}
         </p>
         <p>Conversion Rate from Interview to Place</p>
-      <p>    {this.props.filteredCases.length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Place').length) /
+      <p>    {this.props.filteredCases.filter(i => i.openCase =='Place').length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Place').length) /
                (this.props.filteredCases.filter(i => i.openCase =='Place').length
               +(this.props.filteredCases.filter(i => i.openCase == 'Interview').length))*100).toFixed(1) + '%' : "No Students"}
       </p>
