@@ -91,6 +91,7 @@ class SearchCases extends Component {
 					</Col>
 				</Row>
 				<br/>
+
 				<Row onSubmit={this.onFormSubmit}>
 					<Col sm="12">
 					<h5>Filter by Student Name</h5>
@@ -103,6 +104,7 @@ class SearchCases extends Component {
 						/>
 					</Col>
 				</Row>
+
 			</div>
 		);
 	}

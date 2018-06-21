@@ -49,6 +49,12 @@ export default function authReducer (state=[],action){
 				message: "",
 				fetchingEmail: true
 			}
+		case "INACTIVE_USER": 
+		console.log(action)
+			return {
+				...state,
+				message: action.payload
+			}
 	}
 	return state;
 } 
