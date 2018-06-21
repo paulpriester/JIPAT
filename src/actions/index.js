@@ -387,6 +387,7 @@ export function profileImage(image) {
 		})
 		.then(res => {
 			console.log(res)
+			dispatch(fetchProfile(''))
 		})
 	}
 }
