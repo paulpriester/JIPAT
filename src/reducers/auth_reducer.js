@@ -7,6 +7,7 @@ export default function authReducer (state=[],action){
 				...state,
 				error:'',
 				authenticated:true,
+				active: true,
 				type: action.payload
 			};
 		case UNAUTH_USER:

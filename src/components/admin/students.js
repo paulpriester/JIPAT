@@ -24,7 +24,7 @@ import InviteModal from './invite_modal';
 	changeType(id) {
     this.setState({
     	["score" + id]: this.state["score" + id] ? false : true})
-  }
+ 	}
 
   	trueUser (type) {
   		this.setState({
@@ -93,12 +93,11 @@ import InviteModal from './invite_modal';
 
 	render () {
 		return (
-			<div>
+			<div className="container">
 			<InviteModal />
+			<br />
 			<Button onClick= {() => this.trueUser()}>Approved User</Button>
 			<Button onClick= {() => this.changeUser()}>Pending User</Button>
-
-
 			<table className ='table table-hover'>
 					<thead>
 						<tr>

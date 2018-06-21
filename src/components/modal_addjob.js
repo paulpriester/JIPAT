@@ -72,7 +72,7 @@ class ModalButton extends Component {
     </FormGroup>
   )
 
-   renderLinks() {
+   renderModal() {
     const renderField = ({label,input, meta: {touched, error}}) => (
       <FormGroup className="input-row">
         <ControlLabel>{label}</ControlLabel>
@@ -112,6 +112,7 @@ class ModalButton extends Component {
           </Field>
      )
     const { handleSubmit }= this.props;
+    
     if (this.props.type == 'student') {
       return (
       <span>
@@ -201,7 +202,7 @@ class ModalButton extends Component {
   render() {
     return (
       <div>
-        {this.renderLinks()}
+        {this.renderModal()}
       </div>
     );
   }

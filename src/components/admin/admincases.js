@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'react-bootstrap';
+import {Table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'reactstrap';
 import {Link} from 'react-router';
 import {fetchAllCases, updateCase} from '../../actions';
 import SearchCases from './searchCases';
@@ -10,7 +10,8 @@ class Cases extends Component {
   constructor(props) {
     super(props);
     this.state = { type: 'Open'};
-    this.updateCase = this.updateCase.bind(this)
+    this.updateCase = this.updateCase.bind(this);
+    this.changeType = this.changeType.bind(this);
   }
   componentDidMount() {
     this.props.dispatch(fetchAllCases())
@@ -21,7 +22,6 @@ class Cases extends Component {
   }
   updateCase(id,value) {
     this.props.dispatch(updateCase(id,value))
-    console.log(value)
   }
   renderCase(caseData,dispatch) {
     var selectCase = function(Case) {
@@ -32,20 +32,19 @@ class Cases extends Component {
     }
     return (
         <tr key={caseData._id}>
-           <td><Link className='detail' to={{pathname: '/casedetail' , search: `?id=${caseData._id}`}} onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
+          <td><Link className='detail' to={{pathname: '/casedetail' , search: `?id=${caseData._id}`}} onClick={()=> selectCase(caseData)}>{caseData._id}</Link></td>
           <td>{caseData.studentName}</td>
           <td>{caseData.jobTitle}</td>
           <td>{caseData.company}</td>   
           <td>
-            <select id="case-status"
-                onChange={e => this.updateCase(caseData._id, e.target.value)}>
+          <select id="case-status"
+                  onChange={e => this.updateCase(caseData._id, e.target.value)}>
           <option value="Open" selected={caseData.openCase=="Open" ? true : false}>
             Open
           </option>
           <option value="Interview" selected={caseData.openCase=="Interview" ? true : false}>
             Interview 
           </option>
-       
           <option value="Salary Negotation" selected={caseData.openCase=="Salary Negotation" ? true : false}>
             Salary Negotation
           </option>
@@ -67,21 +66,17 @@ class Cases extends Component {
       
       !this.props.isTyping ?
       <div className="container">
-      <ButtonToolbar className='tabs' justified bsSize="large">
-        <Button onClick= {() => this.changeType('Open')}>Open</Button>
-        <Button onClick= {() => this.changeType('Close')}>Close</Button>
-        <Button onClick= {() => this.changeType('Place')}>Place</Button>
-        <Button onClick= {() => this.changeType('Interview')}>Interview</Button>
-        <Button onClick= {() => this.changeType('Salary Negotation')}>Salary Negotation</Button>
-      </ButtonToolbar>
-      <SearchCases cases={this.props.allCases}
-                    filteredcases = {this.props.filteredCases}/>
-      <table className ='table table-hover'>
+      <SearchCases 
+        cases={this.props.allCases}
+        filteredcases = {this.props.filteredCases}
+        changeType = {this.changeType}
+      />
+      <Table responsive className ='table table-hover'>
           <thead>
             <tr>
               <th>Case ID</th>
               <th>Student Name</th>
-               <th>Job Title</th>
+              <th>Job Title</th>
               <th>Company</th>
               <th>Status</th>
               <th>Date added</th>
@@ -92,19 +87,19 @@ class Cases extends Component {
             .filter(i=>i.openCase==this.state.type)
               .map(i=>this.renderCase(i,this.props.dispatch))}
           </tbody>
-      </table>
+      </Table>
       <p>Conversion Rate from Open to Interview</p>
-        <p>    {this.props.filteredCases.length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Interview').length) /
+        <p>    {this.props.filteredCases.filter(i => i.openCase =='Open').length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Interview').length) /
                  (this.props.filteredCases.filter(i => i.openCase =='Open').length
                 +(this.props.filteredCases.filter(i => i.openCase == 'Interview').length))*100).toFixed(1) + '%': "No Students"}
         </p>
      <p>Conversion Rate from Interview to Close</p>
-        <p>    {this.props.filteredCases.length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Close').length) /
+        <p>    {this.props.filteredCases.filter(i => i.openCase =='Close').length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Close').length) /
                  (this.props.filteredCases.filter(i => i.openCase =='Close').length
                 +(this.props.filteredCases.filter(i => i.openCase == 'Interview').length))*100).toFixed(1) + '%' : "No Students"}
         </p>
         <p>Conversion Rate from Interview to Place</p>
-      <p>    {this.props.filteredCases.length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Place').length) /
+      <p>    {this.props.filteredCases.filter(i => i.openCase =='Place').length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Place').length) /
                (this.props.filteredCases.filter(i => i.openCase =='Place').length
               +(this.props.filteredCases.filter(i => i.openCase == 'Interview').length))*100).toFixed(1) + '%' : "No Students"}
       </p>

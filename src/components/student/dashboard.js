@@ -12,7 +12,13 @@ import moment from 'moment'
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchCases())
+    let id
+    if (this.props.profile) {
+      id = this.props.id 
+    } else {
+      id = this.props.location.query.id?this.props.location.query.id : ''
+    }
+    this.props.dispatch(fetchCases(id))
   }
 
   updateCase(id,value) {
@@ -65,7 +71,7 @@ import moment from 'moment'
   }
 
   render () {
-    // console.log(this.state.type)
+    console.log(this.props)
     return (
       <div className="container">
       <ButtonToolbar className='tabs' justified bsSize="large">
@@ -93,6 +99,8 @@ import moment from 'moment'
     )
   }
 }
+
+Dashboard.defaultProps = {profile: false, id: 0}
 
 function mapStateToProps({Case} ) {
   console.log(Case)

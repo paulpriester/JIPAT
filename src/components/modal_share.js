@@ -26,7 +26,8 @@ class Modal_Share extends Component {
 
     this.state = {
       modalIsOpen: false,
-      Skills: []
+      Skills: [],
+      names: []
     };
 
     this.openModal = this.openModal.bind(this);
@@ -46,11 +47,10 @@ class Modal_Share extends Component {
   }
 
   componentWillMount () {
-
           this.props.dispatch(fetchSavedSkills())
           this.props.dispatch(fetchStudents())
-
   }
+
   onSubmit({email, name, msg}) {
     let id =  this.props.job.selectedJob
     this.props.dispatch(shareJob({email, name,msg, _id:id}));
@@ -62,14 +62,28 @@ class Modal_Share extends Component {
     this.props.dispatch(filterSkills(this.props.student, this.state.Skills))
   }
 
-  renderStudent(studentData) {
+  renderStudent(studentData,fn) {
       return (
-        <div>
+        <div draggable>
         <p>
+
          Name: {studentData.firstName} {studentData.lastName}  Email: {studentData.email}
-         </p>
+        <input className="checkbox-skill" onClick={fn} name="names" type='checkbox' id= {studentData.firstName} value={studentData.email}  />        
+        </p>
         </div>
       )
+    }
+
+    handleName(e) {
+      console.log(e.target.value)
+
+      let nameArray = this.state.names.filter(i => i = e.target.value)
+      // newArray = newArray.concat(e.target.value)
+
+      console.log(newArray)
+      this.setState({
+        names: nameArray
+      })
     }
 
     handleChange(e){
@@ -108,14 +122,14 @@ class Modal_Share extends Component {
        <span className="error">{error}</span>}
     </div>
   )
-  
-  render() {
+
+  renderModal () {
     const { handleSubmit }= this.props;
     const { onSubmit }= this.props;
-    console.log(this.props)
+    console.log(this.props.state)
 
-
-    return (
+    if (this.props.type == 'admin') {
+      return (
       <span>
         <Button className="btn btn-secondary" onClick={this.openModal}>Share Job</Button>
         <Modal
@@ -150,16 +164,56 @@ class Modal_Share extends Component {
                   <br />
                 <input className="btn btn-secondary" type="submit" />
             </form>
-                {this.props.ready && this.props.filteredstudent.map(this.renderStudent)}
+                {this.props.ready && this.props.filteredstudent.map(i =>this.renderStudent(i, this.handleName))}
 
         </Modal>
       </span>
+      )
+  } else {
+    return (
+            <span>
+        <Button className="btn btn-secondary" onClick={this.openModal}>Share Job</Button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+          ariaHideApp={false}
+
+        >
+          <h5 className="closeButton" onClick={this.closeModal}>X</h5>
+          <h2>Share Job</h2>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+              <FormGroup className='input-span'>
+                <ControlLabel>Email</ControlLabel>
+                  <p>To send to multiple emails separate by a comma</p>
+                  <Field name="email" component={this.renderField} />
+                <ControlLabel>First Name</ControlLabel>
+                  <Field name="name" component={this.renderField} />
+                  <ControlLabel>Message</ControlLabel>
+                  <Field name="msg" component={this.renderField} />
+                  <br />
+                <button className="btn btn-secondary" type="submit" >Submit</button>
+             </FormGroup>
+            </form>
+        </Modal>
+      </span>
+      )
+  } 
+}
+  
+  render() {
+    return (
+      <div>
+      {this.renderModal()}
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
   return  {
+    type: state.auth.type,
     job: state.job,
     skill: state.student.skills,
     student: state.student.allStudents,

@@ -17,7 +17,7 @@ class Welcome extends Component {
 			  <Jumbotron className="Jumbotron">
 			  	<div style={customStyles.content}>
 				    <h1 className="jumbo-title">Welcome to TKH </h1>
-				    <p className="jumbo-description">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+				    <p className="jumbo-description">A website job searching website used for The Knowledge House Alumni. Where whichever alumni qualifies to apply for jobs depending on their readiness with their skills, resume, portfolio, etc.</p>
 				    <Button className="sign-in-btn"><Link to='/signin'>Sign in</Link></Button>
 			    </div>
 			  </Jumbotron>

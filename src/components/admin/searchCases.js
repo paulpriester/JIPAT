@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormControl} from 'react-bootstrap';
-import {  FormGroup, Col} from 'reactstrap';
+import { Button, ButtonGroup, ButtonToolbar, Form, FormControl, FormGroup, Label, Row, Col} from 'reactstrap';
 import { connect } from 'react-redux';
 import { filterCases } from '../../actions/index';
 import { bindActionCreators } from 'redux';   
@@ -50,8 +49,11 @@ class SearchCases extends Component {
 		console.log(this.state)
 		return (
 			<div>
-				<Form onSubmit={this.onFormSubmit}>
-					<Col sm={12}>
+				<h1>Filter Cases</h1>
+				<br/>
+				<Row onSubmit={this.onFormSubmit}>
+					<Col sm="12">
+					<h5>Filter by Student Name</h5>
 						<input
 							placeholder='Search for a student'
 							className='form-control'
@@ -60,30 +62,48 @@ class SearchCases extends Component {
 							onChange={this.searchInputChange}
 						/>
 					</Col>
-				</Form>
-				<h2>Filter Cases by Date</h2>
-				<FormGroup row>
-				<Col sm={2}>
-				<p>Start Date: </p>
-				<DatePicker
-				    selected={this.state.startDate}
-				    selectsStart
-				    startDate={this.state.startDate}
-				    endDate={this.state.endDate}
-				    onChange={this.handleChangeStart}
-				/>
-				</Col>
-				<Col sm={2}>
-				<p>End Date: </p>
-				<DatePicker
-				    selected={this.state.endDate}
-				    selectsEnd
-				    startDate={this.state.startDate}
-				    endDate={this.state.endDate}
-				    onChange={this.handleChangeEnd}
-				/>
-				</Col>
-				</FormGroup>
+				</Row>
+				<br />
+				<Row>
+					<Col sm="6"><h5>Filter by Date</h5></Col>
+					<Col sm="6"><h5>Filter by Status</h5></Col>
+				</Row>
+				<Row>
+					<Col sm="3">
+						<Form inline>
+						<Label >Start Date: </Label>
+						<DatePicker
+						    selected={this.state.startDate}
+						    selectsStart
+						    startDate={this.state.startDate}
+						    endDate={this.state.endDate}
+						    onChange={this.handleChangeStart}
+						/>
+						</Form>
+					</Col>
+					<Col sm="3">
+						<Form inline>
+						<Label>End Date: </Label>
+						<DatePicker
+						    selected={this.state.endDate}
+						    selectsEnd
+						    startDate={this.state.startDate}
+						    endDate={this.state.endDate}
+						    onChange={this.handleChangeEnd}
+						/>
+					</Form>
+					</Col>
+					<Col sm="6">
+				        <ButtonToolbar className='tabs' justified bsSize="large">
+					        <Button outline size="sm" onClick= {() => this.props.changeType('Open')}>Open</Button>
+					        <Button outline size="sm" onClick= {() => this.props.changeType('Close')}>Close</Button>
+					        <Button outline size="sm" onClick= {() => this.props.changeType('Place')}>Place</Button>
+					        <Button outline size="sm" onClick= {() => this.props.changeType('Interview')}>Interview</Button>
+					        <Button outline size="sm" onClick= {() => this.props.changeType('Salary Negotation')}>Salary Negotation</Button>
+				        </ButtonToolbar>
+					</Col>
+				</Row>
+				<br/>
 			</div>
 		);
 	}
