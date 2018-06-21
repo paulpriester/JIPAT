@@ -8,6 +8,7 @@ import ModalSkill from '../modal_skill';
 import { Row, Col } from 'reactstrap';
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
+import { config } from '../../../config'
 
 class Profile extends Component{
 
@@ -50,8 +51,8 @@ class Profile extends Component{
       // Initial FormData
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "wpwu5lo1"); // Replace the preset name with your own
-      formData.append("api_key", "561924296619786"); // Replace API key with your own Cloudinary key
+      formData.append("upload_preset", config.name); // Replace the preset name with your own
+      formData.append("api_key", config.key); // Replace API key with your own Cloudinary key
       
       // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
       axios.post("https://api.cloudinary.com/v1_1/dxpck5nb2/image/upload", formData, {
