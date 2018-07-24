@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {Table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'reactstrap';
-import {Link} from 'react-router';
-import {fetchAllCases, updateCase} from '../../actions';
+import {table, Button, ButtonGroup, ButtonToolbar, SplitButton,MenuItem} from 'reactstrap';
+import { Link } from 'react-router';
+import { fetchAllCases, updateCase } from '../../actions';
 import SearchCases from './searchCases';
 import moment from 'moment'
 // import 'moment/locale/en-nz'
@@ -71,8 +71,7 @@ class Cases extends Component {
         filteredcases = {this.props.filteredCases}
         changeType = {this.changeType}
       />
-
-      <Table responsive className ='table table-hover'>
+      <table className ='table table-hover'>
           <thead>
             <tr>
               <th>Case ID</th>
@@ -88,7 +87,7 @@ class Cases extends Component {
             .filter(i=>i.openCase==this.state.type)
               .map(i=>this.renderCase(i,this.props.dispatch))}
           </tbody>
-      </Table>
+      </table>
       <p>Conversion Rate from Open to Interview</p>
         <p>    {this.props.filteredCases.filter(i => i.openCase =='Open').length != 0 ? ((this.props.filteredCases.filter(i => i.openCase == 'Interview').length) /
                  (this.props.filteredCases.filter(i => i.openCase =='Open').length

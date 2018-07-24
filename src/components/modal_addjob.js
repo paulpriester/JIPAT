@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {addJob, selectJobType} from '../actions';
 import {reduxForm, Field} from 'redux-form'; 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import '../../src/style.css'
 
 const customStyles = {
   
@@ -20,7 +21,6 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)',
     position              : 'absolute',
     backgroundColor       : '#fff',
-    width                 : '50%',
     height                : '80%',
     border                : 'none',
   

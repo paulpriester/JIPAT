@@ -121,6 +121,11 @@ a:visited{
 	bottom:15px;
 }
 
+form-control{
+
+	width:70%;
+} 
+
 .checkbox {
 	position:relative;
 	bottom:15px;
